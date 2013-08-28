@@ -11,7 +11,8 @@
 	 
 	 global $CONFIG;
 	// Load Elgg engine
-		require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+		require_once(get_config('path').'engine/start.php');
+
 		if(!isloggedin()){
 			forward("pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username);
 		}

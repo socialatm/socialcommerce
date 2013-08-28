@@ -10,8 +10,8 @@
  	**/
 	 
 	// Get engine
-		require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . "/engine/start.php");
-		//echo dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . "/engine/start.php";
+	require_once(get_config('path').'engine/start.php');
+
 	global $CONFIG;
 	
 	$mime = $vars['mimetype'];

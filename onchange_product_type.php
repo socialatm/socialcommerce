@@ -10,7 +10,7 @@
 	 **/ 
 	 
 	global $CONFIG;
-	require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+	require_once(get_config('path').'engine/start.php');
 	
 	$product_type_id = get_input('pt');
 	$action = get_input('at');

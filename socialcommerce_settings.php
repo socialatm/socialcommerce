@@ -12,7 +12,7 @@
 		global $CONFIG, $settings;
 		admin_gatekeeper();
 		$settings = 1;
-		require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+		require_once(get_config('path').'engine/start.php');
 		
 	// Get the current page's owner
 		$page_owner = page_owner_entity();

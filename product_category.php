@@ -11,7 +11,7 @@
 	 
 	global $CONFIG;
 	// Load Elgg engine
-		require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+		require_once(get_config('path').'engine/start.php');
 
 	// Get the current page's owner
 		$page_owner = page_owner_entity();

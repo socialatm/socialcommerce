@@ -9,7 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
-	require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+	require_once(get_config('path').'engine/start.php');
 	gatekeeper();
 	global $CONFIG;
 	$title = elgg_view_title($title = elgg_echo('stores:sold:products'));

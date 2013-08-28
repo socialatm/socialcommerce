@@ -13,7 +13,7 @@
 	header("Cache-Control: no-cache");
 	header("Pragma: nocache");
 	
-	require_once(dirname(dirname(dirname(dirname(__FILE__)))) . "/engine/start.php");
+	require_once(get_config('path').'engine/start.php');
 	
 	//getting the values
 	set_context('add_order');

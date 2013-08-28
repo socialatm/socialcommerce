@@ -10,7 +10,7 @@
 	 **/ 
 	
 	// Load Elgg engine
-	require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+	require_once(get_config('path').'engine/start.php');
 	global $CONFIG;
 	$user_guid = get_input('us');
 	$order_item_id = get_input('stores_guid');

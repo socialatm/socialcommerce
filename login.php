@@ -11,7 +11,8 @@
 	
 	global $CONFIG;
 	// Load Elgg engine
-		require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+		require_once(get_config('path').'engine/start.php');
+
 		$last_forward_from = get_input('forward_url');
 		if($last_forward_from){
 			$_SESSION['last_forward_from'] = $last_forward_from;
