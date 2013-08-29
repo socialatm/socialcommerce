@@ -17,11 +17,10 @@
 		'type' => 'object',
 		'subtype' => 'address',
 		'owner_guid' => page_owner(),
-		)); 			
-		
+		)) 			
 	){
-		
-		$list_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
+
+ 		$list_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
 		$body = <<<EOF
 			<div>
 				<div style="float:right;margin-bottom:10px;">
