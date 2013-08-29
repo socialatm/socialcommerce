@@ -17,7 +17,7 @@
 		'type' => 'object',
 		'subtype' => 'address',
 		'owner_guid' => page_owner(),
-		)); 			
+		)) 			
 
 	){
 	
