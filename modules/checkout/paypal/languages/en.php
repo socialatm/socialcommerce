@@ -12,7 +12,7 @@
 	$english = array(
 		'paypal:standard' => "PayPal Website Payments (Standard)",
 		'paypal:instructions' => "To integrate PayPal into your store you need to follow a few simple steps, which are shown below:",
-		'paypal:instruction1' => '<a target="_blank" class="ui_desc_link" href="%s">Register for a free PayPal account here</a>',
+		'paypal:instruction1' => '<a target="_blank" href="%s">Register for a free PayPal account here</a>',
 		'paypal:instruction2' => 'Fill in the other details below',
 		'settings' => 'Settings',
 		'mode' => "Mode",
