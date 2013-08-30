@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	$method = $vars['method'];
 	$base = $vars['base'];
 	$settings = elgg_get_entities_from_metadata(array(
@@ -24,7 +23,7 @@
 		$settings = $settings[0];	
 	}
 	$order = $vars['order'];
-	$action = $CONFIG->wwwroot."action/".$CONFIG->pluginname."/manage_socialcommerce";
+	$action = get_config('url').'action/socialcommerce/manage_socialcommerce';
 	$method_view = $method->view;
 	$display_name = $settings->display_name;
 	if(empty($display_name))
@@ -85,7 +84,10 @@
 					</tr>
 				</table>
 				<div style="float:left;margin:18px 0 0 20px;">
-					<img src="<?php echo $CONFIG->wwwroot; ?>mod/<?php echo $CONFIG->pluginname; ?>/views/default/modules/checkout/paypal/images/paypal_logo.gif">
+					<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/checkout/paypal/images/paypal_logo.gif">
+					
+					<!-- @todo - not crazy about image location or inline css	-->
+					
 				</div>
 				<div class="clear"></div>
 			</form>
