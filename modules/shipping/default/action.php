@@ -26,7 +26,7 @@
 			if($guid){
 				$shipping_settings = get_entity($guid);
 			}else{
-				$shipping_settings = new ElggObject($guid);
+				$shipping_settings = new ElggObject();
 			}
 			
 			$shipping_settings->access_id = 2;
