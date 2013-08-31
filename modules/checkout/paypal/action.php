@@ -30,7 +30,7 @@
 			if($guid){
 				$checkout_settings = get_entity($guid);
 			}else{
-				$checkout_settings = new ElggObject($guid);
+				$checkout_settings = new ElggObject();
 			}
 			
 			$checkout_settings->access_id = 2;
