@@ -65,7 +65,7 @@
 			if($guid){
 				$settings = get_entity($guid);
 			}else{
-				$settings = new ElggObject($guid);
+				$settings = new ElggObject();
 				$settings->subtype = 'splugin_settings';
 				$settings->access_id = 2;
 				$settings->container_guid = $_SESSION['user']->guid;
