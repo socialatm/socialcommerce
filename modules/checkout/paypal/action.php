@@ -113,9 +113,9 @@
 			'item_name'		=> elgg_echo('cart:item:name').":".$product_titles,
 
 			// Notification and return URLS
-			'return'		=> $CONFIG->wwwroot."action/{$CONFIG->pluginname}/manage_socialcommerce?manage_action=cart_success&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
-			'cancel_return'	=> $CONFIG->wwwroot."action/{$CONFIG->pluginname}/manage_socialcommerce?manage_action=cart_cancel&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
-			//'notify_url'	=> $CONFIG->wwwroot."action/{$CONFIG->pluginname}/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
+			'return'		=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
+			'cancel_return'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_cancel&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
+			//'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
 			// Customer details
 			'first_name'	=> $billingDetails['firstname'],
@@ -136,7 +136,7 @@
 			//'address_override' => 1
 		);
 		/* 
-		 *	Enter any extra datas from clinit side
+		 *	Enter extra data from client side
 		 *	if 1 we allow to enter datas
 		 * 	Otherwise it automatically redirect to the given url
 		 */

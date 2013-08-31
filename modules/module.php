@@ -19,7 +19,7 @@ function register_socialcommerce_settings(){
 	
 //	$CONFIG->checkout_path = $CONFIG->pluginspath.'socialcommerce/modules/checkout';
 	
-	set_config( 'checkout_path' , $CONFIG->pluginspath.'socialcommerce/modules/checkout', 1  );
+	set_config('checkout_path' , $CONFIG->pluginspath.'socialcommerce/modules/checkout');
 	
 	
 	$CONFIG->checkout_view_path = $CONFIG->pluginspath.'socialcommerce/views/default/modules/checkout';
@@ -961,7 +961,7 @@ function view_success_page(){
 		$body = elgg_view($view);
 		return $body;
 	}else{
-		$redirect = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/{$_SESSION['user']->username}/all";
+		$redirect = $CONFIG->wwwroot."pg/socialcommerce/{$_SESSION['user']->username}/all";
 		forward($redirect);
 	}
 }

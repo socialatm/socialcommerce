@@ -11,7 +11,7 @@
 	 
 	// Load socialcommerce model
     	require_once(dirname(__FILE__)."/modules/module.php");
-    
+   
 	// Load system configuration
 		global $CONFIG;
 		
@@ -32,7 +32,7 @@
 		// Set up menu for logged in users
 			if (isloggedin()) 
 			{
-				add_menu(elgg_echo('stores'), $CONFIG->wwwroot . "pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username."/all");
+				add_menu(elgg_echo('stores'), $CONFIG->wwwroot . 'pg/socialcommerce/' . $_SESSION['user']->username."/all");
 			}
 	
 		// Extend CSS
@@ -196,7 +196,7 @@
 			switch($page[0]) {
 				case "all":				@include(dirname(__FILE__) . "/all.php");
 										break;
-				case "login"			:@include(dirname(__FILE__) . "/login.php");
+				case "login":           @include(dirname(__FILE__) . "/login.php");
 									  	break;
 			}
 			return true;

@@ -113,7 +113,7 @@
 			if(function_exists($function)){
 				$function();
 			}
-			$redirect = $CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$_SESSION['user']->username.'/settings?filter=checkout&order='.$order;
+			$redirect = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings?filter=checkout&order='.$order;
 			break;	
 		case 'makepayment':
 			$method = get_input('payment_method');
