@@ -13,19 +13,19 @@
 	
 	// Get variables
 	
-	$All_Store_Entities = elgg_get_entities($type = "object", 
-	  $subtype = "stores", 
-	  $owner_guid = 0, 
-	  $order_by = "", 
-	  $limit = 15, 
-	  $offset = 0, 
-	  $count = true, 
-	  $site_guid = 0, 
-	  $container_guid = null, 
-	  $timelower = 0, 
-	  $timeupper = 0);
-
-	
+	$All_Store_Entities = elgg_get_entities(array( 	
+		'type' => 'object',
+		'subtype' => 'stores',
+		'owner_guid' => 0,
+		'order_by' => "",
+		'limit' => 15,
+		'offset' => 0,
+		'count' => true,
+		'site_guid' => 0,
+		'container_guid' => null,
+		'timelower' => 0,
+		'timeupper' => 0,	 
+	)); 	
 	
 	$title = trim(get_input("storestitle"));
 	$file_name = trim($_FILES['upload']['name']);
@@ -43,7 +43,7 @@
 		$Max_Limit = 1;
 		$error_field .=",error";
 		register_error(sprintf(elgg_echo("This version only to allow 10 products"),$error_field));
-		$redirect = $CONFIG->wwwroot . "mod/{$CONFIG->pluginname}/add.php";
+		$redirect = $CONFIG->wwwroot . 'mod/socialcommerce/add.php';
 	}else{
 	
 		if (!$container_guid){
@@ -122,7 +122,7 @@
 				register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
 			}
 			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->wwwroot . "mod/{$CONFIG->pluginname}/add.php";
+			$redirect = $CONFIG->wwwroot . 'mod/socialcommerce/add.php';
 		}else{
 			// Extract stores from, save to default stores (for now)
 			$stores = new ElggObject();
@@ -132,7 +132,7 @@
 			if (is_array($product_fields) && sizeof($product_fields) > 0){
 				foreach ($product_fields as $shortname => $valtype){
 					if($valtype['field'] == 'file' && $shortname == 'upload' && isset($_FILES[$shortname]) && $_FILES[$shortname]['name'] != ""){
-						$prefix = "{$CONFIG->pluginname}/";
+						$prefix = 'socialcommerce/';
 						$upload_file = new ElggFile();
 						$filestorename = strtolower(time().$_FILES[$shortname]['name']);
 						$upload_file->setFilename($prefix.$filestorename);
@@ -176,7 +176,7 @@
 				// Now see if we have a file product_image
 				if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/')))
 				{
-					$image_prefix = $CONFIG->pluginname."/".$result;
+					$image_prefix = 'socialcommerce/'.$result;
 					
 					$product_imagehandler = new ElggFile();
 					$product_imagehandler->owner_guid = $stores->owner_guid;
@@ -261,7 +261,7 @@
 				register_error(elgg_echo("stores:uploadfailed"));
 			}
 			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->wwwroot . "pg/{$CONFIG->pluginname}/" . $container_user->username;
+			$redirect = $CONFIG->wwwroot . 'pg/socialcommerce/' . $container_user->username;
 		}
 		
 	}
