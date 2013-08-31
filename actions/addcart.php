@@ -55,12 +55,12 @@
 								}
 							}else{
 								register_error(sprintf(elgg_echo("cart:quantity:less"),$product->title));
-								$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+								$return = $CONFIG->url . 'pg/socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 							}
 						} else {
 							register_error(elgg_echo("cart:already:added"));
 							$cart_added = true;
-							$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+							$return = $CONFIG->url . 'pg/socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 						}
 					}else{
 						$cart_item = new ElggObject();
@@ -108,20 +108,20 @@
 			if(!$cart_added){
 				if ($result){
 					system_message(elgg_echo("cart:added"));
-					$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/cart/";
+					$return = $CONFIG->url . 'pg/socialcommerce/' . $_SESSION['user']->username . "/cart/";
 				}else {
 					register_error(elgg_echo("cart:addfailed"));
-					$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+					$return = $CONFIG->url . 'pg/socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 				}	
 			}
 			$container_user = get_entity($container_guid);
 		}else{
 			register_error(elgg_echo("cart:addfailed:quantity"));
-			$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+			$return = $CONFIG->url . 'pg/socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 		}
 	}else{
 		register_error(elgg_echo("cart:addfailed:pquantity"));
-		$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+		$return = $CONFIG->url . 'pg/socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 	}
 	forward($return);
 ?>

@@ -29,7 +29,7 @@
 	
 	// Get objects
 		set_context('confirm');
-		$area2 = elgg_view("{$CONFIG->pluginname}/cart_confirm");
+		$area2 = elgg_view("socialcommerce/cart_confirm");
 		set_context('stores');
 		$area2 = <<<EOF
 			{$title}

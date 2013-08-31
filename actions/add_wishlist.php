@@ -46,6 +46,6 @@
 		}
 	}
 	
-	$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/read/" . $product->getGUID() . "/" . $product->title;
+	$return = $CONFIG->url . 'pg/socialcommerce/' . $product->getOwnerEntity()->username . "/read/" . $product->getGUID() . "/" . $product->title;
 	forward($return);
 ?>

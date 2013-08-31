@@ -31,7 +31,7 @@
 				<br>{$body}<br><br>
 			</div>
 AREA2;
-		$area2 .= elgg_view("{$CONFIG->pluginname}/cart_success");
+		$area2 .= elgg_view("socialcommerce/cart_success");
 		
 		set_context('stores');
 		

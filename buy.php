@@ -40,7 +40,7 @@
 		
 		if ($entity) {
 			if($entity->owner_guid == $_SESSION['user']->guid)
-				forward($CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
+				forward($CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
 			set_context('cartadd');
 			$area2 .= elgg_view_entity($entity,true);
 			// These for left side menu
