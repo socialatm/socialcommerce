@@ -14,11 +14,18 @@
  */
 function register_socialcommerce_settings(){
 	global $CONFIG;
-	$CONFIG->checkout_path = $CONFIG->pluginspath.$CONFIG->pluginname."/modules/checkout";
-	$CONFIG->checkout_view_path = $CONFIG->pluginspath.$CONFIG->pluginname."/views/default/modules/checkout";
-	$CONFIG->shipping_path = $CONFIG->pluginspath.$CONFIG->pluginname."/modules/shipping";
-	$CONFIG->shipping_view_path = $CONFIG->pluginspath.$CONFIG->pluginname."/views/default/modules/shipping";
-	$CONFIG->currency_path = $CONFIG->pluginspath.$CONFIG->pluginname."/modules/currency";
+
+	//	@todo - these should be in the store object instead of $CONFIG
+	
+//	$CONFIG->checkout_path = $CONFIG->pluginspath.'socialcommerce/modules/checkout';
+	
+	set_config( 'checkout_path' , $CONFIG->pluginspath.'socialcommerce/modules/checkout', 1  );
+	
+	
+	$CONFIG->checkout_view_path = $CONFIG->pluginspath.'socialcommerce/views/default/modules/checkout';
+	$CONFIG->shipping_path = $CONFIG->pluginspath.'socialcommerce/modules/shipping';
+	$CONFIG->shipping_view_path = $CONFIG->pluginspath.'socialcommerce/views/default/modules/shipping';
+	$CONFIG->currency_path = $CONFIG->pluginspath.'socialcommerce/modules/currency';
 	load_module_languages();
 	SetGeneralValuesInConfig();
 	genarateCartFromSession();
@@ -39,7 +46,7 @@ function SetGeneralValuesInConfig(){
 		$river_settings = $settings->river_settings;
 		if(!is_array($river_settings))
 			$river_settings = array($river_settings);
-		$CONFIG->river_settings = $river_settings;
+		$CONFIG->river_settings = $river_settings;		//	@todo - these should be in the store object instead of $CONFIG
 
 		
 	    $allow_shipping_method =  $settings->allow_shipping_method;
