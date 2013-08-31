@@ -99,9 +99,8 @@
 		$orderIdAppend = '('.implode(', ', $orderIds).')';*/
 		$ts = time();
 		$hiddenFields = array(
-			'cmd'			=> '_ext-enter',
-			'redirect_cmd'	=> '_xclick',
-			'business'		=> $email,
+			'cmd'			=> '_xclick',
+			'business'		=> $email,									// @todo - this works but I don't really like it...
 			'rm'			=> 2,
 
 			// Order details
@@ -179,6 +178,9 @@
 			if($settings){
 				$settings = $settings[0];	
 			}
+			
+			//			@todo - IPN settings need an upgrade here...
+						
 			$stores_paypal_email = $settings->socialcommerce_paypal_email;
 			$environment = $settings->socialcommerce_paypal_environment;
 			if(!$environment){
