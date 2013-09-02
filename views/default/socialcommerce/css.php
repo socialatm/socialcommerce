@@ -239,7 +239,7 @@ p.storesrepo_owner {
 }
 .cart_subtotal{
 	padding:5px;
-	width:200px;
+	float:right;
 }
 .content_area_user_bottom{
 	-moz-border-radius-bottomleft:8px;
