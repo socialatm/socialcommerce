@@ -5,15 +5,12 @@
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	 // Load Elgg engine
-	 require_once(get_config('path').'engine/start.php');
-	 global $CONFIG;
+
 	 $quanties = get_input('cartquantity');
-	
+	 
 	 foreach ($quanties as $cart_item_guid=>$quantity){
 	 	$guid = (int)$cart_item_guid;
 	 	if(isloggedin()){
@@ -22,8 +19,8 @@
 	 				$product = get_entity($cart_item->product_id);
 	 			}
 	 		}
-	 		$username = $_SESSION['user']->username;
 	 	}
+		
 	 	if (is_numeric($quantity)) { 
  			if($quantity > 0){
  				if($product->quantity >= $quantity){
@@ -44,5 +41,8 @@
 			register_error(sprintf(elgg_echo("cart:pregmatch:quantity:failed"),$product->title));
 		}
 	 }
-	 forward("pg/{$CONFIG->pluginname}/" . $username . "/cart/");
+	 
+	system_message(elgg_echo("cart:updated"));
+	forward('pg/socialcommerce/'. $_SESSION['username'] . '/cart/');
+
 ?>
