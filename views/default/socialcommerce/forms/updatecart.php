@@ -5,18 +5,17 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	global $CONFIG;
-	
+
 	$change_quantity = elgg_echo('cart:update:text');
 	$update_cart = elgg_echo('cart:update');
 	$cart_payment = elgg_echo('cart:confirm:payment');
 	$total = calculate_cart_total();
 	$display_price = get_price_with_currency($total);
 	$subtotal_text = elgg_echo('cart:subtotal');
+	
 	if(get_context() == "confirm") {
 		$form_body .= <<< BOTTOM
 			<div class="search_listing">
