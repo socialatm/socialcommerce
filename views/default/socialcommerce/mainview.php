@@ -5,7 +5,7 @@
 	* @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -119,7 +119,7 @@
 								 if($stores->status == 1){ 
 ?>
 									<div class="edit_btn" style="float:left;">
-										<a href="<?php echo $vars['url']; ?>mod/<?php echo $CONFIG->pluginname; ?>/edit.php?stores_guid=<?php echo $stores->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>&nbsp; 
+										<a href="<?php echo $vars['url']; ?>pg/socialcommerce/product/edit/<?php echo $stores->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>
 									</div>
 									
 									<div class="delete_btn" style="float:left;padding-left:10px;">
@@ -203,4 +203,3 @@ EOF;
 		echo elgg_view_comments($stores);
 	}
 ?>
-<img src='http://surfscripts.com/demo/adtracker/index.php/tracker/trackdata/1' width='0' height='0'>

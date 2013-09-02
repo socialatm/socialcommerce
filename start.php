@@ -5,7 +5,7 @@
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
  	**/
 	 
@@ -14,12 +14,11 @@
    
 	// Load system configuration
 		global $CONFIG;
-		
+				
 	// Set Config Values	
 		$CONFIG->default_price_sign = "$";
 		$CONFIG->default_currency_name = 'US Dollar';
 		$CONFIG->pluginname = "socialcommerce";
-
 			
 	/**
 	 * Social Commerce plugin initialization functions.
@@ -194,9 +193,9 @@
 		$page_0 = array('all','login');
 		if(in_array($page[0],$page_0)){
 			switch($page[0]) {
-				case "all":				@include(dirname(__FILE__) . "/all.php");
+				case "all":				include(dirname(__FILE__) . "/all.php");
 										break;
-				case "login":           @include(dirname(__FILE__) . "/login.php");
+				case "login":           include(dirname(__FILE__) . "/login.php");
 									  	break;
 			}
 			return true;
@@ -229,54 +228,61 @@
 										break;
 				case "confirm":			@include(dirname(__FILE__) . "/cart_confirm.php");
 										break;
-				case "cart_success":	@include(dirname(__FILE__) . "/cart_success.php");
+				case "cart_success":	include(dirname(__FILE__) . "/cart_success.php");
 										break;
 				case "order":			set_input('search_viewtype','list');
-										@include(dirname(__FILE__) . "/order.php");
+										include(dirname(__FILE__) . "/order.php");
 										break;
-				case "wishlist":		@include(dirname(__FILE__) . "/wishlist.php");
+				case "wishlist":		include(dirname(__FILE__) . "/wishlist.php");
 										break;
-				case "cancel":			@include(dirname(__FILE__) . "/cart_cancel.php");
+				case "cancel":			include(dirname(__FILE__) . "/cart_cancel.php");
 										break;
-				case "tell_to_friend":	@include(dirname(__FILE__) . "/tell_to_friend_form.php");
+				case "tell_to_friend":	include(dirname(__FILE__) . "/tell_to_friend_form.php");
 										break;
-				case "administration":	@include(dirname(__FILE__) . "/administration/index.php");
+				case "administration":	include(dirname(__FILE__) . "/administration/index.php");
 									  	break;
-				case "my_account":		@include(dirname(__FILE__) . "/my_account.php");
+				case "my_account":		include(dirname(__FILE__) . "/my_account.php");
 									  	break;
-				case "type":			@include(dirname(__FILE__) . "/product_type.php");
+				case "type":			include(dirname(__FILE__) . "/product_type.php");
 									  	break;
-				case "product_cate":	@include(dirname(__FILE__) . "/product_category.php");
+				case "product_cate":	include(dirname(__FILE__) . "/product_category.php");
 									  	break;
-				case "more_order_item":	@include(dirname(__FILE__) . "/more_order_item.php");
+				case "more_order_item":	include(dirname(__FILE__) . "/more_order_item.php");
 									  	break;
-				case "sold":			@include(dirname(__FILE__) . "/sold.php");
+				case "sold":			include(dirname(__FILE__) . "/sold.php");
 									  	break;
-				case "add":				@include(dirname(__FILE__) . "/add.php");
+				case "add":				include(dirname(__FILE__) . "/add.php");
 									  	break;
-				case "settings":		@include(dirname(__FILE__) . "/socialcommerce_settings.php");
+				case "settings":		include(dirname(__FILE__) . "/socialcommerce_settings.php");
 									  	break;
-				case "checkout_process":@include(dirname(__FILE__) . "/checkout_process.php");
+				case "checkout_process":include(dirname(__FILE__) . "/checkout_process.php");
 									  	break;
-				case "checkout_address":@include(dirname(__FILE__) . "/checkout_address.php");
+				case "checkout_address":include(dirname(__FILE__) . "/checkout_address.php");
 									  	break;
-				case "view_address":	@include(dirname(__FILE__) . "/address_view.php");
+				case "view_address":	include(dirname(__FILE__) . "/address_view.php");
 									  	break;
 				case "order_products":	if($page[2])
 											set_input('guid',$page[2]);
-										@include(dirname(__FILE__) . "/order_products.php");
+										include(dirname(__FILE__) . "/order_products.php");
 									  	break;
-				case "currency_settings":@include(dirname(__FILE__) . "/load_currency_settings.php");
+				case "currency_settings":include(dirname(__FILE__) . "/load_currency_settings.php");
 									  	break;
-				case "country_state"	:@include(dirname(__FILE__) . "/manage_country_state.php");
+				case "country_state"	:include(dirname(__FILE__) . "/manage_country_state.php");
 									  	break;
-				default:				@include(dirname(__FILE__) . "/index.php");
+				case "edit":			include(dirname(__FILE__) . "/edit.php");
+										break;
+				
+				case "delete":			//	@todo - this doesn't work...
+									//	include(dirname(__FILE__) . "/cart_success.php");
+										break;
+														
+				default:				include(dirname(__FILE__) . "/index.php");
 										break;
 										
 			}
-		// If the URL is just 'blog/username', or just 'blog/', load the standard blog index
+		// If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load the standard blog index
 		} else {
-			@include(dirname(__FILE__) . "/index.php");
+			include(dirname(__FILE__) . "/index.php");
 			return true;
 		}
 		
@@ -896,7 +902,7 @@ EOT;
 				
 		register_action("{$CONFIG->pluginname}/addcommon_tax",false,$CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/addcommon_tax.php");
 		register_action("{$CONFIG->pluginname}/addcountry_tax",false,$CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/addcountry_tax.php");
-		register_action("{$CONFIG->pluginname}/manage_socialcommerce", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/manage_socialcommerce.php");
+		register_action('socialcommerce/manage_socialcommerce', false, $CONFIG->pluginspath . 'socialcommerce/actions/manage_socialcommerce.php', false);
 
 		
 ?>

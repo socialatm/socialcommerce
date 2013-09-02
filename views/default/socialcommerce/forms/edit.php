@@ -5,31 +5,26 @@
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
  	**/
 	 
-	global $CONFIG;
-
-	
-	
-	
 	// Set title, form destination
 		if (isset($vars['entity'])) {
-			$title = sprintf(elgg_echo("stores:editpost"),$object->title);
+			$title = sprintf(elgg_echo("stores:editpost"),$object->title);	// @todo - why is title on both line 21 & line 23 ??
 			$action = "{$CONFIG->pluginname}/edit";
 			$title = $vars['entity']->title;
 			$body = $vars['entity']->description;
 			$taxrate_name_cnty = $vars['entity']->countrycode;
 			$price = $vars['entity']->price;
-			$base_stock = $vars['entity']->base_stock;
-			$category = $vars['entity']->category;
-			$quantity = $vars['entity']->quantity;
+			$base_stock = $vars['entity']->base_stock;		// @todo - what exactly is base_stock ??
+			$category = $vars['entity']->category;			// @todo - should there be a default category if one is not assigned??
+			$quantity = $vars['entity']->quantity;			// @todo - I don't see a way to set the quantity ??
 			$tags = $vars['entity']->tags;
 			$access_id = $vars['entity']->access_id;
 			$product_type_id = $vars['entity']->product_type_id;
-			if($product_type_id <= 0)
-				$product_type_id = 2;
+		//	if($product_type_id <= 0)			// @todo - doesn't this make every product a digital product ??
+		//		$product_type_id = 2;
 		} else  {
 			$title = elgg_echo("stores:addpost");
 			$action = "{$CONFIG->pluginname}/add";
@@ -40,7 +35,7 @@
 			$access_id = 2;
 			$product_type_id = 2;
 		}
-
+		
 	// Just in case we have some cached details
 		if (isset($vars['product'])) {
 			//unset($_SESSION['product']);
@@ -62,15 +57,14 @@
 			$price = $vars['product']['price'];
 			$base_stock = $vars['product']['base_stock'];
 			$quantity = $vars['product']['quantity'];
-			
-			
-		}
+		}					// @todo - don't know about this part...
+		
 		$chk_tax_type = '';
 		$country_details = '';
 				
 		$splugin_settings = elgg_get_entities(array(
-		'type' => 'object',
-		'subtype' => 'splugin_settings',
+			'type' => 'object',
+			'subtype' => 'splugin_settings',
 		));
 
         $title_label = elgg_echo('title');
@@ -122,6 +116,7 @@
         if (($action == "{$CONFIG->pluginname}/add" && $product_type_id == 2 && $vars['entity']->mimetype == "")||($vars['entity']->guid > 0 && $product_type_id == 2 && $vars['entity']->mimetype == "")) {
 			$upload_label = elgg_echo('stores:file');
 	        $upload_input = elgg_view("input/file",array('internalname' => 'upload'));
+			
 			$form_upload = <<<EOT
 				<p>
 					<label><span style="color:red">*</span>$upload_label</label><br />
@@ -168,7 +163,7 @@ EOT;
 				$fields .= '<p><label>'.$mandetory.elgg_echo('product:'.$shortname).'</label><br />';
 				if($vars['entity']->mimetype != "" && $shortname == 'upload' && $valtype['field'] == 'file'){
 					$fields .= "<div style='float:left;'>".elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $vars['entity']->mimetype, 'thumbnail' => $vars['entity']->thumbnail, 'stores_guid' => $vars['entity']->guid))."</div>";
-					$fields .= "<div class='change_product_file'><a href='javascript:void(0);' onclick='load_edit_product_detaile();'><b>".elgg_echo('product:edit:file')."</a></a></div><div class='clear'></div>";
+					$fields .= "<div class='change_product_file'><a href='javascript:void(0);' onclick='load_edit_product_detaile();'><b>".elgg_echo('product:edit:file')."</a></div><div class='clear'></div>";
 					$fields .= "<div id='product_file_change'>".elgg_view("input/{$valtype['field']}",array(
 															'internalname' => $shortname,
 															'value' => $value,
@@ -198,12 +193,14 @@ EOT;
 			
 		$entity_hidden .= elgg_view('input/securitytoken');
 		$post_url = $CONFIG->wwwroot."mod/{$CONFIG->pluginname}/onchange_product_type.php";
+		
 		if(!$vars['entity']->guid)
 			$id = 0;
 		else 
 			$id = $vars['entity']->guid;
 		
 		$cstom_fields = elgg_view("custom_field/view",array('entity'=>$vars['entity'],'entity_type'=>$product_type_id));
+		
         $form_body = <<<EOT
         	<script>
         		
@@ -253,4 +250,5 @@ EOT;
 			</form>
 EOT;
 echo $form_body;
+
 ?>
