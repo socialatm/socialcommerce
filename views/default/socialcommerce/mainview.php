@@ -98,9 +98,8 @@
 				if ($stores->canEdit()) {?>
 						<div class="storesrepo_controls">
 <?php
-							if($stores->status == 1){
+							if($stores->status == 1){ ; } 	//	@todo - why is this here ??
 ?>
-							<?PHP ; } ?>
 								
 <?php
 							if($_SESSION['user']->guid != $stores->owner_guid && $stores->status == 1 && $product_type_details->addto_cart == 1){
