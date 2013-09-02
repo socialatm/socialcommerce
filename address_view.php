@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -33,7 +33,7 @@
 				'type' => 'object',
 				'subtype' => 'adress',
 				'owner_guid' => $page_owner,
-				)); 			
+				)) 			
 						
 			){
 			
@@ -103,7 +103,7 @@ EOF;
 					'type' => 'object',
 					'subtype' => 'address',
 					'owner_guid' => $user_guid,
-					)); 			
+					)) 			
 							
 			){
 				$list_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
