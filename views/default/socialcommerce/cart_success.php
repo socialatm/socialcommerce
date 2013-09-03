@@ -1,21 +1,19 @@
 <?php
-/**
- * Elgg view - cart success
- * 
-* @package Elgg SocialCommerce
+    /**
+     * Elgg view - cart success
+     * 
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-global $CONFIG;
-		
 $cart = $cart = elgg_get_entities(array( 	
 	'type' => 'object',
 	'subtype' => 'cart',
 	'owner_guid' => $_SESSION['user']->getGUID(),
-	)); 	
+	)); 
 
 if($cart){
 	$cart = $cart[0];
@@ -23,6 +21,7 @@ if($cart){
 					'relationship' => 'cart_item',
 					'relationship_guid' => $cart->guid, 
 					)); 
+					
 	if($cart_items){
 		foreach ($cart_items as $cart_item){
 			if($product = get_entity($cart_item->product_id)){
@@ -63,7 +62,7 @@ if($cart){
 EOF;
 				$info .= elgg_cart_quantity($cart_item);
 				$info .= elgg_view('output/confirmlink',array(
-									'href' => $vars['url'] . "action/{$CONFIG->pluginname}/remove_cart?cart_guid=" . $cart_item->getGUID(),
+									'href' => $vars['url'] . "action/socialcommerce/remove_cart?cart_guid=" . $cart_item->getGUID(),
 									'text' => elgg_echo("remove"),
 									'confirm' => elgg_echo("cart:delete:confirm"),
 								)); 
@@ -74,12 +73,12 @@ EOF;
 										  )
 									);
 				if($product->mimetype && $product->product_type_id == 2){							
-					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
+					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}
 				$display_cart_items .= elgg_view_listing($image.$icon, $info);
 			}
 		}
-		$update_cart = elgg_view("{$CONFIG->pluginname}/forms/updatecart");
+		$update_cart = elgg_view("socialcommerce/forms/updatecart");
 		
 	}
 	$confirm_address = elgg_list_entities(array(
