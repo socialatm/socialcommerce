@@ -866,7 +866,7 @@ EOT;
 		}
 		return null;
   	}
-  	// Make sure the stores initialisation function is called on initialisation
+  	// Make sure the stores initialization function is called on initialization
 		register_elgg_event_handler('init','system','socialcommerce_init');
 		register_elgg_event_handler('init','system','product_fields_setup', 10000); // Ensure this runs after other plugins
 		
