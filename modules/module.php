@@ -5,7 +5,7 @@
 	* @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -438,7 +438,7 @@ function get_checkout_methods(){
 }
 
 /*
- *	Get checkout plugins list. It return as an array.
+ *	Get checkout plugins list. It returns an array.
  */
 function get_checkout_list(){
 	global $CONFIG;
