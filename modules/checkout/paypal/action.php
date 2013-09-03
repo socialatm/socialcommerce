@@ -5,48 +5,45 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
+	
 	function set_checkout_settings_paypal(){
-		
+			
 		$guid = get_input('guid');
-		
-		$error_field = "";
 		$display_name = get_input('display_name');
 		$paypal_email = get_input('socialcommerce_paypal_email');
 		$paypal_envi = get_input('socialcommerce_paypal_environment');
+		
+		
 		if(empty($display_name)){
-			$error_field = ", ".elgg_echo("display:name");
+			register_error('missing '.elgg_echo("display:name"));
+			return;
 		}
 		if(empty($paypal_email)){
-			$error_field .= ", ".elgg_echo("paypal:email");
+			register_error('missing '.elgg_echo("paypal:email"));
+			return;
 		}
 		if(empty($paypal_envi)){
-			$error_field .= ", ".elgg_echo("mode");
+			register_error('missing '.elgg_echo("mode"));
+			return;
 		}
-		if(empty($error_field)){
-			if($guid){
-				$checkout_settings = get_entity($guid);
-			}else{
-				$checkout_settings = new ElggObject();
-			}
-			
-			$checkout_settings->access_id = 2;
-			$checkout_settings->container_guid = $_SESSION['user']->guid;
-			$checkout_settings->subtype = 's_checkout';
-			$checkout_settings->checkout_method = 'paypal';
-			$checkout_settings->display_name = $display_name;
-			$checkout_settings->socialcommerce_paypal_email = $paypal_email;
-			$checkout_settings->socialcommerce_paypal_environment = $paypal_envi;
-			$checkout_settings->save();
-			
-			system_message(sprintf(elgg_echo("settings:saved"),$checkout_methods[$method]->label));
-			return $settings->guid;
-		}elseif (!empty($error_field)){
-			$error_field = substr($error_field,2);
-			register_error(sprintf(elgg_echo("settings:validation:null"),$error_field));
+		
+		$checkout_settings = !empty($guid) ? get_entity($guid) : new ElggObject() ;
+		$checkout_settings->access_id = 2;
+		$checkout_settings->container_guid = $_SESSION['user']->guid;
+		$checkout_settings->subtype = 's_checkout';
+		$checkout_settings->checkout_method = 'paypal';
+		$checkout_settings->display_name = $display_name;
+		$checkout_settings->socialcommerce_paypal_email = $paypal_email;
+		$checkout_settings->socialcommerce_paypal_environment = $paypal_envi;
+		
+		if($checkout_settings->save()){
+			system_message(sprintf(elgg_echo("settings:saved"),$display_name));
+			return true;
+		}else{
+			register_error(sprintf(elgg_echo("paypal:settings:not:saved"),$display_name));
 			return false;
 		}
 	}
@@ -100,7 +97,7 @@
 		$ts = time();
 		$hiddenFields = array(
 			'cmd'			=> '_xclick',
-			'business'		=> $email,									// @todo - this works but I don't really like it...
+			'business'		=> $email,									// @todo - this works, sort of - sometimes but I don't really like it...
 			'rm'			=> 2,
 
 			// Order details
@@ -113,9 +110,12 @@
 			'item_name'		=> elgg_echo('cart:item:name').":".$product_titles,
 
 			// Notification and return URLS
-			'return'		=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
+	//		'return'		=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
+			
+			'return'		=> $CONFIG->wwwroot."pg/socialcommerce/manage_action/cart_success/__elgg_token/".generate_action_token($ts)."/__elgg_ts/".$ts,
+			
 			'cancel_return'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_cancel&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
-			//'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
+			'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
 			// Customer details
 			'first_name'	=> $billingDetails['firstname'],
@@ -150,7 +150,8 @@
 	}
 	
 	function makepayment_paypal(){
-		global $CONFIG;
+	
+	 	global $CONFIG;
 		
 		$custom = get_input('custom');
 		//$custom = 'stores_payment';
@@ -166,7 +167,7 @@
 			$ShippingMethods = $custome[4];
 			if(!$ShippingMethods)
 				$ShippingMethods = 0;
-			
+				
 			$settings = elgg_get_entities_from_metadata(array(
 				'checkout_method' => 'paypal',
 				'entity_type' =>'object',
