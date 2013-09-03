@@ -8,11 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	global $CONFIG;
-	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
-		
+
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
 		if ($page_owner === false || is_null($page_owner)) {
