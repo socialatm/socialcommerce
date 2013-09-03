@@ -9,45 +9,29 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	gatekeeper();
+	 gatekeeper();
 	load_checkout_actions();
 	load_currency_actions();
 	
 	$site = get_entity($CONFIG->site_guid);
 	$manage_action = get_input('manage_action');
-	//Error Flag
-	$error_validation = "";
-	$holding_error =0;
-	$http_url_error=0;
-	//Error flag
+		
 	switch ($manage_action){
 		case 'settings':
-			$checkoutmethods = get_input('checkout_method');
-			if(!$checkoutmethods)
-				$checkoutmethods = array();
-			
-				
-			$fund_withdraw_methods = get_input('fund_withdraw_method');
-			if(!$fund_withdraw_methods)
-				$fund_withdraw_methods = array();
-				
-			$river_settings = get_input('river_settings');
-			
-			
-			
-			
-			$allow_add_product = get_input('allow_add_product');
-			
-			
-			$default_view = "list";
-			
-			$https_allow = get_input('https_allow');
+			$checkoutmethods = get_input('checkout_method') ? get_input('checkout_method') : array();
+			//	@todo - fund_withdraw_method is not on the form
+			$fund_withdraw_methods = get_input('fund_withdraw_method') ? get_input('fund_withdraw_method') : array();	
+			$river_settings = get_input('river_settings')? get_input('river_settings') : array();
+			//	@todo - allow_add_product is not on the form
+			$allow_add_product = get_input('allow_add_product') ? get_input('allow_add_product') : array();
+			// @todo - default_view does not give us a gallery option on the form
+			$default_view = get_input('default_view') ? get_input('default_view') : 'list';
+					
+			$https_allow = get_input('https_allow');		//	@todo - not on the form
 			if($https_allow){
 				$https_url_text = get_input('https_url_text');
-				if($https_url_text==""){
-					$http_url_error=1;
-					$error_validation .='https url should not be blank';
-					$Comma =',';
+				if(empty($https_url_text)){ 
+					register_error(elgg_echo("https url should not be blank"));
 				}
 			}
 			else{
@@ -55,55 +39,33 @@
 				$https_url_text = "";
 			}
 			
-			$share_this = get_input('share_this','',false);
-							
-			
-			
-			
+			$share_this = get_input('share_this','',false);			//	@todo - not on the form
+						
 			$guid = get_input('guid');
-			if($guid){
-				$settings = get_entity($guid);
-			}else{
-				$settings = new ElggObject();
-				$settings->subtype = 'splugin_settings';
-				$settings->access_id = 2;
-				$settings->container_guid = $_SESSION['user']->guid;
-			}
-			
+			$settings = !empty($guid) ? get_entity($guid) : new ElggObject() ;
+			$settings->subtype = 'splugin_settings';
+			$settings->access_id = 2;
+			$settings->container_guid = $_SESSION['user']->guid;
 			$settings->checkout_methods = $checkoutmethods;
 			$settings->fund_withdraw_methods = $fund_withdraw_methods;
-			
 			$settings->default_view = $default_view;
 			// For Add The https URL 
 			$settings->https_allow = $https_allow;
 			$settings->https_url_text = $https_url_text;
-			
 			$settings->share_this = $share_this;
-			
-			if(!empty($river_settings)){
-				$settings->river_settings = $river_settings;
-			}else{
-				$settings->river_settings = array();
-			}
-				
-				
-				$settings->http_proxy_server = "";
-				$settings->http_proxy_port = "";
-				$settings->http_varify_ssl = "";
+			$settings->river_settings = $river_settings;
+			$settings->http_proxy_server = "";
+			$settings->http_proxy_port = "";
+			$settings->http_varify_ssl = "";
+			$settings->allow_add_product = "";
+			$settings->allow_shipping_method = 1;
 
-				$settings->allow_add_product = "";
-				$settings->allow_shipping_method = 1;
-
-
-			if($holding_error!=0 || $http_url_error!=0)
-			{
-					register_error("sorry\n".$error_validation);
-			}
-			else
-			{
-				$settings->save();
-			}
-			$redirect = $CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$_SESSION['user']->username.'/settings';
+		if($settings->save()){
+			system_message(sprintf(elgg_echo("settings:saved"), elgg_echo("item:object:splugin_settings")));
+		}else{
+			register_error(elgg_echo("settings:save:error"));
+		}
+			$redirect = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings';
 			break;	
 		case 'checkout':
 			$order = get_input('order');
@@ -121,7 +83,6 @@
 			if(function_exists($function)){
 				$success = $function();
 			}
-			
 			break;
 		case 'cart_success':
 			$body = view_success_page();
@@ -218,4 +179,3 @@
 		}
 	exit;
 ?>
-
