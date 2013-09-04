@@ -5,14 +5,11 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-		global $CONFIG, $settings;
-		admin_gatekeeper();
-		$settings = 1;
-		require_once(get_config('path').'engine/start.php');
+		admin_gatekeeper();			//	@todo - what if we want to let regular users have a store ??
 		
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
@@ -20,14 +17,10 @@
 			$page_owner = $_SESSION['user'];
 			set_page_owner($_SESSION['guid']);
 		}
-		set_context('admin');
+		set_context('admin');		//	@todo - what if we want to let regular users have a store ??
 	//set stores title
 		$title = elgg_view_title(elgg_echo('socialcommerce:manage'));
-		
-	// Get objects
-		$filter = get_input("filter");
-		if(!$filter)
-			$filter = "settings";
+		$filter = get_input("filter") ? get_input("filter") : 'settings' ;
 			
 		$splugin_settings = elgg_get_entities(array( 	
 			'type' => 'object',
@@ -40,6 +33,12 @@
 				break;
 			case "checkout":
 				$area2 = elgg_view("modules/checkout_methods",array('entity'=>$splugin_settings));
+				break;
+			case "shipping":
+				$area2 = elgg_view("modules/shipping_methods",array('entity'=>$splugin_settings));
+				break;
+			case "currency":
+				$area2 = elgg_view("modules/currency_settings",array('entity'=>$splugin_settings));
 				break;
 		}
 		$area2 = elgg_view("modules/settings_tab_view",array('entity'=>$splugin_settings,'base_view' => $area2, "filter" => $filter));
