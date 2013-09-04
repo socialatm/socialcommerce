@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -28,8 +28,8 @@
 	if($shipping_methods && $selected_shippingmethods){
 ?>
 		<div>
-			<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/<?php echo $CONFIG->pluginname; ?>/js/chili-1.7.pack.js"></script>
-			<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/<?php echo $CONFIG->pluginname; ?>/js/jquery.accordion.js"></script>
+			<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/js/chili-1.7.pack.js"></script>
+			<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/js/jquery.accordion.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function(){
 					jQuery('#list1b').accordion({
