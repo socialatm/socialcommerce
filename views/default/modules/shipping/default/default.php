@@ -5,7 +5,7 @@
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
  	**/
 	 
@@ -26,7 +26,7 @@
 		$settings = $settings[0];	
 	}
 	
-	$action = $CONFIG->wwwroot."action/".$CONFIG->pluginname."/manage_socialcommerce";
+	$action = $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce";
 	$method_view = $method->view;
 	$display_name = $settings->display_name;
 	if(!$display_name)
