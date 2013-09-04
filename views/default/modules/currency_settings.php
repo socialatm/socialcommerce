@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -28,8 +28,8 @@
 		$body = '<div style="text-align:center;padding:5px 0 10px 0;"><B>'.elgg_echo('add:default:currency').'</B></div>';
 		$body .= elgg_view('modules/currency/settings_form',array('status'=>'default'));
 	}
-	$action = $CONFIG->wwwroot."action/".$CONFIG->pluginname."/manage_socialcommerce";
-	$load_action = $CONFIG->wwwroot."pg/".$CONFIG->pluginname."/".$_SESSION['user']->username."/currency_settings";
+	$action = $CONFIG->wwwroot.'action/socialcommerce/manage_socialcommerce';
+	$load_action = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/currency_settings";
 	
 	if($ajax){
 		echo $body;
