@@ -9,8 +9,9 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	$shipping_methods = get_shipping_methods();
+	echo 'Coming Soon';
+	 
+	 // $shipping_methods = get_shipping_methods();
 	$checkoutmethods = "";
 	
 	$settings = $vars['entity'];
