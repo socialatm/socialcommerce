@@ -253,8 +253,8 @@
 									  	break;
 				case "add":				include(dirname(__FILE__) . "/add.php");
 									  	break;
-				case "settings":		include(dirname(__FILE__) . "/socialcommerce_settings.php");
-									  	break;
+				case "settings":		include("/socialcommerce_settings.php");
+										break;
 				case "checkout_process":include(dirname(__FILE__) . "/checkout_process.php");
 									  	break;
 				case "checkout_address":include(dirname(__FILE__) . "/checkout_address.php");
