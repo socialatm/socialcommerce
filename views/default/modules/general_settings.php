@@ -5,7 +5,7 @@
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http:/twentyfiveautumn.com/
  	**/ 
 	 
@@ -60,7 +60,7 @@
 
 		}
 	//// For check the check out url-----END	
-	$action = $CONFIG->wwwroot.'action/'.$CONFIG->pluginname.'/manage_socialcommerce';
+	$action = $CONFIG->wwwroot.'action/socialcommerce/manage_socialcommerce';
 ?>
 <script>
 	function showData(){
@@ -80,7 +80,7 @@
 				<div class="left" style="padding:3px 0"><input type="radio" name="default_view" <?php if($default_view == 'list') echo 'checked="checked"'; ?> value="list"></div>
 				<div class="left" style="padding:3px 5px;"></div>
 				<div class="left"><?php echo elgg_echo('list'); ?></div>
-				<div class="left" style="padding:0 5px;"><img class="help_img" onMouseOut="HideHelp(this);" onMouseOver="ShowHelp(this, '<?php echo elgg_echo('settings:default:view'); ?>', '<?php echo elgg_echo('settings:default:view:list:help'); ?>')" src="<?php echo $CONFIG->wwwroot; ?>mod/<?php echo $CONFIG->pluginname; ?>/images/help.gif" border="0"></div>
+				<div class="left" style="padding:0 5px;"><img class="help_img" onMouseOut="HideHelp(this);" onMouseOver="ShowHelp(this, '<?php echo elgg_echo('settings:default:view'); ?>', '<?php echo elgg_echo('settings:default:view:list:help'); ?>')" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/images/help.gif" border="0"></div>
 				<div class="clear"></div>
 			</div>
 			<div class="clear"></div>
@@ -104,7 +104,7 @@
 				<div class="left" style="padding:3px 0"><input type="checkbox" name="river_settings[]" <?php if(in_array('product_checkout',$river_settings)) echo 'checked="checked"'; ?> value="product_checkout"></div>
 				<div class="left" style="padding:3px 5px;"></div>
 				<div class="left"><?php echo elgg_echo('checkout'); ?></div>
-				<div class="left" style="padding:0 5px;"><img class="help_img" onMouseOut="HideHelp(this);" onMouseOver="ShowHelp(this, '<?php echo elgg_echo('river:management'); ?>', '<?php echo elgg_echo('river:product:checkout:help'); ?>')" src="<?php echo $CONFIG->wwwroot; ?>mod/<?php echo $CONFIG->pluginname; ?>/images/help.gif" border="0"></div>
+				<div class="left" style="padding:0 5px;"><img class="help_img" onMouseOut="HideHelp(this);" onMouseOver="ShowHelp(this, '<?php echo elgg_echo('river:management'); ?>', '<?php echo elgg_echo('river:product:checkout:help'); ?>')" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/images/help.gif" border="0"></div>
 				<div class="clear"></div>
 
 			</div>
