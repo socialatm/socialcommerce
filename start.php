@@ -8,7 +8,13 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
  	**/
-	 
+	
+	/*
+	 *	we'll have to explicitly include classes for now but they will autoload once we move to elgg 1.8
+	 *	require_once("/classes/splugin_settings.php");
+	 *	$bear = new bear();
+	 */
+		 
 	// Load socialcommerce model
     	require_once(dirname(__FILE__)."/modules/module.php");
    
