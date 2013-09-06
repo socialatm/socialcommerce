@@ -48,21 +48,20 @@
 		}
 	}
 	
-	function checkout_payment_settings_paypal(){
+	function checkout_payment_settings_paypal(){		//	working on this right now!!
+	
+		global $CONFIG;	//		let's replace with get_config() calls...
+		$method = $_SESSION['CHECKOUT']['checkout_method'];		//	@todo - what if the $method != 'paypal'  ??
 		
-		global $CONFIG;
-		$method = $_SESSION['CHECKOUT']['checkout_method'];
 		$settings = elgg_get_entities_from_metadata(array(
 			'checkout_method' => $method,
 			'entity_type' =>'object',
 			'entity_subtype' => 's_checkout',
 			'owner_guid' => 0,
 			'limit' => 1,
-			));  	
-				
-		if($settings){
-			$settings = $settings[0];	
-		}
+			)); 
+			
+		if($settings){ $settings = $settings[0]; }		//	@todo - and what if settings is not found?...
 		
 		$total = $_SESSION['CHECKOUT']['total'];
 		$validate_currency = validate_currency($CONFIG->currency_code,$total,'paypal');
@@ -147,7 +146,7 @@
 		 */
 		//$field_view = "paypal_entries";
 		return redirect_to_form($paypal_url, $hiddenFields, $not_compleated, $field_view);
-	}
+	}			// end of function checkout_payment_settings_paypal
 	
 	function makepayment_paypal(){
 	
