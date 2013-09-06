@@ -967,14 +967,12 @@ function view_success_page(){
 }
 
 function view_cancel_page(){
-	global $CONFIG;
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_cancel';
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
 		return $body;
 	}else{
-		$redirect = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/{$_SESSION['user']->username}/all";
-		forward($redirect);
+		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
