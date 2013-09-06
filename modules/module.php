@@ -2,7 +2,7 @@
 	/**
 	 * Elgg module - actions
 	 * 
-	* @package Elgg SocialCommerce
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
 	 * @copyright twentyfiveautumn.com 2013
@@ -1012,9 +1012,7 @@ function create_withdraw_transaction($amount,$receiver_email){
 	return $result;
 }
 
-/******************************************/
-/*                CURRENCY                */
-/******************************************/
+/*****	currency	*****/
 
 function get_currency_list(){
 	global $CONFIG;
@@ -1026,6 +1024,7 @@ function get_currency_list(){
 			}
 		}
 	}
+	
 	if($currencies){
 		return $currencies;
 	}else{
@@ -1033,7 +1032,7 @@ function get_currency_list(){
 	}
 }
 
-function load_currency_actions(){
+function load_currency_actions() {
 	global $CONFIG;
 	$currency_lists = get_currency_list();
 	if ($currency_lists) {
@@ -1121,8 +1120,9 @@ function set_default_currency_to_global(){
 	}
 }
 
-function validate_currency ($c_code="", $amount=0, $method=""){
+function validate_currency( $c_code = "", $amount = 0, $method = "" ){
 	load_currency_actions();
+		
 	if($method){
 		if(!is_array($valid_amount))
 			$valid_amount = array();
