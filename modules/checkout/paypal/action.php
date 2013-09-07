@@ -93,13 +93,7 @@
 				$product_titles .= $product_titles ? ", ".$product->title : $product->title;
 			}
 		}
-		/*$orders = $this->GetOrders();
-		$orderIds = array();
-		foreach($orders as $order) {
-			$orderIds[] = '#'.$order['orderid'];
-		}
-		$orderIdAppend = '('.implode(', ', $orderIds).')';*/
-		$ts = time();
+
 		$hiddenFields = array(
 			'cmd'			=> '_xclick',
 			'business'		=> $email,									// @todo - this works, sort of - sometimes but I don't really like it...
