@@ -59,8 +59,8 @@ EOF;
 			if($shipping_settings)
 				$shipping_settings = $shipping_settings[0];
 			
-			if(file_exists($CONFIG->shipping_path.'/'.$selected_shipping_method.'/action.php')) {
-				include_once($CONFIG->shipping_path.'/'.$selected_shipping_method."/action.php");
+			if(file_exists($CONFIG->shipping_path.$selected_shipping_method.'/action.php')) {
+				include_once($CONFIG->shipping_path.$selected_shipping_method."/action.php");
 			}else{
 				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:method'), $selected_shipping_method));
 			}
