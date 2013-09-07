@@ -50,7 +50,6 @@
 	
 	function checkout_payment_settings_paypal(){		//	working on this right now!!
 	
-		global $CONFIG;	//		let's replace with get_config() calls...
 		$method = $_SESSION['CHECKOUT']['checkout_method'];		//	@todo - what if the $method != 'paypal'  ??
 		
 		/*
@@ -68,7 +67,7 @@
 		if($settings){ $settings = $settings[0]; }		//	@todo - and what if settings is not found?...
 		
 		$total = $_SESSION['CHECKOUT']['total'];
-		$validate_currency = validate_currency($CONFIG->currency_code,$total,'paypal');
+		$validate_currency = validate_currency(get_config('currency_code'), $total, 'paypal');
 		
 		// $email = $settings->socialcommerce_paypal_email;		//	@todo - a mess - hardcoded for now...
 		$email = 'raypea_1306946408_biz@gmail.com';
@@ -112,7 +111,7 @@
 			'return'		=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cart_success',
 			'cancel_return'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cancel',
 			
-			'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
+			'notify_url'	=> get_config('url')."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
 			// Customer details
 			'first_name'	=> $billingDetails['firstname'],
@@ -148,10 +147,8 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 
 // krumo($hiddenFields); die();
 		
-		
-		
-		
-		return redirect_to_form($paypal_url, $hiddenFields, $not_compleated, $field_view);
+			return redirect_to_form($paypal_url, $hiddenFields, $not_compleated, $field_view);
+			
 	}			// end of function checkout_payment_settings_paypal
 	
 	function makepayment_paypal(){
