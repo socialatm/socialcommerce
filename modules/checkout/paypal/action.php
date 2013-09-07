@@ -117,9 +117,12 @@
 			// Notification and return URLS
 	//		'return'		=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
 			
-			'return'		=> $CONFIG->wwwroot."pg/socialcommerce/manage_action/cart_success/__elgg_token/".generate_action_token($ts)."/__elgg_ts/".$ts,
+	//		'return'		=> $CONFIG->wwwroot."pg/socialcommerce/manage_action/cart_success/__elgg_token/".generate_action_token($ts)."/__elgg_ts/".$ts,
 			
-			'cancel_return'	=> get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/cancel",
+			'return'		=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cart_success',
+			
+			
+			'cancel_return'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cancel',
 			
 			'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
@@ -152,6 +155,14 @@
 		 *	This is the view to display that extra fields in client side
 		 */
 		//$field_view = "paypal_entries";
+		
+require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+
+// krumo($hiddenFields); die();
+		
+		
+		
+		
 		return redirect_to_form($paypal_url, $hiddenFields, $not_compleated, $field_view);
 	}			// end of function checkout_payment_settings_paypal
 	

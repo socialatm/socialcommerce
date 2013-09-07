@@ -8,16 +8,20 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
+	
 	gatekeeper();
 	// Get objects
 	
 		if(isset($_SESSION['CHECKOUT'])){
 			$method = $_SESSION['CHECKOUT']['checkout_method'];
 			$function = 'makepayment_'.$method;
-				
-			$cart_success_load = get_input('cart_success_load');
-			$success = get_input('success');
+
+		//	$cart_success_load = get_input('cart_success_load');	//	@todo - re-visit this once IPN is working...
+			$cart_success_load = 2;
+			
+		//	$success = get_input('success');						//	@todo - re-visit this once IPN is working...
+			$success = 1;
+			
 			if(function_exists($function)){
 				if($cart_success_load !=2 ){
 					$success = $function();
@@ -31,7 +35,8 @@
 					}else{
 						$body = elgg_echo('cart:success:content');
 						$back_text = elgg_echo('checkout:back:text');
-						$action = $CONFIG->wwwroot."pg/socialcommerce/{$_SESSION['user']->username}/all";
+						$action = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/all';
+						
 						$area2 = <<< AREA2
 							<div class="contentWrapper stores">
 								<br>{$body}<br><br>
@@ -42,13 +47,13 @@
 AREA2;
 					}
 				}else{
-					$redirect =  $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=checkout_error";
+					$redirect =  elgg_add_action_tokens_to_url($CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=checkout_error");	// @todo - re-write this at some point...
 					forward($redirect);
 				}
 				echo $area2;
 			}
 			unset($_SESSION['CHECKOUT']);
 		}else{
-			forward($CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/all");
+			forward(get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/all');
 		}
 ?>
