@@ -84,6 +84,13 @@
 		$BillingDetails = $_SESSION['CHECKOUT']['billing_address'];
 		$ShippingDetails = $_SESSION['CHECKOUT']['shipping_address'];
 		
+		$states = get_state_by_fields('iso3',$BillingDetails->country);
+		foreach($states as $state){
+			if($state->name == $BillingDetails->state ){
+				$state_abbrv = $state->abbrv;
+			}
+		}
+		
 		$products = $_SESSION['CHECKOUT']['product'];				//	@todo - throw an error message here if $products is	empty		
 		 $i = 1;
 		 $hiddenProducts = array();
@@ -115,22 +122,18 @@
 			'notify_url'	=> get_config('url')."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
 			// Customer details
-			'first_name'	=> $billingDetails['firstname'],
-			'last_name'		=> $billingDetails['lastname'],
-			//'email'			=> $billingDetails['ordbillemail'],
-			'address1'		=> $billingDetails['address_line_1'],
-			'address2'		=> $billingDetails['address_line_2'],
-			//'day_phone_a'	=> $phone_1,
-			//'day_phone_b'	=> $phone_2,
-			//'day_phone_c'	=> $phone_3,
-			//'night_phone_a'	=> $phone_1,
-			//'night_phone_b'	=> $phone_2,
-			//'night_phone_c'	=> $phone_3,
-			'country'		=> get_name_by_fields('iso3',$billingDetails['country']),
-			'zip'			=> $billingDetails['pincode'],
-			'city'			=> $billingDetails['city'],
-			'state'			=> $billingDetails['state']
-			//'address_override' => 1
+			'first_name'	=> $BillingDetails->firstname,
+			'last_name'		=> $BillingDetails->lastname,
+			'address1'		=> $BillingDetails->address_line_1,
+			'address2'		=> $BillingDetails->address_line_2,
+			'city'			=> $BillingDetails->city,
+			'state'			=> $state_abbrv,
+			'zip'			=> $BillingDetails->pincode,
+			'country'		=> get_iso2_by_fields('iso3',$BillingDetails->country),
+			'night_phone_a'	=> substr($BillingDetails->mobileno , 0, 3 ),
+			'night_phone_b'	=> substr($BillingDetails->mobileno , 3, 3 ),
+			'night_phone_c'	=> substr($BillingDetails->mobileno , 6, 4 ),
+			'address_override' => 1,
 		);
 		
 		/*****	Enter extra data from client side? if value = 1 we allow to enter data. Otherwise it automatically redirects to the given url	*****/
