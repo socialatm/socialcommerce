@@ -115,13 +115,7 @@
 			'item_name'		=> elgg_echo('cart:item:name').":".$product_titles,
 
 			// Notification and return URLS
-	//		'return'		=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
-			
-	//		'return'		=> $CONFIG->wwwroot."pg/socialcommerce/manage_action/cart_success/__elgg_token/".generate_action_token($ts)."/__elgg_ts/".$ts,
-			
 			'return'		=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cart_success',
-			
-			
 			'cancel_return'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cancel',
 			
 			'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
