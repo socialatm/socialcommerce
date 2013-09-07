@@ -90,12 +90,6 @@
 			$display = true;
 			set_context('socialcommerce');
 			break;
-		case 'cart_cancel':
-			$body = view_cancel_page();
-			$title = elgg_view_title(elgg_echo('cart:cancel'));
-			$display = true;
-			set_context('socialcommerce');
-			break;
 		case 'checkout_error':
 			$body = view_checkout_error_page();
 			$title = elgg_view_title(elgg_echo('checkout:error'));
