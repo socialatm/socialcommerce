@@ -970,7 +970,10 @@ function view_cancel_page(){
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_cancel';
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
-		return $body;
+		$title = elgg_view_title(elgg_echo('cart:cancel'));
+		$title1 = elgg_echo('cart:cancel');
+		set_context('socialcommerce');
+		page_draw($title1,elgg_view_layout("two_column_left_sidebar", '', elgg_view_title($title) . $body));
 	}else{
 		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
 	}
