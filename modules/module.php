@@ -955,14 +955,12 @@ EOF;
 }
 
 function view_success_page(){
-	global $CONFIG;
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_success';
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
-		return $body;
+		page_draw($title1,elgg_view_layout("two_column_left_sidebar", '', elgg_view_title($title) . $body));
 	}else{
-		$redirect = $CONFIG->wwwroot."pg/socialcommerce/{$_SESSION['user']->username}/all";
-		forward($redirect);
+		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
@@ -980,14 +978,12 @@ function view_cancel_page(){
 }
 
 function view_checkout_error_page(){
-	global $CONFIG;
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/checkout_error';
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
 		return $body;
 	}else{
-		$redirect = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/{$_SESSION['user']->username}/all";
-		forward($redirect);
+		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
