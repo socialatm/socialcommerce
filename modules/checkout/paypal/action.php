@@ -84,29 +84,30 @@
 		$BillingDetails = $_SESSION['CHECKOUT']['billing_address'];
 		$ShippingDetails = $_SESSION['CHECKOUT']['shipping_address'];
 		
-		if($_SESSION['CHECKOUT']['product']){
-			$products = $_SESSION['CHECKOUT']['product'];
-			$product_titles = '';
-			foreach($products as $pguid=>$product){
-				$product = get_entity($pguid);
-				$product_titles .= $product_titles ? ", ".$product->title : $product->title;
+		$products = $_SESSION['CHECKOUT']['product'];				//	@todo - throw an error message here if $products is	empty		
+		 $i = 1;
+		 $hiddenProducts = array();
+		 foreach($products as $p_guid=>$product){
+				$product = get_entity($p_guid);
+				$hiddenProducts['item_name_'.$i] = $product->title;
+				$hiddenProducts['amount_'.$i] = $product->price;	//	@todo - validate_currency() here instead of on total above??	
+				$hiddenProducts['quantity_'.$i] = 1 ;				//	@todo - we'll need to change this for non-digital products...
+				$i++ ;
 			}
-		}
-
+		
 		$hiddenFields = array(
-			'cmd'			=> '_xclick',
+			'cmd'			=> '_cart',
+			'upload'			=> 1,
 			'business'		=> $email,									// @todo - this works, sort of - sometimes but I don't really like it...
 			'rm'			=> 2,
 
 			// Order details
-			'amount'		=> $validate_currency['amount'],
 			//'no_shipping'	=> 1,
 			//'tax'			=> 0,
 			'no_note'		=> 0,
 			'currency_code'	=> $validate_currency['currency_code'],
 			'custom'		=>"{$method},".page_owner().','.$BillingDetails->guid.','.$ShippingDetails->guid.','.$_SESSION['CHECKOUT']['shipping_method'],
-			'item_name'		=> elgg_echo('cart:item:name').":".$product_titles,
-
+		
 			// Notification and return URLS
 			'return'		=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cart_success',
 			'cancel_return'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cancel',
@@ -131,23 +132,17 @@
 			'state'			=> $billingDetails['state']
 			//'address_override' => 1
 		);
-		/* 
-		 *	Enter extra data from client side
-		 *	if 1 we allow to enter datas
-		 * 	Otherwise it automatically redirect to the given url
-		 */
+		
+		/*****	Enter extra data from client side? if value = 1 we allow to enter data. Otherwise it automatically redirects to the given url	*****/
+		
 		//$not_compleated = 0;
 		
-		/* 
-		 *	This is the view to display that extra fields in client side
-		 */
+		/*****	This is the view to display that extra fields in client side	*****/
+		
 		//$field_view = "paypal_entries";
 		
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-
-// krumo($hiddenFields); die();
-		
-			return redirect_to_form($paypal_url, $hiddenFields, $not_compleated, $field_view);
+		$hiddenFields = array_merge( $hiddenFields, $hiddenProducts );
+		return redirect_to_form($paypal_url, $hiddenFields, $not_compleated, $field_view);
 			
 	}			// end of function checkout_payment_settings_paypal
 	
