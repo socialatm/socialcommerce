@@ -53,6 +53,10 @@
 		global $CONFIG;	//		let's replace with get_config() calls...
 		$method = $_SESSION['CHECKOUT']['checkout_method'];		//	@todo - what if the $method != 'paypal'  ??
 		
+		/*
+		 * @todo - take a hard look at $settings = elgg_get_entities_from_metadata(array( - I don't like it at all!!
+		 */
+		
 		$settings = elgg_get_entities_from_metadata(array(
 			'checkout_method' => $method,
 			'entity_type' =>'object',
@@ -66,9 +70,11 @@
 		$total = $_SESSION['CHECKOUT']['total'];
 		$validate_currency = validate_currency($CONFIG->currency_code,$total,'paypal');
 		
-		$email = $settings->socialcommerce_paypal_email;
+		// $email = $settings->socialcommerce_paypal_email;		//	@todo - a mess - hardcoded for now...
+		$email = 'raypea_1306946408_biz@gmail.com';
 
-		$paypal_environment = $settings->socialcommerce_paypal_environment;
+	//	$paypal_environment = $settings->socialcommerce_paypal_environment;		//	@todo - another mess - hardcoded for now...
+		$paypal_environment = 'sandbox';
 
 		if($paypal_environment == "paypal") {
 			$paypal_url = "https://www.paypal.com/cgi-bin/webscr";
@@ -113,7 +119,8 @@
 			
 			'return'		=> $CONFIG->wwwroot."pg/socialcommerce/manage_action/cart_success/__elgg_token/".generate_action_token($ts)."/__elgg_ts/".$ts,
 			
-			'cancel_return'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?manage_action=cart_cancel&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}",
+			'cancel_return'	=> get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/cancel",
+			
 			'notify_url'	=> $CONFIG->wwwroot."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
 			// Customer details
