@@ -9,23 +9,19 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-/*
- * Add checkout path and checkout view path are in CONFIG
- */
+/****	add these to $CONFIG	*****/
 function register_socialcommerce_settings(){
-	global $CONFIG;
-
-	//	@todo - these should be in the store object instead of $CONFIG
+	//	@todo - should these should be in the store object instead of $CONFIG
 	
-//	$CONFIG->checkout_path = $CONFIG->pluginspath.'socialcommerce/modules/checkout';
+	$pluginspath = get_config('pluginspath');
+	$site_guid = get_config('site_guid'); 
 	
-	set_config('checkout_path' , $CONFIG->pluginspath.'socialcommerce/modules/checkout');
+	set_config('checkout_path' , $pluginspath.'socialcommerce/modules/checkout/', $site_guid);
+	set_config('checkout_view_path' , $pluginspath.'socialcommerce/views/default/modules/checkout', $site_guid);	//	@todo - doesn't get called from anywhere?
+	set_config('shipping_path' , $pluginspath.'socialcommerce/modules/shipping/', $site_guid);
+	set_config('shipping_view_path', $pluginspath.'socialcommerce/views/default/modules/shipping', $site_guid);		//	@todo - doesn't get called from anywhere?
+	set_config('currency_path' , $pluginspath.'socialcommerce/modules/currency/', $site_guid);
 	
-	
-	$CONFIG->checkout_view_path = $CONFIG->pluginspath.'socialcommerce/views/default/modules/checkout';
-	$CONFIG->shipping_path = $CONFIG->pluginspath.'socialcommerce/modules/shipping';
-	$CONFIG->shipping_view_path = $CONFIG->pluginspath.'socialcommerce/views/default/modules/shipping';
-	$CONFIG->currency_path = $CONFIG->pluginspath.'socialcommerce/modules/currency';
 	load_module_languages();
 	SetGeneralValuesInConfig();
 	genarateCartFromSession();
@@ -290,7 +286,7 @@ function load_module_languages(){
 	$checkout_lists = get_checkout_list();
 	if($checkout_lists){
 		foreach ($checkout_lists as $checkout_list){
-			register_translations($CONFIG->checkout_path . "/" . $checkout_list . "/languages/");
+			register_translations(get_config('checkout_path').$checkout_list.'/languages/');
 		}
 	}
 
@@ -298,14 +294,13 @@ function load_module_languages(){
 	$currency_lists = get_currency_list();
 	if($currency_lists){
 		foreach ($currency_lists as $currency_list){
-			register_translations($CONFIG->currency_path . "/" . $currency_list . "/languages/");
+			register_translations(get_config('currency_path').$currency_list . '/languages/');
 		}
 	}
 }
 
-/*
- * For Varify social commerce settings.
- */
+/*****	verify social commerce settings.	*****/
+
 function confirm_social_commerce_settings(){
 	global $CONFIG;
 	
@@ -415,8 +410,8 @@ function get_checkout_methods(){
 	if ($checkout_lists) {
 		$checkout_methods = array();
 		foreach ($checkout_lists as $checkout_list){
-			if (file_exists($CONFIG->checkout_path.'/'.$checkout_list.'/method.xml')) {
-				$xml = xml_to_object(file_get_contents($CONFIG->checkout_path.'/'.$checkout_list.'/method.xml'));
+			if (file_exists($CONFIG->checkout_path.$checkout_list.'/method.xml')) {
+				$xml = xml_to_object(file_get_contents($CONFIG->checkout_path.$checkout_list.'/method.xml'));
 				if ($xml){
 					$elements = array();
 					if($xml->children){
@@ -445,7 +440,7 @@ function get_checkout_list(){
 	$checkouts = array();
 	if ($handle = opendir($CONFIG->checkout_path)) {
 		while ($mod = readdir($handle)) {
-			if (!in_array($mod,array('.','..','.svn','CVS')) && is_dir($CONFIG->checkout_path . "/" . $mod)) {
+			if (!in_array($mod,array('.','..','.svn','CVS')) && is_dir($CONFIG->checkout_path .$mod)) {
 				$checkouts[] = $mod;
 			}
 		}
@@ -463,8 +458,8 @@ function load_checkout_actions(){
 	if ($checkout_lists) {
 		$checkout_methods = array();
 		foreach ($checkout_lists as $checkout_list){
-			if (file_exists($CONFIG->checkout_path.'/'.$checkout_list.'/action.php')) {
-				include_once($CONFIG->checkout_path.'/'.$checkout_list."/action.php");
+			if (file_exists($CONFIG->checkout_path.$checkout_list.'/action.php')) {
+				include_once($CONFIG->checkout_path.$checkout_list."/action.php");
 			}else{
 				throw new PluginException(sprintf(elgg_echo('misconfigured:checkout:method'), $checkout_list));
 			}
@@ -474,9 +469,9 @@ function load_checkout_actions(){
 
 function check_checkout_form(){
 	global $CONFIG;
-	if(is_dir($CONFIG->checkout_path.'/'.$_SESSION['CHECKOUT']['checkout_method'])){
-		if (file_exists($CONFIG->checkout_path.'/'.$_SESSION['CHECKOUT']['checkout_method'].'/action.php')) {
-			include_once($CONFIG->checkout_path.'/'.$_SESSION['CHECKOUT']['checkout_method']."/action.php");
+	if(is_dir($CONFIG->checkout_path.$_SESSION['CHECKOUT']['checkout_method'])){
+		if (file_exists($CONFIG->checkout_path.$_SESSION['CHECKOUT']['checkout_method'].'/action.php')) {
+			include_once($CONFIG->checkout_path.$_SESSION['CHECKOUT']['checkout_method']."/action.php");
 			$function = 'checkout_payment_settings_'.$_SESSION['CHECKOUT']['checkout_method'];
 			if(function_exists($function)){
 				return $function();
@@ -1012,16 +1007,7 @@ function create_withdraw_transaction($amount,$receiver_email){
 /*****	currency	*****/
 
 function get_currency_list(){
-	global $CONFIG;
-	$currencies = array();
-	if ($handle = opendir($CONFIG->currency_path)) {
-		while ($mod = readdir($handle)) {
-			if (!in_array($mod,array('.','..','.svn','CVS')) && is_dir($CONFIG->currency_path . "/" . $mod)) {
-				$currencies[] = $mod;
-			}
-		}
-	}
-	
+	$currencies = array_diff(scandir(get_config('currency_path')), array('..', '.'));
 	if($currencies){
 		return $currencies;
 	}else{
@@ -1030,14 +1016,11 @@ function get_currency_list(){
 }
 
 function load_currency_actions() {
-	global $CONFIG;
 	$currency_lists = get_currency_list();
+	
 	if ($currency_lists) {
-		$currency_methods = array();
 		foreach ($currency_lists as $currency_list){
-			if (file_exists($CONFIG->currency_path.'/'.$currency_list.'/action.php')) {
-				include_once($CONFIG->currency_path.'/'.$currency_list."/action.php");
-			}else{
+			if(!require_once(get_config('currency_path').$currency_list.'/action.php')){
 				throw new PluginException(sprintf(elgg_echo('misconfigured:currency:method'), $currency_list));
 			}
 		}

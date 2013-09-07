@@ -8,6 +8,17 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	 
+	 /****
+	 @todo - 
+	 this is the old cart sucess page. We may want to add some of this code to
+	 
+	 'mod/socialcommerce/views/default/modules/checkout/paypal/cart_success.php'
+	 
+	 so we can show the order details on the new success page...
+	 
+	 okay to delete this file after we're done... We'll need to think about what happens when there are more checkout methods
+	 *****/
 
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
