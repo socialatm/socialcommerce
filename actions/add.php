@@ -37,15 +37,7 @@
 	$container_guid = (int) get_input('container_guid', 0);
 	$tax_country = trim(get_input("tax_country"));
 	$error_field = "";
-	$Max_Limit =0;
-	if($All_Store_Entities>10)
-	{
-		$Max_Limit = 1;
-		$error_field .=",error";
-		register_error(sprintf(elgg_echo("This version only to allow 10 products"),$error_field));
-		$redirect = $CONFIG->wwwroot . 'mod/socialcommerce/add.php';
-	}else{
-	
+
 		if (!$container_guid){
 			$container_guid = $_SESSION['user']->getGUID();
 		}
@@ -115,12 +107,7 @@
 			}
 			
 			$error_field = substr($error_field,2);
-	
-			if($Max_Limit > 0){
-				register_error(sprintf(elgg_echo("This version only to allow 10 products"),$error_field));
-			}else{
-				register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
-			}
+			
 			$container_user = get_entity($container_guid);
 			$redirect = $CONFIG->wwwroot . 'mod/socialcommerce/add.php';
 		}else{
@@ -264,7 +251,5 @@
 			$redirect = $CONFIG->wwwroot . 'pg/socialcommerce/' . $container_user->username;
 		}
 		
-	}
 	forward($redirect);
-
 ?>
