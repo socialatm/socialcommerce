@@ -404,7 +404,7 @@
 		 	'cart:success' => "Thanks for Your Order.",
 		 	'cart:cancel' => "Purchase Canceled.",
 		 	'cart:success:content' => "Your order was completed successfully.<br> A confirmation email has been sent to your email address.",
-		 	'cart:cancel:content' => "Sorry, Your purchase has been canceled. Please try after some times",
+		 	'cart:cancel:content' => "Sorry, Your purchase has been canceled. Please:",
 		 	'cart:river:created' => "%s Added",
 			'cart:river:item' => "a product to cart",
 			'cart:null' => "There are no products in your cart.",
