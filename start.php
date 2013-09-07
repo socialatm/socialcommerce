@@ -241,7 +241,7 @@
 										break;
 				case "wishlist":		include(dirname(__FILE__) . "/wishlist.php");
 										break;
-				case "cancel":			include(dirname(__FILE__) . "/cart_cancel.php");
+				case "cancel":			view_cancel_page();
 										break;
 				case "tell_to_friend":	include(dirname(__FILE__) . "/tell_to_friend_form.php");
 										break;
