@@ -84,12 +84,6 @@
 				$success = $function();
 			}
 			break;
-		case 'cart_success':
-			$body = view_success_page();
-			$title = elgg_view_title(elgg_echo('cart:success'));
-			$display = true;
-			set_context('socialcommerce');
-			break;
 		case 'checkout_error':
 			$body = view_checkout_error_page();
 			$title = elgg_view_title(elgg_echo('checkout:error'));
