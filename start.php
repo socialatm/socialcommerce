@@ -234,7 +234,7 @@
 										break;
 				case "confirm":			include(dirname(__FILE__) . "/cart_confirm.php");
 										break;
-				case "cart_success":	include(dirname(__FILE__) . "/cart_success.php");
+				case "cart_success":	view_success_page();
 										break;
 				case "order":			set_input('search_viewtype','list');
 										include(dirname(__FILE__) . "/order.php");
