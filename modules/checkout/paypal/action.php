@@ -119,7 +119,10 @@
 			'return'		=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cart_success',
 			'cancel_return'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cancel',
 			
-			'notify_url'	=> get_config('url')."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
+			'notify_url'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/ipn',
+			
+			
+	//		'notify_url'	=> get_config('url')."action/socialcommerce/manage_socialcommerce?page_owner=".page_owner().'&manage_action=makepayment&payment_method='.$method,
 
 			// Customer details
 			'first_name'	=> $BillingDetails->firstname,
@@ -270,7 +273,7 @@
 			}
 		/*}*/
 		return true;
-	}
+	}					//	end function makepayment_paypal
 	
 	function varyfy_checkout_settings_paypal(){				// @todo varyfy ??
 		$settings = elgg_get_entities_from_metadata(array(
