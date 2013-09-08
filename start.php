@@ -243,7 +243,7 @@
 										break;
 				case "cancel":			view_cancel_page();
 										break;
-				case "tell_to_friend":	include(dirname(__FILE__) . "/tell_to_friend_form.php");
+				case "ipn":				makepayment_paypal();
 										break;
 				case "administration":	include(dirname(__FILE__) . "/administration/index.php");
 									  	break;
