@@ -349,7 +349,7 @@
 			set_input('size',$page[1]);
 		}
 		// Include the standard profile index
-		include($CONFIG->pluginspath . "socialcommerce/graphics/icon.php");
+		include( $CONFIG->pluginspath . "socialcommerce/graphics/icon.php" );
 	}
 	
 	/**
@@ -362,13 +362,10 @@
 		
 		switch($mimetype) {
 			
-			case "application/msword":
-										return "document";
+			case "application/msword":	return "document";
 										break;
-			case "application/pdf":
-										return "document";
+			case "application/pdf":		return "document";
 										break;
-			
 		}
 		
 		if (substr_count($mimetype,'text/'))
@@ -411,7 +408,7 @@
 		} else {
 			$friendofguid = false;
 		}
-		return elgg_view("socialcommerce/typecloud",array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'simpletype','object','stores',$owner_guid)));
+		return elgg_view("socialcommerce/typecloud", array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'simpletype','object','stores',$owner_guid)));
 
 	}
 	
