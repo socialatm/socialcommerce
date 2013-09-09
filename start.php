@@ -181,10 +181,10 @@
 		}
 	}
 	
-	function socialcommerce_page_handler($page) {
+	function socialcommerce_page_handler( $page ) {
 		global $CONFIG;
 		
-		// The first component of a blog URL is the username
+		/*****	The first component of a socialcommerce URL is the username	*****/
 		if (isset($page[0]) && !is_numeric($page[0])){
 			set_input('username', $page[0]);
 		}
@@ -281,12 +281,11 @@
 										break;
 										
 			}
-		// If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load the standard blog index
+		/*****	If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load index.php	*****/
 		} else {
 			include(dirname(__FILE__) . "/index.php");
 			return true;
 		}
-		
 		return false;
 	}
 	
@@ -299,12 +298,9 @@
 	 * @param unknown_type $params
 	 * @return unknown
 	 */
-	function socialcommerce_image_hook($hook, $entity_type, $returnvalue, $params)
-	{
-		global $CONFIG;
-		
-		if ((!$returnvalue) && ($hook == 'entity:icon:url') && ($params['entity'] instanceof ElggEntity))
-		{
+	 
+	function socialcommerce_image_hook($hook, $entity_type, $returnvalue, $params) {
+		if ((!$returnvalue) && ($hook == 'entity:icon:url') && ($params['entity'] instanceof ElggEntity)) {
 			$entity = $params['entity'];
 			$type = $entity->type;
 			$viewtype = $params['viewtype'];
@@ -321,21 +317,18 @@
 			$filehandler->setFilename("socialcommerce/" . $entity->guid . $size . ".jpg");
 			
 			if ($filehandler->exists()) {
-				$url = $CONFIG->url . "pg/storesimage/{$entity->guid}/$size/$icontime.jpg";
-			
+				$url = get_config('url')."pg/storesimage/{$entity->guid}/$size/$icontime.jpg";
 				return $url;
 			}
 		}
 	}
+	
 	/**
 	 * Handle stores Image.
-	 *
 	 * @param unknown_type $page
 	 */
+	 
 	function socialcommerce_image_handler($page) {
-			
-		global $CONFIG;
-		
 		// The username should be the file we're getting
 		if (isset($page[0])) {
 			set_input('stores_guid',$page[0]);
@@ -344,7 +337,7 @@
 			set_input('size',$page[1]);
 		}
 		// Include the standard profile index
-		include( $CONFIG->pluginspath . "socialcommerce/graphics/icon.php" );
+		include( get_config('pluginspath').'socialcommerce/graphics/icon.php' );
 	}
 	
 	/**
@@ -353,6 +346,7 @@
 	 * @param string $mimetype The MIME type
 	 * @return string The overall type
 	 */
+	 
 	function get_general_product_type($mimetype) {
 		
 		switch($mimetype) {
