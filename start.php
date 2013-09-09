@@ -35,8 +35,7 @@
 			global $CONFIG;
 		
 		// Set up menu for logged in users
-			if (isloggedin()) 
-			{
+			if (isloggedin()) {
 				add_menu(elgg_echo('stores'), $CONFIG->wwwroot . 'pg/socialcommerce/' . $_SESSION['user']->username."/all");
 			}
 	
@@ -63,7 +62,8 @@
 			register_translations($CONFIG->pluginspath . "{$CONFIG->pluginname}/languages/");
 			
 		// Register a page handler, so we can have nice URLs
-			register_page_handler("{$CONFIG->pluginname}","socialcommerce_page_handler");
+			register_page_handler("socialcommerce", "socialcommerce_page_handler");
+			
 		// Register an image handler for stores
 			register_page_handler("storesimage","socialcommerce_image_handler");
 			
@@ -139,7 +139,7 @@
 			//if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
 			if (isset($_SESSION['guid']) && isloggedin()) {	
 				add_submenu_item(elgg_echo('stores:everyone'),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/all",'stores');
-				add_submenu_item(elgg_echo('stores:category'),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/category/",'stores');
+				add_submenu_item(elgg_echo('stores:category'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
 				$splugin_settings = elgg_get_entities(array( 	
 					'type' => 'object',
 					'subtype' => 'splugin_settings',
