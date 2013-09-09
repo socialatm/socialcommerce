@@ -9,13 +9,13 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	 gatekeeper();
+	gatekeeper();
 	load_checkout_actions();
 	load_currency_actions();
 	
-	$site = get_entity($CONFIG->site_guid);
+	$site = get_entity(get_config(('site_guid')));
 	$manage_action = get_input('manage_action');
-		
+	
 	switch ($manage_action){
 		case 'settings':
 			$checkoutmethods = get_input('checkout_method') ? get_input('checkout_method') : array();
@@ -65,7 +65,7 @@
 		}else{
 			register_error(elgg_echo("settings:save:error"));
 		}
-			$redirect = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings';
+			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings';
 			break;	
 		case 'checkout':
 			$order = get_input('order');
@@ -74,7 +74,7 @@
 			if(function_exists($function)){
 				$function();
 			}
-			$redirect = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings?filter=checkout&order='.$order;
+			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings?filter=checkout&order='.$order;	//	@todo - make query string go away
 			break;	
 		case 'makepayment':
 			$method = get_input('payment_method');
@@ -110,12 +110,12 @@
 			$to_code = get_input('c_code');
 
 			$default_currency = elgg_get_entities_from_metadata(array(
-			'metadata_name' => 'set_default',
-			'metadata_value' => 1,
-			'type' => 'object',
-			'subtype' => 's_currency',
-			'owner_guid' => 0, 
-			'limit' =>'1'
+				'metadata_name' => 'set_default',
+				'metadata_value' => 1,
+				'type' => 'object',
+				'subtype' => 's_currency',
+				'owner_guid' => 0, 
+				'limit' =>'1'
 			));
 					
 			if($default_currency){
