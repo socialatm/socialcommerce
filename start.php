@@ -793,7 +793,7 @@ EOT;
 	
 	/*****	send email function	*****/
 
-	 function stores_send_mail($from,$to,$subject,$message,$headers = null){
+	 function stores_send_mail( $from, $to, $subject, $message, $headers = null) {
 	 	
 	 	if(is_object($from)){
 	 		$from_name = $from->name;
@@ -815,8 +815,7 @@ EOT;
 	    		. "MIME-Version: 1.0\r\n"
 	    		. "Content-Transfer-Encoding: 8bit\r\n";
 	 	}
-    	
-    	return mail($to_email,$subject,$message,$headers);
+       	return mail( $to_email, $subject, $message, $headers );
 	 }
 	 
 	 function get_site_admin() {
@@ -873,31 +872,29 @@ EOT;
 		register_elgg_event_handler('pagesetup','system','socialcommerce_pagesetup');
 		
 	// Register actions
-		register_action("{$CONFIG->pluginname}/add", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/add.php");
-		register_action("{$CONFIG->pluginname}/edit", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/edit.php");
-		register_action("{$CONFIG->pluginname}/delete", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/delete.php");
-		register_action("{$CONFIG->pluginname}/icon", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/icon.php");
-		register_action("{$CONFIG->pluginname}/add_category", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/add_category.php");
-		register_action("{$CONFIG->pluginname}/edit_category", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/edit_category.php");
-		register_action("{$CONFIG->pluginname}/delete_category", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/delete_category.php");
-		register_action("{$CONFIG->pluginname}/addcart", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/addcart.php");
-		register_action("{$CONFIG->pluginname}/remove_cart", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/remove_cart.php");
-		register_action("{$CONFIG->pluginname}/update_cart", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/update_cart.php");
-		register_action("{$CONFIG->pluginname}/add_address", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/add_address.php");
-		register_action("{$CONFIG->pluginname}/edit_address", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/edit_address.php");
-		register_action("{$CONFIG->pluginname}/delete_address", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/delete_address.php");
-		register_action("{$CONFIG->pluginname}/makepayment", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/makepayment.php");
-		register_action("{$CONFIG->pluginname}/add_order", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/add_order.php");
-		register_action("{$CONFIG->pluginname}/change_order_status", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/change_order_status.php");
-		register_action("{$CONFIG->pluginname}/add_wishlist", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/add_wishlist.php");
-		register_action("{$CONFIG->pluginname}/remove_wishlist", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/remove_wishlist.php");
-		register_action("{$CONFIG->pluginname}/download", true, $CONFIG->pluginspath. "{$CONFIG->pluginname}/actions/download.php");
-		register_action("{$CONFIG->pluginname}/retrieve", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/retrieve.php");
-		
-		register_action("{$CONFIG->pluginname}/contry_tax", false, $CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/contry_tax.php");
-				
-		register_action("{$CONFIG->pluginname}/addcommon_tax",false,$CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/addcommon_tax.php");
-		register_action("{$CONFIG->pluginname}/addcountry_tax",false,$CONFIG->pluginspath . "{$CONFIG->pluginname}/actions/addcountry_tax.php");
+		register_action("socialcommerce/add", false, $CONFIG->pluginspath . "socialcommerce/actions/add.php");
+		register_action("socialcommerce/edit", false, $CONFIG->pluginspath . "socialcommerce/actions/edit.php");
+		register_action("socialcommerce/delete", false, $CONFIG->pluginspath . "socialcommerce/actions/delete.php");
+		register_action("socialcommerce/icon", false, $CONFIG->pluginspath . "socialcommerce/actions/icon.php");
+		register_action("socialcommerce/add_category", false, $CONFIG->pluginspath . "socialcommerce/actions/add_category.php");
+		register_action("socialcommerce/edit_category", false, $CONFIG->pluginspath . "socialcommerce/actions/edit_category.php");
+		register_action("socialcommerce/delete_category", false, $CONFIG->pluginspath . "socialcommerce/actions/delete_category.php");
+		register_action("socialcommerce/addcart", false, $CONFIG->pluginspath . "socialcommerce/actions/addcart.php");
+		register_action("socialcommerce/remove_cart", false, $CONFIG->pluginspath . "socialcommerce/actions/remove_cart.php");
+		register_action("socialcommerce/update_cart", false, $CONFIG->pluginspath . "socialcommerce/actions/update_cart.php");
+		register_action("socialcommerce/add_address", false, $CONFIG->pluginspath . "socialcommerce/actions/add_address.php");
+		register_action("socialcommerce/edit_address", false, $CONFIG->pluginspath . "socialcommerce/actions/edit_address.php");
+		register_action("socialcommerce/delete_address", false, $CONFIG->pluginspath . "socialcommerce/actions/delete_address.php");
+		register_action("socialcommerce/makepayment", false, $CONFIG->pluginspath . "socialcommerce/actions/makepayment.php");
+		register_action("socialcommerce/add_order", false, $CONFIG->pluginspath . "socialcommerce/actions/add_order.php");
+		register_action("socialcommerce/change_order_status", false, $CONFIG->pluginspath . "socialcommerce/actions/change_order_status.php");
+		register_action("socialcommerce/add_wishlist", false, $CONFIG->pluginspath . "socialcommerce/actions/add_wishlist.php");
+		register_action("socialcommerce/remove_wishlist", false, $CONFIG->pluginspath . "socialcommerce/actions/remove_wishlist.php");
+		register_action("socialcommerce/download", true, $CONFIG->pluginspath. "socialcommerce/actions/download.php");
+		register_action("socialcommerce/retrieve", false, $CONFIG->pluginspath . "socialcommerce/actions/retrieve.php");
+		register_action("socialcommerce/contry_tax", false, $CONFIG->pluginspath . "socialcommerce/actions/contry_tax.php");
+		register_action("socialcommerce/addcommon_tax",false,$CONFIG->pluginspath . "socialcommerce/actions/addcommon_tax.php");
+		register_action("socialcommerce/addcountry_tax",false,$CONFIG->pluginspath . "socialcommerce/actions/addcountry_tax.php");
 		register_action('socialcommerce/manage_socialcommerce', false, $CONFIG->pluginspath . 'socialcommerce/actions/manage_socialcommerce.php', false);
 
 		
