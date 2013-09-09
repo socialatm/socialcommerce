@@ -22,13 +22,11 @@
 		global $CONFIG;
 				
 	// Set Config Values	
-		$CONFIG->default_price_sign = "$";
-		$CONFIG->default_currency_name = 'US Dollar';
-		$CONFIG->pluginname = "socialcommerce";
+		set_config('default_price_sign', '$');
+		set_config('default_currency_name', 'US Dollar');
+		set_config('pluginname', 'socialcommerce');			//	@todo - may be able to remove this at some point in time...
 			
-	/**
-	 * Social Commerce plugin initialization functions.
-	 */
+	/*****	Social Commerce plugin initialization functions.	*****/
 	function socialcommerce_init() {
 	    
 	    // Load system configuration
@@ -69,7 +67,7 @@
 			
 		// Add a new file widget
 			if(isadminloggedin()){
-			add_widget_type('recent',elgg_echo("stores:recent:widget"),elgg_echo("stores:recent:widget:description"));
+			add_widget_type('recent', elgg_echo("stores:recent:widget"),elgg_echo("stores:recent:widget:description"));
 			}
 			//add_widget_type('mostly',elgg_echo("stores:mostly:widget"),elgg_echo("stores:mostly:widget:description"));
 			if(!isadminloggedin()){
@@ -112,7 +110,7 @@
    	function product_fields_setup(){
    		global $CONFIG;
    		//--- Default product types ----//
-   		$default_produt_types = array((object)array('value'=>2,'display_val'=>elgg_echo('stores:digital:products'),'addto_cart'=>1)
+   		$default_produt_types = array((object)array('value'=> 2, 'display_val'=> elgg_echo('stores:digital:products'), 'addto_cart'=> 1 )
 								 );
 								 
 		$CONFIG->produt_type_default = trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_produt_types);
@@ -133,13 +131,12 @@
    	}
 		
 	function socialcommerce_pagesetup() {
-		global $CONFIG;
-		//add submenu options
+		/*****	add submenu options	*****/
 		if (get_context() == "stores" || get_context() == "socialcommerce") {
 			//if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
 			if (isset($_SESSION['guid']) && isloggedin()) {	
-				add_submenu_item(elgg_echo('stores:everyone'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
-				add_submenu_item(elgg_echo('stores:category'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
+				add_submenu_item(elgg_echo('stores:everyone'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
+				add_submenu_item(elgg_echo('stores:category'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
 				$splugin_settings = elgg_get_entities(array( 	
 					'type' => 'object',
 					'subtype' => 'splugin_settings',
@@ -166,24 +163,22 @@
 					));
 	*****/				
 				if( isadminloggedin() ){
-					add_submenu_item(elgg_echo('stores:addpost'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
-					add_submenu_item(elgg_echo('stores:sold:products'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
-					add_submenu_item(elgg_echo('stores:addcate'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
+					add_submenu_item(elgg_echo('stores:addpost'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
+					add_submenu_item(elgg_echo('stores:sold:products'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
+					add_submenu_item(elgg_echo('stores:addcate'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
 				}
 					
 			} else if (page_owner()) {
 				$page_owner = page_owner_entity();
-				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name),$CONFIG->wwwroot."pg/socialcommerce/" . $page_owner->username);
+				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username);
 				if ($page_owner instanceof ElggUser)
-					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name),$CONFIG->wwwroot."pg/socialcommerce/" . $page_owner->username . "/friends/");
+					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username . "/friends/");
 			}
 		}
 		
 		if (get_context() == 'admin' && isadminloggedin()) {
-			add_submenu_item(elgg_echo('socialcommerce:default:settings'), $CONFIG->wwwroot . 'pg/'.$CONFIG->pluginname.'/' . $_SESSION['user']->username . '/settings');
+			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings');
 		}
-		
-		
 	}
 	
 	function socialcommerce_page_handler($page) {
