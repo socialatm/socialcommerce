@@ -34,7 +34,7 @@
 		
 		// Set up menu for logged in users
 			if (isloggedin()) {
-				add_menu(elgg_echo('stores'), $CONFIG->wwwroot . 'pg/socialcommerce/' . $_SESSION['user']->username."/all");
+				add_menu( elgg_echo('stores'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/all');
 			}
 	
 		// Extend CSS
@@ -91,14 +91,12 @@
 			register_country_state();
 
 			register_subtypes();
-					
-	
+		
 	    	if (get_context() == "stores" || get_context() == "socialcommerce") {
 	    		if(!isset($_REQUEST['search_viewtype']))
 	    			set_input('search_viewtype','list');
 	    	}
-	    	
-   }
+    }
    
    /**
 	 * This function loads a set of default fields into the socialcommerce, then triggers a hook letting other plugins to edit
