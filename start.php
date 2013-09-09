@@ -546,7 +546,7 @@ EOT;
 		if (!$value) return false;
 		
 		$name = add_metastring($name);
-		if (!$name) return false;
+		if(!$name) { return false;	}
 		
 		// If ok then add it
 		$result = update_data("UPDATE {$CONFIG->dbprefix}metadata set value_id='$value', value_type='$value_type', access_id=$access_id, owner_guid=$owner_guid where id=$id and name_id='$name'");
@@ -558,7 +558,6 @@ EOT;
 				delete_metadata($id);
 			}
 		}
-			
 		return $result;
 	}
 	
@@ -745,8 +744,6 @@ EOT;
 		return $propositions;
 	}
 	
-	
-	
 	function get_stores_access_sql_suffix($table_prefix = ""){
 		global $ENTITY_SHOW_HIDDEN_OVERRIDE;  
 		
@@ -776,7 +773,6 @@ EOT;
 	}
 	
 	function gettags(){
-		global $CONFIG;
 		$products = elgg_get_entities(array( 	
 			'type' => 'object',
 			'subtype' => 'stores',
@@ -792,13 +788,11 @@ EOT;
 				}
 			}
 		}
-		return elgg_view("{$CONFIG->pluginname}/tagsmenu",array('tags'=>$tagarr));
+		return elgg_view( 'socialcommerce/tagsmenu', array( 'tags'=>$tagarr ));
 	}
 	
-	/**
-	 * Function for send email
-	 *
-	 */
+	/*****	send email function	*****/
+
 	 function stores_send_mail($from,$to,$subject,$message,$headers = null){
 	 	
 	 	if(is_object($from)){
@@ -825,7 +819,6 @@ EOT;
     	return mail($to_email,$subject,$message,$headers);
 	 }
 	 
-	 
 	 function get_site_admin() {
 	 	global $CONFIG;
 		$access = get_access_sql_suffix('e');
@@ -839,10 +832,8 @@ EOT;
 		}
 	}
 
-	/**
-	 * Override the order_can_create function to return true for create order
-	 *
-	 */
+	/*****	Override the order_can_create function to return true for create order	****/
+	
 	function order_can_create($hook_name, $entity_type, $return_value, $parameters) {
 		$entity = $parameters['entity'];
 		$context = get_context();//echo $entity->getSubtype();exit;
@@ -873,7 +864,7 @@ EOT;
   	}
   	// Make sure the stores initialization function is called on initialization
 		register_elgg_event_handler('init','system','socialcommerce_init');
-		register_elgg_event_handler('init','system','product_fields_setup', 10000); // Ensure this runs after other plugins
+		register_elgg_event_handler('init','system','product_fields_setup', 10000); 	// Ensure this runs after other plugins
 		
   	// Override permissions
 		register_plugin_hook('permissions_check','user','order_can_create');
