@@ -40,26 +40,26 @@
 			}
 	
 		// Extend CSS
-			elgg_extend_view("css", "{$CONFIG->pluginname}/css");
-			elgg_extend_view("js", "{$CONFIG->pluginname}/js/behavior");
-			elgg_extend_view("js", "{$CONFIG->pluginname}/js/rating");
-			elgg_extend_view("index/righthandside", "{$CONFIG->pluginname}/products_list",600);
-			elgg_extend_view("index/righthandside", "{$CONFIG->pluginname}/most_popular_products",600);
+			elgg_extend_view("css", "socialcommerce/css");
+			elgg_extend_view("js", "socialcommerce/js/behavior");
+			elgg_extend_view("js", "socialcommerce/js/rating");
+			elgg_extend_view("index/righthandside", "socialcommerce/products_list",600);
+			elgg_extend_view("index/righthandside", "socialcommerce/most_popular_products",600);
 					
-			elgg_extend_view("owner_block/extend", "{$CONFIG->pluginname}/owner_block",500);
+			elgg_extend_view("owner_block/extend", "socialcommerce/owner_block",500);
 			
-			elgg_extend_view("page_elements/header_contents", "{$CONFIG->pluginname}/header");
+			elgg_extend_view("page_elements/header_contents", "socialcommerce/header");
 			
-			elgg_extend_view("metatags", "{$CONFIG->pluginname}/extend_header");
+			elgg_extend_view("metatags", "socialcommerce/extend_header");
 			
-			elgg_extend_view("page_elements/footer", "{$CONFIG->pluginname}/extend_footer",400);
+			elgg_extend_view("page_elements/footer", "socialcommerce/extend_footer",400);
 		
 		// Extend hover-over menu	
-			elgg_extend_view("profile/menu/links","{$CONFIG->pluginname}/menu");
+			elgg_extend_view("profile/menu/links","socialcommerce/menu");
 			//extend_view('groups/right_column','stores/groupprofile_files');
 			
 		// Load the language file
-			register_translations($CONFIG->pluginspath . "{$CONFIG->pluginname}/languages/");
+			register_translations($CONFIG->pluginspath . "socialcommerce/languages/");
 			
 		// Register a page handler, so we can have nice URLs
 			register_page_handler("socialcommerce", "socialcommerce_page_handler");
@@ -138,7 +138,7 @@
 		if (get_context() == "stores" || get_context() == "socialcommerce") {
 			//if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
 			if (isset($_SESSION['guid']) && isloggedin()) {	
-				add_submenu_item(elgg_echo('stores:everyone'),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/all",'stores');
+				add_submenu_item(elgg_echo('stores:everyone'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
 				add_submenu_item(elgg_echo('stores:category'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
 				$splugin_settings = elgg_get_entities(array( 	
 					'type' => 'object',
@@ -163,19 +163,19 @@
 					));
 												  
 				if(isadminloggedin() && $All_Store_Entities<11){
-					add_submenu_item(elgg_echo('stores:addpost'),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/add",'create');
+					add_submenu_item(elgg_echo('stores:addpost'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
 				}
 				if(isadminloggedin()){
-				add_submenu_item(elgg_echo('stores:sold:products'),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/sold",'sold');
+				add_submenu_item(elgg_echo('stores:sold:products'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
 				}
 				if(isadminloggedin()){
-					add_submenu_item(elgg_echo('stores:addcate'),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/addcategory/",'create');
+					add_submenu_item(elgg_echo('stores:addcate'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
 				}
 			} else if (page_owner()) {
 				$page_owner = page_owner_entity();
-				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $page_owner->username);
+				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name),$CONFIG->wwwroot."pg/socialcommerce/" . $page_owner->username);
 				if ($page_owner instanceof ElggUser)
-					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name),$CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $page_owner->username . "/friends/");
+					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name),$CONFIG->wwwroot."pg/socialcommerce/" . $page_owner->username . "/friends/");
 			}
 		}
 		
@@ -323,7 +323,7 @@
 			
 			$filehandler = new ElggFile();
 			$filehandler->owner_guid = $entity->owner_guid;
-			$filehandler->setFilename("{$CONFIG->pluginname}/" . $entity->guid . $size . ".jpg");
+			$filehandler->setFilename("socialcommerce/" . $entity->guid . $size . ".jpg");
 			
 			if ($filehandler->exists()) {
 				$url = $CONFIG->url . "pg/storesimage/{$entity->guid}/$size/$icontime.jpg";
@@ -349,7 +349,7 @@
 			set_input('size',$page[1]);
 		}
 		// Include the standard profile index
-		include($CONFIG->pluginspath . "{$CONFIG->pluginname}/graphics/icon.php");
+		include($CONFIG->pluginspath . "socialcommerce/graphics/icon.php");
 	}
 	
 	/**
@@ -411,7 +411,7 @@
 		} else {
 			$friendofguid = false;
 		}
-		return elgg_view("{$CONFIG->pluginname}/typecloud",array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'simpletype','object','stores',$owner_guid)));
+		return elgg_view("socialcommerce/typecloud",array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'simpletype','object','stores',$owner_guid)));
 
 	}
 	
@@ -426,7 +426,7 @@
 		global $CONFIG;
 		$title = $entity->title;
 		$title = friendly_title($title);
-		return $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $entity->getOwnerEntity()->username . "/read/" . $entity->getGUID() . "/" . $title;
+		return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/read/" . $entity->getGUID() . "/" . $title;
 		
 	}
 	
@@ -441,7 +441,7 @@
 		global $CONFIG;
 		$title = $entity->title;
 		$title = friendly_title($title);
-		return $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $entity->getOwnerEntity()->username . "/cateread/" . $entity->getGUID() . "/" . $title;
+		return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/cateread/" . $entity->getGUID() . "/" . $title;
 		
 	}
 	
@@ -450,7 +450,7 @@
 		global $CONFIG;
 		$title = $entity->title;
 		$title = friendly_title($title);
-		return $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $entity->getOwnerEntity()->username . "/cart/" . $entity->getGUID() . "/" . $title;
+		return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/cart/" . $entity->getGUID() . "/" . $title;
 		
 	}
 	
@@ -465,8 +465,8 @@
 		global $CONFIG;
 		$title = $entity->title;
 		$title = friendly_title($title);
-		//return $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $entity->getOwnerEntity()->username . "/buy/" . $entity->getGUID() . "/" . $title;
-		return	elgg_add_action_tokens_to_url($CONFIG->url."action/{$CONFIG->pluginname}/addcart?stores_guid=".$entity->getGUID());
+		//return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/buy/" . $entity->getGUID() . "/" . $title;
+		return	elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/addcart?stores_guid=".$entity->getGUID());		//	@todo - fix query string
 	}
 	
 	function elgg_addcart($entity){
