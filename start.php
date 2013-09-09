@@ -385,7 +385,7 @@
 	 */
 	function get_storestype_cloud($owner_guid = "", $friends = false) {
 		
-		if ($friends) {
+		if($friends) {
 			if ($friendslist = get_user_friends($user_guid, $subtype, 999999, 0)) {
 				$friendguids = array();
 				foreach($friendslist as $friend) {
@@ -398,7 +398,6 @@
 			$friendofguid = false;
 		}
 		return elgg_view("socialcommerce/typecloud", array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'simpletype','object','stores',$owner_guid)));
-
 	}
 	
 	/**
@@ -407,13 +406,10 @@
 	 * @param ElggEntity $entity File entity
 	 * @return string File URL
 	 */
-	function stores_url($entity) {
-		
-		global $CONFIG;
+	function stores_url( $entity ) {
 		$title = $entity->title;
 		$title = friendly_title($title);
-		return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/read/" . $entity->getGUID() . "/" . $title;
-		
+		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
 	}
 	
 	/**
@@ -423,23 +419,16 @@
 	 * @return string File URL
 	 */
 	function category_url($entity) {
-		
-		global $CONFIG;
 		$title = $entity->title;
 		$title = friendly_title($title);
-		return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/cateread/" . $entity->getGUID() . "/" . $title;
-		
+		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
 	}
 	
 	function cart_url($entity) {
-		
-		global $CONFIG;
 		$title = $entity->title;
 		$title = friendly_title($title);
-		return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/cart/" . $entity->getGUID() . "/" . $title;
-		
+		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
 	}
-	
 	
 	/**
 	 * Populates the ->getUrl() method for file objects
