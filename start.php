@@ -148,12 +148,15 @@
 				if($splugin_settings){
 					$settings = $splugin_settings[0];
 				}
+				
+				
+	/***** @todo - looks like this was just here to limit the number of products you could have to 10. Comment it out and see if it effects anything			
 				$All_Store_Entities = elgg_get_entities(array(
 					'type' => 'object', 
 					'subtype' => 'stores', 
 					'owner_guid' => 0, 
 					'order_by' => '', 
-					'limit' => 15, 
+					'limit' => '', 
 					'offset' => 0, 
 					'count' => true, 
 					'site_guid' => 0, 
@@ -161,16 +164,13 @@
 					'timelower' => 0, 
 					'timeupper' => 0
 					));
-												  
-				if(isadminloggedin() && $All_Store_Entities<11){
+	*****/				
+				if( isadminloggedin() ){
 					add_submenu_item(elgg_echo('stores:addpost'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
-				}
-				if(isadminloggedin()){
-				add_submenu_item(elgg_echo('stores:sold:products'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
-				}
-				if(isadminloggedin()){
+					add_submenu_item(elgg_echo('stores:sold:products'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
 					add_submenu_item(elgg_echo('stores:addcate'),$CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
 				}
+					
 			} else if (page_owner()) {
 				$page_owner = page_owner_entity();
 				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name),$CONFIG->wwwroot."pg/socialcommerce/" . $page_owner->username);
@@ -191,7 +191,7 @@
 		
 		// The first component of a blog URL is the username
 		if (isset($page[0]) && !is_numeric($page[0])){
-			set_input('username',$page[0]);
+			set_input('username', $page[0]);
 		}
 		if(is_numeric($page[0])){
 			set_input('stores_guid', $page[0]);
