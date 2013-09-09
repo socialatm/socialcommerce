@@ -9,7 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-		admin_gatekeeper();			//	@todo - what if we want to let regular users have a store ??
+	admin_gatekeeper();			//	@todo - what if we want to let regular users have a store ??
 		
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
