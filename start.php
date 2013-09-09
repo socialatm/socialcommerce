@@ -509,19 +509,18 @@ EOT;
 	 * @param int $owner_guid
 	 * @param int $access_id
 	 */
-	function update_metadata_for_stores($id, $name, $value, $value_type, $owner_guid, $access_id)
-	{
+	 
+	function update_metadata_for_stores($id, $name, $value, $value_type, $owner_guid, $access_id) {
 		global $CONFIG;
 
 		$id = (int)$id;
 
-		if (!$md = get_metadata($id)) return false;	
+		if(!$md = get_metadata($id)) { return false; }	
 		
 		// If memcached then we invalidate the cache for this entry
 		static $metabyname_memcache;
-		if ((!$metabyname_memcache) && (is_memcache_available()))
-			$metabyname_memcache = new ElggMemcache('metabyname_memcache');
-		if ($metabyname_memcache) $metabyname_memcache->delete("{$md->entity_guid}:{$md->name_id}");
+		if((!$metabyname_memcache) && (is_memcache_available())) { $metabyname_memcache = new ElggMemcache('metabyname_memcache'); }
+		if($metabyname_memcache) { $metabyname_memcache->delete("{$md->entity_guid}:{$md->name_id}"); }
 		
 		//$name = sanitise_string(trim($name));
 		//$value = sanitise_string(trim($value));
