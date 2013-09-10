@@ -5,33 +5,20 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
+		 
 	$method = $vars['method'];
 	$base = $vars['base'];
-	$settings = elgg_get_entities_from_metadata(array(
-		'checkout_method' => 'paypal',
-		'entity_type' =>'object',
-		'entity_subtype' => 's_checkout',
-		'owner_guid' => 0,
-		'limit' => 1,
-		));  	
-		
-	if($settings){
-		$settings = $settings[0];	
-	}
+	$splugin_settings = $vars['entity'];
 	$order = $vars['order'];
 	$action = get_config('url').'action/socialcommerce/manage_socialcommerce';
 	$method_view = $method->view;
-	$display_name = $settings->display_name;
-	if(empty($display_name))
-		$display_name = $method->label;
-	$stores_paypal_email = $settings->socialcommerce_paypal_email;
-	$paypal_environment = $settings->socialcommerce_paypal_environment;
-	if(!$paypal_environment)
-		$paypal_environment = $base;
+	$display_name = $splugin_settings->display_name ? $splugin_settings->display_name : $method->label ;
+	$stores_paypal_email = $splugin_settings->socialcommerce_paypal_email;
+	$paypal_environment = $splugin_settings->socialcommerce_paypal_environment ? $splugin_settings->socialcommerce_paypal_environment : $base ;
+		
 ?>
 <div>
 	<div>
@@ -77,7 +64,7 @@
 							<input type='submit' name='btn_submit' value='<?php echo elgg_echo('stores:save'); ?>'>
 							<input type='hidden'"' name='method' value="<?php echo $base; ?>">
 							<input type='hidden'"' name='manage_action' value="checkout">
-							<input type='hidden'"' name='guid' value="<?php echo $settings->guid; ?>">
+							<input type='hidden'"' name='guid' value="<?php echo $splugin_settings->guid; ?>">
 							<input type='hidden'"' name='order' value="<?php echo $order; ?>">
 							<?php echo elgg_view('input/securitytoken'); ?>
 						</td>
