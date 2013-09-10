@@ -8,7 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
+
 	admin_gatekeeper();			//	@todo - what if we want to let regular users have a store ??
 		
 	// Get the current page's owner
@@ -22,11 +22,12 @@
 		$title = elgg_view_title(elgg_echo('socialcommerce:manage'));
 		$filter = get_input("filter") ? get_input("filter") : 'settings' ;
 			
-		$splugin_settings = elgg_get_entities(array( 	
+		$splugin_settings = elgg_get_entities(array( 		//	@todo - what if it's not found??	
 			'type' => 'object',
 			'subtype' => 'splugin_settings',
-			)); 			
-			
+			)); 
+		$splugin_settings = $splugin_settings[0];
+		
 		switch($filter){
 			case "settings":
 				$area2 = elgg_view("modules/general_settings",array('entity'=>$splugin_settings));
