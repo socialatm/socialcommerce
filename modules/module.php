@@ -477,10 +477,10 @@ function html_escape($text){
  *	Display or redirect to payment gateway
  * 	@param string The URL to redirect to.
  * 	@param array An array of form fields to POST, if any.
- * 	@param int not_compleated for enter any extra datas from clinit side. If 1 it will allow to enter datas otherwise it automatically redirect to the given url.
- *	@param string the field_view is the view to display that extra fields in client side.
+ * 	
  */
-function redirect_to_form($url, $fields=array(), $not_compleated = 0, $field_view){
+ 
+function redirect_to_form( $url, $fields ){
 	global $CONFIG;
 	$formFields = '';
 	if(is_array($fields)){
@@ -488,9 +488,6 @@ function redirect_to_form($url, $fields=array(), $not_compleated = 0, $field_vie
 			$formFields .= "<input type=\"hidden\" name=\"".html_escape($name)."\" value=\"".html_escape($value)."\" />\n";
 		}
 	}
-	if($not_compleated){
-		$detailed_view = elgg_view('modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/'.$field_view);
-	}else{
 		$detailed_view = elgg_echo('processing').'...';
 		$auto_redirect_script = <<<EOF
 			<div id="load_action"></div>
@@ -514,7 +511,6 @@ function redirect_to_form($url, $fields=array(), $not_compleated = 0, $field_vie
 				}
 			</script>
 EOF;
-	}
 	$form = <<<EOF
 		<div>
 			<form id="payment_redirect_form" action="{$url}" method="post">
@@ -528,9 +524,8 @@ EOF;
 	exit;
 }
 
-/*
- * Create an order after payment
- */
+/*****	Create the order after payment	*****/
+
 function create_order($user_guid = 0, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod){
 
 	global $CONFIG;
