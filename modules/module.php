@@ -397,28 +397,22 @@ function confirm_social_commerce_settings(){
 	}
 }
 
-/******************************************/
-/*                CHECKOUT                */
-/******************************************/
+/*****	CHECKOUT	*****/
+/*****	 Read the check out plugins and get checkout methods. Return them as an array.	*****/
 
-/*
- * Read check out plugins and get checkout methods. It return as an array.
- */
 function get_checkout_methods(){
-	global $CONFIG;
 	$checkout_lists = get_checkout_list();
 	if ($checkout_lists) {
 		$checkout_methods = array();
 		foreach ($checkout_lists as $checkout_list){
-			if (file_exists($CONFIG->checkout_path.$checkout_list.'/method.xml')) {
-				$xml = xml_to_object(file_get_contents($CONFIG->checkout_path.$checkout_list.'/method.xml'));
+			if (file_exists(get_config('checkout_path').$checkout_list.'/method.xml')) {
+				$xml = xml_to_object(file_get_contents(get_config('checkout_path').$checkout_list.'/method.xml'));
 				if ($xml){
 					$elements = array();
 					if($xml->children){
 						foreach ($xml->children as $element){
 							$key = $element->attributes['key'];
 							$value = $element->attributes['value'];
-							
 							$elements[$key] = $value;
 						}
 					}
@@ -432,24 +426,13 @@ function get_checkout_methods(){
 	return false;
 }
 
-/*
- *	Get checkout plugins list. It returns an array.
- */
+/*****	Get checkout plugins list. returns an array.	*****/
+
 function get_checkout_list(){
-	global $CONFIG;
 	$checkouts = array();
-	if ($handle = opendir($CONFIG->checkout_path)) {
-		while ($mod = readdir($handle)) {
-			if (!in_array($mod,array('.','..','.svn','CVS')) && is_dir($CONFIG->checkout_path .$mod)) {
-				$checkouts[] = $mod;
-			}
-		}
-	}
-	if($checkouts){
-		return $checkouts;
-	}else{
-		return false;
-	}
+	$checkouts = array_diff(scandir(get_config('checkout_path')), array('..', '.'));
+	$checkouts = count($checkouts) > 0 ? $checkouts : false ;
+	return $checkouts;
 }
 
 function load_checkout_actions(){
