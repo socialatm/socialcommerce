@@ -526,109 +526,98 @@ EOF;
 
 /*****	Create the order after payment	*****/
 
-function create_order($user_guid = 0, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod){
+function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod){
 
-	global $CONFIG;
+	global $CONFIG;					//	@todo	-	working on making this go away...
 	$used_coupons = array();
-	if($user_guid == 0){
-		$user_guid = $_SESSION['user']->guid;	
-	}
-	$page_owner = $user_guid;
-	if($page_owner > 0){
-		set_page_owner($page_owner);
-	}
 	set_context('add_order');
-	$user = get_entity($page_owner);
 	
-	$container_guid = $page_owner;
+	$user = get_entity($buyer_guid);	//	@todo - change all instances of $user to $buyer ...
+	$buyer = get_entity($buyer_guid);
 	
-	$settings = elgg_get_entities(array( 	
+	
+	$container_guid = $buyer_guid;
+		
+	$splugin_settings = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'splugin_settings',
-		'owner_guid' => 0,
-		'order_by' => '',
-		'limit' => 9999,
 		)); 			
-	
-	if($settings){
-		$settings = $settings[0];
-	}
+	$splugin_settings = $splugin_settings[0];
+	$seller_guid = $splugin_settings->owner_guid;
 
 	$carts = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'cart',
-		'owner_guid' => $page_owner,
-		)); 			
-		
+		'owner_guid' => $buyer_guid,
+		)); 
+	$carts = $carts[0];
+	
 	if($carts){
 		$payment_fee = (float)$posted_values['fee'];
 		$payment_gross = (float)$posted_values['total'];
 		$payment_fee_percentage = ($payment_fee * 100)/$payment_gross;
-		$new_fund = $payment_gross - $payment_fee;
-		$cart = $carts[0];
-		
+		$payment_net = $payment_gross - $payment_fee;
+						
 		$order = new ElggObject();
 		$order->access_id = 2;
-		$order->owner_guid=$page_owner;
-		$order->subtype="order";
-		$order->payment_fee=$payment_fee;
-		$order->total=$payment_gross;
-		$order->percentage=$payment_fee_percentage;
-		$order->amound=$new_fund;
-		$order->payer_email=$posted_values['email'];
-		$order->transaction_status=$posted_values['status'];
-		$order->transaction_id=$posted_values['txn_id'];
-		if($CheckoutMethod)
-			$order->checkout_method=$CheckoutMethod;
-		if($ShippingMethod)
+		$order->owner_guid = $buyer_guid;
+		$order->subtype = 'order';
+		$order->payment_fee = $payment_fee;
+		$order->total = $payment_gross;
+		$order->percentage = $payment_fee_percentage;
+		$order->amount = $payment_net;
+		$order->payer_email = $posted_values['email'];
+		$order->transaction_status = $posted_values['status'];
+		$order->transaction_id = $posted_values['txn_id'];
+		$order->checkout_method = $CheckoutMethod;
+			
+		if($ShippingMethod != 0 ) {
 			$order->shipping_method=$ShippingMethod;
-		
-		$BillingAddress = get_entity($BillingDetails);
-		if($BillingAddress){
-			$order->b_first_name=$BillingAddress->first_name;
-			$order->b_last_name=$BillingAddress->last_name;
-			$order->b_address_line_1=$BillingAddress->address_line_1;
-			$order->b_address_line_2=$BillingAddress->address_line_2;
-			$order->b_city=$BillingAddress->city;
-			$order->b_state=$BillingAddress->state;
-			$order->b_country=$BillingAddress->country;
-			$order->b_pincode=$BillingAddress->pincode;
-			if($BillingAddress->mobileno)
-				$order->b_mobileno=$BillingAddress->mobileno;
-			if($BillingAddress->phoneno)
-				$order->b_phoneno=$BillingAddress->phoneno;
 		}
+			
+		$BillingAddress = get_entity( $BillingDetails );
+		$order->b_first_name = $BillingAddress->first_name;
+		$order->b_last_name = $BillingAddress->last_name;
+		$order->b_address_line_1 = $BillingAddress->address_line_1;
+		$order->b_address_line_2 = $BillingAddress->address_line_2;
+		$order->b_city = $BillingAddress->city;
+		$order->b_state = $BillingAddress->state;
+		$order->b_country = $BillingAddress->country;
+		$order->b_pincode = $BillingAddress->pincode;
 		
-				
-		if ($container_guid){
-			$order->container_guid = $container_guid;
-		}
-		$order_id = $order->save();
+		if($BillingAddress->mobileno) { $order->b_mobileno = $BillingAddress->mobileno; }
+		if($BillingAddress->phoneno) { $order->b_phoneno = $BillingAddress->phoneno; }
+		
+		$order->container_guid = $container_guid;
+		$order_id = $order->save();		
+	
 		if($order_id){
-			$cart_guid = $cart->guid;
+			$cart_guid = $carts->guid;
 			$tot = $tax_total_price = 0;
 			$item_details_for_store_owner = array();
 			//-------- Site admin ----------------//
 			$admin_user = get_site_admin();
 			//-------- Site entity ----------------//
-			$site = get_entity($CONFIG->site_guid);
+			$site = get_entity(get_config('site_guid'));
+			
+	
 			$cart_items = elgg_get_entities_from_relationship(array(
 				'relationship' => 'cart_item',
 				'relationship_guid' => $cart->guid, 
-				));  
+				)); 
+
 			if($cart_items){
-				if($ShippingMethod){
+				if($ShippingMethod){						//	@todo -  will need to test this function
 					foreach ($cart_items as $cart_item){
 						$product = get_entity($cart_item->product_id);
-						$products[$product->guid] = (object)array('quantity'=>$cart_item->quantity,'price'=>$cart_item->amount,'type'=>$product->product_type_id);
+						$products[$product->guid] = (object)array('quantity'=>$cart_item->quantity, 'price'=>$cart_item->amount, 'type'=>$product->product_type_id );
 					}
 					$function = "price_calc_".$ShippingMethod;
 					if(function_exists($function)){
 						$s_prince = $function($products);
 					}
 				}
-				
-				
+
 				foreach ($cart_items as $cart_item){
 					$price = 0;
 					$product_id = $cart_item->product_id;
@@ -638,7 +627,7 @@ function create_order($user_guid = 0, $CheckoutMethod, $posted_values, $BillingD
 					$order_item = "";
 					$order_item = new ElggObject();
 					$order_item->access_id = 2;
-					$order_item->owner_guid=$page_owner;
+					$order_item->owner_guid = $buyer_guid;
 					$order_item->subtype="order_item";
 					$order_item->product_id=$product_id;
 					$order_item->product_owner_guid=$product->owner_guid;
@@ -660,39 +649,41 @@ function create_order($user_guid = 0, $CheckoutMethod, $posted_values, $BillingD
 					$coupon_discount = 0;
 			
 					$order_item_id = $order_item->save();
+					
 					if($order_item_id){
-						if(in_array('product_checkout',$CONFIG->river_settings))
-							add_to_river('river/object/stores/purchase','purchase',$page_owner,$product_id);
-							
+						if(in_array('product_checkout', get_config('river_settings'))) {
+							add_to_river('river/object/stores/purchase', 'purchase', $buyer_guid, $product_id );
+						}
+												
 						//-------- User Price ----------------//
-						$user_price = ($product->price * $cart_item->quantity);
+						$user_price = ( $product->price * $cart_item->quantity );
 						
 						$admin_transaction = new ElggObject();
 						$admin_transaction->access_id = 2;
-						$admin_transaction->owner_guid=$admin_user->guid;
-						$admin_transaction->container_guid=$admin_user->guid;
-						$admin_transaction->subtype='transaction';
-						$admin_transaction->trans_type="credit";
-						$admin_transaction->title='site_commission';
-						$admin_transaction->trans_category='site_commission';
-						$admin_transaction->order_guid=$order_id;
-						$admin_transaction->order_item_guid=$order_item_id;
-						$admin_transaction->amount=0;
-						$admin_transaction->payment_fee=$item_payment_fee * $cart_item->quantity;
+						$admin_transaction->owner_guid = $admin_user->guid;
+						$admin_transaction->container_guid = $admin_user->guid;
+						$admin_transaction->subtype = 'transaction';
+						$admin_transaction->trans_type = "credit";
+						$admin_transaction->title = 'site_commission';
+						$admin_transaction->trans_category = 'site_commission';
+						$admin_transaction->order_guid = $order_id;
+						$admin_transaction->order_item_guid = $order_item_id;
+						$admin_transaction->amount = 0;
+						$admin_transaction->payment_fee = $item_payment_fee * $cart_item->quantity;
 						$admin_transaction->save();
 						
 						$user_transaction = new ElggObject();
 						$user_transaction->access_id = 2;
-						$user_transaction->owner_guid=$product->owner_guid;
-						$user_transaction->container_guid=$product->owner_guid;
-						$user_transaction->subtype='transaction';
-						$user_transaction->total_amount=$product->price * $cart_item->quantity;
-						$user_transaction->trans_type="credit";
-						$user_transaction->title='sold_product';
-						$user_transaction->trans_category='sold_product';
-						$user_transaction->order_guid=$order_id;
-						$user_transaction->order_item_guid=$order_item_id;
-						$user_transaction->amount=$user_price;
+						$user_transaction->owner_guid = $product->owner_guid;
+						$user_transaction->container_guid = $product->owner_guid;
+						$user_transaction->subtype = 'transaction';
+						$user_transaction->total_amount = $product->price * $cart_item->quantity;
+						$user_transaction->trans_type = "credit";
+						$user_transaction->title = 'sold_product';
+						$user_transaction->trans_category = 'sold_product';
+						$user_transaction->order_guid = $order_id;
+						$user_transaction->order_item_guid = $order_item_id;
+						$user_transaction->amount = $user_price;
 						$user_transaction->save();
 
 						$result = add_entity_relationship($order_id,'order_item',$order_item_id);
@@ -772,7 +763,7 @@ EOF;
 					$order_date = date("dS M Y");
 					$order_recipient = $order->b_first_name." ".$order->b_last_name;
 					$order_total = $order->s_first_name." ".$order->s_last_name;
-					$billing_details = elgg_view("{$CONFIG->pluginname}/order_display_address",array('entity'=>$order,'type'=>'b'));
+					$billing_details = elgg_view("socialcommerce/order_display_address", array('entity'=>$order,'type'=>'b'));
 					$adderss_details = <<<EOF
 						<div style="float:left;width:300px;">
 							<h3 style="font-size:16px;">Billing Details</h3>
@@ -780,7 +771,7 @@ EOF;
 						</div>		
 EOF;
 					if($ShippingMethod){
-						$shipping_details = elgg_view("{$CONFIG->pluginname}/order_display_address",array('entity'=>$order,'type'=>'s'));
+						$shipping_details = elgg_view("socialcommerce/order_display_address", array('entity'=>$order,'type'=>'s'));
 						$adderss_details .= <<<EOF
 							<div style="float:left;width:300px;">
 								<h3 style="font-size:16px;">shipping Details</h3>
@@ -809,7 +800,7 @@ EOF;
 							</td>
 						</tr>
 EOF;
-					$order_page = $CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$user->username.'/order/';
+					$order_page = get_config('url').'pg/socialcommerce/'.$user->username.'/order/';
 					if($product->mimetype && $product->product_type_id == 2){
 						$download_condition = <<<EOF
 							<div>
@@ -830,7 +821,7 @@ EOF;
 						$download_condition = "";
 					}
 						$ShippingMethod = 'None';
-					$order_link = $CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$user->username.'/order_products/'.$order_id;
+					$order_link = get_config('url').'pg/socialcommerce/'.$user->username.'/order_products/'.$order_id;
 					$view_total_price = get_price_with_currency($grand_total_price);
 					$mail_body = sprintf(elgg_echo('order:mail'),
 										 $user->name,
@@ -922,10 +913,12 @@ EOF;
 				}
 			}
 		}
-		$cart->delete();
+//		$cart->delete();		//	not until we're finished...
 	}
 	return $order_id;
 }
+
+/***** end function create_order	*****/
 
 function view_success_page(){
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_success';
