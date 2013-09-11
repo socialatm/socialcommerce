@@ -83,7 +83,7 @@
 			}
 			
 		/****	make custom setting into an array	*****/
-		$custom = array( $method, page_owner(), $BillingDetails->guid, $ShippingDetails->guid, $_SESSION['CHECKOUT']['shipping_method'] );
+		$custom = array( $method, page_owner(), $BillingDetails->guid, $ShippingDetails->guid, $_SESSION['CHECKOUT']['shipping_method'] );	//	@todo - replace the page owner thing...
 		
 		$hiddenFields = array(
 			'cmd'			=> '_cart',
@@ -247,7 +247,7 @@ $process_payment = false;
 if($process_payment){
 	$custom = unserialize($_POST['custom']);
 	$CheckoutMethod = $custom[0];
-	$page_owner = $custom[1];
+	$buyer_guid = $custom[1];
 	$BillingDetails = $custom[2];
 	$ShippingDetails = is_null( $custom[3] ) ? 0 : $custom[3] ;
 	$ShippingMethods = is_null( $custom[4] ) ? 0 : $custom[4] ;
@@ -279,8 +279,8 @@ if($process_payment){
 		'fee'=>$payment_fee,
 		'total'=>$payment_gross,
 		);
-		
-	create_order( $page_owner, $CheckoutMethod, $transactions, $BillingDetails, $ShippingDetails, $ShippingMethods );
+
+	create_order( $buyer_guid, $CheckoutMethod, $transactions, $BillingDetails, $ShippingDetails, $ShippingMethods );
 }
 exit;
 	
