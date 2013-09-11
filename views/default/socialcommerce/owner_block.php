@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -17,14 +17,14 @@
 			<?php if (isadminloggedin()) { ?>
 				<!--My Account-->
 				<div class="scommerce_settings">
-					<a href="<?php echo $CONFIG->wwwroot . 'pg/'.$CONFIG->pluginname.'/' . $_SESSION['user']->username . '/settings'; ?>" />
+					<a href="<?php echo $CONFIG->wwwroot . 'pg/socialcommerce/' . $_SESSION['user']->username . '/settings/general'; ?>" />
 						<?php echo elgg_echo('socialcommerce:settings'); ?>
 					</a>
 				</div>
 			<?php } ?>
 			<!--My Account-->
 			<div class="my_account">
-				<a href="<?php echo $CONFIG->checkout_base_url ?>pg/<?php echo $CONFIG->pluginname; ?>/<?php echo $_SESSION['user']->username; ?>/my_account" />
+				<a href="<?php echo $CONFIG->checkout_base_url ?>pg/socialcommerce/<?php echo $_SESSION['user']->username; ?>/my_account" />
 					<?php echo elgg_echo('stores:my:account'); ?>
 				</a>
 			</div>
