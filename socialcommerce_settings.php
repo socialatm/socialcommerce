@@ -8,7 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
+	 
 	admin_gatekeeper();			//	@todo - what if we want to let regular users have a store ??
 		
 	// Get the current page's owner
@@ -28,8 +28,8 @@
 			)); 
 		$splugin_settings = $splugin_settings[0];
 		
-		switch($filter){
-			case "settings":
+		switch($page[2]){
+			case "general":
 				$area2 = elgg_view("modules/general_settings",array('entity'=>$splugin_settings));
 				break;
 			case "checkout":
@@ -42,7 +42,7 @@
 				$area2 = elgg_view("modules/currency_settings",array('entity'=>$splugin_settings));
 				break;
 		}
-		$area2 = elgg_view("modules/settings_tab_view",array('entity'=>$splugin_settings,'base_view' => $area2, "filter" => $filter));
+		$area2 = elgg_view("modules/settings_tab_view",array('entity'=>$splugin_settings,'base_view' => $area2, "filter" => $page[2]));
 		
 		$area2 = <<<EOF
 			{$title}
