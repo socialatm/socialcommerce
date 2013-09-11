@@ -260,8 +260,6 @@ if($process_payment){
 	$txn_id 			= $_POST['txn_id'];
 	$receiver_email 	= $_POST['receiver_email'];
 	$payer_email 		= $_POST['payer_email'];
-	
-	$new_fund 			= $payment_gross - $payment_fee;		//	@todo - replace with $payment_net
 	$post_values = $_POST;
 	
 /*****	@todo - need to test this part	*****/
