@@ -913,7 +913,7 @@ EOF;
 				}
 			}
 		}
-//		$cart->delete();		//	not until we're finished...
+		$cart->delete();		//	not until we're finished...
 	}
 	return $order_id;
 }
