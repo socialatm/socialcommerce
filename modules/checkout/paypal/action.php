@@ -126,65 +126,6 @@
 	function makepayment_paypal(){
 	
 	/*****	verify with paypal first	*****/
-	
-	/*****	$_POST test for localhost	*****/	
-
-$_POST['mc_gross'] = '1.53';
-$_POST['protection_eligibility'] = 'Ineligible';
-$_POST['address_status'] = 'confirmed';
-$_POST['item_number1'] = '';
-$_POST['tax'] = '0.00';
-$_POST['item_number2'] = '';
-$_POST['payer_id'] = 'Z4HUXKZ5YUHXQ';
-$_POST['address_street'] = '123 any st';
-$_POST['payment_date'] = '16:08:49 Sep 10, 2013 PDT';
-$_POST['payment_status'] = 'Pending';
-$_POST['charset'] = 'windows-1252';
-$_POST['address_zip'] = '04330';
-$_POST['mc_shipping'] = '0.00';
-$_POST['mc_handling'] = '0.00';
-$_POST['first_name'] = 'john';
-$_POST['mc_fee'] = '0.34';
-$_POST['address_country_code'] = 'US';
-$_POST['address_name'] = 'jane doe';
-$_POST['notify_version'] = '3.7';
-$_POST['custom'] = 'a:5:{i:0;s:6:"paypal";i:1;s:1:"6";i:2;s:2:"25";i:3;N;i:4;N;}';
-$_POST['payer_status'] = 'verified';
-$_POST['business'] = 'raypea_1306946408_biz@gmail.com';
-$_POST['address_country'] = 'United States';
-$_POST['num_cart_items'] = '2';
-$_POST['mc_handling1'] = '0.00';
-$_POST['mc_handling2'] = '0.00';
-$_POST['address_city'] = 'augusta';
-$_POST['verify_sign'] = 'AfqOQy8Tn1DbAx4LBm8LhaLhMtAMAgZa8t6XAfEZF4b4AzjVRGXGu01V';
-$_POST['payer_email'] = 'buyer@twentyfiveautumn.com';
-$_POST['mc_shipping1'] = '0.00';
-$_POST['mc_shipping2'] = '0.00';
-$_POST['tax1'] = '0.00';
-$_POST['tax2'] = '0.00';
-$_POST['txn_id'] = '3FD169205E546350A';
-$_POST['payment_type'] = 'instant';
-$_POST['last_name'] = 'autumn';
-$_POST['address_state'] = 'ME';
-$_POST['item_name1'] = 'Product One';
-$_POST['receiver_email'] = 'raypea_1306946408_biz@gmail.com';
-$_POST['item_name2'] = 'Product Two';
-$_POST['payment_fee'] = '0.34';
-$_POST['quantity1'] = '1';
-$_POST['quantity2'] = '1';
-$_POST['receiver_id'] = 'E78NXJZPR6SL8';
-$_POST['pending_reason'] = 'paymentreview';
-$_POST['txn_type'] = 'cart';
-$_POST['mc_gross_1'] = '1.00';
-$_POST['mc_currency'] = 'USD';
-$_POST['mc_gross_2'] = '0.53';
-$_POST['residence_country'] = 'US';
-$_POST['test_ipn'] = '1';
-$_POST['transaction_subject'] = 'a:5:{i:0;s:6:"paypal";i:1;s:1:"6";i:2;s:2:"25";i:3;N;i:4;N;}';
-$_POST['payment_gross'] = '1.53';
-$_POST['ipn_track_id'] = '28ce8e3d8e483';
-
-/*****	end $_POST test for localhost	*****/
 
 /*****	start cURL	*****/
 
