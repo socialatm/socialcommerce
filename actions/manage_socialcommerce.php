@@ -13,17 +13,21 @@
 	load_checkout_actions();
 	load_currency_actions();
 	
-	$site = get_entity(get_config(('site_guid')));
+	$site = get_entity(get_config('site_guid'));
 	$manage_action = get_input('manage_action');
 	
 	switch ($manage_action){
 		case 'settings':
-			$checkoutmethods = get_input('checkout_method') ? get_input('checkout_method') : array();
+			$checkoutmethod = get_input('checkout_method') ? get_input('checkout_method') : array();	//	@todo - make this mandatory
+			
 			//	@todo - fund_withdraw_method is not on the form
 			$fund_withdraw_methods = get_input('fund_withdraw_method') ? get_input('fund_withdraw_method') : array();	
-			$river_settings = get_input('river_settings')? get_input('river_settings') : array();
-			//	@todo - allow_add_product is not on the form
+		
+		$river_settings = get_input('river_settings')? get_input('river_settings') : array();
+		
+		//	@todo - allow_add_product is not on the form
 			$allow_add_product = get_input('allow_add_product') ? get_input('allow_add_product') : array();
+			
 			// @todo - default_view does not give us a gallery option on the form
 			$default_view = get_input('default_view') ? get_input('default_view') : 'list';
 					
@@ -40,13 +44,16 @@
 			}
 			
 			$share_this = get_input('share_this','',false);			//	@todo - not on the form
-						
-			$guid = get_input('guid');
-			$settings = !empty($guid) ? get_entity($guid) : new ElggObject() ;
-			$settings->subtype = 'splugin_settings';
-			$settings->access_id = 2;
-			$settings->container_guid = $_SESSION['user']->guid;
-			$settings->checkout_methods = $checkoutmethods;
+			
+			$splugin_settings = elgg_get_entities(array(
+			'type' => 'object',
+			'subtype' => 'splugin_settings',
+			));
+			$splugin_settings = $splugin_settings[0];
+			
+	//		$guid = get_input('guid');
+			$settings = $splugin_settings;
+			$settings->checkout_methods = $checkoutmethod;
 			$settings->fund_withdraw_methods = $fund_withdraw_methods;
 			$settings->default_view = $default_view;
 			// For Add The https URL 
@@ -65,7 +72,7 @@
 		}else{
 			register_error(elgg_echo("settings:save:error"));
 		}
-			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings';
+			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general';
 			break;	
 		case 'checkout':
 			$order = get_input('order');
