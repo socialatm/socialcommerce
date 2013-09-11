@@ -9,8 +9,13 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
+	$splugin_settings = elgg_get_entities(array(
+			'type' => 'object',
+			'subtype' => 'splugin_settings',
+			));
+	$splugin_settings = $splugin_settings[0];
+	 
 	$checkout_methods = get_checkout_methods();
-	$splugin_settings = $vars['entity'];
 	$order = get_input('order') ? get_input('order') : 0 ;
 	$selected_checkoutmethods_guid = $splugin_settings->guid;
 	$selected_checkoutmethods = $splugin_settings->checkout_methods;

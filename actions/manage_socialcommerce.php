@@ -81,7 +81,7 @@
 			if(function_exists($function)){
 				$function();
 			}
-			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings?filter=checkout&order='.$order;	//	@todo - make query string go away
+			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/checkout/'.$order;
 			break;	
 		case 'makepayment':
 			$method = get_input('payment_method');
