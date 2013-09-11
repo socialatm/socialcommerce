@@ -143,23 +143,7 @@
 				if($splugin_settings){
 					$settings = $splugin_settings[0];
 				}
-				
-				
-	/***** @todo - looks like this was just here to limit the number of products you could have to 10. Comment it out and see if it effects anything			
-				$All_Store_Entities = elgg_get_entities(array(
-					'type' => 'object', 
-					'subtype' => 'stores', 
-					'owner_guid' => 0, 
-					'order_by' => '', 
-					'limit' => '', 
-					'offset' => 0, 
-					'count' => true, 
-					'site_guid' => 0, 
-					'container_guid' => null, 
-					'timelower' => 0, 
-					'timeupper' => 0
-					));
-	*****/				
+	
 				if( isadminloggedin() ){
 					add_submenu_item(elgg_echo('stores:addpost'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
 					add_submenu_item(elgg_echo('stores:sold:products'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
@@ -175,7 +159,7 @@
 		}
 		
 		if (get_context() == 'admin' && isadminloggedin()) {
-			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings');
+			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general/');
 		}
 	}
 	
