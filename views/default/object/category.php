@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
@@ -58,7 +58,7 @@
 		<div class="storesrepo_title_owner_wrapper">
 		<?php
 			//get the user and a link to their gallery
-			$user_gallery = $vars['url'] . "mod/{$CONFIG->pluginname}/search.php?md_type=simpletype&subtype=category&tag=image&owner_guid=" . $owner->guid . "&search_viewtype=gallery";
+			$user_gallery = $vars['url'] . "mod/socialcommerce/search.php?md_type=simpletype&subtype=category&tag=image&owner_guid=" . $owner->guid . "&search_viewtype=gallery";
 		?>
 		<div class="storesrepo_title"><h2><a href="<?php echo $category->getURL(); ?>"><?php echo $title; ?></a></h2></div>
 		<div class="storesrepo_owner">
