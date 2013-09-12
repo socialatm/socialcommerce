@@ -20,7 +20,7 @@
    
 	// Load system configuration
 		global $CONFIG;
-				
+	
 	// Set Config Values	
 		set_config('default_price_sign', '$');
 		set_config('default_currency_name', 'US Dollar');
@@ -192,18 +192,17 @@
 										}
 										@include(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
 										break;
-				case "category":		include(dirname(__FILE__) . "/category.php");
+				case "category":		require(get_config('pluginspath').'socialcommerce/category.php'); 
 										break;
-				case "addcategory":		include(dirname(__FILE__) . "/add_category.php");
+				case "addcategory":		require(get_config('pluginspath').'socialcommerce/add_category.php'); 
 										break;
 				case "cart":			include(dirname(__FILE__) . "/cart.php");
 										break;
 				case "cateread":		set_input('guid',$page[2]);
 										include(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
 										break;
-				case "buy":				set_input('stores_guid',$page[2]);
+				case "buy":				set_input('stores_guid', $page[2]);
 										include(dirname(__FILE__) . "/buy.php");
-										//@include(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
 										break;
 				case "all":				include(dirname(__FILE__) . "/all.php");
 										break;
@@ -234,9 +233,9 @@
 									  	break;
 				case "sold":			include(dirname(__FILE__) . "/sold.php");
 									  	break;
-				case "add":				include(dirname(__FILE__) . "/add.php");
-									  	break;
-				case "settings":		include("/socialcommerce_settings.php");
+				case "add":				require(get_config('pluginspath').'socialcommerce/add.php');
+										break;
+				case "settings":		require(get_config('pluginspath').'socialcommerce/socialcommerce_settings.php'); 
 										break;
 				case "checkout_process":include(dirname(__FILE__) . "/checkout_process.php");
 									  	break;
