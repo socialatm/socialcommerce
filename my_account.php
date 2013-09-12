@@ -44,30 +44,28 @@
 				$baseurl = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			}
 		switch($filter){
-			case "address":
-				$area2 = elgg_view("{$CONFIG->pluginname}/myaccount_address");
-			break;
-			case "transactions":
-				/*$cound = get_entities_from_metadata('trans_category','sold_product','object','transaction',$_SESSION['user']->guid,$limit,$offset,'','',true);
-				$transactions = get_entities_from_metadata('trans_category','sold_product','object','transaction',$_SESSION['user']->guid,$limit,$offset);*/
-				$transactions = get_purchased_orders('trans_category','sold_product,withdraw_fund','object','transaction','','','','','',$limit,$offset,'',$_SESSION['user']->guid);
-				$count = get_data("SELECT FOUND_ROWS( ) AS count");
-				$count = $count[0]->count;
-				$nav = elgg_view('navigation/pagination',array(
-													'baseurl' => $baseurl,
-													'offset' => $offset,
-													'count' => $count,
-													'limit' => $limit
-												));
-				$area2 = elgg_view("{$CONFIG->pluginname}/my_account",array('entity'=>$transactions,'filter'=>$filter,'nav'=>$nav));
-			break;
+			case "address":			$area2 = elgg_view("socialcommerce/myaccount_address");
+									break;
+			case "transactions":	$transactions = get_purchased_orders('trans_category','sold_product,withdraw_fund','object','transaction','','','','','',$limit,$offset,'',$_SESSION['user']->guid);
+									$count = get_data("SELECT FOUND_ROWS( ) AS count");
+									$count = $count[0]->count;
+									$nav = elgg_view('navigation/pagination', array(
+											'baseurl' => $baseurl,
+											'offset' => $offset,
+											'count' => $count,
+											'limit' => $limit
+											));
+									$area2 = elgg_view("socialcommerce/my_account", array('entity'=>$transactions, 'filter'=>$filter, 'nav'=>$nav ));
+									break;
+			default:				$area2 = elgg_view("socialcommerce/myaccount_address");
+									break;
 		}
 			
-		$area2 = "<div class=\"contentWrapper\">".elgg_view("{$CONFIG->pluginname}/my_account_tab_view",array('base_view' => $area2, "filter" => $filter))."</div>";
+		$area2 = "<div class=\"contentWrapper\">".elgg_view("socialcommerce/my_account_tab_view",array('base_view' => $area2, "filter" => $filter))."</div>";
 		$area2 .= <<<EOF
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->wwwroot}mod/{$CONFIG->pluginname}/images/loadingAnimation.gif">
+				<img src="{$CONFIG->wwwroot}mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Processing...</div>
 			</div>
 EOF;
