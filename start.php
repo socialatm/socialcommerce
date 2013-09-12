@@ -243,28 +243,27 @@
 									  	break;
 				case "view_address":	include(dirname(__FILE__) . "/address_view.php");
 									  	break;
-				case "order_products":	if($page[2])
-											set_input('guid',$page[2]);
+				case "order_products":	if($page[2]) { set_input('guid',$page[2]); }
 										include(dirname(__FILE__) . "/order_products.php");
 									  	break;
 				case "currency_settings":include(dirname(__FILE__) . "/load_currency_settings.php");
 									  	break;
-				case "country_state"	:include(dirname(__FILE__) . "/manage_country_state.php");
+				case "country_state":	require(get_config('pluginspath').'socialcommerce/manage_country_state.php'); 	
 									  	break;
-				case "edit":			include(dirname(__FILE__) . "/edit.php");
+				case "edit":			require(get_config('pluginspath').'socialcommerce/edit.php'); 	
 										break;
 				
 				case "delete":			//	@todo - this doesn't work...
 									//	include(dirname(__FILE__) . "/cart_success.php");
 										break;
 														
-				default:				include(dirname(__FILE__) . "/index.php");
+				default:				require(get_config('pluginspath').'socialcommerce/index.php'); 
 										break;
 										
 			}
 		/*****	If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load index.php	*****/
 		} else {
-			include(dirname(__FILE__) . "/index.php");
+			require(get_config('pluginspath').'socialcommerce/index.php'); 
 			return true;
 		}
 		return false;
