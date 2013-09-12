@@ -25,10 +25,14 @@
 			'subtype' => 'splugin_settings',
 			));
 			$splugin_settings = $splugin_settings[0];
-	
+			
 	if(count($splugin_settings) < 1){
 		$splugin_settings = new ElggObject;
 		$splugin_settings->subtype = 'splugin_settings';
+		$splugin_settings->owner_guid = get_loggedin_userid();
+		$splugin_settings->container_guid = get_loggedin_userid();
+		$splugin_settings->site_guid = get_config('site_id');
+		$splugin_settings->access_id = ACCESS_PUBLIC;
 		$splugin_settings->checkout_methods = 'paypal';
 		$splugin_settings->fund_withdraw_methods = '';
 		$splugin_settings->default_view = 'list';
