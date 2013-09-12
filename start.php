@@ -244,9 +244,9 @@
 				case "view_address":	include(dirname(__FILE__) . "/address_view.php");
 									  	break;
 				case "order_products":	if($page[2]) { set_input('guid',$page[2]); }
-										include(dirname(__FILE__) . "/order_products.php");
-									  	break;
-				case "currency_settings":include(dirname(__FILE__) . "/load_currency_settings.php");
+										require(get_config('pluginspath').'socialcommerce/order_products.php'); 
+										break;
+				case "currency_settings": require(get_config('pluginspath').'socialcommerce/load_currency_settings.php'); 
 									  	break;
 				case "country_state":	require(get_config('pluginspath').'socialcommerce/manage_country_state.php'); 	
 									  	break;
