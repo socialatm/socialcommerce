@@ -41,6 +41,9 @@
 			case "currency":
 				$area2 = elgg_view("modules/currency_settings",array('entity'=>$splugin_settings));
 				break;
+			default:
+				$area2 = elgg_view("modules/general_settings",array('entity'=>$splugin_settings));
+				break;
 		}
 		$area2 = elgg_view("modules/settings_tab_view",array('entity'=>$splugin_settings,'base_view' => $area2, "filter" => $page[2]));
 		
