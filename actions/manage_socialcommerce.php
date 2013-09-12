@@ -63,7 +63,7 @@
 			$settings->river_settings = $river_settings;
 			$settings->http_proxy_server = "";
 			$settings->http_proxy_port = "";
-			$settings->http_varify_ssl = "";
+			$settings->http_verify_ssl = "";
 			$settings->allow_add_product = "";
 			$settings->allow_shipping_method = 1;
 
