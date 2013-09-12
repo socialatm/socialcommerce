@@ -8,11 +8,8 @@
 	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	global $CONFIG;
-	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
-		gatekeeper();
+
+	gatekeeper();
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
 		
@@ -27,23 +24,20 @@
 	// Set stores title
 		$title = elgg_view_title(elgg_echo('stores:my:account'));
 	
-	// Get objects
-		$filter = get_input("filter");
-		if(!$filter)
-			$filter = "address";
 		$limit = 10;
 		$offset = get_input('offset');
 		if(!$offset)
 			$offset = 0;
 			
-			$position = strstr($CONFIG->checkout_base_url,'https://');
+		$position = strstr($CONFIG->checkout_base_url,'https://');
 			if($position === false)
 			{
 				$baseurl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			}else{
 				$baseurl = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			}
-		switch($filter){
+			
+		switch($page[2]){
 			case "address":			$area2 = elgg_view("socialcommerce/myaccount_address");
 									break;
 			case "transactions":	$transactions = get_purchased_orders('trans_category','sold_product,withdraw_fund','object','transaction','','','','','',$limit,$offset,'',$_SESSION['user']->guid);
@@ -55,13 +49,13 @@
 											'count' => $count,
 											'limit' => $limit
 											));
-									$area2 = elgg_view("socialcommerce/my_account", array('entity'=>$transactions, 'filter'=>$filter, 'nav'=>$nav ));
+									$area2 = elgg_view("socialcommerce/my_account", array('entity'=>$transactions, 'filter'=>$page[2], 'nav'=>$nav ));
 									break;
 			default:				$area2 = elgg_view("socialcommerce/myaccount_address");
 									break;
 		}
 			
-		$area2 = "<div class=\"contentWrapper\">".elgg_view("socialcommerce/my_account_tab_view",array('base_view' => $area2, "filter" => $filter))."</div>";
+		$area2 = "<div class=\"contentWrapper\">".elgg_view("socialcommerce/my_account_tab_view",array('base_view' => $area2, "filter" => $page[2]))."</div>";
 		$area2 .= <<<EOF
 			<div id="load_action"></div>
 			<div id='load_action_div'>

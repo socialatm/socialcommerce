@@ -24,7 +24,7 @@
 			<?php } ?>
 			<!--My Account-->
 			<div class="my_account">
-				<a href="<?php echo $CONFIG->checkout_base_url ?>pg/socialcommerce/<?php echo $_SESSION['user']->username; ?>/my_account" />
+				<a href="<?php echo get_config('checkout_base_url').'pg/socialcommerce/'.$_SESSION['user']->username.'/my_account/address/"/>'; ?>
 					<?php echo elgg_echo('stores:my:account'); ?>
 				</a>
 			</div>
