@@ -186,78 +186,75 @@
 		// The second part dictates what we're doing
 		if (isset($page[1])) {
 			switch($page[1]) {
+				case "add":				require(get_config('pluginspath').'socialcommerce/add.php');
+										break;
+				case "addcategory":		require(get_config('pluginspath').'socialcommerce/add_category.php'); 
+										break;
+				case "address":			require(get_config('pluginspath').'socialcommerce/address.php');
+										break;
+				case "all":				require(get_config('pluginspath').'socialcommerce/all.php');
+										break;
+				case "buy":				set_input('stores_guid', $page[2]);
+										require(get_config('pluginspath').'socialcommerce/buy.php');
+										break;
+				case "cancel":			view_cancel_page();
+										break;
+				case "cart":			require(get_config('pluginspath').'socialcommerce/cart.php');
+										break;
+				case "cart_success":	view_success_page();
+										break;
+				case "category":		require(get_config('pluginspath').'socialcommerce/category.php'); 
+										break;
+				case "cateread":		set_input('guid',$page[2]);
+										require(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
+										break;
+				case "checkout_address": require(get_config('pluginspath').'socialcommerce/checkout_address.php'); 
+									  	break;
+				case "checkout_process": require(get_config('pluginspath').'socialcommerce/checkout_process.php'); 
+									  	break;
+				case "confirm":			require(get_config('pluginspath').'socialcommerce/cart_confirm.php');
+										break;						
+				case "country_state":	require(get_config('pluginspath').'socialcommerce/manage_country_state.php'); 	
+									  	break;						
+				case "currency_settings": require(get_config('pluginspath').'socialcommerce/load_currency_settings.php'); 
+									  	break;						
+				case "delete":			//	@todo - this doesn't work...
+									//	include(dirname(__FILE__) . "/cart_success.php");
+										break;	
+				case "edit":			require(get_config('pluginspath').'socialcommerce/edit.php'); 	
+										break;											
+				case "ipn":				makepayment_paypal();
+										break;						
+				case "more_order_item":	require(get_config('pluginspath').'socialcommerce/more_order_item.php');
+									  	break;						
+				case "my_account":		require(get_config('pluginspath').'socialcommerce/my_account.php');
+									  	break;	
+				case "order":			set_input('search_viewtype', 'list');
+										require(get_config('pluginspath').'socialcommerce/order.php');
+										break;
+				case "order_products":	if($page[2]) { set_input('guid',$page[2]); }
+										require(get_config('pluginspath').'socialcommerce/order_products.php'); 
+										break;
+				case "product_cate":	require(get_config('pluginspath').'socialcommerce/product_category.php');
+									  	break;
 				case "read":			if($page[2] > 0){
 											set_input('guid',$page[2]);
 											$product = get_entity($page[2]);
 										}
 										require(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
 										break;
-				case "category":		require(get_config('pluginspath').'socialcommerce/category.php'); 
+				case "settings":		require(get_config('pluginspath').'socialcommerce/socialcommerce_settings.php'); 
 										break;
-				case "addcategory":		require(get_config('pluginspath').'socialcommerce/add_category.php'); 
-										break;
-				case "cart":			require(get_config('pluginspath').'socialcommerce/cart.php');
-										break;
-				case "cateread":		set_input('guid',$page[2]);
-										require(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
-										break;
-				case "buy":				set_input('stores_guid', $page[2]);
-										require(get_config('pluginspath').'socialcommerce/buy.php');
-										break;
-				case "all":				require(get_config('pluginspath').'socialcommerce/all.php');
-										break;
-				case "address":			require(get_config('pluginspath').'socialcommerce/address.php');
-										break;
-				case "confirm":			require(get_config('pluginspath').'socialcommerce/cart_confirm.php');
-										break;
-				case "cart_success":	view_success_page();
-										break;
-				case "order":			set_input('search_viewtype', 'list');
-										require(get_config('pluginspath').'socialcommerce/order.php');
-										break;
-				case "wishlist":		require(get_config('pluginspath').'socialcommerce/wishlist.php');
-										break;
-				case "cancel":			view_cancel_page();
-										break;
-				case "ipn":				makepayment_paypal();
-										break;
-				case "my_account":		require(get_config('pluginspath').'socialcommerce/my_account.php');
+				case "sold":			require(get_config('pluginspath').'socialcommerce/sold.php');
 									  	break;
 				case "type":			require(get_config('pluginspath').'socialcommerce/product_type.php');
 									  	break;
-				case "product_cate":	require(get_config('pluginspath').'socialcommerce/product_category.php');
-									  	break;
-				case "more_order_item":	require(get_config('pluginspath').'socialcommerce/more_order_item.php');
-									  	break;
-				case "sold":			require(get_config('pluginspath').'socialcommerce/sold.php');
-									  	break;
-				case "add":				require(get_config('pluginspath').'socialcommerce/add.php');
-										break;
-				case "settings":		require(get_config('pluginspath').'socialcommerce/socialcommerce_settings.php'); 
-										break;
-				case "checkout_process": require(get_config('pluginspath').'socialcommerce/checkout_process.php'); 
-									  	break;
-				case "checkout_address": require(get_config('pluginspath').'socialcommerce/checkout_address.php'); 
-									  	break;
 				case "view_address":	require(get_config('pluginspath').'socialcommerce/address_view.php'); 
 									  	break;
-				case "order_products":	if($page[2]) { set_input('guid',$page[2]); }
-										require(get_config('pluginspath').'socialcommerce/order_products.php'); 
+				case "wishlist":		require(get_config('pluginspath').'socialcommerce/wishlist.php');
 										break;
-				case "currency_settings": require(get_config('pluginspath').'socialcommerce/load_currency_settings.php'); 
-									  	break;
-				case "country_state":	require(get_config('pluginspath').'socialcommerce/manage_country_state.php'); 	
-									  	break;
-				case "edit":			require(get_config('pluginspath').'socialcommerce/edit.php'); 	
-										break;
-				
-				case "delete":			//	@todo - this doesn't work...
-									//	include(dirname(__FILE__) . "/cart_success.php");
-										break;
-														
 				default:				require(get_config('pluginspath').'socialcommerce/index.php'); 
 										break;
-										
 			}
 		/*****	If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load index.php	*****/
 		} else {
