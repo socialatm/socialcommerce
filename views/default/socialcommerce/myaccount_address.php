@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -20,7 +20,7 @@
 		)) 			
 	){
 
- 		$list_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
+ 		$list_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
 		$body = <<<EOF
 			<div>
 				<div style="float:right;margin-bottom:10px;">
@@ -34,11 +34,11 @@
 			</div>
 EOF;
 	}else{
-		$body = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
+		$body = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
 	}
 	$delete_confirm_msg = elgg_echo('delete:confirm:address');
-	$load_action = $CONFIG->checkout_base_url."pg/".$CONFIG->pluginname."/".$_SESSION['user']->username."/view_address"; 
-	$delete_action = $CONFIG->checkout_base_url."action/".$CONFIG->pluginname."/delete_address";
+	$load_action = $CONFIG->checkout_base_url.'pg/socialcommerce/'.$_SESSION['user']->username.'/view_address'; 
+	$delete_action = $CONFIG->checkout_base_url.'action/socialcommerce/delete_address';
 	$area2 = <<<EOF
 		<script>
 			function add_myaddress(){
