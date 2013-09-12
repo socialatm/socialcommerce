@@ -14,13 +14,16 @@
 	 *	require_once("/classes/splugin_settings.php");
 	 *	$bear = new bear();
 	 */
-		 
+	 
 	// Load socialcommerce model
-    	require_once(dirname(__FILE__)."/modules/module.php");
-   
-	// Load system configuration
-		global $CONFIG;
+ 	require(get_config('pluginspath').'socialcommerce/modules/module.php');
 	
+	/***** add a default plugin settings object here if there is not one. we'll move this to activate.php once we migrate to 1.8	*****/
+	
+	
+	
+	/*****	end add a default plugin settings object	*****/
+ 
 	// Set Config Values	
 		set_config('default_price_sign', '$');
 		set_config('default_currency_name', 'US Dollar');
