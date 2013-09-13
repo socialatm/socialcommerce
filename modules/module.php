@@ -341,7 +341,7 @@ function confirm_social_commerce_settings(){
 		
 		
 		if($checkout_messages || $shipping_messages || $withdraw_messages){
-			$general_error_msg = sprintf(elgg_echo('general:settings:errot:msg'),$CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$_SESSION['user']->username.'/settings');
+			$general_error_msg = sprintf(elgg_echo('general:settings:errot:msg'),$CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings');
 			
 			$message_array = array($general_error_msg);
 			
@@ -393,7 +393,7 @@ function confirm_social_commerce_settings(){
 			}
 		}
 	}else{
-		system_message(sprintf(elgg_echo('no:settings:entity'),$CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$_SESSION['user']->username.'/settings'));
+		system_message(sprintf(elgg_echo('no:settings:entity'),$CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings'));
 	}
 }
 
@@ -1119,8 +1119,8 @@ function convert_currency($convert_from="", $convert_to="", $amount=0){
 
 function register_country_state(){
 	global $CONFIG;
-	if (file_exists($CONFIG->pluginspath.$CONFIG->pluginname.'/xml/country_state.xml')) {
-		$xml = xml_to_object(file_get_contents($CONFIG->pluginspath.$CONFIG->pluginname.'/xml/country_state.xml'));
+	if ( file_exists($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml')) {
+		$xml = xml_to_object(file_get_contents($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml'));
 		if ($xml && is_object($xml)){
 			$country = array();
 			foreach ($xml->children as $countries_array){
