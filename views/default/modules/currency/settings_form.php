@@ -90,7 +90,7 @@
 					<div class="buttonwrapper" style="position:relative;top:5px;float:left;">
 						<a onclick="get_exchange_rate();" class="squarebutton"><span> <?php echo elgg_echo('get:exchange:rate'); ?></span></a>
 					</div>
-					<span><img id="run_exchange_rate" style="position:relative;left:10px;top:5px;display:none;" src="<?php echo $CONFIG->wwwroot."mod/".$CONFIG->pluginname; ?>/images/working.gif"> </span>
+					<span><img id="run_exchange_rate" style="position:relative;left:10px;top:5px;display:none;" src="<?php echo $CONFIG->wwwroot."mod/socialcommerce"; ?>/images/working.gif"> </span>
 				<?php } ?>
 			</td>
 		</tr>

@@ -146,7 +146,7 @@
 						<div class="storesrepo_controls">
 							<?php if($product_type_details->addto_cart == 1) { ?>
 								<div class="cart_wishlist">
-										<a class="wishlist" href="<?php echo $CONFIG->wwwroot."action/".$CONFIG->pluginname."/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
+										<a class="wishlist" href="<?php echo $CONFIG->wwwroot."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
 								</div>
 							<?php } ?>
 							<div style="clear:both;"></div>	

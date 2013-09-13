@@ -23,7 +23,7 @@
 		if($order_guid){
 			$order = get_entity($order_guid);
 		}else{
-			$redirect = $CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$_SESSION['user']->username.'/order';
+			$redirect = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/order';
 			forward($redirect);
 		}
 	// Set stores title

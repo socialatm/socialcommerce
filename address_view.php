@@ -107,7 +107,7 @@ EOF;
 							
 			){
 				$list_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
-				$load_action = $CONFIG->wwwroot."pg/".$CONFIG->pluginname."/".$_SESSION['user']->username."/view_address"; 
+				$load_action = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/view_address"; 
 				$body = <<<EOF
 					<div>
 						<div style="float:right;margin-bottom:10px;">

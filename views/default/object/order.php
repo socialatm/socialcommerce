@@ -26,7 +26,7 @@
 				}
 			}
 			$order_datre = date("dS M Y", $order->time_created);
-			$action = $CONFIG->wwwroot.'pg/'.$CONFIG->pluginname.'/'.$_SESSION['user']->username.'/order_products';
+			$action = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/order_products';
 ?>
 			<div class="search_listing">
 				<div style="float:right;">

@@ -14,7 +14,7 @@
 		$edit_msg = elgg_echo('currency:edit');
 		$delete_msg = elgg_echo('currency:delete');
 		$delete_confirm_msg = elgg_echo('currency:delete_confirm');
-		$img_template = '<img border="0" width="16" height="16" alt="%s" title="%s" src="'.$CONFIG->wwwroot.'mod/'.$CONFIG->pluginname.'/images/%s" />';
+		$img_template = '<img border="0" width="16" height="16" alt="%s" title="%s" src="'.$CONFIG->wwwroot.'mod/socialcommerce/images/%s" />';
 		$edit_img = sprintf($img_template,$edit_msg,$edit_msg,"tag-pencil.png");
 		
 		$template .= <<<EOF
