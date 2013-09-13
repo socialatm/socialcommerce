@@ -38,13 +38,13 @@
 			){
 			
 				$exist = elgg_echo($type.':address:exist');
-				$exist_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list','selected'=>$added_address,'type'=>$type));
+				$exist_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list','selected'=>$added_address,'type'=>$type));
 				
 				$new = elgg_echo($type.':address:new');
-				$address_add = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>$type));
+				$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>$type));
 				
 				$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo($type.':address')));
-				$action = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/checkout_process/";
+				$action = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 				$address_details = <<<EOF
 					<div>
 						<form method="post" action="{$action}" onsubmit="return validate_{$type}_details();">
@@ -68,7 +68,7 @@
 				</div>
 EOF;
 			}else{
-				$address_details = elgg_view("{$CONFIG->pluginname}/forms/edit_address",array('ajax'=>1,'type'=>$type));
+				$address_details = elgg_view("socialcommerce/forms/edit_address",array('ajax'=>1,'type'=>$type));
 			}
 			echo $address_details;
 			break;
@@ -92,7 +92,7 @@ EOF;
 			echo $state_list;
 			break;
 		case 'add_myaddress':
-			$body = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount'));
+			$body = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount'));
 			echo $body;
 			break;
 		case 'reload_myaccount_address':
@@ -106,7 +106,7 @@ EOF;
 					)) 			
 							
 			){
-				$list_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
+				$list_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
 				$load_action = $CONFIG->wwwroot."pg/".$CONFIG->pluginname."/".$_SESSION['user']->username."/view_address"; 
 				$body = <<<EOF
 					<div>
@@ -121,7 +121,7 @@ EOF;
 					</div>
 EOF;
 			}else{
-				$body = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
+				$body = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
 			}
 			echo $body;
 			break;
@@ -130,7 +130,7 @@ EOF;
 			if($address_guid){
 				$address = get_entity($address_guid);
 				if($address){
-					$body = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('entity'=>$address,'ajax'=>1,'type'=>'myaccount'));
+					$body = elgg_view("socialcommerce/forms/checkout_edit_address",array('entity'=>$address,'ajax'=>1,'type'=>'myaccount'));
 				}else{
 					$edit_address_not_posible = elgg_echo('address:edit:not:posible');
 					$body = <<<EOF

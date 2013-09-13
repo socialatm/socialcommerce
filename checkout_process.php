@@ -89,20 +89,20 @@
 		$title = elgg_view_title(elgg_echo('checkout:process'));
 		
 	//--------- Billing Address Details ----------//
-		$billing_details = elgg_view("{$CONFIG->pluginname}/billing_details",array('checkout_order'=>$checkout_order));
+		$billing_details = elgg_view("socialcommerce/billing_details",array('checkout_order'=>$checkout_order));
 		if($_SESSION['CHECKOUT']['confirm_billing_address'] == 1){
 			$billing_address_modify = "<span id='checkout_modify_0' class='checkout_modify' onclick='change_modified(0);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 		}
 
 	//--------- Checkout Methods Details ----------//
-		$checkout_method_details = elgg_view("{$CONFIG->pluginname}/list_checkout_methods");
+		$checkout_method_details = elgg_view("socialcommerce/list_checkout_methods");
 		if($_SESSION['CHECKOUT']['confirm_checkout_method'] == 1){
 			$checkout_method_modify = "<span id='checkout_modify_1' class='checkout_modify' onclick='change_modified(1);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 		}
 	//--------- Order Confirmation ----------//	
 		if(isset($_SESSION['CHECKOUT']['checkout_method']) && $_SESSION['CHECKOUT']['checkout_method'] != ""){
 			$checkout_plugin = $_SESSION['CHECKOUT']['checkout_method'];
-			$order_confirmation_details = elgg_view("{$CONFIG->pluginname}/cart_confirm_list",array('checkout_confirm'=>$checkout_confirm));
+			$order_confirmation_details = elgg_view("socialcommerce/cart_confirm_list",array('checkout_confirm'=>$checkout_confirm));
 			$checkout_checkout_confirm = elgg_echo('checkout:checkout:confirm');
 			if($checkout_confirm){
 				$check_out_details = <<<EOF
@@ -138,8 +138,8 @@ EOF;
 		$checkout_order_confirm = elgg_echo('checkout:order:confirm');
 		$area2 = <<<EOF
 			<div class="checkout_process">
-				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/{$CONFIG->pluginname}/js/chili-1.7.pack.js"></script>
-				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/{$CONFIG->pluginname}/js/jquery.accordion.js"></script>
+				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/chili-1.7.pack.js"></script>
+				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/jquery.accordion.js"></script>
 				<script type="text/javascript">
 					$(document).ready(function(){
 						jQuery('#list1b').accordion({
@@ -202,7 +202,7 @@ EOF;
 						}else{
 							var elgg_token = $('[name=__elgg_token]');
 							var elgg_ts = $('[name=__elgg_ts]');
-							$.post("{$CONFIG->wwwroot}action/{$CONFIG->pluginname}/manage_socialcommerce", { 
+							$.post("{$CONFIG->wwwroot}action/socialcommerce/manage_socialcommerce", { 
 									code: couponcode,
 									manage_action: "coupon_process",
 									__elgg_token: elgg_token.val(),
@@ -228,7 +228,7 @@ EOF;
 												$("#coupon_apply_result").css({"color":"#9F1313"});
 											break;
 										case 'coupon_applied':
-												$.post("{$CONFIG->wwwroot}action/{$CONFIG->pluginname}/manage_socialcommerce", {
+												$.post("{$CONFIG->wwwroot}action/socialcommerce/manage_socialcommerce", {
 														manage_action: "coupon_reload_process",
 														__elgg_token: elgg_token.val(),
 														__elgg_ts: elgg_ts.val()
@@ -308,7 +308,7 @@ EOF;
 			</div>
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->wwwroot}mod/{$CONFIG->pluginname}/images/loadingAnimation.gif">
+				<img src="{$CONFIG->wwwroot}mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Processing...</div>
 			</div>
 EOF;
