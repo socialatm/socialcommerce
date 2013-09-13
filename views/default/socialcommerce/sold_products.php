@@ -1,11 +1,11 @@
 <?php
-/**
- * Elgg view - sold product
- * 
- * @package Elgg SocialCommerce
+	/**
+	 * Elgg view - sold product
+	 * 
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -111,8 +111,7 @@ EOF;
 		</div>	
 		
 EOF;
-	
-	$image =  elgg_view("{$CONFIG->pluginname}/image", array(
+	$image =  elgg_view("socialcommerce/image", array(
 									'entity' => $vars['entity'],
 									'size' => 'small',
 								  )

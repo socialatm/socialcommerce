@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -17,7 +17,7 @@
 		'type' => 'object',
 		'subtype' => 'address',
 		'owner_guid' => page_owner(),
-		)); 			
+		)) 			
 	){
 	
 		if($_SESSION['CHECKOUT']['shipping_address'])
@@ -55,6 +55,5 @@ EOF;
 	}else{
 		$address_details = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
 	}
-	
 	echo $address_details;
 ?>
