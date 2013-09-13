@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	// Load Elgg engine
@@ -15,7 +15,7 @@
 	$name = get_input('contact_name');
 	$subject = get_input('subject');
 	$desc = nl2br(get_input('description'));
-	$to = "shameer@cubettech.com";
+	$to = "shameer@cubettech.com";				//	@todo - make this go away....
 	
 	$messate_header = sprintf(elgg_echo('msg:header'),"Admin");
 	$messate_footer = sprintf(elgg_echo('msg:footer'),$CONFIG->sitename.' Team');

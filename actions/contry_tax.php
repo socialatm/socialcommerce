@@ -1,10 +1,10 @@
 <?php
-/**
+	/**
  	 * Elgg country tax	 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	global $CONFIG;
@@ -19,9 +19,8 @@
 		'limit' =>'1'
 		));
 	
-	foreach($tax_entity as $tax_entitys)
-	{
-			$tax_rate = $tax_entitys->taxrate;
+	foreach($tax_entity as $tax_entitys) {
+		$tax_rate = $tax_entitys->taxrate;
 	}
 	echo $tax_rate ;
 ?>

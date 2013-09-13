@@ -867,7 +867,7 @@ EOF;
 						//echo $mail_body;
 						$subject = "New order created on {$site->name}";
 						stores_send_mail($site, 					// From entity
-										 $admin_user, 					// To entity
+										 $admin_user, 				// To entity
 										 $subject,					// The subject
 										 $mail_body					// Message
 								);
@@ -1302,7 +1302,6 @@ function notification_for_scommerce($hook, $entity_type, $returnvalue, $params){
 												   $product->base_stock,
 												   $quantity,
 												   $site->name
-												   
 					);
 					$subject = sprintf(elgg_echo('less:quantity:notification:mail:subject'),$site->name);
 					//$user = "akhi.pv@gmail.com";

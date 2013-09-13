@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	global $CONFIG;
@@ -23,20 +23,12 @@
 			} else {
 				system_message(elgg_echo("stores:retrieved"));
 			}
-
 		} else {
-			
 			$container = $_SESSION['user'];
 			register_error(elgg_echo("stores:retrievefailed"));
-			
 		}
-
 	} else {
-		
 		register_error(elgg_echo("stores:retrievefailed"));
-		
 	}
-	
-	forward("pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username);
-
+	forward( "pg/socialcommerce/" . $_SESSION['user']->username);
 ?>

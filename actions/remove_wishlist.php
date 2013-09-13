@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
@@ -27,7 +27,6 @@
 			register_error(elgg_echo("wishlist:delete:failed"));
 		}
 	}
-	
-	$return = $CONFIG->url . "pg/{$CONFIG->pluginname}/" . $product->getOwnerEntity()->username . "/wishlist";
+	$return = $CONFIG->url . "pg/socialcommerce/" . $product->getOwnerEntity()->username . "/wishlist";
 	forward($return);
 ?>
