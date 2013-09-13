@@ -5,6 +5,6 @@
 	<field key="description" value="the Elgg eCommerce plugin."/>
 	<field key="licence" value="GNU Public License version 2"/>
 	<field key="website" value="http://twentyfiveautumn.com/"/>
-	<field key="copyright" value="(C) twentyfiveautumn.con 2013 / Cubet Technologies 2009"/>
+	<field key="copyright" value="(C) twentyfiveautumn.con 2013"/>
 	<field key="elgg_version" value="2009031301" />
 </plugin_manifest>

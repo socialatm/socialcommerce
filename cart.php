@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -29,9 +29,6 @@
 			$header_title = elgg_echo('my:shopping:cart');
 			$title = elgg_view_title($header_title);
 		}
-
-		
-	
 		
 	// Get objects
 		set_context('search');
@@ -54,5 +51,4 @@ EOF;
 	// Finally draw the page
 		
 		page_draw(sprintf($header_title.$count,page_owner_entity()->name), $body);
-	
 ?>
