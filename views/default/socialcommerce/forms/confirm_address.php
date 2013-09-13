@@ -15,9 +15,7 @@
 	if($address)
 		$address = $address[0];
 	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('confirm:address')));
-	//$byu_more = elgg_echo('buy:more');
-	$action = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/checkout_process/";
-	//$buy_more_link = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/all";
+	$action = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 	$hidden_values = elgg_view('input/securitytoken');
 	$form_body = <<< BOTTOM
 		<form method="post" action="{$action}">

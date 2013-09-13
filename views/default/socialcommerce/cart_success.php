@@ -66,12 +66,12 @@ EOF;
 									'text' => elgg_echo("remove"),
 									'confirm' => elgg_echo("cart:delete:confirm"),
 								)); 
-				$image = elgg_view("{$CONFIG->pluginname}/image", array(
+				$image = elgg_view("socialcommerce/image", array(
 											'entity' => $product,
 											'size' => 'medium',
 											'display'=>'full'
-										  )
-									);
+										  ));
+										  
 				if($product->mimetype && $product->product_type_id == 2){							
 					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}

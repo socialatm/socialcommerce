@@ -26,12 +26,12 @@
 	$search_viewtype = get_input('search_viewtype');
 	$mime = $stores->mimetype;
 	
-	$image =  elgg_view("{$CONFIG->pluginname}/image", array(
+	$image =  elgg_view("socialcommerce/image", array(
 								'entity' => $vars['entity'],
 								'size' => 'medium',
 								'display' => 'image'
-							  )
-							);
+							  ));
+							  
 	$info = "<div> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></div>";
 	$info .= "<div class=\"owner_timestamp\">
 		<a href=\"{$owner->getURL()}\">{$owner->name}</a> {$friendlytime}";
@@ -52,7 +52,7 @@
 		$quantity = "";
 	}
 	$display_price = get_price_with_currency($stores->price);
-	$rating = elgg_view("{$CONFIG->pluginname}/view_rating",array('id'=>$stores->guid,'units'=>5,'static'=>''));
+	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$stores->guid,'units'=>5,'static'=>''));
 	$output = <<<EOF
 		<script>
 			function findPosX(obj) {

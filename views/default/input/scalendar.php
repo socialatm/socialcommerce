@@ -3,7 +3,7 @@
 	global $CONFIG;
     if (empty($calendarjs)) {
         echo <<< END
-        	<script language="JavaScript" src="{$vars['url']}mod/{$CONFIG->pluginname}/js/jquery.date_input.js"></script>
+        	<script language="JavaScript" src="{$vars['url']}mod/socialcommerce/js/jquery.date_input.js"></script>
         	<script type="text/javascript">$($.date_input.initialize);</script>
 END;
         $calendarjs = 1;

@@ -48,7 +48,7 @@
 			}
 		break;
 		default : 
-			if (!empty($mime) && elgg_view_exists("{$CONFIG->pluginname}/icon/{$mime}")) {
+			if (!empty($mime) && elgg_view_exists("socialcommerce/icon/{$mime}")) {
 				echo elgg_view("socialcommerce/icon/{$mime}", $vars);
 			} else if (!empty($mime) && elgg_view_exists("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default")) {
 				echo elgg_view("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default");

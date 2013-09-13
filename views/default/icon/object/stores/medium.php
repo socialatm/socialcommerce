@@ -10,5 +10,5 @@
 	 **/ 
 	 
 	global $CONFIG;
-	echo $vars['url'] . "mod/{$CONFIG->pluginname}/graphics/defaultmedium.gif";
+	echo $vars['url'] . "mod/socialcommerce/graphics/defaultmedium.gif";
 ?>

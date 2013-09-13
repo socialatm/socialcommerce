@@ -13,13 +13,13 @@
 	// Set title, form destination
 		if (isset($vars['entity'])) {
 			$title = sprintf(elgg_echo("stores:editcate"),$object->title);
-			$action = "{$CONFIG->pluginname}/edit_category";
+			$action = "socialcommerce/edit_category";
 			$title = $vars['entity']->title;
 			$product_type_id = $vars['entity']->product_type_id;
 			$body = $vars['entity']->description;
 		} else {
 			$title = elgg_echo("stores:addcate");
-			$action = "{$CONFIG->pluginname}/add_category";
+			$action = "socialcommerce/add_category";
 			$title = "";
 			$body = "";
 			$access_id = 2;
