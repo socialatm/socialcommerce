@@ -353,12 +353,6 @@ p.storesrepo_owner {
 	padding-left:20px;
 	font-weight:bold;
 }
-.cart_wishlist .tell_friend{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/tell_a_friend.png) no-repeat left top;
-	padding-left:20px;
-	font-weight:bold;
-	width:50px;
-}
 .cart_wishlist a:hover{
 	text-decoration:none;
 }
