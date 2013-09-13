@@ -1,11 +1,11 @@
 <?php
-/**
- * Elgg widget - recent - view
- * 
- * @package Elgg SocialCommerce
+	/**
+	 * Elgg widget - recent - view
+	 * 
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 ?>
@@ -78,7 +78,7 @@ $('a.show_product_recent_desc').click(function () {
 				));  	
 	}
 	
-	//if there are some files, go get them
+	// if there are files get them
 	if ($product) {
     	
     	echo "<div id=\"stores_widget_layout\">";
@@ -110,8 +110,7 @@ EOF;
 				$i++;
             }
             
-            //echo "</div>";
-            echo $cart_body = <<<EOF
+             echo $cart_body = <<<EOF
 				<script>
 					function recent_products_list_mouseover_action(product_guid,widget_guid){
 						$("#recent_products_list_"+product_guid+widget_guid).fadeTo("fast", 1); 
@@ -196,29 +195,18 @@ EOF;
 		        		<div style="clear:both;"></div>
 		        	</div>
 EOF;
-            				
-        	}
+            }
         	echo $content = <<<EOF
         		<div  class="stores_widget_singleitem stores">
         			{$inner_content}
         			<div style="clear:both;"></div>
         		</div>
 EOF;
-        	    
         }
-        	
-        	
         //get a link to the users files
         $users_file_url = $vars['url'] . "pg/{$CONFIG->pluginname}/" . get_user($f->owner_guid)->username;
-        	
-        //echo "<a href=\"{$users_file_url}\"><B>" . elgg_echo('stores:more') . "</B></a>";
         echo "</div>";
-        	
-				
-	} else {
-		
+    } else {
 		echo elgg_echo("stores:none");
-		
 	}
-
 ?>

@@ -1,11 +1,11 @@
 <?php
-/**
- * Elgg widget - purchased - edit
- * 
-* @package Elgg SocialCommerce
+	/**
+	 * Elgg widget - purchased - edit
+	 * 
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 ?>
@@ -26,15 +26,6 @@
 	    <option value="20" <?php if($vars['entity']->num_display == 20) echo "SELECTED"; ?>>20</option>
 	</select>
 </p>
-
-<!--<p>
-    <?php echo elgg_echo("stores:display");?>:
-    <select name="params[product_display]">
-        <option value="1" <?php if($vars['entity']->product_display == 1) echo "SELECTED"; ?>><?php echo elgg_echo("my:stores"); ?></option>
-	    <option value="2" <?php if($vars['entity']->product_display == 2) echo "SELECTED"; ?>><?php echo elgg_echo("friends:stores"); ?></option>
-	    <option value="3" <?php if($vars['entity']->product_display == 3) echo "SELECTED"; ?>><?php echo elgg_echo("all:stores"); ?></option>
-    </select>
-</p>-->
 
 <p>
     <?php echo elgg_echo("stores:gallery_list"); ?>:

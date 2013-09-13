@@ -5,9 +5,10 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	 
 	// Load Elgg engine
 		require_once(get_config('path').'engine/start.php');
 		global $CONFIG;
@@ -71,5 +72,4 @@ EOF;
 	
 	// Finally draw the page
 		page_draw(sprintf(elgg_echo('stores:my:wishlist').$count,page_owner_entity()->name), $body);
-	
 ?>

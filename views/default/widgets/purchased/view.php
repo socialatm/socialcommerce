@@ -1,11 +1,11 @@
 <?php
-/**
- * Elgg widget - purchased - view
- * 
- * @package Elgg SocialCommerce
+	/**
+	 * Elgg widget - purchased - view
+	 * 
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 ?>
@@ -19,7 +19,6 @@ $('a.show_product_recent_desc').click(function () {
 
 }); /* end document ready function */
 </script>
-
 
 <?php
 	global $CONFIG;
@@ -214,21 +213,11 @@ EOF;
         			<div style="clear:both;"></div>
         		</div>
 EOF;
-        	    
         }
-        	
-        	
         //get a link to the users files
         $users_file_url = $vars['url'] . "pg/{$CONFIG->pluginname}/" . get_user($f->owner_guid)->username;
-        	
-        //echo "<a href=\"{$users_file_url}\"><B>" . elgg_echo('stores:more') . "</B></a>";
-        echo "</div>";
-        	
-				
+        echo '</div>';
 	} else {
-		
 		echo elgg_echo("stores:none");
-		
 	}
-
 ?>
