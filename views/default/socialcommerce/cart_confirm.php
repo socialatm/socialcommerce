@@ -63,26 +63,26 @@ if($cart){
 EOF;
 				$info .= elgg_cart_quantity($cart_item);
 				$info .= elgg_view('output/confirmlink',array(
-									'href' => $vars['url'] . "action/{$CONFIG->pluginname}/remove_cart?cart_guid=" . $cart_item->getGUID(),
+									'href' => $vars['url'] . "action/socialcommerce/remove_cart?cart_guid=" . $cart_item->getGUID(),
 									'text' => elgg_echo("remove"),
 									'confirm' => elgg_echo("cart:delete:confirm"),
 								)); 
-				$image = elgg_view("{$CONFIG->pluginname}/image", array(
+				$image = elgg_view("socialcommerce/image", array(
 											'entity' => $product,
 											'size' => 'medium',
 											'display'=>'full'
 										  )
 									);
 				if($product->mimetype && $product->product_type_id == 2){							
-					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
+					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}
 				$display_cart_items .= elgg_view_listing($image.$icon, $info);
 			}
 		}
-		$update_cart = elgg_view("{$CONFIG->pluginname}/forms/updatecart");
+		$update_cart = elgg_view("socialcommerce/forms/updatecart");
 		
 	}
-	$confirm_cart = elgg_view("{$CONFIG->pluginname}/forms/confirm_cart");
+	$confirm_cart = elgg_view("socialcommerce/forms/confirm_cart");
 	$confirm_address = elgg_list_entities(array(
 						'type' => 'object',
 						'subtype' => 'address',
@@ -106,10 +106,10 @@ if($environment == "sandbox"){
 	$business = get_plugin_setting('socialcommerce_paypal_email', $CONFIG->pluginname);
 	$paypalurl = "https://www.paypal.com/cgi-bin/webscr";	
 }
-$cencelurl = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/cancel/";
+$cencelurl = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/cancel/";
 //$returnurl = $CONFIG->wwwroot."action/stores/add_order?page_owner=".page_owner();
-$returnurl = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/cart_success/";
-$ipnurl = $CONFIG->wwwroot."action/{$CONFIG->pluginname}/makepayment?page_owner=".page_owner();
+$returnurl = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/cart_success/";
+$ipnurl = $CONFIG->wwwroot."action/socialcommerce/makepayment?page_owner=".page_owner();
 
 echo $cart_body = <<<EOF
 	<form name="frm_cart" method="post" action="{$paypalurl}">

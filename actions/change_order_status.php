@@ -27,6 +27,4 @@
 		}
 	}
 	exit;
-	/*$redirect = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/read/".$order_item->product_id."/".$order_item->title.$offset;
-	forward($redirect);*/
 ?>
