@@ -5,11 +5,11 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	$base_view = $vars['base_view'];
+	$base_view = $vars['base_view'];												//	@todo - take a close look at this
 	$filter = $vars['filter'];
 	$baseurl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	$replace_url = preg_replace('/[\&\?]filter\=[a-z,A-Z]*/',"",$baseurl);
