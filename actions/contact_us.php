@@ -8,14 +8,16 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	 
 	// Load Elgg engine
 	global $CONFIG;
 	
+	$site = get_entity(get_config('site_guid'));
 	$from = get_input('contact_email');
 	$name = get_input('contact_name');
 	$subject = get_input('subject');
 	$desc = nl2br(get_input('description'));
-	$to = "shameer@cubettech.com";				//	@todo - make this go away....
+	$to = $site->email;
 	
 	$messate_header = sprintf(elgg_echo('msg:header'),"Admin");
 	$messate_footer = sprintf(elgg_echo('msg:footer'),$CONFIG->sitename.' Team');
@@ -38,12 +40,6 @@
 			</div>
 		</div>
 EOF;
-	
-	$result = stores_send_mail($from,$to,$subject,$message);
-	if($result){
-		system_message(elgg_echo('contact:succcess:msg'));
-	}else{
-		register_error(elgg_echo("contact:faild:msg"));
-	}
+	$result = stores_send_mail( $from, $to, $subject, $message ) ? system_message(elgg_echo('contact:succcess:msg')) : register_error(elgg_echo("contact:faild:msg"));
 	forward();
 ?>
