@@ -52,7 +52,7 @@
 				$area2 = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
 			}
 			if($view != 'rss'){
-				$area2 = elgg_view("{$CONFIG->pluginname}/product_tab_view",array('base_view' => $area2, "filter" => $filter));
+				$area2 = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter));
 			}
 		}else{
 			$area2 = list_entities_from_metadata('status',1,"object","stores",0,$limit);
@@ -68,7 +68,6 @@
 				</div>
 EOF;
 		}
-		//echo "~~~".add_to_river('river/object/stores/create','create',91,2);
 		set_context('stores');
 	// These for left side menu
 		$area1 .= gettags();
@@ -78,5 +77,4 @@ EOF;
 	
 	// Finally draw the page
 		page_draw(sprintf(elgg_echo("stores:all:products"),page_owner_entity()->name), $body);
-	
 ?>

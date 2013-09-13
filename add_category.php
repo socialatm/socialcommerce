@@ -11,11 +11,8 @@
 
 	// Load Elgg engine
 		require_once(get_config('path').'engine/start.php');
-		gatekeeper();
+		admin_gatekeeper();
 		global $CONFIG;
-		if(!isadminloggedin()){
-			forward("pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username);
-		}
 		
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
@@ -28,7 +25,7 @@
 		$area2 = elgg_view_title(elgg_echo('stores:addcate'));
 
 	// Get the form
-		$area2 .= "<div class=\"contentWrapper\">".elgg_view("{$CONFIG->pluginname}/forms/edit_category")."</div>";
+		$area2 .= "<div class=\"contentWrapper\">".elgg_view("socialcommerce/forms/edit_category")."</div>";
 		
 	// These for left side menu
 		$area1 .= gettags();

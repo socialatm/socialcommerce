@@ -49,13 +49,13 @@
 				}
 			?>
 			<div class="wishlist">
-				<a href='<?php echo $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/wishlist"; ?>' />
+				<a href='<?php echo $CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>' />
 					<?php echo elgg_echo('stores:my:wishlist').$w_count ?>
 				</a>
 			</div>
 			<!--orders-->
 			<div class="orders">
-				<a href='<?php echo $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/order/"; ?>' />
+				<a href='<?php echo $CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>' />
 					<?php echo elgg_echo('stores:my:order') ?>
 				</a>
 			</div>

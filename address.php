@@ -41,10 +41,10 @@
 						'limit' => 10,
 						));
 						
-			$area2 .= elgg_view("{$CONFIG->pluginname}/forms/confirm_address");
+			$area2 .= elgg_view("socialcommerce/forms/confirm_address");
 			set_context('address');
 		}else{
-			$area2 .= elgg_view("{$CONFIG->pluginname}/forms/edit_address");
+			$area2 .= elgg_view("socialcommerce/forms/edit_address");
 		}
 		
 		$area2 = <<<EOF

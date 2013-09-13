@@ -23,7 +23,7 @@
 	//set the title
 		$area2 = elgg_view_title(elgg_echo('stores:addpost'));
 	// Get the form
-		$area2 .= "<div class=\"contentWrapper\">".elgg_view("{$CONFIG->pluginname}/forms/edit")."</div>";
+		$area2 .= "<div class=\"contentWrapper\">".elgg_view("socialcommerce/forms/edit")."</div>";
 	// These for left side menu
 		$area1 .= gettags();
 	// Get the body
