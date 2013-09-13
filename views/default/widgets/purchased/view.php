@@ -163,7 +163,6 @@ EOF;
 								);
 		        $time_creatd =  friendly_time($f->time_created);
 		        $price_text = elgg_echo('price');
-		        $tell_a_friend = elgg_view("socialcommerce/tell_a_friend",array('entity'=>$f,'text'=>"not_display"));
 				$cart_url = addcartURL($f);
 				$cart_text = elgg_echo('add:to:cart');
 				$wishlist_text = elgg_echo('add:wishlist');
@@ -192,9 +191,6 @@ EOF;
 								<div style="clear:both;"></div>
 								<div class="price_list">
 									{$price_text}: {$display_price}
-								</div>
-								<div class="cart_wishlist">
-									{$tell_a_friend}
 								</div>
 								{$cart_wishlist}
 								<div style="clear:both;"></div>	

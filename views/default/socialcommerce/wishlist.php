@@ -37,7 +37,6 @@ if($products){
 			$not_available = "";
 		}else{
 			$not_available = "<div style='color:red;padding:5px 0;'>".elgg_echo('not:available')."</div>";
-			$tell_a_friend = "";
 		}
 		if($stores->product_type_id == 1){
 			if($stores->quantity > 0){
