@@ -492,7 +492,7 @@ function redirect_to_form( $url, $fields ){
 		$auto_redirect_script = <<<EOF
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->wwwroot}mod/{$CONFIG->pluginname}/images/loadingAnimation.gif">
+				<img src="{$CONFIG->wwwroot}mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Loading...</div>
 			</div>
 			<script type="text/javascript">
@@ -715,7 +715,7 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 							$display_sub_total = get_price_with_currency($sub_total);
 							
 							if($product->mimetype && $product->product_type_id == 2){
-								$icon = "<div title='Download' class='order_icon_class'><a href=\"{$CONFIG->wwwroot}action/{$CONFIG->pluginname}/download?product_guid={$order_item->guid}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div><div class='clear'></div>";
+								$icon = "<div title='Download' class='order_icon_class'><a href=\"{$CONFIG->wwwroot}action/socialcommerce/download?product_guid={$order_item->guid}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div><div class='clear'></div>";
 							}else{
 								$icon = "";
 							}
@@ -1557,7 +1557,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 		$info .= '<span class=\"space\">&nbsp;</span><B>'.elgg_echo("stores:price").' :</B>'. $display_sub_total;
 		
 		if($status){
-			$status = elgg_view("{$CONFIG->pluginname}/product_status",array('status'=>$status_val,'action'=>$status));
+			$status = elgg_view("socialcommerce/product_status",array('status'=>$status_val,'action'=>$status));
 		}
 		$info .= "</div>";
 		
@@ -1569,7 +1569,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 		if($product->product_type_id == 1){
 			$quantity = "<div style='margin-bottom:5px;'><B>{$quantity_text}:</B> {$quantity_box}</div>";
 		}else if($product->product_type_id == 2 && get_context() == 'purchased_products'){
-			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->wwwroot}action/{$CONFIG->pluginname}/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
+			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->wwwroot}action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
 		}
 		$info = <<<EOF
 			<div class="storesqua_stores">
@@ -1651,8 +1651,6 @@ function calculate_cart_total($cart_user=0,$product_user=0){
 
 		}
 	}
-	
 	return $total;
 }
-
 ?>

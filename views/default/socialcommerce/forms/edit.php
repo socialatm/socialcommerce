@@ -12,7 +12,7 @@
 	// Set title, form destination
 		if (isset($vars['entity'])) {
 			$title = sprintf(elgg_echo("stores:editpost"),$object->title);	// @todo - why is title on both line 21 & line 23 ??
-			$action = "{$CONFIG->pluginname}/edit";
+			$action = "socialcommerce/edit";
 			$title = $vars['entity']->title;
 			$body = $vars['entity']->description;
 			$taxrate_name_cnty = $vars['entity']->countrycode;
@@ -27,7 +27,7 @@
 		//		$product_type_id = 2;
 		} else  {
 			$title = elgg_echo("stores:addpost");
-			$action = "{$CONFIG->pluginname}/add";
+			$action = "socialcommerce/add";
 			$tags = "";
 			$title = "";
 			$body = "";
@@ -35,7 +35,6 @@
 			$access_id = 2;
 			$product_type_id = 2;
 		}
-		
 	// Just in case we have some cached details
 		if (isset($vars['product'])) {
 			//unset($_SESSION['product']);
@@ -113,7 +112,7 @@
         }else{
         	$category_view = elgg_echo('no:category');	
         }
-        if (($action == "{$CONFIG->pluginname}/add" && $product_type_id == 2 && $vars['entity']->mimetype == "")||($vars['entity']->guid > 0 && $product_type_id == 2 && $vars['entity']->mimetype == "")) {
+        if (($action == "socialcommerce/add" && $product_type_id == 2 && $vars['entity']->mimetype == "")||($vars['entity']->guid > 0 && $product_type_id == 2 && $vars['entity']->mimetype == "")) {
 			$upload_label = elgg_echo('stores:file');
 	        $upload_input = elgg_view("input/file",array('internalname' => 'upload'));
 			
@@ -125,7 +124,7 @@
 EOT;
 		}elseif ($vars['entity']->guid > 0 && $product_type_id == 2  && $vars['entity']->mimetype != ""){
 			$upload_label = elgg_echo('stores:file');
-			$upload_input = elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $vars['entity']->mimetype, 'thumbnail' => $vars['entity']->thumbnail, 'file_guid' => $vars['entity']->guid));
+			$upload_input = elgg_view("socialcommerce/icon", array("mimetype" => $vars['entity']->mimetype, 'thumbnail' => $vars['entity']->thumbnail, 'file_guid' => $vars['entity']->guid));
 			$form_upload = <<<EOT
 				<p>
 					<label><span style="color:red">*</span>$upload_label</label><br />
@@ -134,7 +133,7 @@ EOT;
 EOT;
 		}
 		if ($vars['entity']->guid > 0){
-			$uploaded_image = elgg_view("{$CONFIG->pluginname}/image", array(
+			$uploaded_image = elgg_view("socialcommerce/image", array(
 										'entity' => $vars['entity'],
 										'size' => 'small',
 										'display'=>'image'
@@ -162,7 +161,7 @@ EOT;
 				}
 				$fields .= '<p><label>'.$mandetory.elgg_echo('product:'.$shortname).'</label><br />';
 				if($vars['entity']->mimetype != "" && $shortname == 'upload' && $valtype['field'] == 'file'){
-					$fields .= "<div style='float:left;'>".elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $vars['entity']->mimetype, 'thumbnail' => $vars['entity']->thumbnail, 'stores_guid' => $vars['entity']->guid))."</div>";
+					$fields .= "<div style='float:left;'>".elgg_view("socialcommerce/icon", array("mimetype" => $vars['entity']->mimetype, 'thumbnail' => $vars['entity']->thumbnail, 'stores_guid' => $vars['entity']->guid))."</div>";
 					$fields .= "<div class='change_product_file'><a href='javascript:void(0);' onclick='load_edit_product_detaile();'><b>".elgg_echo('product:edit:file')."</a></div><div class='clear'></div>";
 					$fields .= "<div id='product_file_change'>".elgg_view("input/{$valtype['field']}",array(
 															'internalname' => $shortname,
@@ -192,7 +191,7 @@ EOT;
 			$entity_hidden .= "<input type=\"hidden\" name=\"stores_guid\" id=\"stores_guid\" value=\"{$vars['entity']->getGUID()}\" />";
 			
 		$entity_hidden .= elgg_view('input/securitytoken');
-		$post_url = $CONFIG->wwwroot."mod/{$CONFIG->pluginname}/onchange_product_type.php";
+		$post_url = $CONFIG->wwwroot."mod/socialcommerce/onchange_product_type.php";
 		
 		if(!$vars['entity']->guid)
 			$id = 0;
@@ -250,5 +249,4 @@ EOT;
 			</form>
 EOT;
 echo $form_body;
-
 ?>

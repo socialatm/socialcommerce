@@ -36,14 +36,13 @@
 	<div class="storesrepo_stores">
 	<div class="storesrepo_title"><h2><a href="<?php echo $stores->getURL(); ?>"><?php echo $title; ?></a></h2></div>
 		<div class="storesrepo_icon full_view">
-			<?php 
-				echo elgg_view("{$CONFIG->pluginname}/image", array(
-												'entity' => $vars['entity'],
-												'size' => 'large',
-												'display' => 'image'
-											  )
-										);
-			?>	
+<?php 
+	echo elgg_view("socialcommerce/image", array(
+		'entity' => $vars['entity'],
+		'size' => 'large',
+		'display' => 'image'
+		));
+?>	
 		</div>
 		<form method="post" action="<?php echo addcartURL($stores); ?>">
 		<div class="right_section_contents">
@@ -73,16 +72,16 @@
 						<?php 
 						if($vars['entity']->mimetype && $stores->product_type_id == 2){
 							echo "<div style=\"float:left;margin-top:20px;\">".elgg_view('output/product_type',array('value' => $stores->product_type_id))."</div>";
-							echo "<div style=\"float:left;\"><a href=\"{$stores->getURL()}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
+							echo "<div style=\"float:left;\"><a href=\"{$stores->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
 							echo "<div class=\"clear\"></div>";
 						}else{
 							echo elgg_view('output/product_type',array('value' => $stores->product_type_id));
 						} 
 						?>
 					</div>
-				<?php }
+<?php }
 				if($stores->category > 0){
-				?>
+?>
 					<div class="product_odd"><B><?php echo elgg_echo("category");?></B></div>
 					<div class="field_results"><?php echo elgg_view('output/category',array('value' => $stores->category)); ?></div>
 				<?php } 
@@ -105,7 +104,7 @@
 							if($_SESSION['user']->guid != $stores->owner_guid && $stores->status == 1 && $product_type_details->addto_cart == 1){
 ?>
 								<div class="cart_wishlist">
-									<a class="wishlist" href="<?php echo $CONFIG->wwwroot."action/{$CONFIG->pluginname}/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
+									<a class="wishlist" href="<?php echo $CONFIG->wwwroot."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
 								</div>
 							<?php } ?>
 							<div class="clear"></div>
@@ -124,7 +123,7 @@
 									<div class="delete_btn" style="float:left;padding-left:10px;">
 										<?php 
 											echo elgg_view('output/confirmlink',array(
-												'href' => $vars['url'] . "action/{$CONFIG->pluginname}/delete?stores=" . $stores->getGUID(),
+												'href' => $vars['url'] . "action/socialcommerce/delete?stores=" . $stores->getGUID(),
 												'text' => elgg_echo("delete"),
 												'confirm' => elgg_echo("stores:delete:confirm"),
 											));  
@@ -157,7 +156,7 @@
 				}
 ?>
 				<!-- Cart Button -->
-				<?php echo elgg_view("{$CONFIG->pluginname}/socialcommerce_cart",array('entity'=>$stores,'product_type_details'=>$product_type_details,'phase'=>1)); ?>
+				<?php echo elgg_view("socialcommerce/socialcommerce_cart",array('entity'=>$stores,'product_type_details'=>$product_type_details,'phase'=>1)); ?>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -194,7 +193,7 @@ EOF;
 	
 <?PHP
 	if(isloggedin() && $vars['entity']->owner_guid == $_SESSION['user']->guid){
-		echo elgg_view("{$CONFIG->pluginname}/order_view",array('entity'=>$vars['entity']));
+		echo elgg_view("socialcommerce/order_view",array('entity'=>$vars['entity']));
 	}
 ?>
 <?php

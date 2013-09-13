@@ -24,7 +24,7 @@
 	//---------------- Check the entity --------------//
 	if (!$stores = get_entity($guid)) {
 		register_error(elgg_echo("stores:uploadfailed"));
-		forward($CONFIG->wwwroot . "pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username);
+		forward($CONFIG->wwwroot . "pg/socialcommerce/" . $_SESSION['user']->username);
 		exit;
 	}
 	
@@ -104,7 +104,7 @@
 		
 		register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "mod/{$CONFIG->pluginname}/edit.php?stores_guid=".$guid;
+		$redirect = $CONFIG->wwwroot . "mod/socialcommerce/edit.php?stores_guid=".$guid;
 	}else{
 		if ($stores->canEdit()) {
 			$old_product_type_id = $stores->product_type_id;
@@ -136,7 +136,7 @@
 							$old_largethumb_file = $old_filehandler->getFilenameOnFilestore();
 						}
 						
-						$prefix = "{$CONFIG->pluginname}/";
+						$prefix = "socialcommerce/";
 						$upload_file = new ElggFile();
 						$filestorename = strtolower(time().$_FILES[$shortname]['name']);
 						$upload_file->setFilename($prefix.$filestorename);
@@ -179,7 +179,7 @@
 			// Now see if we have a file product_image
 			if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/')))
 			{
-				$image_prefix = "{$CONFIG->pluginname}/".$result;
+				$image_prefix = "socialcommerce/".$result;
 				
 				$filehandler = new ElggFile();
 				$filehandler->owner_guid = $stores->owner_guid;
@@ -271,14 +271,13 @@
 					}
 				}
 			}
-			
 			system_message(elgg_echo("stores:saved"));
 			unset($_SESSION['product']);
 		}else{
 			register_error(elgg_echo("stores:uploadfailed"));
 		}
 		$container_user = get_entity($container_guid);	
-		$redirect = $CONFIG->wwwroot . "pg/{$CONFIG->pluginname}/" . $container_user->username;
+		$redirect = $CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username;
 	}
 	forward($redirect);
 ?>

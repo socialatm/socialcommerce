@@ -80,7 +80,7 @@ EOF;
 			$info .= "<div class=\"stores_remove\">";
 			
 			$info .= elgg_view('output/confirmlink',array(
-								'href' => $vars['url'] . "action/{$CONFIG->pluginname}/remove_cart?" . $parameters,
+								'href' => $vars['url'] . "action/socialcommerce/remove_cart?" . $parameters,
 								'text' => elgg_echo("remove"),
 								'confirm' => elgg_echo("cart:delete:confirm"),
 							)); 
@@ -90,22 +90,22 @@ EOF;
 				$not_allow = 1;
 			}
 			
-			$image = elgg_view("{$CONFIG->pluginname}/image", array(
+			$image = elgg_view("socialcommerce/image", array(
 										'entity' => $product,
 										'size' => 'medium',
 										'display'=>'full'
 									  )
 								);
 			if($product->mimetype && $product->product_type_id == 2){							
-				$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
+				$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 			}else{
 				$icon = "";	
 			}
 			$display_cart_items .= elgg_view_listing($image.$icon, $info);
 		}
 	}
-	$update_cart = elgg_view("{$CONFIG->pluginname}/forms/updatecart");
-	$confirm_cart_list = elgg_view("{$CONFIG->pluginname}/forms/confirm_cart_list",array('not_allow'=>$not_allow));
+	$update_cart = elgg_view("socialcommerce/forms/updatecart");
+	$confirm_cart_list = elgg_view("socialcommerce/forms/confirm_cart_list",array('not_allow'=>$not_allow));
 }else{
 	$display_cart_items = elgg_echo('cart:null');
 }
@@ -114,7 +114,7 @@ if($not_allow == 1){
 	$hidden = "<input type=\"hidden\" name=\"not_allow\" value=\"1\">";
 	$action = "#";
 }else{
-	$action = $CONFIG->wwwroot."action/{$CONFIG->pluginname}/update_cart";
+	$action = $CONFIG->wwwroot."action/socialcommerce/update_cart";
 }
 $hidden .= elgg_view('input/securitytoken');
 echo $cart_body = <<<EOF
