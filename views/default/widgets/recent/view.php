@@ -180,9 +180,6 @@ EOF;
 								<div class="price_list">
 									{$price_text}: {$display_price}
 								</div>
-								<!-- <div class="cart_wishlist">
-									{$tell_a_friend}
-								</div> -->
 								{$cart_wishlist}
 								<div style="clear:both;"></div>	
 							</div>
