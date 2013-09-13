@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
+	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -33,14 +33,9 @@
 			$product_type_id = $vars['category']['product_type_id'];
 		}
 
-?>
-
-<?php
-                $title_label = elgg_echo('title');
-                $title_textbox = elgg_view('input/text', array('internalname' => 'categorytitle', 'value' => $title));
-                
-                $produt_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
-                
+            $title_label = elgg_echo('title');
+			$title_textbox = elgg_view('input/text', array('internalname' => 'categorytitle', 'value' => $title));
+            $produt_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));	//	@TODO - $produt_type?? spelling
                
 $text_label = elgg_echo('category:text');
                 $text_textarea = elgg_view('input/longtext', array('internalname' => 'categorybody', 'value' => $body));
