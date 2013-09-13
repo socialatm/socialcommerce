@@ -14,9 +14,9 @@
 	$address = (int) get_input('guid');
 	$title = elgg_view_title(elgg_echo('address:edit'));
 	if ($address = get_entity($address)) {
-		$area2 = elgg_view("{$CONFIG->pluginname}/forms/edit_address",array('entity' => $address,'ajax'=>1));
+		$area2 = elgg_view("socialcommerce/forms/edit_address", array('entity' => $address,'ajax'=>1));
     } else {
-		$area2 = elgg_view("{$CONFIG->pluginname}/forms/edit_address",array('ajax'=>1));
+		$area2 = elgg_view("socialcommerce/forms/edit_address", array('ajax'=>1));
 	}
 	echo $area2;
 ?>

@@ -52,7 +52,7 @@
 			$area2 = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
 		}
 		if($view != 'rss'){
-		$area2 = elgg_view("{$CONFIG->pluginname}/product_tab_view",array('base_view' => $area2, "filter" => $filter));
+		$area2 = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter));
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">

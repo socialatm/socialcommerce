@@ -34,7 +34,7 @@
 		$area2 = "";
 		foreach ($sold_products as $sold_product){
 			$sold_product = get_entity($sold_product->value);
-			$area2 .= elgg_view("{$CONFIG->pluginname}/sold_products",array('entity'=>$sold_product));
+			$area2 .= elgg_view("socialcommerce/sold_products",array('entity'=>$sold_product));
 		}
 		$area2 = $nav.$area2.$nav;
 	}else{

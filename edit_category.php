@@ -11,18 +11,15 @@
 
 	require_once(get_config('path').'engine/start.php');
 	global $CONFIG;
-	gatekeeper();
+	admin_gatekeeper();
 	
-	if(!isadminloggedin()){
-		forward("pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username);
-	}
 	// Render the category upload page
 	
 	$category = (int) get_input('category_guid');
 	$title = elgg_view_title($title = elgg_echo('category:edit'));
 	if ($category = get_entity($category)) {
 		if ($category->canEdit()) { 
-    		$area2 = "<div class=\"contentWrapper\">".elgg_view("{$CONFIG->pluginname}/forms/edit_category",array('entity' => $category))."</div>";
+    		$area2 = "<div class=\"contentWrapper\">".elgg_view("socialcommerce/forms/edit_category",array('entity' => $category))."</div>";
     		// These for left side menu
 			$area1 .= gettags();
 			$body = elgg_view_layout('two_column_left_sidebar', $area1, $title . $area2);

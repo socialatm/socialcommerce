@@ -14,7 +14,7 @@
 		require_once(get_config('path').'engine/start.php');
 
 		if(!isloggedin()){
-			forward("pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username);
+			forward("pg/socialcommerce/" . $_SESSION['user']->username);
 		}
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
@@ -67,5 +67,4 @@ EOF;
 	
 	// Finally draw the page
 		page_draw(sprintf(elgg_echo("stores:category"),page_owner_entity()->name), $body);
-	
 ?>

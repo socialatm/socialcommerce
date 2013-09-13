@@ -31,7 +31,7 @@
 	
 	// Get objects
 		set_context('order');
-		$area2 .= elgg_view("{$CONFIG->pluginname}/order_products",array('entity'=>$order));
+		$area2 .= elgg_view("socialcommerce/order_products",array('entity'=>$order));
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">
@@ -47,5 +47,4 @@ EOF;
 	
 	// Finally draw the page
 		page_draw(sprintf(elgg_echo('order:heading'),$order->guid), $body);
-	
 ?>

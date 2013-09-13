@@ -9,13 +9,10 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
-	gatekeeper();
+	admin_gatekeeper();
 
 	$stores = get_entity((int)$page[2]);
 	
-	if(!isadminloggedin() && ($stores->owner_guid != $_SESSION['guid'] || $stores->container_guid != $_SESSION['guid'])){
-		forward();
-	}
 	$title = elgg_view_title($title = elgg_echo('stores:edit'));
 	if ($stores) {
 		if ($stores->canEdit()) { 

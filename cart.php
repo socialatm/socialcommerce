@@ -24,7 +24,7 @@
 				set_page_owner($_SESSION['guid']);
 			}
 			if(page_owner() != $_SESSION['user']->guid){
-				forward("pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/cart/");
+				forward("pg/socialcommerce/" . $_SESSION['user']->username . "/cart/");
 			}
 			$header_title = elgg_echo('my:shopping:cart');
 			$title = elgg_view_title($header_title);
@@ -32,7 +32,7 @@
 		
 	// Get objects
 		set_context('search');
-		$area2 = elgg_view("{$CONFIG->pluginname}/cart");
+		$area2 = elgg_view("socialcommerce/cart");
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">

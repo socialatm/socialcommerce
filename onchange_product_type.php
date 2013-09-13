@@ -64,7 +64,7 @@ EOF;
 				}
 				$fields .= '<p><label>'.$mandatory .elgg_echo('product:'.$shortname).'</label><br />';
 				if($product->mimetype != "" && $shortname == 'upload' && $valtype['field'] == 'file'){
-					$fields .= elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'file_guid' => $product->guid));
+					$fields .= elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'file_guid' => $product->guid));
 				}else{
 					$fields .= elgg_view("input/{$valtype['field']}",array(
 															'internalname' => $shortname,

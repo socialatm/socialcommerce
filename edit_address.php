@@ -19,7 +19,7 @@
 	$title = elgg_view_title($title = elgg_echo('address:edit'));
 	if ($address = get_entity($address)) {
 		if ($address->canEdit()) { 
-    		$area2 = "<div class=\"contentWrapper\">".elgg_view("{$CONFIG->pluginname}/forms/edit_address",array('entity' => $address))."</div>";
+    		$area2 = "<div class=\"contentWrapper\">".elgg_view("socialcommerce/forms/edit_address",array('entity' => $address))."</div>";
     		// These for left side menu
 			$area1 .= gettags();
 			$body = elgg_view_layout('two_column_left_sidebar', $area1, $title . $area2);

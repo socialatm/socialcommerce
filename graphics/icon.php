@@ -23,7 +23,7 @@
 	
 	$filehandler = new ElggFile();
 	$filehandler->owner_guid = $stores->owner_guid;
-	$filehandler->setFilename("{$CONFIG->pluginname}/" . $stores->guid . $size . ".jpg");
+	$filehandler->setFilename("socialcommerce/" . $stores->guid . $size . ".jpg");
 	
 	$success = false;
 	if ($filehandler->open("read")) {
@@ -33,7 +33,7 @@
 	}
 	
 	if (!$success) {
-		$contents = @file_get_contents($CONFIG->pluginspath . "{$CONFIG->pluginname}/graphics/default{$size}.jpg");
+		$contents = file_get_contents($CONFIG->pluginspath . "socialcommerce/graphics/default{$size}.jpg");
 	}
 	
 	header("Content-type: image/jpeg");
