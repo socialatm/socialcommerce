@@ -56,8 +56,7 @@
 	// Set Config Values	
 		set_config('default_price_sign', '$');
 		set_config('default_currency_name', 'US Dollar');
-		set_config('pluginname', 'socialcommerce');			//	@todo - may be able to remove this at some point in time...
-			
+				
 	/*****	Social Commerce plugin initialization functions.	*****/
 	function socialcommerce_init() {
 	    
