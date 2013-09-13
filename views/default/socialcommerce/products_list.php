@@ -26,12 +26,12 @@ if($products){
 	foreach ($products as $product){
 		$product_path = $product->getURL();
 		$mime = $product->mimetype;
-		$product_img = elgg_view("{$CONFIG->pluginname}/image", array(
+		$product_img = elgg_view("socialcommerce/image", array(
 										'entity' => $product,
 										'size' => 'medium',
 										'display'=>'image'
-									  )
-								);
+									  ));
+									  
 		if($i%8 == 0){
 			$products_list .= "</tr><tr>";
 		}

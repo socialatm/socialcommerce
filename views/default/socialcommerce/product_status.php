@@ -28,7 +28,7 @@ if(isloggedin() && $action == "edit"){
 		}
 		$order_options .= "<option value=\"{$key}\" {$select}>{$status}</option>";
 	}
-	$action = $CONFIG->wwwroot."action/{$CONFIG->pluginname}/change_order_status";
+	$action = $CONFIG->wwwroot.'action/socialcommerce/change_order_status';
 	$submit_btn_text = elgg_echo('change:status:btn');
 	$status_body = <<<EOF
 		<span class="order_item_status">

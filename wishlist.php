@@ -51,7 +51,7 @@
 												'limit' => $limit,
 											));
 											
-		$area2 .= elgg_view("{$CONFIG->pluginname}/wishlist",array('entities'=>$entities));
+		$area2 .= elgg_view( 'socialcommerce/wishlist', array('entities'=>$entities));
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">
