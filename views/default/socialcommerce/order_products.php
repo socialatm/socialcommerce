@@ -36,13 +36,13 @@
 
 				$shipping_total += $shipping;
 				set_context('order');
-				$status = elgg_view("{$CONFIG->pluginname}/product_status",array('entity'=>$order_item,'status'=>$order_item->status,'action'=>'view'));
+				$status = elgg_view("socialcommerce/product_status",array('entity'=>$order_item,'status'=>$order_item->status,'action'=>'view'));
 				$display_price = get_price_with_currency($price);
 				$display_total = get_price_with_currency($total);
 				if($product->mimetype && $product->product_type_id == 2){
 					$download_action_url = $CONFIG->wwwroot."action/".$CONFIG->pluginname."/download?product_guid=".$order_item->guid;						
 					$download_action_url = elgg_add_action_tokens_to_url($download_action_url);							
-					$icon = "<div title='Download' class='order_icon_class'><a href=\"{$download_action_url}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
+					$icon = "<div title='Download' class='order_icon_class'><a href=\"{$download_action_url}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}else{
 					$icon = "";
 				}
@@ -95,10 +95,10 @@ TAX;
 			}
 			$grand_total += $shipping_total;
 			
-			$billing_details = elgg_view("{$CONFIG->pluginname}/order_display_address",array('entity'=>$order,'type'=>'b'));
+			$billing_details = elgg_view("socialcommerce/order_display_address",array('entity'=>$order,'type'=>'b'));
 			$order_billing_address_head = elgg_echo('order:billing:address:head');
 			if($order->s_first_name && $order->s_last_name){
-				$shipping_details = elgg_view("{$CONFIG->pluginname}/order_display_address",array('entity'=>$order,'type'=>'s'));
+				$shipping_details = elgg_view("socialcommerce/order_display_address",array('entity'=>$order,'type'=>'s'));
 				$order_shipping_address_head = elgg_echo('order:shipping:address:head');
 				$shipping_details = <<<EOF
 					<div class="order_details">

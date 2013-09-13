@@ -37,7 +37,7 @@ if($stores){
 	
 	$info = "<p> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></p>";
 	$info .= "<p class=\"owner_timestamp\">
-		<a href=\"{$vars['url']}pg/{$CONFIG->pluginname}/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
+		<a href=\"{$vars['url']}pg/socialcommerce/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
 		$numcomments = elgg_count_comments($stores);
 		if ($numcomments)
 			$info .= ", <a href=\"{$stores->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
@@ -67,12 +67,11 @@ if($stores){
 			</tr>
 		</table>
 EOF;
-	$rating = elgg_view("{$CONFIG->pluginname}/view_rating",array('id'=>$stores->guid,'units'=>5,'static'=>''));
+	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$stores->guid,'units'=>5,'static'=>''));
 	$cart_url = addcartURL($stores);
 	$cart_text = elgg_echo('add:to:cart');
 	$wishlist_text = elgg_echo('add:wishlist');
 	if($stores->status == 1){
-		//$tell_a_friend = elgg_view("{$CONFIG->pluginname}/tell_a_friend",array('entity'=>$stores,'text'=>"not_display"));
 		if($stores->owner_guid != $_SESSION['user']->guid){
 			$entity_hidden = elgg_view('input/securitytoken');
 			$cart_wishlist = <<<EOF
@@ -80,7 +79,7 @@ EOF;
 					<a title="{$cart_text}" class="cart" href="{$cart_url}">&nbsp;</a>
 				</div>
 				<div class="cart_wishlist">
-					<form name="frm_wishlist_{$stores->guid}" method="POST" action="{$CONFIG->wwwroot}action/{$CONFIG->pluginname}/add_wishlist">
+					<form name="frm_wishlist_{$stores->guid}" method="POST" action="{$CONFIG->wwwroot}action/socialcommerce/add_wishlist">
 						<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$stores->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
 						<INPUT type="hidden" name="product_guid" value="{$stores->guid}">
 					</form>

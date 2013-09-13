@@ -52,7 +52,7 @@ $('a.show_product_recent_desc').click(function () {
 			'entity_subtype' => 'stores',
 			'owner_guid' => page_owner(),
 			'limit' => $number,
-			));  	
+			))  	
 			
 	}else if($display == 2){
 		if ($friends = get_user_friends($user_guid, $subtype, 999999, 0)) {
@@ -66,7 +66,7 @@ $('a.show_product_recent_desc').click(function () {
 				'entity_subtype' => 'stores',
 				'owner_guid' => $friendguids,
 				'limit' => $number,
-				));  	
+				))  	
 		}
 	}else if($display == 3){
 		$product = elgg_get_entities_from_metadata(array(
@@ -75,7 +75,7 @@ $('a.show_product_recent_desc').click(function () {
 				'entity_subtype' => 'stores',
 				'owner_guid' => 0,
 				'limit' => $number,
-				));  	
+				))  	
 	}
 	
 	// if there are files get them
@@ -85,20 +85,18 @@ $('a.show_product_recent_desc').click(function () {
         
         if($view == "gallery"){
         
-        //echo "<div class=\"stores_widget_galleryview\">";
-        	$i = 0;
+         	$i = 0;
             //display in gallery mode
             foreach($product as $f){
             	if($i%5 == 0){
 					$products_list .= "</tr><tr>";
 				}
                 $mime = $f->mimetype;
-                $product_img = elgg_view("{$CONFIG->pluginname}/image", array(
-										'entity' => $f,
-										'size' => 'medium',
-										'display'=>'image'
-									  )
-								);
+                $product_img = elgg_view("socialcommerce/image", array(
+						'entity' => $f,
+						'size' => 'medium',
+						'display'=>'image'
+						));
                 $product_img = "<a onmouseover=\"recent_products_list_mouseover_action($f->guid,$widget_guid)\" onmouseout=\"recent_products_list_mouseout_action($f->guid,$widget_guid)\" href=\"{$f->getURL()}\">" . $product_img . "</a>";
             	$products_list .= <<<EOF
 					<td>
@@ -145,15 +143,14 @@ EOF;
 		        if (!empty($description)){ 
 		        	$more = "<a href=\"javascript:void(0);\" class=\"show_product_recent_desc\">". elgg_echo('more') ."</a><br /><div class=\"stores_listview_desc\">" . $description . "</div>";
 		        }
-		        $product_icon = elgg_view("{$CONFIG->pluginname}/image", array(
+		        $product_icon = elgg_view("socialcommerce/image", array(
 										'entity' => $f,
 										'size' => 'medium',
 										'display'=>'image'
-									  )
-								);
+										));
+									  
 		        $time_creatd =  friendly_time($f->time_created);
 		        $price_text = elgg_echo('price');
-		        //$tell_a_friend = elgg_view("{$CONFIG->pluginname}/tell_a_friend",array('entity'=>$f,'text'=>"not_display"));
 				$cart_url = addcartURL($f);
 				$cart_text = elgg_echo('add:to:cart');
 				$wishlist_text = elgg_echo('add:wishlist');
@@ -164,7 +161,7 @@ EOF;
 							<a title="{$cart_text}" class="cart" href="{$cart_url}">&nbsp;</a>
 						</div>
 						<div class="cart_wishlist">
-							<form name="frm_wishlist_{$f->guid}" method="POST" action="{$CONFIG->wwwroot}action/{$CONFIG->pluginname}/add_wishlist">
+							<form name="frm_wishlist_{$f->guid}" method="POST" action="{$CONFIG->wwwroot}action/socialcommerce/add_wishlist">
 								<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$f->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
 								<INPUT type="hidden" name="product_guid" value="{$f->guid}">
 							</form>
@@ -204,7 +201,7 @@ EOF;
 EOF;
         }
         //get a link to the users files
-        $users_file_url = $vars['url'] . "pg/{$CONFIG->pluginname}/" . get_user($f->owner_guid)->username;
+        $users_file_url = $vars['url'] . "pg/socialcommerce/" . get_user($f->owner_guid)->username;
         echo "</div>";
     } else {
 		echo elgg_echo("stores:none");

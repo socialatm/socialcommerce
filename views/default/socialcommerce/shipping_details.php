@@ -23,13 +23,13 @@
 		if($_SESSION['CHECKOUT']['shipping_address'])
 			$selected_address = $_SESSION['CHECKOUT']['shipping_address']->guid;
 		$exist = elgg_echo('shipping:address:exist');
-		$exist_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'shipping'));
+		$exist_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'shipping'));
 		
 		$new = elgg_echo('shipping:address:new');
-		$address_add = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
+		$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
 		
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('shipping:address')));
-		$action = $CONFIG->checkout_base_url."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/checkout_process/";
+		$action = $CONFIG->checkout_base_url."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		$address_details = <<<EOF
 			<div>
 				<form method="post" action="{$action}" onsubmit="return validate_shipping_details();">
@@ -53,7 +53,7 @@
 			</div>
 EOF;
 	}else{
-		$address_details = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
+		$address_details = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
 	}
 	echo $address_details;
 ?>

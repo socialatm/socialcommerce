@@ -39,7 +39,7 @@ if($order_items){
 		$quantity_text = elgg_echo('quantity');
 		$price_text = elgg_echo('price');
 		$total = $order_item->quantity * $order_item->price;
-		$status = elgg_view("{$CONFIG->pluginname}/product_status",array('entity'=>$order_item,'status'=>$order_item->status,'action'=>'view'));
+		$status = elgg_view("socialcommerce/product_status",array('entity'=>$order_item,'status'=>$order_item->status,'action'=>'view'));
 		$more = "<a onclick='view_order_details($order_item->guid);' href='javascript:void(0);'>".elgg_echo('order:more')."</a>";
 		$info .= <<<EOF
 			<div class="storesqua_stores">
@@ -62,7 +62,7 @@ EOF;
 	}
 }
 
-$action = $CONFIG->wwwroot."action/{$CONFIG->pluginname}/update_cart";
+$action = $CONFIG->wwwroot."action/socialcommerce/update_cart";
 $title = elgg_echo('stores:purchased:orders');
 echo $cart_body = <<<EOF
 	<script>
@@ -79,7 +79,7 @@ echo $cart_body = <<<EOF
 			
 			user_id = {$_SESSION['user']->guid}
 			
-			$("#order_action_bg").load("{$base_url}pg/{$CONFIG->pluginname}/" + order_item_id + "/more_order_item", {us: user_id});
+			$("#order_action_bg").load("{$base_url}pg/socialcommerce/" + order_item_id + "/more_order_item", {us: user_id});
 			
 			$("#order_action").show();
 			$("#order_action").css({'width':window_width+'px','height':window_height+'px'});
@@ -97,7 +97,7 @@ echo $cart_body = <<<EOF
 			var sratus_array = new Array("Pending","Shipped","received");
 			var elgg_token = $('[name=__elgg_token]');
 			var elgg_ts = $('[name=__elgg_ts]');
-			$.post("{$base_url}action/{$CONFIG->pluginname}/change_order_status", {
+			$.post("{$base_url}action/socialcommerce/change_order_status", {
 				us: user_id,
 				id: id,
 				status: status,

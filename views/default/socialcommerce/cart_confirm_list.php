@@ -76,17 +76,15 @@ EOF;
 	}
 }
 
-$cencelurl = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/cancel/";
-//$returnurl = $CONFIG->wwwroot."action/stores/add_order?page_owner=".page_owner();
-$returnurl = $CONFIG->wwwroot."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/cart_success/";
-$ipnurl = $CONFIG->wwwroot."action/{$CONFIG->pluginname}/makepayment?page_owner=".page_owner();
-$redirectlurl = $CONFIG->checkout_base_url."pg/{$CONFIG->pluginname}/{$_SESSION['user']->username}/checkout_process/";
+$cencelurl = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/cancel/";
+$returnurl = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/cart_success/";
+$ipnurl = $CONFIG->wwwroot."action/socialcommerce/makepayment?page_owner=".page_owner();
+$redirectlurl = $CONFIG->checkout_base_url."pg/socialcommerce/{$_SESSION['user']->username}/checkout_process/";
+
 if($checkout_confirm)
 	$disabled = 'disabled';
 else 
 	$disabled = '';
-
-	
 
 if($_SESSION['CHECKOUT']['allow_shipping'] == 1){
 	$display_shipping_price = get_price_with_currency($_SESSION['CHECKOUT']['shipping_price']);
@@ -106,9 +104,7 @@ EOF;
 	
 	$tax_line = '';
 
-
 $display_grand_total = get_price_with_currency($grand_total);
-
 
 $cart_item_text = elgg_echo('checkout:cart:item');
 $qty_text = elgg_echo('checkout:qty');
