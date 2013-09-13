@@ -20,7 +20,7 @@
 		$username = "/".$_SESSION['user']->username;
 	}
 	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('check:out')));
-	$byu_more = elgg_echo('buy:more');
+	$buy_more = elgg_echo('buy:more');
 	$hidden_values = elgg_view('input/securitytoken');
 	$buy_more_link = $CONFIG->wwwroot.'pg/socialcommerce'.$username."/all";
 	$form_body = <<< BOTTOM
@@ -28,7 +28,7 @@
 		<form method="post" id="checkout_form" action="{$action}" {$java_function}>
 			<div class="content_area_user_bottom">
 				<div class="bottom_content">
-					<span class="buy_more"><a href="$buy_more_link">$byu_more</a></span>
+					<span class="buy_more"><a href="$buy_more_link">$buy_more</a></span>
 					<span>$submit_input</span>&nbsp;
 					<span class="space"></span>
 					{$hidden}
