@@ -11,12 +11,11 @@
 	 
 	global $CONFIG;
 	
-	if (get_context() == "search") { 	// Start search listing version 
-		echo elgg_view("{$CONFIG->pluginname}/short_view",$vars);
+	if (get_context() == "search") { 	// Start search listing version @todo - switch statement here maybe?
+		echo elgg_view("socialcommerce/short_view", $vars );
 	}elseif (get_context() == "cartadd") {
-		echo elgg_view("{$CONFIG->pluginname}/cart_mainview",$vars);
+		echo elgg_view("socialcommerce/cart_mainview", $vars );
 	}else {
-		echo elgg_view("{$CONFIG->pluginname}/mainview",$vars);
-		
+		echo elgg_view("socialcommerce/mainview", $vars );
 	}
 ?>

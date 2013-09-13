@@ -34,16 +34,15 @@
 ?>
 	<div class="storesrepo_stores">
 		<div class="storesrepo_icon full_view">
-			<?php 
-				echo elgg_view("{$CONFIG->pluginname}/image", array(
+<?php 
+				echo elgg_view("socialcommerce/image", array(
 												'entity' => $vars['entity'],
 												'size' => 'large',
 												'display' => 'image'
-											  )
-										);
-			?>	
+											  ));
+?>	
 		</div>
-		<form method="post" action="<?php echo $CONFIG->url."action/{$CONFIG->pluginname}/addcart"; ?>">
+		<form method="post" action="<?php echo $CONFIG->url."action/socialcommerce/addcart"; ?>">
 		<div class="right_section_contents">
 			<div class="storesrepo_title_owner_wrapper">
 				<?php
@@ -71,7 +70,7 @@
 						<?php 
 						if($vars['entity']->mimetype && $stores->product_type_id == 2){
 							echo "<div style=\"float:left;margin-top:20px;\">".elgg_view('output/product_type',array('value' => $stores->product_type_id))."</div>";
-							echo "<div style=\"float:left;\"><a href=\"{$stores->getURL()}\">" . elgg_view("{$CONFIG->pluginname}/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
+							echo "<div style=\"float:left;\"><a href=\"{$stores->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
 							echo "<div class=\"clear\"></div>";
 						}else{
 							echo elgg_view('output/product_type',array('value' => $stores->product_type_id));
@@ -94,7 +93,7 @@
 				</div>
 				<div>
 					<!-- Cart Button -->
-					<?php echo elgg_view("{$CONFIG->pluginname}/socialcommerce_cart",array('entity'=>$stores,'product_type_details'=>$product_type_details,'phase'=>2)); ?>
+					<?php echo elgg_view("socialcommerce/socialcommerce_cart",array('entity'=>$stores,'product_type_details'=>$product_type_details,'phase'=>2)); ?>
 				</div>
 			</div>
 		</div>

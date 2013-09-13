@@ -13,7 +13,7 @@
 	$ajax = $vars['ajax'];
 	// Set title, form destination
 		if (isset($vars['entity'])) {
-			$action = "{$CONFIG->pluginname}/edit_address";
+			$action = "socialcommerce/edit_address";
 			$firstname = $vars['entity']->first_name;
 			$lastname = $vars['entity']->last_name;
 			$address_line_1 = $vars['entity']->address_line_1;
@@ -26,7 +26,7 @@
 			$phoneno = $vars['entity']->phoneno;
 			$access_id = $vars['entity']->access_id;
 		} else {
-			$action = "{$CONFIG->pluginname}/add_address";
+			$action = "socialcommerce/add_address";
 			$firstname = "";
 			$lastname = "";
 			$address_line_1 = "";
@@ -54,12 +54,7 @@
 			$phoneno = $vars['address']['phoneno'];
 			$access_id = $vars['address']['access_id'];
 		}
-?>
 
-<?php
-        /*$title_label = elgg_echo('title');
-        $title_textbox = elgg_view('input/text', array('internalname' => 'title', 'value' => $title));*/
-        
         $fnaem_label = elgg_echo('first:name');
         $fnaem_textbox = elgg_view('input/text', array('internalname' => 'first_name', 'value' => $firstname));
         
@@ -113,7 +108,7 @@
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
 			$address_post_url = "{$vars['url']}action/{$action}";
-			$address_reload_url = "{$vars['url']}pg/{$CONFIG->pluginname}/{$_SESSION['user']->username}/view_address";
+			$address_reload_url = "{$vars['url']}pg/socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
 					function save_address(){

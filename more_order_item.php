@@ -26,7 +26,7 @@
 			$quantity_text = elgg_echo('quantity');
 			$price_text = elgg_echo('price');
 			$sub_total = $order_item->quantity * $product->price;
-			$status = elgg_view("{$CONFIG->pluginname}/product_status",array('entity'=>$order_item,'action'=>'edit'));
+			$status = elgg_view("socialcommerce/product_status",array('entity'=>$order_item,'action'=>'edit'));
 			$icon = elgg_view("profile/icon",array('entity' => $owner, 'size' => 'small'));
 			
 			$order = elgg_get_entities_from_relationship(array(
@@ -38,7 +38,7 @@
 			if($order){
 				$order = $order[0];
 				if($order->b_first_name && $order->b_last_name){
-					$billing_details = elgg_view("{$CONFIG->pluginname}/order_display_address",array('entity'=>$order,'type'=>'b'));
+					$billing_details = elgg_view("socialcommerce/order_display_address",array('entity'=>$order,'type'=>'b'));
 					$billing_details = <<<EOF
 						<div class="order_details">
 							<h3>Billing Details</h3>
@@ -49,7 +49,7 @@ EOF;
 				
 				if($order->shipping_method && $product->product_type_id == 1){
 					if($order->s_first_name && $order->s_last_name){
-						$shipping_details = elgg_view("{$CONFIG->pluginname}/order_display_address",array('entity'=>$order,'type'=>'s'));
+						$shipping_details = elgg_view("socialcommerce/order_display_address",array('entity'=>$order,'type'=>'s'));
 						$shipping_details = <<<EOF
 							<div class="order_details">
 								<h3>Shipping Details</h3>

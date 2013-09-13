@@ -20,7 +20,7 @@
 	
 	if (!$category = get_entity($guid)) {
 		register_error(elgg_echo("category:addfailed"));
-		forward($CONFIG->wwwroot . "pg/{$CONFIG->pluginname}/" . $_SESSION['user']->username . "/category/");
+		forward($CONFIG->wwwroot . "pg/socialcommerce/" . $_SESSION['user']->username . "/category/");
 		exit;
 	}
 	
@@ -41,7 +41,7 @@
 		
 		register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "mod/{$CONFIG->pluginname}/edit_category.php?category_guid=".$guid;
+		$redirect = $CONFIG->wwwroot . "mod/socialcommerce/edit_category.php?category_guid=".$guid;
 	}else{
 		if ($category->canEdit()) {
 		
@@ -61,7 +61,7 @@
 		}
 		
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "pg/{$CONFIG->pluginname}/" . $container_user->username . "/category/";
+		$redirect = $CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username . "/category/";
 	}
 	forward($redirect);
 ?>

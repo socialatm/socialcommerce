@@ -15,7 +15,7 @@
 	$first = $vars['first'];
 	// Set title, form destination
 		if (isset($vars['entity'])) {
-			$action = "{$CONFIG->pluginname}/edit_address";
+			$action = "socialcommerce/edit_address";
 			$firstname = $vars['entity']->first_name;
 			$lastname = $vars['entity']->last_name;
 			$address_line_1 = $vars['entity']->address_line_1;
@@ -28,7 +28,7 @@
 			$phoneno = $vars['entity']->phoneno;
 			$access_id = $vars['entity']->access_id;
 		} else {
-			$action = "{$CONFIG->pluginname}/add_address";
+			$action = "socialcommerce/add_address";
 			$firstname = "";
 			$lastname = "";
 			$address_line_1 = "";
@@ -134,7 +134,7 @@ EOF;
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
 			$address_post_url = "{$CONFIG->checkout_base_url}action/{$action}";
-			$address_reload_url = "{$CONFIG->checkout_base_url}pg/{$CONFIG->pluginname}/{$_SESSION['user']->username}/view_address";
+			$address_reload_url = "{$CONFIG->checkout_base_url}pg/socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
 					var time_out;

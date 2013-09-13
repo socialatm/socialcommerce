@@ -24,13 +24,13 @@
 		if($_SESSION['CHECKOUT']['billing_address'])
 			$selected_address = $_SESSION['CHECKOUT']['billing_address']->guid;
 		$exist = elgg_echo('billing:address:exist');
-		$exist_address = elgg_view("{$CONFIG->pluginname}/list_address",array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'billing'));
+		$exist_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'billing'));
 		
 		$new = elgg_echo('billing:address:new');
-		$address_add = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'billing'));
+		$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'billing'));
 		
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('billing:address')));
-		$action = $CONFIG->checkout_base_url."pg/{$CONFIG->pluginname}/".$_SESSION['user']->username."/checkout_process/";
+		$action = $CONFIG->checkout_base_url."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		
 		$address_details = <<<EOF
 			<div>
@@ -55,8 +55,7 @@
 			</div>
 EOF;
 	}else{
-		$address_details = elgg_view("{$CONFIG->pluginname}/forms/checkout_edit_address",array('ajax'=>1,'type'=>'billing'));
+		$address_details = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'billing'));
 	}
-	
 	echo $address_details;
 ?>
