@@ -1,13 +1,14 @@
 <?php
-	/**
-	 * Elgg address - edit form
-	 * 
+   /**
+	* Elgg address - edit form
+	* 
 	* @package Elgg SocialCommerce
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
-	 * @link http://twentyfiveautumn.com/
-	 **/ 
+	* @license http://www.gnu.org/licenses/gpl-2.0.html
+	* @author twentyfiveautumn.com
+	* @copyright twentyfiveautumn.com 2013
+	* @link http://twentyfiveautumn.com/
+	**/ 
+	 
 	global $CONFIG;
 	$ajax = $vars['ajax'];
 	$type = $vars['type'];
@@ -55,9 +56,7 @@
 			$phoneno = $vars['address']['phoneno'];
 			$access_id = $vars['address']['access_id'];
 		}
-?>
 
-<?php
         /*$title_label = elgg_echo('title');
         $title_textbox = elgg_view('input/text', array('internalname' => 'title', 'value' => $title));*/
         

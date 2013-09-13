@@ -1,13 +1,13 @@
 <?php
-/**
- * Elgg view - caet page
- * 
- * @package Elgg SocialCommerce
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013 / Cubet Technologies 2009-2010
-	 * @link http://twentyfiveautumn.com/
-	 **/ 
+   /**
+	* Elgg view - caet page
+	* 
+	* @package Elgg SocialCommerce
+	* @license http://www.gnu.org/licenses/gpl-2.0.html
+	* @author twentyfiveautumn.com
+	* @copyright twentyfiveautumn.com 2013
+	* @link http://twentyfiveautumn.com/
+	**/ 
 	 
 global $CONFIG;
 if(get_input('not_allow') && get_input('not_allow') == 1){
