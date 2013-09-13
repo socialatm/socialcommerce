@@ -131,7 +131,7 @@
 									</div>
 							<?PHP } else { ?>
 									<div class="retrieve_btn" style="float:left;">
-										<a href="<?php echo $vars['url']; ?>action/<?php echo $CONFIG->pluginname; ?>/retrieve?stores_guid=<?php echo $stores->getGUID(); ?>&__elgg_token=<?php echo generate_action_token($ts); ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo('retrieve'); ?></a>&nbsp; 
+										<a href="<?php echo $vars['url']; ?>action/socialcommerce/retrieve?stores_guid=<?php echo $stores->getGUID(); ?>&__elgg_token=<?php echo generate_action_token($ts); ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo('retrieve'); ?></a>&nbsp; 
 									</div>
 						<?php 
 								}

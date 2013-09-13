@@ -38,7 +38,7 @@
 				}
 			?>
 			<div class="cart">
-				<a href="<?php echo $CONFIG->wwwroot ?>pg/<?php echo $CONFIG->pluginname; ?>/<?php echo $_SESSION['user']->username; ?>/cart" />
+				<a href="<?php echo $CONFIG->wwwroot ?>pg/socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart" />
 					<?php echo elgg_echo('stores:my:cart').$c_count; ?>
 				</a>
 			</div>
@@ -71,7 +71,7 @@
 		<div id="owner_block_stores">
 			<!--Cart-->
 			<div class="cart">
-				<a href="<?php echo $CONFIG->wwwroot ?>pg/<?php echo $CONFIG->pluginname; ?>/gust/cart" />
+				<a href="<?php echo $CONFIG->wwwroot ?>pg/socialcommerce/gust/cart" />
 					<?php echo elgg_echo('stores:gust:cart').$c_count; ?>
 				</a>
 			</div>

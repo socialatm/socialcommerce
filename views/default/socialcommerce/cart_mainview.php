@@ -54,7 +54,7 @@
 					<?php
 						echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'tiny'));
 					?>
-					<p class="storesrepo_owner_details"><b><a href="<?php echo $vars['url']; ?>pg/<?php echo $CONFIG->pluginname; ?>/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
+					<p class="storesrepo_owner_details"><b><a href="<?php echo $vars['url']; ?>pg/socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
 					<small><?php echo $friendlytime; ?></small></p>
 				</div>
 			</div>

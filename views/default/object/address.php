@@ -53,7 +53,7 @@
 ?>
 			<div class="storesrepo_controls">
 				<p>
-					<a href="<?php echo $vars['url']; ?>mod/<?php echo $CONFIG->pluginname; ?>/edit_address.php?address_guid=<?php echo $address->getGUID(); ?>"><?php echo elgg_echo('edit:address'); ?></a>&nbsp; 		
+					<a href="<?php echo $vars['url']; ?>mod/socialcommerce/edit_address.php?address_guid=<?php echo $address->getGUID(); ?>"><?php echo elgg_echo('edit:address'); ?></a>&nbsp; 		
 				</p>
 			</div>
 <?php

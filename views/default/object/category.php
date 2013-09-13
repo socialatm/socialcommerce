@@ -22,7 +22,7 @@
 				
 ?>
 		<div>
-			<a  class="object_category_string" href="<?php echo $vars['url']; ?>pg/<?php echo $CONFIG->pluginname; ?>/<?php echo $category->guid; ?>/product_cate">
+			<a  class="object_category_string" href="<?php echo $vars['url']; ?>pg/socialcommerce/<?php echo $category->guid; ?>/product_cate">
 				<?php echo $category->title; ?>
 			</a>
 			<?php if($category->owner_guid == $_SESSION['user']->guid){ ?>
