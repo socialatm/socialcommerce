@@ -8,7 +8,18 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-		 
+	
+	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	$arr2 = get_defined_vars();
+	krumo($arr2); die();
+	
+	/*****
+	$user_gallery = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
+	
+	md_type = metadata type
+	
+	*****/
+	
 	// Get input
 		$md_type = 'tags';
 		$tag = get_input('tag');

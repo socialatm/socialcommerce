@@ -54,10 +54,16 @@
 	/*****	end add a default plugin settings object	*****/
  
 	// Set Config Values	
-		set_config('default_price_sign', '$');
-		set_config('default_currency_name', 'US Dollar');
-				
-	/*****	Social Commerce plugin initialization functions.	*****/
+	
+	if(!get_config('default_price_sign')) {
+		set_config('default_price_sign', '$');				//	@todo - these should be plugin settings anyway
+	}
+	
+	if(!get_config('default_currency_name')) {
+		set_config('default_currency_name', 'US Dollar');				//	@todo - these should be plugin settings anyway
+	}
+	
+		/*****	Social Commerce plugin initialization functions.	*****/
 	function socialcommerce_init() {
 	    
 	    // Load system configuration

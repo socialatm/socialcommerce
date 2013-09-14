@@ -11,16 +11,20 @@
 	 
 /****	add these to $CONFIG	*****/
 function register_socialcommerce_settings(){
-	//	@todo - should these should be in the store object instead of $CONFIG
+	
 	
 	$pluginspath = get_config('pluginspath');
 	$site_guid = get_config('site_guid'); 
 	
-	set_config('checkout_path' , $pluginspath.'socialcommerce/modules/checkout/', $site_guid);
-	set_config('checkout_view_path' , $pluginspath.'socialcommerce/views/default/modules/checkout', $site_guid);	//	@todo - doesn't get called from anywhere?
-	set_config('shipping_path' , $pluginspath.'socialcommerce/modules/shipping/', $site_guid);
-	set_config('shipping_view_path', $pluginspath.'socialcommerce/views/default/modules/shipping', $site_guid);		//	@todo - doesn't get called from anywhere?
-	set_config('currency_path' , $pluginspath.'socialcommerce/modules/currency/', $site_guid);
+	if(!get_config('checkout_path')) {
+		set_config('checkout_path' , $pluginspath.'socialcommerce/modules/checkout/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
+	}
+	if(!get_config('shipping_path')) {
+	set_config('shipping_path' , $pluginspath.'socialcommerce/modules/shipping/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
+	}
+	if(!get_config('currency_path')) {
+	set_config('currency_path' , $pluginspath.'socialcommerce/modules/currency/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
+	}
 	
 	load_module_languages();
 	SetGeneralValuesInConfig();
