@@ -9,33 +9,30 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	$tags = $vars['tags'];
 	
 	if (is_array($vars['tags']) && sizeof($vars['tags'])) {
-		$all = "all";
+		$all = 'all';
 		$vars['tags'][] = $all;
-		$vars['tags'] = array_reverse($vars['tags']);
-		foreach($vars['tags'] as $tag) {print_r($tagarr);
+		$vars['tags'] = array_reverse( $vars['tags'] );
+		foreach($vars['tags'] as $tag) { 
+			print_r( $tagarr );
 
-			if ($tag != "all") {
-				$label = elgg_echo($tag);
-			} else {
-				$label = elgg_echo('all');
-			}
+			$label = $tag != 'all' ? elgg_echo($tag) : elgg_echo('all') ;
 			
-			$url = $vars['url'] . "mod/socialcommerce/search.php?subtype=stores";
+			$url = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/';
+			
 			if ($tag != "all")
-				$url .= "&md_type=simpletype&tag=" . urlencode($tag);
+				$url .= 'md_type/simpletype/tag/'.urlencode($tag);
 				
 			$inputtag = get_input('tag');
 			if ($inputtag == $tag || (empty($inputtag) && $tag == "all")) {
-				$class = " class=\"selected\" ";
+				$class = ' class="selected" ';
 			} else {
 				$class = "";
 			}
 				
-			$submenu .= add_submenu_item($label, $url, 'stores_tag');
+			$submenu .= add_submenu_item( $label, $url, 'stores_tag');
 		}
 	}
 ?>

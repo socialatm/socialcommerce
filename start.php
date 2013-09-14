@@ -274,6 +274,8 @@
 										}
 										require(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
 										break;
+				case "search":			require(get_config('pluginspath').'socialcommerce/search.php'); 
+										break;
 				case "settings":		require(get_config('pluginspath').'socialcommerce/socialcommerce_settings.php'); 
 										break;
 				case "sold":			require(get_config('pluginspath').'socialcommerce/sold.php');
