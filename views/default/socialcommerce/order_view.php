@@ -31,7 +31,7 @@ if($order_items){
 		
 		$owner = $order_item->getOwnerEntity();
 		$owner_url = $owner->getURL();
-		$friendlytime = friendly_time($order_item->time_created);
+		$friendlytime = elgg_view_friendly_time($order_item->time_created);
 		$friendlytime = sprintf(elgg_echo('stores:friendlytime'),$friendlytime,$owner_url,$owner->name);
 		//$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 		$info = "<p class=\"owner_timestamp\">{$friendlytime}";

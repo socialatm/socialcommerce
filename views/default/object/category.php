@@ -14,7 +14,7 @@
 	$title = $category->title;
 	$desc = $category->description;
 	$owner = $category->getOwnerEntity();
-	$friendlytime = friendly_time($category->time_created);
+	$friendlytime = elgg_view_friendly_time($category->time_created);
 	
 //	$mime = $category->mimetype;
 	

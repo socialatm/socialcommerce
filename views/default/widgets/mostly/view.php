@@ -150,7 +150,7 @@ EOF;
 											'display'=>'image'
 										  )
 									);
-			        $time_creatd =  friendly_time($f->time_created);
+			        $time_creatd =  elgg_view_friendly_time($f->time_created);
 			        $price_text = elgg_echo('price');
 					$cart_url = addcartURL($f);
 					$cart_text = elgg_echo('add:to:cart');

@@ -35,7 +35,7 @@ if($cart){
 				}
 				
 				$owner = $cart_item->getOwnerEntity();
-				$friendlytime = friendly_time($cart_item->time_created);
+				$friendlytime = elgg_view_friendly_time($cart_item->time_created);
 				
 				$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 				$info .= "<p class=\"owner_timestamp\">{$friendlytime}";

@@ -107,7 +107,7 @@ EOF;
 				echo $address_list;
 			}else{
 				
-				$friendlytime = friendly_time($vars['entity']->time_created);
+				$friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
 ?>
 				<div class="address_listing_info">
 						<table cellpadding="10">

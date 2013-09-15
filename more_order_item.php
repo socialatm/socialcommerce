@@ -21,7 +21,7 @@
 			
 			$owner_url = $owner->getURL();
 			$product = get_entity($order_item->product_id);
-			$friendlytime = friendly_time($order_item->time_created);
+			$friendlytime = elgg_view_friendly_time($order_item->time_created);
 			$friendlytime = sprintf(elgg_echo('stores:friendlytime'),$friendlytime,$owner_url,$owner->name);
 			$quantity_text = elgg_echo('quantity');
 			$price_text = elgg_echo('price');

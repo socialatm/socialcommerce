@@ -17,7 +17,7 @@ if($products){
 	foreach ($products as $product){
 		$rating = "";
 		$owner = $product->getOwnerEntity();
-		$friendlytime = friendly_time($product->time_created);
+		$friendlytime = elgg_view_friendly_time($product->time_created);
 		$title = $product->title;
 		$product_url = $product->getURL();
 		$title = $product->title;
