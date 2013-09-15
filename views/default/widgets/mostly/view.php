@@ -50,9 +50,9 @@ $('a.show_product_mostly_desc').click(function () {
     
     //get the user's files
 	if($display == 1){
-		$ratings = get_purchased_orders('final_value','','object','rating','','',true,'','DESC',$number,0,'',page_owner());
+		$ratings = get_purchased_orders('final_value', '', 'object', 'rating', '', '', true, '', 'DESC', $number, 0, '', elgg_get_page_owner_guid());
 	}else if($display == 2){
-		if ($friends = get_user_friends(page_owner(), 'rating', 999999, 0)) {
+		if ($friends = get_user_friends( elgg_get_page_owner_guid(), 'rating', 999999, 0)) {
 			$friendguids = array();
 			foreach($friends as $friend) {
 				$friendguids[] = $friend->getGUID();
