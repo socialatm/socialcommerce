@@ -23,7 +23,7 @@
 		$selected_checkout_methods = $settings[0]->checkout_methods;
 		if(!is_array($selected_checkout_methods))
 			$selected_checkout_methods = array($selected_checkout_methods);
-		$checkout_methods = get_checkout_methods();
+		$checkout_methods = sc_get_checkout_methods();
 		$action = $CONFIG->checkout_base_url."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		$checkout_method_validation_text = elgg_echo('checkout:method:validation:text');
 		$checkout_method_title_text = elgg_echo('checkout:method:title:text');
