@@ -481,7 +481,7 @@
 		 */
 		 
 			 'general:settings:tab' => "General",
-			 'checkout:methods:tab' => "Checkout",
+			 'payment:methods:tab' => "Payment",
 			 'shipping:methods:tab' => "Shipping",
 			 'fund:withdraw:methods:tab' => "Withdraw",
 			 'currency:tab' => "Currency",

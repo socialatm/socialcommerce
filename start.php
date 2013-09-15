@@ -282,7 +282,8 @@
 										break;
 				case "search":			require(get_config('pluginspath').'socialcommerce/search.php'); 
 										break;
-				case "settings":		require(get_config('pluginspath').'socialcommerce/socialcommerce_settings.php'); 
+				case "settings":	//	require(get_config('pluginspath').'socialcommerce/socialcommerce_settings.php'); 
+										require(get_config('pluginspath').'socialcommerce/pages/socialcommerce/settings.php'); 
 										break;
 				case "sold":			require(get_config('pluginspath').'socialcommerce/sold.php');
 									  	break;
