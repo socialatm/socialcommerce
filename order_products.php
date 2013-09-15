@@ -41,7 +41,7 @@ EOF;
 		elgg_set_context('stores');
 		// These for left side menu
 			$area1 .= gettags();
-		//$area1 .= get_storestype_cloud(page_owner());
+		
 	// Create a layout
 		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
 	

@@ -50,7 +50,7 @@ $('a.show_product_recent_desc').click(function () {
 			'status' => 1,
 			'entity_type' =>'object',
 			'entity_subtype' => 'stores',
-			'owner_guid' => page_owner(),
+			'owner_guid' => elgg_get_page_owner_guid(),
 			'limit' => $number,
 			))  	
 			

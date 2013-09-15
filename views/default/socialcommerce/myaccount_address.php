@@ -16,7 +16,7 @@
 	$address = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'address',
-		'owner_guid' => page_owner(),
+		'owner_guid' => elgg_get_page_owner_guid(),
 		)) 			
 	){
 

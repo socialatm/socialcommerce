@@ -83,7 +83,7 @@
 			}
 			
 		/****	make custom setting into an array	*****/
-		$custom = array( $method, page_owner(), $BillingDetails->guid, $ShippingDetails->guid, $_SESSION['CHECKOUT']['shipping_method'] );	//	@todo - replace the page owner thing...
+		$custom = array( $method, elgg_get_page_owner_guid(), $BillingDetails->guid, $ShippingDetails->guid, $_SESSION['CHECKOUT']['shipping_method'] );	//	@todo - replace the page owner thing...
 		
 		$hiddenFields = array(
 			'cmd'			=> '_cart',

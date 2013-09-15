@@ -48,7 +48,7 @@ $('a.show_product_recent_desc').click(function () {
 		$product = elgg_get_entities(array( 	
 			'type' => 'object',
 			'subtype' => 'order_item',
-			'owner_guid' => page_owner(),
+			'owner_guid' => elgg_get_page_owner_guid(),
 			'order_by' => '',
 			'limit' => $number,
 			)) 			

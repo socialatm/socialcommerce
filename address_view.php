@@ -25,7 +25,7 @@
 			$added_address = get_input('guid');
 			$page_owner = get_input('u_guid');
 			if(!$page_owner)
-				$page_owner = page_owner();
+				$page_owner = elgg_get_page_owner_guid();
 				
 			if(
 			

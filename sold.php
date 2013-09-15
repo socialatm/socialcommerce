@@ -40,7 +40,7 @@
 	}else{
 		$area2 = elgg_echo('no:data');
 	}
-	//$area2 = list_user_friends_objects(page_owner(),'stores',10,'',false);
+	
 	$area2 = <<<EOF
 		{$title}
 		<div class="contentWrapper stores">
@@ -48,7 +48,7 @@
 		</div>
 EOF;
 	elgg_set_context('socialcommerce');
-	//$area1 = get_filetype_cloud(page_owner(), true);
+	
 	// These for left side menu
 	$area1 .= gettags();
 	$body = elgg_view_layout('two_column_left_sidebar',$area1, $area2);

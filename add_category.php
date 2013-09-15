@@ -20,7 +20,7 @@
 			$page_owner = $_SESSION['user'];
 			set_page_owner($_SESSION['guid']);
 		}
-		$container_guid = page_owner();
+		$container_guid = elgg_get_page_owner_guid();
 	//set the title
 		$area2 = elgg_view_title(elgg_echo('stores:addcate'));
 

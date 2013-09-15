@@ -18,7 +18,7 @@
 			$page_owner = $_SESSION['user'];
 			set_page_owner($_SESSION['guid']);
 		}
-		$container_guid = page_owner();
+		$container_guid = elgg_get_page_owner_guid();
 
 	//set Category title
 	
@@ -28,7 +28,7 @@
 	if(	elgg_get_entities(array( 	
 			'type' => 'object',
 			'subtype' => 'address',
-			'owner_guid' => page_owner(),
+			'owner_guid' => elgg_get_page_owner_guid(),
 			)) 
 		){
 			
@@ -37,7 +37,7 @@
 			$area2 .= elgg_list_entities(array(
 						'type' => 'object',
 						'subtype' => 'address',
-						'owner_guid' => page_owner(),
+						'owner_guid' => elgg_get_page_owner_guid(),
 						'limit' => 10,
 						));
 						
@@ -56,7 +56,7 @@ EOF;
 
 	// These for left side menu
 		$area1 .= gettags();
-		//$area1 .= get_storestype_cloud(page_owner());
+		
 	// Create a layout
 		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
 	
