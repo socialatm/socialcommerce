@@ -9,9 +9,12 @@
 	 * @link http://twentyfiveautumn.com/
  	 **/
 	 
-	 /*****
-	 @todo - check to be sure directory is named socialcommerce
-	 *****/
+	 /***** check to be sure directory is named socialcommerce	*****/
+	 
+	if(basename(__DIR__ ) != 'socialcommerce'){
+		echo 'you need to rename this directory to <b>socialcommerce</b> before you can continue';
+		die();
+	}
 	 
 	/*****
 	@todo - create default settings object
