@@ -11,9 +11,9 @@
 	 
 	global $CONFIG;
 	
-	if (get_context() == "search") { 	// Start search listing version @todo - switch statement here maybe?
+	if (elgg_get_context() == "search") { 	// Start search listing version @todo - switch statement here maybe?
 		echo elgg_view("socialcommerce/short_view", $vars );
-	}elseif (get_context() == "cartadd") {
+	}elseif (elgg_get_context() == "cartadd") {
 		echo elgg_view("socialcommerce/cart_mainview", $vars );
 	}else {
 		echo elgg_view("socialcommerce/mainview", $vars );

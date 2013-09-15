@@ -10,7 +10,7 @@
 	**/ 
 	 
 global $CONFIG;
-$context = get_context();
+$context = elgg_get_context();
 if($context == 'socialcommerce' || $context == 'stores' || $context == 'search' || $context == 'main'){
 	
 ?>

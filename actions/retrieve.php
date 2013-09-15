@@ -14,7 +14,7 @@
 
 		if ($stores->canEdit()) {
 			$stores->status = 1;
-			$context = get_context();
+			$context = elgg_get_context();
 			elgg_set_context('retrive_product');
 			$retrieve = $stores->save();
 			elgg_set_context($context);

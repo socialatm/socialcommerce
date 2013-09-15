@@ -123,7 +123,7 @@
 
 			register_subtypes();
 		
-	    	if (get_context() == "stores" || get_context() == "socialcommerce") {
+	    	if (elgg_get_context() == "stores" || elgg_get_context() == "socialcommerce") {
 	    		if(!isset($_REQUEST['search_viewtype']))
 	    			set_input('search_viewtype','list');
 	    	}
@@ -161,7 +161,7 @@
 		
 	function socialcommerce_pagesetup() {
 		/*****	add submenu options	*****/
-		if (get_context() == "stores" || get_context() == "socialcommerce") {
+		if (elgg_get_context() == "stores" || elgg_get_context() == "socialcommerce") {
 			if (isset($_SESSION['guid']) && elgg_is_logged_in()) {	
 				add_submenu_item(elgg_echo('stores:everyone'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
 				add_submenu_item(elgg_echo('stores:category'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
@@ -188,7 +188,7 @@
 			}
 		}
 		
-		if (get_context() == 'admin' && isadminloggedin()) {
+		if (elgg_get_context() == 'admin' && isadminloggedin()) {
 			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general/');
 		}
 	}
@@ -813,7 +813,7 @@ EOT;
 	
 	function order_can_create($hook_name, $entity_type, $return_value, $parameters) {
 		$entity = $parameters['entity'];
-		$context = get_context();//echo $entity->getSubtype();exit;
+		$context = elgg_get_context();
 		if ($context == 'add_order' && $entity->getSubtype() == "") {
 			return true;
 		}elseif ($context == 'add_order' && $entity->getSubtype() == "rating"){

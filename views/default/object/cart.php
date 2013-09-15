@@ -26,7 +26,7 @@
 	$owner = $vars['entity']->getOwnerEntity();
 	$friendlytime = friendly_time($vars['entity']->time_created);
 	
-	if (get_context() == "search") {	// Start search listing version 
+	if (elgg_get_context() == "search") {	// Start search listing version 
 		$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";
@@ -43,7 +43,7 @@
 											  ));
 		
 		echo elgg_view_listing($icon, $info);
-	}elseif (get_context() == "confirm") {
+	}elseif (elgg_get_context() == "confirm") {
 		$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";
@@ -55,7 +55,7 @@
 											  ));
 											  
 		echo elgg_view_listing($icon, $info);
-	}elseif (get_context() == "order") {	// Start search listing version 
+	}elseif (elgg_get_context() == "order") {	// Start search listing version 
 		$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";

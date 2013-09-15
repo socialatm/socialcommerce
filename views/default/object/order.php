@@ -13,7 +13,7 @@
 	gatekeeper();
 	$order = $vars['entity'];
 	if($order){
-		if (get_context() == "order") {	
+		if (elgg_get_context() == "order") {	
 			$order_items = elgg_get_entities_from_relationship(array(
 			'relationship' => 'order_item',
 			'relationship_guid' => $order->guid, 

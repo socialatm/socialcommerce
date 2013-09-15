@@ -18,7 +18,7 @@
 	
 //	$mime = $category->mimetype;
 	
-	if (get_context() == "search") {	// Start search listing version 
+	if (elgg_get_context() == "search") {	// Start search listing version 
 				
 ?>
 		<div>

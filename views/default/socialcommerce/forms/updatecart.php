@@ -16,7 +16,7 @@
 	$display_price = get_price_with_currency($total);
 	$subtotal_text = elgg_echo('cart:subtotal');
 	
-	if(get_context() == "confirm") {
+	if(elgg_get_context() == "confirm") {
 		$form_body .= <<< BOTTOM
 			<div class="search_listing">
 				<span class="address_listing_info_head"><B><h3>$cart_payment</h3></B></span>
@@ -28,7 +28,7 @@
 			</div>
 			<input type="hidden" name="amount" value="{$display_price}">  
 BOTTOM;
-	}elseif (get_context() == "order"){
+	}elseif (elgg_get_context() == "order"){
 		$form_body .= <<< BOTTOM
 			<div class="search_listing">
 				<span class="address_listing_info_head"><B><h3>$cart_payment</h3></B></span>

@@ -1537,10 +1537,10 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 	if ($entity->guid > 0) {
 		if($product = get_entity($entity->product_id))
 			$product_price = $product->price;
-		if (get_context() == "confirm") {
+		if (elgg_get_context() == "confirm") {
 			$quantity_box = $entity->quantity;
 			$quantity_text = elgg_echo("quantity:available");
-		}elseif(get_context() == "order" || get_context() == "purchased_products"){
+		}elseif(elgg_get_context() == "order" || elgg_get_context() == "purchased_products"){
 			$quantity_box = $entity->quantity;
 			$quantity_text = elgg_echo("quantity:available");
 		}else{
@@ -1572,7 +1572,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 		}
 		if($product->product_type_id == 1){
 			$quantity = "<div style='margin-bottom:5px;'><B>{$quantity_text}:</B> {$quantity_box}</div>";
-		}else if($product->product_type_id == 2 && get_context() == 'purchased_products'){
+		}else if($product->product_type_id == 2 && elgg_get_context() == 'purchased_products'){
 			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->wwwroot}action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
 		}
 		$info = <<<EOF

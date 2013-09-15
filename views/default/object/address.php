@@ -29,7 +29,7 @@
 	$owner = $vars['entity']->getOwnerEntity();
 	$friendlytime = friendly_time($vars['entity']->time_created);
 	
-	if (get_context() == "search") {	// Start search listing version 
+	if (elgg_get_context() == "search") {	// Start search listing version 
 ?>
 		<div class="address_listing_info">
 				<table cellpadding="10">
@@ -58,7 +58,7 @@
 			</div>
 <?php
 		}
-	}elseif (get_context() == "confirm" or get_context() == "order") {
+	}elseif (elgg_get_context() == "confirm" or elgg_get_context() == "order") {
 ?>
 		<div class="address_listing_info">
 			<table>
