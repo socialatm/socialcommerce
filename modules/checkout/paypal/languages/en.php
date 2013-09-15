@@ -11,13 +11,12 @@
 	 
 	$english = array(
 		'paypal:standard' => "PayPal Website Payments (Standard)",
-		'paypal:instructions' => "To integrate PayPal into your store you need to follow a few simple steps, which are shown below:",
 		'paypal:instruction1' => '<a target="_blank" href="%s">Register for a free PayPal account here</a>',
-		'paypal:instruction2' => 'Fill in the other details below',
 		'settings' => 'Settings',
 		'mode' => "Mode",
-		'display:name' => "Display Name",
-		'paypal:email' => "PayPal Email ID",
+		'payment:name' => "Payment Name",
+		'paypal:email' => "PayPal Email",
+		'enter:paypal:email' => 'your paypal email goes here',
 		'stores:paypal' => 'PayPal',
 		'stores:sandbox' => 'Sandbox',
 		'not:fill:paypal:settings' => 'You have selected PayPal Website Payments (Standard) for Checkout. To integrate PayPal Website Payments (Standard) into your store you should fill the settings in <B>Checkout</B> tab.',
