@@ -46,7 +46,13 @@
 			switch($filter){
 				case "active":
 					if (!empty($tag)) {
-						$area2 = list_entities_from_metadata_multi( array('status'=>1, $md_type=>$tag), 'object', 'stores', 0, 10 );
+						$area2 = elgg_get_entities_from_metadata(array(
+										'meta_array' => array('status'=>1, $md_type=>$tag),
+										'entity_type' => 'object',
+										'entity_subtype' => 'stores',
+										'owner_guid' => 0,
+										'limit' => 10,
+										));
 					}else{
 						$area2 = elgg_list_entities_from_metadata(array(
 													'status' => 1'
@@ -59,7 +65,13 @@
 				break;
 				case "deleted":
 					if (!empty($tag)) {
-						$area2 = list_entities_from_metadata_multi( array('status'=>0, $md_type=>$tag ), "object", "stores", 0, 10 );
+						$area2 = elgg_get_entities_from_metadata(array(
+										'meta_array' => array('status'=>0, $md_type=>$tag),
+										'entity_type' => 'object',
+										'entity_subtype' => 'stores',
+										'owner_guid' => 0,
+										'limit' => 10,
+										));
 					}else{
 						$area2 = elgg_list_entities_from_metadata(array(
 													'status' => 0'
@@ -78,7 +90,13 @@
 			$area2 = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter ));
 		}else{
 			if (!empty($tag)) {
-				$area2 = list_entities_from_metadata_multi(array('status'=>1, $md_type=>$tag ), "object", "stores", 0, 10);	
+				$area2 = elgg_get_entities_from_metadata(array(
+										'meta_array' => array('status'=>1, $md_type=>$tag),
+										'entity_type' => 'object',
+										'entity_subtype' => 'stores',
+										'owner_guid' => 0,
+										'limit' => 10,
+										));
 			}else{
 				$area2 .= elgg_list_entities_from_metadata('status', 1, "object", "stores", 0, 10 );
 			}
