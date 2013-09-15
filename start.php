@@ -91,10 +91,10 @@
 			register_translations($CONFIG->pluginspath . "socialcommerce/languages/");
 			
 		// Register a page handler, so we can have nice URLs
-			register_page_handler("socialcommerce", "socialcommerce_page_handler");
+			elgg_register_page_handler("socialcommerce", "socialcommerce_page_handler");
 			
 		// Register an image handler for stores
-			register_page_handler("storesimage","socialcommerce_image_handler");
+			elgg_register_page_handler("storesimage","socialcommerce_image_handler");
 			
 		// Add a new file widget
 			if(elgg_is_admin_logged_in()){
@@ -492,7 +492,7 @@ EOT;
 
 		$id = (int)$id;
 
-		if(!$md = get_metadata($id)) { return false; }	
+		if(!$md = elgg_get_metadata_from_id($id)) { return false; }	
 		
 		// If memcached then we invalidate the cache for this entry
 		static $metabyname_memcache;
@@ -528,7 +528,7 @@ EOT;
 		// If ok then add it
 		$result = update_data("UPDATE {$CONFIG->dbprefix}metadata set value_id='$value', value_type='$value_type', access_id=$access_id, owner_guid=$owner_guid where id=$id and name_id='$name'");
 		if ($result!==false) {
-			$obj = get_metadata($id);
+			$obj = elgg_get_metadata_from_id($id);
 			if (trigger_elgg_event('update', 'metadata', $obj)) {
 				return true;
 			} else {
