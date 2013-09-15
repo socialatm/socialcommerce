@@ -16,7 +16,7 @@
 	$order = get_entity($order_guid);
 	$subtype = get_data_row("SELECT * from {$CONFIG->dbprefix}entity_subtypes where id='{$order->subtype}'");
 	
-	if(isloggedin() && $order && $subtype->subtype == "order_item" && $order->owner_guid == $_SESSION['user']->guid){
+	if(elgg_is_logged_in() && $order && $subtype->subtype == "order_item" && $order->owner_guid == $_SESSION['user']->guid){
 		// Get the file
 		$product = get_entity($order->product_id);
 		

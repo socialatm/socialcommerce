@@ -64,7 +64,7 @@
 			global $CONFIG;
 		
 		// Set up menu for logged in users
-			if (isloggedin()) {
+			if (elgg_is_logged_in()) {
 				add_menu( elgg_echo('stores'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/all');
 			}
 	
@@ -162,8 +162,7 @@
 	function socialcommerce_pagesetup() {
 		/*****	add submenu options	*****/
 		if (get_context() == "stores" || get_context() == "socialcommerce") {
-			//if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
-			if (isset($_SESSION['guid']) && isloggedin()) {	
+			if (isset($_SESSION['guid']) && elgg_is_logged_in()) {	
 				add_submenu_item(elgg_echo('stores:everyone'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
 				add_submenu_item(elgg_echo('stores:category'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
 				$splugin_settings = elgg_get_entities(array( 	
@@ -453,7 +452,7 @@
 	function elgg_addcart($entity){
 		global $CONFIG;
 		
-		if ($entity->guid > 0 && (isloggedin())) {
+		if ($entity->guid > 0 && (elgg_is_logged_in())) {
 			$form_body = elgg_view('input/hidden', array('internalname' => 'stores_guid', 'value' => $entity->getGUID()));
 			$form_body .= "<input type='image' src=\"{$CONFIG->wwwroot}mod/socialcommerce/images/shopping_cart_btn.jpg\">";//elgg_view('input/submit', array('value' => elgg_echo("add:to:cart")));
 			if($entity->product_type_id == 1){

@@ -13,7 +13,7 @@
 	 
 	 foreach ($quanties as $cart_item_guid=>$quantity){
 	 	$guid = (int)$cart_item_guid;
-	 	if(isloggedin()){
+	 	if(elgg_is_logged_in()){
 	 		if ($cart_item = get_entity($guid)) {
 	 			if ($cart_item->canEdit()) {
 	 				$product = get_entity($cart_item->product_id);
@@ -25,7 +25,7 @@
  			if($quantity > 0){
  				if($product->quantity >= $quantity){
 	 				if($cart_item->quantity != $quantity){
-	 					if(isloggedin()){
+	 					if(elgg_is_logged_in()){
 				 			$cart_item->quantity = $quantity;
 				 			$result = $cart_item->save();
 	 					}

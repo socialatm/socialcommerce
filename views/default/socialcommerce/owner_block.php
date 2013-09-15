@@ -11,7 +11,7 @@
 	 
 	global $CONFIG;
 
-	if(isloggedin()){
+	if(elgg_is_logged_in()){
 ?>
 		<div id="owner_block_stores">
 			<?php if (isadminloggedin()) { ?>

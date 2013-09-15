@@ -14,7 +14,7 @@
 	$product_type_details = $vars['product_type_details'];
 	$phase = $vars['phase'];
 	if($product){
-		if ($product->guid > 0 && (isloggedin())) {
+		if ($product->guid > 0 && (elgg_is_logged_in())) {
 			$cart_btn = "<input class='input_img' type='image' src=\"{$CONFIG->wwwroot}mod/socialcommerce/images/shopping_cart_btn.jpg\">";
 			
 			$form_body = elgg_view('input/hidden', array('internalname' => 'stores_guid', 'value' => $product->getGUID()));

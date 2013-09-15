@@ -14,7 +14,7 @@ if(get_input('not_allow') && get_input('not_allow') == 1){
 	register_error(elgg_echo('not:allow:error'));
 }
 
-if(isloggedin()){
+if(elgg_is_logged_in()){
 	$cart = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'cart',
@@ -47,7 +47,7 @@ if($cart_items){
 			$mime = $product->mimetype;
 			$tags = $product->tags;
 			$category = $product->category;
-			if(isloggedin()){
+			if(elgg_is_logged_in()){
 				$owner = $cart_item->getOwnerEntity();
 				$parameters = "cart_guid=".$cart_item->getGUID();
 			}

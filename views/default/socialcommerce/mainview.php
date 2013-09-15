@@ -191,7 +191,7 @@ EOF;
 	</div>
 	
 <?PHP
-	if(isloggedin() && $vars['entity']->owner_guid == $_SESSION['user']->guid){
+	if(elgg_is_logged_in() && $vars['entity']->owner_guid == $_SESSION['user']->guid){
 		echo elgg_view("socialcommerce/order_view",array('entity'=>$vars['entity']));
 	}
 ?>

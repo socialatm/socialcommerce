@@ -13,7 +13,7 @@
 	// Load Elgg engine
 		require_once(get_config('path').'engine/start.php');
 
-		if(!isloggedin()){
+		if(!elgg_is_logged_in()){
 			forward("pg/socialcommerce/" . $_SESSION['user']->username);
 		}
 	// Get the current page's owner

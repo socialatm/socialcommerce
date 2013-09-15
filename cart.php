@@ -13,10 +13,10 @@
 		require_once(get_config('path').'engine/start.php');
 		global $CONFIG;
 		
-		if (!isloggedin()) {
+		if (!elgg_is_logged_in()) {
 			$_SESSION['last_forward_from'] = current_page_url();
 			forward();
-		}elseif (isloggedin()){
+		}elseif (elgg_is_logged_in()){
 			// Get the current page's owner
 			$page_owner = page_owner_entity();
 			if ($page_owner === false || is_null($page_owner)) {

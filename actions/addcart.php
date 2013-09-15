@@ -16,7 +16,7 @@
 	$product_guid = get_input("stores_guid");
 
 	$container_guid = (int) get_input('container_guid', 0);
-	if (!$container_guid && isloggedin()){
+	if (!$container_guid && elgg_is_logged_in()){
 		$container_guid = $_SESSION['user']->getGUID();
 	}
 	// Get product enthity
@@ -32,7 +32,7 @@
 	// Check the quantity of a product
 	if($product->quantity > 0 || $product->product_type_id == 2){
 		if(($product->quantity >= $quantity && $quantity > 0) || $product->product_type_id == 2){
-			if(isloggedin()){
+			if(elgg_is_logged_in()){
 				// Get carts of a particular user for find that product is already in particular user's cart
 				$carts = elgg_get_entities(array(
 					'type' => 'object',

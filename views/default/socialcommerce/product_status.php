@@ -15,7 +15,7 @@ $action = $vars['action'];
 $order_status = $vars['status'];
 $statuses = array(0=>'Pending',1=>'Shipped',2=>'received');
 $Status_text = elgg_echo("stores:status");
-if(isloggedin() && $action == "edit"){
+if(elgg_is_logged_in() && $action == "edit"){
 	$offset = get_input('offset');
 	if(!$offset)
 		$offset = 0;

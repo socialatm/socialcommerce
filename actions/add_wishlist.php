@@ -10,7 +10,7 @@
 	 **/ 
 
 	global $CONFIG;
-	if (!isloggedin()) {
+	if (!elgg_is_logged_in()) {
 		system_message(elgg_echo("add:wishlist:not:login"));
 		$_SESSION['last_forward_from'] = current_page_url();
 		forward();

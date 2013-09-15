@@ -14,7 +14,7 @@
 	// Get variables
 	$product_guid = get_input("product_guid");
 	$product = get_entity($product_guid);
-	if($product_guid && $product_guid > 0 && isloggedin()){
+	if($product_guid && $product_guid > 0 && elgg_is_logged_in()){
 		$relation = check_entity_relationship($_SESSION['user']->guid,'wishlist',$product_guid);
 		if($relation){
 			$result = remove_entity_relationship($_SESSION['user']->guid,'wishlist',$product_guid);

@@ -9,7 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 		global $CONFIG;
-		if(isloggedin()){
+		if(elgg_is_logged_in()){
 			$guid = (int) get_input('cart_guid');
 			if ($cart_item = get_entity($guid)) {
 				if ($cart_item->canEdit()) {

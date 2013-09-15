@@ -12,7 +12,7 @@
 	require_once(get_config('path').'engine/start.php');
 	global $CONFIG;
 	
-	if (!isloggedin()) {
+	if (!elgg_is_logged_in()) {
 		system_message(elgg_echo("add:cart:not:login"));
 		$_SESSION['last_forward_from'] = current_page_url();
 		forward();

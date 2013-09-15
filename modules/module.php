@@ -64,7 +64,7 @@ function SetGeneralValuesInConfig(){
 		$CONFIG->checkout_base_url = $CONFIG->wwwroot;
 	}
 	
-	if(isloggedin()){
+	if(elgg_is_logged_in()){
 		$carts = elgg_get_entities(array(
 		'type' => 'object',
 		'subtype' => 'cart',
@@ -141,7 +141,7 @@ function register_subtypes(){
 
 function genarateCartFromSession(){
 	global $CONFIG;
-	if (isloggedin() && isset($_SESSION['GUST_CART']) && !empty($_SESSION['GUST_CART'])) {
+	if (elgg_is_logged_in() && isset($_SESSION['GUST_CART']) && !empty($_SESSION['GUST_CART'])) {
 		$session_cart_items = $_SESSION['GUST_CART'];
 		$ownered_products = array();
 		$less_quantity_products = array();
@@ -1544,7 +1544,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 			$quantity_box = $entity->quantity;
 			$quantity_text = elgg_echo("quantity:available");
 		}else{
-			if(isloggedin()){
+			if(elgg_is_logged_in()){
 				$quantity_box = elgg_view('input/text',array('internalname' => "cartquantity[{$entity->guid}]",'class'=>"input_quantity", 'value'=>$entity->quantity));
 				$quantity_text = elgg_echo("quantity");
 			}
@@ -1606,7 +1606,7 @@ EOF;
 function calculate_cart_total($cart_user=0,$product_user=0){
 	global $CONFIG;
 		
-	if(isloggedin()){
+	if(elgg_is_logged_in()){
 		if($cart_user > 0)
 			$user_guid = $cart_user;
 		else

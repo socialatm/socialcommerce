@@ -10,7 +10,7 @@
 	 **/ 
 	 
 	global $CONFIG;
-	if(isloggedin()){
+	if(elgg_is_logged_in()){
 		if($vars['not_allow'] == 1){
 			$hidden = "<input type=\"hidden\" name=\"not_allow\" value=\"1\">";
 			$action = "#";
