@@ -881,4 +881,6 @@ EOT;
 		register_action("socialcommerce/addcommon_tax",false,$CONFIG->pluginspath . "socialcommerce/actions/addcommon_tax.php");
 		register_action("socialcommerce/addcountry_tax",false,$CONFIG->pluginspath . "socialcommerce/actions/addcountry_tax.php");
 		register_action('socialcommerce/manage_socialcommerce', false, $CONFIG->pluginspath . 'socialcommerce/actions/manage_socialcommerce.php', false);
+		
+		elgg_register_action('socialcommerce/settings/save', $CONFIG->pluginspath . 'socialcommerce/actions/socialcommerce/settings/save.php' );
 ?>
