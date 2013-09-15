@@ -74,15 +74,6 @@
 		}
 			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general';
 			break;	
-		case 'checkout':
-			$order = get_input('order');
-			$method = get_input('method');
-			$function = 'set_checkout_settings_'.$method;
-			if(function_exists($function)){
-				$function();
-			}
-			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/checkout/'.$order;
-			break;	
 		case 'makepayment':
 			$method = get_input('payment_method');
 			$function = 'makepayment_'.$method;
