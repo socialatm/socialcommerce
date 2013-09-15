@@ -180,7 +180,7 @@
 					add_submenu_item(elgg_echo('stores:addcate'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
 				}
 					
-			} else if (page_owner()) {
+			} else if ( elgg_get_page_owner_guid()) {
 				$page_owner = elgg_get_page_owner_entity();
 				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username);
 				if ($page_owner instanceof ElggUser)

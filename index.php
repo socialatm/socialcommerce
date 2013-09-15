@@ -42,10 +42,10 @@
 			$filter = "active";
 		switch($filter){
 			case "active":
-				$area2 = list_entities_from_metadata('status',1,"object","stores",page_owner(),$limit);
+				$area2 = list_entities_from_metadata('status', 1, "object", "stores", elgg_get_page_owner_guid(), $limit);
 			break;
 			case "deleted":
-				$area2 = list_entities_from_metadata('status',0,"object","stores",page_owner(),$limit);
+				$area2 = list_entities_from_metadata('status', 0, "object", "stores", elgg_get_page_owner_guid(), $limit);
 			break;
 		}
 		if(empty($area2)){
