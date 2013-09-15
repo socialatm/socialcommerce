@@ -14,7 +14,7 @@
 	if(elgg_is_logged_in()){
 ?>
 		<div id="owner_block_stores">
-			<?php if (isadminloggedin()) { ?>
+			<?php if (elgg_is_admin_logged_in()) { ?>
 				<!--My Account-->
 				<div class="scommerce_settings">
 					<a href="<?php echo $CONFIG->wwwroot . 'pg/socialcommerce/' . $_SESSION['user']->username . '/settings/general'; ?>" />
@@ -29,7 +29,7 @@
 				</a>
 			</div>
 			<?php 
-			if(!isadminloggedin()){
+			if(!elgg_is_admin_logged_in()){
 			?>
 			<!--Cart-->
 			<?php 

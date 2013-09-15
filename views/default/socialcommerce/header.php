@@ -10,7 +10,7 @@
 	 **/ 
 	 
 global $CONFIG, $settings;
-if(isadminloggedin() && $settings == 1){
+if(elgg_is_admin_logged_in() && $settings == 1){
 	confirm_social_commerce_settings();
 }
 

@@ -33,7 +33,7 @@
 			$limit = 10;
 		}
 		$view = get_input('view');
-		if (isadminloggedin()) {
+		if (elgg_is_admin_logged_in()) {
 			$filter = get_input("filter");
 			if(!$filter)
 				$filter = "active";

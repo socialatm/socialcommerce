@@ -109,7 +109,7 @@
 							<div class="clear"></div>
 						</div>	
 <?php
-							if(isadminloggedin() || $_SESSION['user']->guid == $stores->owner_guid){
+							if(elgg_is_admin_logged_in() || $_SESSION['user']->guid == $stores->owner_guid){
 ?>
 								<div class="storesrepo_controls">
 <?php

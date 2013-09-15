@@ -97,11 +97,11 @@
 			register_page_handler("storesimage","socialcommerce_image_handler");
 			
 		// Add a new file widget
-			if(isadminloggedin()){
+			if(elgg_is_admin_logged_in()){
 			add_widget_type('recent', elgg_echo("stores:recent:widget"),elgg_echo("stores:recent:widget:description"));
 			}
 			//add_widget_type('mostly',elgg_echo("stores:mostly:widget"),elgg_echo("stores:mostly:widget:description"));
-			if(!isadminloggedin()){
+			if(!elgg_is_admin_logged_in()){
 			add_widget_type('purchased',elgg_echo("stores:purchased:widget"),elgg_echo("stores:purchased:widget:description"));
 			}
 		// Register a URL handler for files
@@ -174,7 +174,7 @@
 					$settings = $splugin_settings[0];
 				}
 	
-				if( isadminloggedin() ){
+				if( elgg_is_admin_logged_in() ){
 					add_submenu_item(elgg_echo('stores:addpost'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
 					add_submenu_item(elgg_echo('stores:sold:products'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
 					add_submenu_item(elgg_echo('stores:addcate'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
@@ -188,7 +188,7 @@
 			}
 		}
 		
-		if (elgg_get_context() == 'admin' && isadminloggedin()) {
+		if (elgg_get_context() == 'admin' && elgg_is_admin_logged_in()) {
 			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general/');
 		}
 	}

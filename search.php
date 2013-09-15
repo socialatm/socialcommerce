@@ -38,7 +38,7 @@
 		
 		$limit = 10;
 		
-		if (isadminloggedin()) {
+		if (elgg_is_admin_logged_in()) {
 		
 			$filter = get_input("filter");
 			if(!$filter)
