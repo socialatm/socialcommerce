@@ -532,7 +532,7 @@ EOT;
 			if (trigger_elgg_event('update', 'metadata', $obj)) {
 				return true;
 			} else {
-				delete_metadata($id);
+				elgg_delete_metadata(array('metadata_id' => $id));
 			}
 		}
 		return $result;
