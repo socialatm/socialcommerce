@@ -28,9 +28,9 @@
 
 	
 	// Get objects
-		set_context('confirm');
+		elgg_set_context('confirm');
 		$area2 = elgg_view("socialcommerce/cart_confirm");
-		set_context('stores');
+		elgg_set_context('stores');
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">

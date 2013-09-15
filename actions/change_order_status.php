@@ -13,7 +13,7 @@
 	
 	$order_item_guid = get_input('id');
 	$order_item_status = get_input('status');
-	set_context('add_order');
+	elgg_set_context('add_order');
 	if($order_item_guid){
 		$order_item = get_entity($order_item_guid);
 		if($order_item){

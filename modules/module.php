@@ -534,7 +534,7 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 
 	global $CONFIG;					//	@todo	-	working on making this go away...
 	$used_coupons = array();
-	set_context('add_order');
+	elgg_set_context('add_order');
 	
 	$user = get_entity($buyer_guid);	//	@todo - change all instances of $user to $buyer ...
 	$buyer = get_entity($buyer_guid);
@@ -940,7 +940,7 @@ function view_cancel_page(){
 		$body = elgg_view($view);
 		$title = elgg_view_title(elgg_echo('cart:cancel'));
 		$title1 = elgg_echo('cart:cancel');
-		set_context('socialcommerce');
+		elgg_set_context('socialcommerce');
 		page_draw($title1,elgg_view_layout("two_column_left_sidebar", '', elgg_view_title($title) . $body));
 	}else{
 		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");

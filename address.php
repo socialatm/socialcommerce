@@ -32,7 +32,7 @@
 			)) 
 		){
 			
-			set_context('search');
+			elgg_set_context('search');
 			
 			$area2 .= elgg_list_entities(array(
 						'type' => 'object',
@@ -42,7 +42,7 @@
 						));
 						
 			$area2 .= elgg_view("socialcommerce/forms/confirm_address");
-			set_context('address');
+			elgg_set_context('address');
 		}else{
 			$area2 .= elgg_view("socialcommerce/forms/edit_address");
 		}

@@ -24,7 +24,7 @@
 		$title = elgg_view_title(elgg_echo('stores:orders'));
 	
 	// Get objects
-		set_context('order');
+		elgg_set_context('order');
 		$view = get_input('view');
 		$area2 = elgg_list_entities(array(
 						'type' => 'object',
@@ -44,7 +44,7 @@
 				</div>
 EOF;
 		}
-		set_context('stores');
+		elgg_set_context('stores');
 	// These for left side menu
 		$area1 .= gettags();
 	// set autofeed as false for not display the Subscribe to feed link in owner block

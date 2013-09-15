@@ -13,7 +13,7 @@
 	
 	$title = elgg_view_title($title = elgg_echo('stores:yours:friends'));
 	
-	set_context('search');
+	elgg_set_context('search');
 	$search_viewtype = get_input('search_viewtype');
 	
 	$limit = ($search_viewtype == 'gallery') ? 20 : 10 ;
@@ -38,7 +38,7 @@
 			</div>
 EOF;
 	}
-	set_context('stores');
+	elgg_set_context('stores');
 	
 	// These for left side menu
 	$area1 .= gettags();

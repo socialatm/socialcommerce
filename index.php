@@ -28,7 +28,7 @@
 		}
 		
 	// Get objects
-		set_context('search');
+		elgg_set_context('search');
 		
 		$search_viewtype = get_input('search_viewtype');
 		if($search_viewtype == 'gallery'){
@@ -60,7 +60,7 @@
 			</div>
 EOF;
 		}
-		set_context('stores');
+		elgg_set_context('stores');
 	// These for left side menu
 		$area1 .= gettags();
 		//$area1 .= get_storestype_cloud(page_owner());

@@ -14,7 +14,7 @@
 	global $CONFIG;
 	$title = elgg_view_title($title = elgg_echo('stores:sold:products'));
 	
-	set_context('search');
+	elgg_set_context('search');
 	
 	$limit = 10;
 	$offset = get_input('offset');
@@ -47,7 +47,7 @@
 			{$area2}
 		</div>
 EOF;
-	set_context('socialcommerce');
+	elgg_set_context('socialcommerce');
 	//$area1 = get_filetype_cloud(page_owner(), true);
 	// These for left side menu
 	$area1 .= gettags();

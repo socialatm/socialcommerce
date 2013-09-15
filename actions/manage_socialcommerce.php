@@ -29,7 +29,7 @@
 			$body = view_checkout_error_page();
 			$title = elgg_view_title(elgg_echo('checkout:error'));
 			$display = true;
-			set_context('socialcommerce');
+			elgg_set_context('socialcommerce');
 			break;
 		case 'withdraw':
 				;

@@ -34,7 +34,7 @@
 		$area1 = gettags();
 		
 		// Set context
-		set_context('search');
+		elgg_set_context('search');
 		
 		$limit = 10;
 		
@@ -77,7 +77,7 @@
 				{$area2}
 			</div>
 EOF;
-		set_context("stores");
+		elgg_set_context("stores");
 		
 		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2 );
 		

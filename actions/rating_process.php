@@ -16,7 +16,7 @@
 	require_once(get_config('path').'engine/start.php');
 	
 	//getting the values
-	set_context('add_order');
+	elgg_set_context('add_order');
 	$vote_sent = preg_replace("/[^0-9]/","",$_REQUEST['j']);
 	$id_sent = preg_replace("/[^0-9a-zA-Z]/","",$_REQUEST['q']);
 	$user_guid = preg_replace("/[^0-9\.]/","",$_REQUEST['t']);

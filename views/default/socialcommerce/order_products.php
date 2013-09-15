@@ -35,7 +35,7 @@
 				$grand_total += $total;
 
 				$shipping_total += $shipping;
-				set_context('order');
+				elgg_set_context('order');
 				$status = elgg_view("socialcommerce/product_status",array('entity'=>$order_item,'status'=>$order_item->status,'action'=>'view'));
 				$display_price = get_price_with_currency($price);
 				$display_total = get_price_with_currency($total);

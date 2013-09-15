@@ -31,7 +31,7 @@
 		}
 		
 	// Get objects
-		set_context('search');
+		elgg_set_context('search');
 		$area2 = elgg_view("socialcommerce/cart");
 		$area2 = <<<EOF
 			{$title}

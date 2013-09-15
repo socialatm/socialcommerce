@@ -32,7 +32,7 @@
 		$title = elgg_view_title(elgg_view('output/category',array('value' => $product_category,'display'=>1)));
 	
 	// Get objects
-		set_context('search');
+		elgg_set_context('search');
 		if (isadminloggedin()) {
 			$filter = get_input("filter");
 			if(!$filter)
@@ -63,7 +63,7 @@
 				{$area2}
 			</div>
 EOF;
-		set_context('stores');
+		elgg_set_context('stores');
 		// These for left side menu
 			$area1 .= gettags();
 		//$area1 .= get_storestype_cloud(page_owner());

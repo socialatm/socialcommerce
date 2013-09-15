@@ -13,7 +13,7 @@
 		require_once(get_config('path').'engine/start.php');
 		global $CONFIG;
 		gatekeeper();
-		set_context('stores');
+		elgg_set_context('stores');
 	// Get the current page's owner
 		$page_owner = page_owner_entity();
 		$page_owner = $_SESSION['user'];

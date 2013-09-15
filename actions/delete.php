@@ -16,9 +16,9 @@
 		if ($stores->canEdit()) {
 			$stores->status = 0;
 			$context = get_context();
-			set_context('delete_product');
+			elgg_set_context('delete_product');
 			$delete = $stores->save();
-			set_context($context);
+			elgg_set_context($context);
 						
 			if (!$delete) {
 				register_error(elgg_echo("stores:deletefailed"));

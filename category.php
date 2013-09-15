@@ -30,7 +30,7 @@
 		$offset = 0;
 		$limit = 9999;
 		$fullview = false;
-		set_context('search');
+		elgg_set_context('search');
 		$digital_cats = elgg_get_entities_from_metadata(array(
 			'product_type_id' => 2,
 			'entity_type' =>'object',
@@ -58,7 +58,7 @@ EOF;
 				{$digital_area}
 			</div>
 EOF;
-		set_context('category');
+		elgg_set_context('category');
 	// These for left side menu
 		$area1 .= gettags();
 		//$area1 .= get_storestype_cloud(page_owner());

@@ -30,7 +30,7 @@
 		$title = elgg_view_title(sprintf(elgg_echo('order:heading'),$order->guid));
 	
 	// Get objects
-		set_context('order');
+		elgg_set_context('order');
 		$area2 .= elgg_view("socialcommerce/order_products",array('entity'=>$order));
 		$area2 = <<<EOF
 			{$title}
@@ -38,7 +38,7 @@
 				{$area2}
 			</div>
 EOF;
-		set_context('stores');
+		elgg_set_context('stores');
 		// These for left side menu
 			$area1 .= gettags();
 		//$area1 .= get_storestype_cloud(page_owner());

@@ -31,7 +31,7 @@
 		$title = elgg_view_title(elgg_echo('cart:success'));
 		
 	// Get objects
-		set_context('order');
+		elgg_set_context('order');
 		$body = elgg_echo('cart:success:content');
 		$area2 .= <<< AREA2
 			<div class="search_listing_info">
@@ -40,7 +40,7 @@
 AREA2;
 		$area2 .= elgg_view("socialcommerce/cart_success");
 		
-		set_context('stores');
+		elgg_set_context('stores');
 		
 		$area2 = <<<EOF
 			{$title}
