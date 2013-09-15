@@ -320,7 +320,7 @@ function confirm_social_commerce_settings(){
 		$selected_shippingmethods = $splugin_settings->shipping_methods;
 		$selected_withdraw_methods = $splugin_settings->fund_withdraw_methods;
 		
-		$checkout_methods = get_checkout_methods();
+		$checkout_methods = sc_get_checkout_methods();
 		if($checkout_methods){
 			load_checkout_actions();
 			if($selected_checkoutmethods){
@@ -404,7 +404,7 @@ function confirm_social_commerce_settings(){
 /*****	CHECKOUT	*****/
 /*****	 Read the check out plugins and get checkout methods. Return them as an array.	*****/
 
-function get_checkout_methods(){
+function sc_get_checkout_methods(){
 	$checkout_lists = get_checkout_list();
 	if ($checkout_lists) {
 		$checkout_methods = array();
