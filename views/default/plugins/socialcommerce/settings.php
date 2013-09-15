@@ -9,11 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	$socialcommerce = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'socialcommerce',
-			));
-	 
+	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
 	$tab = get_input('tab') ? get_input('tab') : 'general';
 
 	$vars = array(
