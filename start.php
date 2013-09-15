@@ -23,8 +23,8 @@
 	if(count($splugin_settings) < 1){
 		$splugin_settings = new ElggObject;
 		$splugin_settings->subtype = 'splugin_settings';
-		$splugin_settings->owner_guid = get_loggedin_userid();
-		$splugin_settings->container_guid = get_loggedin_userid();
+		$splugin_settings->owner_guid = elgg_get_logged_in_user_guid();
+		$splugin_settings->container_guid = elgg_get_logged_in_user_guid();
 		$splugin_settings->site_guid = get_config('site_id');
 		$splugin_settings->access_id = ACCESS_PUBLIC;
 		$splugin_settings->checkout_methods = 'paypal';
@@ -505,7 +505,7 @@ EOT;
 		$value_type = detect_extender_valuetype($value, sanitise_string(trim($value_type)));
 		
 		$owner_guid = (int)$owner_guid;
-		if ($owner_guid==0) $owner_guid = get_loggedin_userid();
+		if ($owner_guid==0) $owner_guid = elgg_get_logged_in_user_guid();
 		
 		$access_id = (int)$access_id;
 		
@@ -732,7 +732,7 @@ EOT;
 		
 			$access = get_access_list();
 			
-			$owner = get_loggedin_userid();
+			$owner = elgg_get_logged_in_user_guid();
 			if (!$owner) $owner = -1;
 			
 			global $is_admin;
