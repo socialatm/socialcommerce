@@ -11,7 +11,7 @@
 
 	gatekeeper();
 	// Get the current page's owner
-		$page_owner = page_owner_entity();
+		$page_owner = elgg_get_page_owner_entity();
 		
 		if ($page_owner === false || is_null($page_owner)) {
 			$page_owner = $_SESSION['user'];
@@ -70,6 +70,6 @@ EOF;
 		$body = elgg_view_layout('two_column_left_sidebar', $area1, $title.$area2);
 	
 	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:my:account"),page_owner_entity()->name), $body);
+		page_draw(sprintf(elgg_echo("stores:my:account"), elgg_get_page_owner_entity()->name), $body);
 	
 ?>

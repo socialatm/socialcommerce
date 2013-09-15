@@ -23,5 +23,5 @@
 		$body = elgg_view_layout('one_column', $area2);
 	
 	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:your"),page_owner_entity()->name), $body);
+		page_draw(sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name), $body);
 ?>

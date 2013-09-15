@@ -181,7 +181,7 @@
 				}
 					
 			} else if (page_owner()) {
-				$page_owner = page_owner_entity();
+				$page_owner = elgg_get_page_owner_entity();
 				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username);
 				if ($page_owner instanceof ElggUser)
 					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username . "/friends/");

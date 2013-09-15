@@ -15,7 +15,7 @@
 		gatekeeper();
 		elgg_set_context('stores');
 	// Get the current page's owner
-		$page_owner = page_owner_entity();
+		$page_owner = elgg_get_page_owner_entity();
 		$page_owner = $_SESSION['user'];
 		set_page_owner($_SESSION['guid']);
 		
@@ -71,5 +71,5 @@ EOF;
 		}
 	
 	// Finally draw the page
-		page_draw(sprintf(elgg_echo('stores:my:wishlist').$count,page_owner_entity()->name), $body);
+		page_draw(sprintf(elgg_echo('stores:my:wishlist').$count, elgg_get_page_owner_entity()->name), $body);
 ?>

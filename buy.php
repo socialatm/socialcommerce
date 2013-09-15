@@ -26,7 +26,7 @@
 	
 	global $CONFIG;
 	// Get the current page's owner
-		$page_owner = page_owner_entity();
+		$page_owner = elgg_get_page_owner_entity();
 		if ($page_owner === false || is_null($page_owner)) {
 			$page_owner = $_SESSION['user'];
 			set_page_owner($_SESSION['guid']);
@@ -48,7 +48,7 @@
 			
 			$body = elgg_view_layout('two_column_left_sidebar', $area1 , $area2);
 			
-			page_draw(sprintf(elgg_echo("cart:add"),page_owner_entity()->name), $body);
+			page_draw(sprintf(elgg_echo("cart:add"), elgg_get_page_owner_entity()->name), $body);
 		} else {
 			forward();
 		}
