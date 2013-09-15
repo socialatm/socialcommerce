@@ -17,63 +17,6 @@
 	$manage_action = get_input('manage_action');
 	
 	switch ($manage_action){
-		case 'settings':
-			$checkoutmethod = get_input('checkout_method') ? get_input('checkout_method') : array();	//	@todo - make this mandatory
-			
-			//	@todo - fund_withdraw_method is not on the form
-			$fund_withdraw_methods = get_input('fund_withdraw_method') ? get_input('fund_withdraw_method') : array();	
-		
-		$river_settings = get_input('river_settings')? get_input('river_settings') : array();
-		
-		//	@todo - allow_add_product is not on the form
-			$allow_add_product = get_input('allow_add_product') ? get_input('allow_add_product') : array();
-			
-			// @todo - default_view does not give us a gallery option on the form
-			$default_view = get_input('default_view') ? get_input('default_view') : 'list';
-					
-			$https_allow = get_input('https_allow');		//	@todo - not on the form
-			if($https_allow){
-				$https_url_text = get_input('https_url_text');
-				if(empty($https_url_text)){ 
-					register_error(elgg_echo("https url should not be blank"));
-				}
-			}
-			else{
-				$https_allow =0;
-				$https_url_text = "";
-			}
-			
-			$share_this = get_input('share_this','',false);			//	@todo - not on the form
-			
-			$splugin_settings = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-			));
-			$splugin_settings = $splugin_settings[0];
-			
-	//		$guid = get_input('guid');
-			$settings = $splugin_settings;
-			$settings->checkout_methods = $checkoutmethod;
-			$settings->fund_withdraw_methods = $fund_withdraw_methods;
-			$settings->default_view = $default_view;
-			// For Add The https URL 
-			$settings->https_allow = $https_allow;
-			$settings->https_url_text = $https_url_text;
-			$settings->share_this = $share_this;
-			$settings->river_settings = $river_settings;
-			$settings->http_proxy_server = "";
-			$settings->http_proxy_port = "";
-			$settings->http_verify_ssl = "";
-			$settings->allow_add_product = "";
-			$settings->allow_shipping_method = 1;
-
-		if($settings->save()){
-			system_message(sprintf(elgg_echo("settings:saved"), elgg_echo("item:object:splugin_settings")));
-		}else{
-			register_error(elgg_echo("settings:save:error"));
-		}
-			$redirect = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general';
-			break;	
 		case 'makepayment':
 			$method = get_input('payment_method');
 			$function = 'makepayment_'.$method;
