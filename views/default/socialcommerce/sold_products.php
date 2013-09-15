@@ -38,7 +38,7 @@ if($stores){
 	$info = "<p> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></p>";
 	$info .= "<p class=\"owner_timestamp\">
 		<a href=\"{$vars['url']}pg/socialcommerce/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
-		$numcomments = elgg_count_comments($stores);
+		$numcomments = $stores->countComments();
 		if ($numcomments)
 			$info .= ", <a href=\"{$stores->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
 	$info .= "</p>";

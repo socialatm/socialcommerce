@@ -35,7 +35,7 @@
 	$info = "<div> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></div>";
 	$info .= "<div class=\"owner_timestamp\">
 		<a href=\"{$owner->getURL()}\">{$owner->name}</a> {$friendlytime}";
-		$numcomments = elgg_count_comments($stores);
+		$numcomments = $stores->countComments();
 		if ($numcomments)
 			$info .= ", <a href=\"{$stores->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
 	$info .= "</div>";
