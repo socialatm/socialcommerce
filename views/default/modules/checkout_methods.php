@@ -15,7 +15,7 @@
 			));
 	$splugin_settings = $splugin_settings[0];
 	 
-	$checkout_methods = get_checkout_methods();
+	$checkout_methods = sc_get_checkout_methods();
 	$order = get_input('order') ? get_input('order') : 0 ;
 	$selected_checkoutmethods_guid = $splugin_settings->guid;
 	$selected_checkoutmethods = $splugin_settings->checkout_methods;
