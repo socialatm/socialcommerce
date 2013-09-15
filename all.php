@@ -65,7 +65,13 @@
 				$area2 = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter));
 			}
 		}else{
-			$area2 = list_entities_from_metadata('status',1,"object","stores",0,$limit);
+			$area2 = elgg_list_entities_from_metadata(array(
+								'status' => 1'
+								'entity_type' => 'object',
+								'entity_subtype' => 'stores',
+								'owner_guid' => 0,
+								'limit' => $limit,
+								));
 			if(empty($area2)){
 				$area2 = elgg_echo('product:null');
 			}
