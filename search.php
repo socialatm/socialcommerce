@@ -48,14 +48,26 @@
 					if (!empty($tag)) {
 						$area2 = list_entities_from_metadata_multi( array('status'=>1, $md_type=>$tag), 'object', 'stores', 0, 10 );
 					}else{
-						$area2 = elgg_list_entities_from_metadata('status',1,"object","stores",0,10);
+						$area2 = elgg_list_entities_from_metadata(array(
+													'status' => 1'
+													'entity_type' => 'object',
+													'entity_subtype' => 'stores',
+													'owner_guid' => 0,
+													'limit' => 10,
+													));
 					}
 				break;
 				case "deleted":
 					if (!empty($tag)) {
 						$area2 = list_entities_from_metadata_multi( array('status'=>0, $md_type=>$tag ), "object", "stores", 0, 10 );
 					}else{
-						$area2 = elgg_list_entities_from_metadata('status',0,"object","stores",0,10);
+						$area2 = elgg_list_entities_from_metadata(array(
+													'status' => 0'
+													'entity_type' => 'object',
+													'entity_subtype' => 'stores',
+													'owner_guid' => 0,
+													'limit' => 10,
+													));
 					}
 				break;
 			}

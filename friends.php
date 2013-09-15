@@ -25,7 +25,13 @@
 		foreach($friends as $friend) {
 			$friendguids[] = $friend->getGUID();
 		}
-		$area2 = list_entities_from_metadata('status', 1, 'object', 'stores', $friendguids, $limit );
+		$area2 = elgg_list_entities_from_metadata(array(
+					'status' => 1'
+					'entity_type' => 'object',
+					'entity_subtype' => 'stores',
+					'owner_guid' => $friendguids,
+					'limit' => $limit,
+					));
 	}
 	if($view != 'rss'){
 		if(empty($area2)){
