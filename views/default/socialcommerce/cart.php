@@ -101,7 +101,7 @@ EOF;
 			}else{
 				$icon = "";	
 			}
-			$display_cart_items .= elgg_view_listing($image.$icon, $info);
+			$display_cart_items .= elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
 		}
 	}
 	$update_cart = elgg_view("socialcommerce/forms/updatecart");

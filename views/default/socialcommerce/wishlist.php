@@ -76,7 +76,7 @@ EOF;
 					'entity' => $product,
 					'size' => 'small',
 					 ));
-		$display_cart_items .= elgg_view_listing($icon, $info);
+		$display_cart_items .= elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
 	}
 }else {
 	$display_cart_items = elgg_echo('wishlist:null');

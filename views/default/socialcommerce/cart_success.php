@@ -75,7 +75,7 @@ EOF;
 				if($product->mimetype && $product->product_type_id == 2){							
 					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}
-				$display_cart_items .= elgg_view_listing($image.$icon, $info);
+				$display_cart_items .= elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
 			}
 		}
 		$update_cart = elgg_view("socialcommerce/forms/updatecart");

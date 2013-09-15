@@ -115,6 +115,6 @@ EOF;
 									'size' => 'small',
 								  )
 								);
-	echo elgg_view_listing($image.$icon, $info);
+	echo elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
 }
 ?>

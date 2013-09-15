@@ -42,7 +42,7 @@
 												'size' => 'small',
 											  ));
 		
-		echo elgg_view_listing($icon, $info);
+		echo elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
 	}elseif (elgg_get_context() == "confirm") {
 		$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
@@ -54,7 +54,7 @@
 												'size' => 'small',
 											  ));
 											  
-		echo elgg_view_listing($icon, $info);
+		echo elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
 	}elseif (elgg_get_context() == "order") {	// Start search listing version 
 		$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
@@ -66,6 +66,6 @@
 												'size' => 'small',
 											  ));
 		
-		echo elgg_view_listing($icon, $info);
+		echo elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
 	}
 ?>

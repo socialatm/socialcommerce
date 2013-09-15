@@ -110,5 +110,5 @@ EOF;
 	if($stores->mimetype && $stores->product_type_id == 2){							
 		$icon = "<div style=\"padding-top:10px;\"><a href=\"{$stores->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
 	}
-	echo elgg_view_listing($image.$icon, $info);
+	echo elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
 ?>

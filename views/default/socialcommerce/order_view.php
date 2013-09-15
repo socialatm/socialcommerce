@@ -58,7 +58,7 @@ if($order_items){
 EOF;
 		$icon = elgg_view("profile/icon",array('entity' => $owner, 'size' => 'small'));
 		
-		$display_cart_items .= elgg_view_listing($icon, $info);
+		$display_cart_items .= elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
 	}
 }
 
