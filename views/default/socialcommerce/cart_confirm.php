@@ -93,17 +93,17 @@ EOF;
 }
 
 // Set Payment 
-if(get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce' )){
-	$environment = get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce' );
+if(elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce' )){
+	$environment = elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce' );
 }else{
 	$environment = "sandbox";
 }
 if($environment == "sandbox"){
-	$business = get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
+	$business = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
 	$paypalurl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
 	
 }else if ($environment == "paypal") {
-	$business = get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
+	$business = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
 	$paypalurl = "https://www.paypal.com/cgi-bin/webscr";	
 }
 $cencelurl = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/cancel/";
