@@ -17,9 +17,8 @@
 	// Get the current page's owner
 		$page_owner = elgg_get_page_owner_entity();
 		$page_owner = $_SESSION['user'];
-		set_page_owner($_SESSION['guid']);
+		elgg_set_page_owner_guid($_SESSION['guid']);
 		
-	
 	// Set stores title
 		$title = elgg_view_title(elgg_echo('stores:your:wishlist'));
 	

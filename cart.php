@@ -21,7 +21,7 @@
 			$page_owner = elgg_get_page_owner_entity();
 			if ($page_owner === false || is_null($page_owner)) {
 				$page_owner = $_SESSION['user'];
-				set_page_owner($_SESSION['guid']);
+				elgg_set_page_owner_guid($_SESSION['guid']);
 			}
 			if(page_owner() != $_SESSION['user']->guid){
 				forward("pg/socialcommerce/" . $_SESSION['user']->username . "/cart/");

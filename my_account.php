@@ -15,7 +15,7 @@
 		
 		if ($page_owner === false || is_null($page_owner)) {
 			$page_owner = $_SESSION['user'];
-			set_page_owner($_SESSION['guid']);
+			elgg_set_page_owner_guid($_SESSION['guid']);
 		}
 		if($page_owner->guid != $_SESSION['guid']){
 			register_error(elgg_echo('stores:user:not:match'));
