@@ -413,7 +413,7 @@
 	 */
 	function stores_url( $entity ) {
 		$title = $entity->title;
-		$title = friendly_title($title);
+		$title = elgg_get_friendly_title($title);
 		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
 	}
 	
@@ -425,13 +425,13 @@
 	 */
 	function category_url($entity) {
 		$title = $entity->title;
-		$title = friendly_title($title);
+		$title = elgg_get_friendly_title($title);
 		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
 	}
 	
 	function cart_url($entity) {
 		$title = $entity->title;
-		$title = friendly_title($title);
+		$title = elgg_get_friendly_title($title);
 		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
 	}
 	
@@ -444,8 +444,7 @@
 	function addcartURL($entity) {
 		global $CONFIG;
 		$title = $entity->title;
-		$title = friendly_title($title);
-		//return $CONFIG->url . "pg/socialcommerce/" . $entity->getOwnerEntity()->username . "/buy/" . $entity->getGUID() . "/" . $title;
+		$title = elgg_get_friendly_title($title);
 		return	elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/addcart?stores_guid=".$entity->getGUID());		//	@todo - fix query string
 	}
 	
