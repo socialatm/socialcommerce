@@ -38,12 +38,22 @@
 			if(!$filter)
 				$filter = "active";
 			switch($filter){
-				case "active":
-					$area2 = list_entities_from_metadata('status',1,"object","stores",0,$limit);
-				break;
-				case "deleted":
-					$area2 = list_entities_from_metadata('status',0,"object","stores",0,$limit);
-				break;
+				case "active":	$area2 = elgg_list_entities_from_metadata(array(
+													'status' => 1'
+													'entity_type' => 'object',
+													'entity_subtype' => 'stores',
+													'owner_guid' => 0,
+													'limit' => $limit,
+													));
+								break;
+				case "deleted":	$area2 = elgg_list_entities_from_metadata(array(
+													'status' => 0'
+													'entity_type' => 'object',
+													'entity_subtype' => 'stores',
+													'owner_guid' => 0,
+													'limit' => $limit,
+													));
+								break;
 			}
 			if(empty($area2)){
 				$area2 = elgg_echo('product:null');

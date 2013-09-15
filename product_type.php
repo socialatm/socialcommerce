@@ -53,7 +53,7 @@
 		}else{
 			$area2 .= list_entities_from_metadata_multi(array('status'=>1,'product_type_id'=>$product_type_id),"object","stores",0,$limit);
 		}
-		//$area2 .= list_entities_from_metadata('product_type_id',$product_type_id,"object","stores",0);
+		
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">

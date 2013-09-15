@@ -56,7 +56,7 @@
 				$area2 = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
 			}
 		}
-		//$area2 .= list_entities_from_metadata('category',$product_category,"object","stores",0);
+		
 		$area2 = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">
