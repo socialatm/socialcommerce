@@ -8,7 +8,9 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-		 
+	 
+	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
+	
 	$sc_payment_name = elgg_get_plugin_setting('payment_name', 'socialcommerce') ? elgg_get_plugin_setting('payment_name', 'socialcommerce') : elgg_echo('paypal:standard');
 	$sc_paypal_email = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce') ? elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce') : elgg_echo('enter:paypal:email');
 	$sc_paypal_environment = elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce') ? elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce') : 'sandbox';
