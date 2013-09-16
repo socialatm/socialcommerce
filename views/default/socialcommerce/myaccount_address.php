@@ -21,7 +21,7 @@
 	){
 
  		$list_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
-		$body = <<<EOF
+		$content = <<<EOF
 			<div>
 				<div style="float:right;margin-bottom:10px;">
 					<div class="buttonwrapper" style="float:left;">
@@ -34,12 +34,12 @@
 			</div>
 EOF;
 	}else{
-		$body = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
+		$content = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
 	}
 	$delete_confirm_msg = elgg_echo('delete:confirm:address');
 	$load_action = $CONFIG->checkout_base_url.'pg/socialcommerce/'.$_SESSION['user']->username.'/view_address'; 
 	$delete_action = $CONFIG->checkout_base_url.'action/socialcommerce/delete_address';
-	$area2 = <<<EOF
+	$content = <<<EOF
 		<script>
 			function add_myaddress(){
 				$("#myaccount_address").load("{$load_action}", { 
@@ -87,11 +87,10 @@ EOF;
 		<div class="basic checkout_process">
 			<div class="content">
 				<div id="myaccount_address">
-					{$body}
+					{$content}
 				</div>
 			</div>
 		</div>			
 EOF;
-	
-	echo $area2;
+	echo $content;
 ?>

@@ -219,7 +219,7 @@
 			switch($page[1]) {
 				case "add":				require($base_path.'add.php');
 										break;
-				case "addcategory":		require(get_config('pluginspath').'socialcommerce/add_category.php'); 
+				case "addcategory":		require($base_path.'add_category.php'); 
 										break;
 				case "address":			require($base_path.'address.php');
 										break;
@@ -258,7 +258,7 @@
 										break;						
 				case "more_order_item":	require(get_config('pluginspath').'socialcommerce/more_order_item.php');
 									  	break;						
-				case "my_account":		require(get_config('pluginspath').'socialcommerce/my_account.php');
+				case "my_account":		require($base_path.'my_account.php');
 									  	break;	
 				case "order":			set_input('search_viewtype', 'list');
 										require(get_config('pluginspath').'socialcommerce/order.php');
