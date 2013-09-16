@@ -9,9 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
-		global $CONFIG;
 	// Get the current page's owner
 		$page_owner = elgg_get_page_owner_entity();
 		if ($page_owner === false || is_null($page_owner)) {
@@ -20,11 +17,10 @@
 		}
 		$container_guid = elgg_get_page_owner_guid();
 
-	//set Category title
-	
-		$title = elgg_view_title(elgg_echo('stores:address'));
+	//set title
+	$title = elgg_view_title(elgg_echo('stores:address'));
 		
-	// Get objects
+	// Get address objects
 	if(	elgg_get_entities(array( 	
 			'type' => 'object',
 			'subtype' => 'address',
@@ -32,35 +28,36 @@
 			)) 
 		){
 			
-			elgg_set_context('search');
+	elgg_set_context('search');
 			
-			$area2 .= elgg_list_entities(array(
+			$content .= elgg_list_entities(array(
 						'type' => 'object',
 						'subtype' => 'address',
 						'owner_guid' => elgg_get_page_owner_guid(),
 						'limit' => 10,
 						));
 						
-			$area2 .= elgg_view("socialcommerce/forms/confirm_address");
+			$content .= elgg_view("socialcommerce/forms/confirm_address");
 			elgg_set_context('address');
-		}else{
-			$area2 .= elgg_view("socialcommerce/forms/edit_address");
+	}else{
+			$content .= elgg_view("socialcommerce/forms/edit_address");
 		}
 		
-		$area2 = <<<EOF
-			{$title}
+		$content = <<<EOF
 			<div class="contentWrapper stores">
-				{$area2}
+				{$content}
 			</div>
 EOF;
 
-	// These for left side menu
-		$area1 .= gettags();
+	// sidebar
+	$sidebar .= gettags();
 		
-	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
-	
-	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:address"), elgg_get_page_owner_entity()->name), $body);
-	
+	$params = array(
+	'title' => $title,
+	'content' => $content,
+	'sidebar' => $sidebar,
+	);
+
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page($title, $body);
 ?>

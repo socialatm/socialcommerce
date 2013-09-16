@@ -195,6 +195,7 @@
 	
 	function socialcommerce_page_handler( $page ) {
 		global $CONFIG;
+		$base_path = get_config('pluginspath').'socialcommerce/pages/socialcommerce/';
 		
 		/*****	The first component of a socialcommerce URL is the username	*****/
 		if (isset($page[0]) && !is_numeric($page[0])){
@@ -216,11 +217,11 @@
 		// The second part dictates what we're doing
 		if (isset($page[1])) {
 			switch($page[1]) {
-				case "add":				require(get_config('pluginspath').'socialcommerce/add.php');
+				case "add":				require($base_path.'add.php');
 										break;
 				case "addcategory":		require(get_config('pluginspath').'socialcommerce/add_category.php'); 
 										break;
-				case "address":			require(get_config('pluginspath').'socialcommerce/address.php');
+				case "address":			require($base_path.'address.php');
 										break;
 				case "all":				require(get_config('pluginspath').'socialcommerce/all.php');
 										break;
