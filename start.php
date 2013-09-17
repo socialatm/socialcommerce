@@ -289,7 +289,7 @@
 			}
 		/*****	If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load index.php	*****/
 		} else {
-			require(get_config('pluginspath').'socialcommerce/index.php'); 
+			require($base_path.'index.php'); 
 			return true;
 		}
 		return false;
