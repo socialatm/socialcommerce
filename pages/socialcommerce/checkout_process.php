@@ -85,20 +85,19 @@
 			}
 		}
 		
-	// Set stores title
-		$title = elgg_view_title(elgg_echo('checkout:process'));
+	$title = elgg_view_title(elgg_echo('checkout:process'));
 		
 	//--------- Billing Address Details ----------//
-		$billing_details = elgg_view("socialcommerce/billing_details",array('checkout_order'=>$checkout_order));
-		if($_SESSION['CHECKOUT']['confirm_billing_address'] == 1){
-			$billing_address_modify = "<span id='checkout_modify_0' class='checkout_modify' onclick='change_modified(0);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
-		}
+	$billing_details = elgg_view("socialcommerce/billing_details",array('checkout_order'=>$checkout_order));
+	if($_SESSION['CHECKOUT']['confirm_billing_address'] == 1){
+		$billing_address_modify = "<span id='checkout_modify_0' class='checkout_modify' onclick='change_modified(0);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
+	}
 
 	//--------- Checkout Methods Details ----------//
-		$checkout_method_details = elgg_view("socialcommerce/list_checkout_methods");
-		if($_SESSION['CHECKOUT']['confirm_checkout_method'] == 1){
-			$checkout_method_modify = "<span id='checkout_modify_1' class='checkout_modify' onclick='change_modified(1);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
-		}
+	$checkout_method_details = elgg_view("socialcommerce/list_checkout_methods");
+	if($_SESSION['CHECKOUT']['confirm_checkout_method'] == 1){
+		$checkout_method_modify = "<span id='checkout_modify_1' class='checkout_modify' onclick='change_modified(1);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
+	}
 	//--------- Order Confirmation ----------//	
 		if(isset($_SESSION['CHECKOUT']['checkout_method']) && $_SESSION['CHECKOUT']['checkout_method'] != ""){
 			$checkout_plugin = $_SESSION['CHECKOUT']['checkout_method'];
@@ -121,13 +120,8 @@
 EOF;
 			}
 		}
-		if($_SESSION['CHECKOUT']['allow_shipping'] == 1){
-			$class = "";
-		}else{
-			$class = "class='shipping_disable'";
-		}
-		//print_r($_SESSION['CHECKOUT']);
 		
+		$class = $_SESSION['CHECKOUT']['allow_shipping'] == 1 ? '' : 'class="shipping_disable"';
 		$no_coupon = elgg_echo('no:coupon:in:couponcode');
 		$exp_date = elgg_echo('coupon:exp_date');
 		$coupon_maxuses = elgg_echo('coupon:maxuses:limit');
@@ -136,7 +130,8 @@ EOF;
 		$checkout_billing_details = elgg_echo('checkout:billing:details');
 		$checkout_checkout_method = elgg_echo('checkout:checkout:method');
 		$checkout_order_confirm = elgg_echo('checkout:order:confirm');
-		$area2 = <<<EOF
+		
+		$content = <<<EOF
 			<div class="checkout_process">
 				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/chili-1.7.pack.js"></script>
 				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/jquery.accordion.js"></script>
@@ -313,17 +308,14 @@ EOF;
 			</div>
 EOF;
 		
-		$area2 = <<<EOF
-			{$title}
-			<div class="contentWrapper stores">
-				{$area2}
-			</div>
-EOF;
-		$area1 .= gettags();
-	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
+	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$sidebar .= gettags();
 	
-	// Finally draw the page
-		page_draw(elgg_echo("checkout:process"), $body);
-	
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page(elgg_echo("checkout:process"), $body);
 ?>

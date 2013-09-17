@@ -239,9 +239,9 @@
 				case "cateread":		set_input('guid',$page[2]);
 										require(dirname(dirname(dirname(__FILE__))) . '/pages/entities/index.php');
 										break;
-				case "checkout_address": require(get_config('pluginspath').'socialcommerce/checkout_address.php'); 
+				case "checkout_address": require($base_path.'checkout_address.php'); 
 									  	break;
-				case "checkout_process": require(get_config('pluginspath').'socialcommerce/checkout_process.php'); 
+				case "checkout_process": require($base_path.'checkout_process.php'); 
 									  	break;
 				case "confirm":			require(get_config('pluginspath').'socialcommerce/cart_confirm.php');
 										break;						
