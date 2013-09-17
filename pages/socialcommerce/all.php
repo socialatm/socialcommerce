@@ -84,7 +84,6 @@ EOF;
 	$sidebar .= gettags();
 		
 	$body = elgg_view_layout('content', array(
-		'filter_context' => 'all',
 		'content' => $content,
 		'title' => $title,
 		'sidebar' => elgg_view('bookmarks/sidebar'),

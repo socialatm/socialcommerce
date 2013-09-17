@@ -24,7 +24,6 @@
 		}
 	}
 	
-	global $CONFIG;
 	// Get the current page's owner
 		$page_owner = elgg_get_page_owner_entity();
 		if ($page_owner === false || is_null($page_owner)) {
@@ -32,25 +31,24 @@
 			elgg_set_page_owner_guid($_SESSION['guid']);
 		}
 		
-	//set stores title
-		$area2 = elgg_view_title($title = elgg_echo('cart:add'));
+	$title = elgg_view_title( elgg_echo('cart:add'));
 	
 	// Render the category upload page
-		
-		
 		if ($entity) {
 			if($entity->owner_guid == $_SESSION['user']->guid)
-				forward($CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
+				forward($CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
 			elgg_set_context('cartadd');
-			$area2 .= elgg_view_entity($entity,true);
-			// These for left side menu
-			$area1 .= gettags();
+			$content .= elgg_view_entity($entity, true);
 			
-			$body = elgg_view_layout('two_column_left_sidebar', $area1 , $area2);
+			$sidebar .= gettags();
 			
-			page_draw(sprintf(elgg_echo("cart:add"), elgg_get_page_owner_entity()->name), $body);
+			$body = elgg_view_layout('content', array(
+				'content' => $content,
+				'title' => $title,
+				'sidebar' => elgg_view('bookmarks/sidebar'),
+				));
+			echo elgg_view_page($title, $body);
 		} else {
 			forward();
 		}
-	
 ?>

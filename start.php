@@ -223,10 +223,10 @@
 										break;
 				case "address":			require($base_path.'address.php');
 										break;
-				case "all":				require(get_config('pluginspath').'socialcommerce/all.php');
+				case "all":				require($base_path.'all.php');
 										break;
 				case "buy":				set_input('stores_guid', $page[2]);
-										require(get_config('pluginspath').'socialcommerce/buy.php');
+										require($base_path.'buy.php');
 										break;
 				case "cancel":			view_cancel_page();
 										break;
@@ -237,7 +237,7 @@
 				case "category":		require(get_config('pluginspath').'socialcommerce/category.php'); 
 										break;
 				case "cateread":		set_input('guid',$page[2]);
-										require(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
+										require(dirname(dirname(dirname(__FILE__))) . '/pages/entities/index.php');
 										break;
 				case "checkout_address": require(get_config('pluginspath').'socialcommerce/checkout_address.php'); 
 									  	break;
@@ -272,7 +272,7 @@
 											set_input('guid',$page[2]);
 											$product = get_entity($page[2]);
 										}
-										require(dirname(dirname(dirname(__FILE__))) . "/entities/index.php");
+										require(dirname(dirname(dirname(__FILE__))) . '/pages/entities/index.php');
 										break;
 				case "search":			require(get_config('pluginspath').'socialcommerce/search.php'); 
 										break;
