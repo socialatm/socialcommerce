@@ -207,9 +207,9 @@
 		$page_0 = array('all','login');
 		if(in_array($page[0],$page_0)){
 			switch($page[0]) {
-				case "all":				include(dirname(__FILE__) . "/all.php");
+				case "all":				require($base_path.'all.php');
 										break;
-				case "login":           include(dirname(__FILE__) . "/login.php");
+				case "login":           require($base_path.'login.php');
 									  	break;
 			}
 			return true;
