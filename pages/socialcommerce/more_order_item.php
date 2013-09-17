@@ -12,6 +12,7 @@
 	// Load Elgg engine
 	require_once(get_config('path').'engine/start.php');
 	global $CONFIG;
+	
 	$user_guid = get_input('us');
 	$order_item_id = get_input('stores_guid');
 	if($order_item_id){
@@ -38,24 +39,17 @@
 			if($order){
 				$order = $order[0];
 				if($order->b_first_name && $order->b_last_name){
-					$billing_details = elgg_view("socialcommerce/order_display_address",array('entity'=>$order,'type'=>'b'));
-					$billing_details = <<<EOF
-						<div class="order_details">
-							<h3>Billing Details</h3>
-							{$billing_details}
-						</div>			
-EOF;
+					
+					$billing_details = elgg_view("socialcommerce/order_display_address", array('entity' => $order, 'type' => 'b' ));
+					
+					$billing_details = '<div class="order_details"><h3>Billing Details</h3>'.$billing_details.'</div>';			
 				}
 				
 				if($order->shipping_method && $product->product_type_id == 1){
 					if($order->s_first_name && $order->s_last_name){
 						$shipping_details = elgg_view("socialcommerce/order_display_address",array('entity'=>$order,'type'=>'s'));
-						$shipping_details = <<<EOF
-							<div class="order_details">
-								<h3>Shipping Details</h3>
-								{$shipping_details}
-							</div>			
-EOF;
+						
+						$shipping_details = '<div class="order_details"><h3>Shipping Details</h3>'.$shipping_details.'</div>';			
 					}
 					$shipping_method = "<tr><td align='left' colspan='2'><B>Shipping Method:</B> ".$order->shipping_method."</td></tr>";
 				}

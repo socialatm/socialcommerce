@@ -252,16 +252,16 @@
 				case "delete":			//	@todo - this doesn't work...
 									//	include(dirname(__FILE__) . "/cart_success.php");
 										break;	
-				case "edit":			require(get_config('pluginspath').'socialcommerce/edit.php'); 	
+				case "edit":			require($base_path.'edit.php'); 	
 										break;											
 				case "ipn":				makepayment_paypal();
 										break;						
-				case "more_order_item":	require(get_config('pluginspath').'socialcommerce/more_order_item.php');
+				case "more_order_item":	require($base_path.'more_order_item.php');
 									  	break;						
 				case "my_account":		require($base_path.'my_account.php');
 									  	break;	
 				case "order":			set_input('search_viewtype', 'list');
-										require(get_config('pluginspath').'socialcommerce/order.php');
+										require($base_path.'order.php');
 										break;
 				case "order_products":	if($page[2]) { set_input('guid',$page[2]); }
 										require(get_config('pluginspath').'socialcommerce/order_products.php'); 
