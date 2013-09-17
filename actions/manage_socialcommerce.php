@@ -104,7 +104,15 @@
 		if(!$display && $redirect){
 			forward($redirect);
 		}else if($display){
-			page_draw($title,elgg_view_layout("two_column_left_sidebar", '', elgg_view_title($title) . $body));
+		
+			$content = $title.$body;
+			$params = array(
+				'title' => $title,
+				'content' => $content,
+				'sidebar' => $sidebar,
+				);
+			$body = elgg_view_layout('one_sidebar', $params);
+			echo elgg_view_page($title, $body);
 		}
 	exit;
 ?>
