@@ -83,10 +83,11 @@ EOF;
 	elgg_set_context('stores');
 	$sidebar .= gettags();
 		
-	$body = elgg_view_layout('content', array(
-		'content' => $content,
+	$params = array(
 		'title' => $title,
-		'sidebar' => elgg_view('bookmarks/sidebar'),
-		));
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page($title, $body);
 ?>
