@@ -40,8 +40,7 @@
 			</div>
 EOF;
 
-	// These for left side menu
-		$area1 .= gettags();
+	$sidebar .= gettags();
 		
 	// Create a layout
 		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
