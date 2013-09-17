@@ -16,16 +16,16 @@
 		$todo = get_input('todo');
 		switch ($todo){
 			case 'currency_settings':
-				$body = elgg_view("modules/currency_settings",array('ajax'=>1));
+				$body = elgg_view("modules/currency_settings", array('ajax'=>1));
 				break;
 			case 'settings_form':
-				$body = elgg_view("modules/currency/settings_form",array('ajax'=>1));
+				$body = elgg_view("modules/currency/settings_form", array('ajax'=>1));
 				break;
 			case 'edit_settings':
 				$c_guid = get_input('c_id');
 				if($c_guid){
 					$currency = get_entity($c_guid);
-					$body = elgg_view("modules/currency/settings_form",array('entity'=>$currency,'ajax'=>1));
+					$body = elgg_view("modules/currency/settings_form", array('entity' => $currency, 'ajax' => 1 ));
 				}
 				break;
 		}
