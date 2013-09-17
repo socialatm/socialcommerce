@@ -8,19 +8,19 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	
+	gatekeeper();
 
 	require_once(get_config('path').'engine/start.php');
-	gatekeeper();
 	global $CONFIG;
+	
 	$title = elgg_view_title($title = elgg_echo('stores:sold:products'));
-	
 	elgg_set_context('search');
-	
 	$limit = 10;
-	$offset = get_input('offset');
-	if(!$offset)
-		$offset = 0;
-	$sold_products = get_sold_products($_SESSION['user']->guid,$limit,$offset);
+	$offset = get_input('offset') ? get_input('offset') : 0;
+	
+		
+	$sold_products = get_sold_products($_SESSION['user']->guid, $limit, $offset );
 	$count = get_data("SELECT FOUND_ROWS( ) AS count");
 	$count = $count[0]->count;
 	if($sold_products){
@@ -31,28 +31,26 @@
 									'count' => $count,
 									'limit' => $limit
 								));
-		$area2 = "";
+		$content = "";
+		
 		foreach ($sold_products as $sold_product){
 			$sold_product = get_entity($sold_product->value);
-			$area2 .= elgg_view("socialcommerce/sold_products",array('entity'=>$sold_product));
+			$content .= elgg_view("socialcommerce/sold_products",array('entity'=>$sold_product));
 		}
-		$area2 = $nav.$area2.$nav;
+		$content = $nav.$content.$nav;
 	}else{
-		$area2 = elgg_echo('no:data');
+		$content = elgg_echo('no:data');
 	}
 	
-	$area2 = <<<EOF
-		{$title}
-		<div class="contentWrapper stores">
-			{$area2}
-		</div>
-EOF;
+	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
 	elgg_set_context('socialcommerce');
+	$sidebar .= gettags();
 	
-	// These for left side menu
-	$area1 .= gettags();
-	$body = elgg_view_layout('two_column_left_sidebar',$area1, $area2);
-	
-	// Finally draw the page
-	page_draw(sprintf(elgg_echo("stores:sold"),$_SESSION['user']->name), $body);
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page(elgg_echo("stores:sold"), $body);
 ?>

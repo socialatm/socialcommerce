@@ -14,12 +14,9 @@
 	global $CONFIG;
 	
 	$type = get_input('type');
-	if($type == "shipping")
-		$checkout_order = 1;
-	else 
-		$checkout_order = 0;
-	
+	$check_order = $type == "shipping" ? 1 : 0;
 	$todo = get_input('todo');
+	
 	switch ($todo){
 		case 'reload_checkout_address':
 			$added_address = get_input('guid');
@@ -68,7 +65,7 @@
 				</div>
 EOF;
 			}else{
-				$address_details = elgg_view("socialcommerce/forms/edit_address",array('ajax'=>1,'type'=>$type));
+				$address_details = elgg_view("socialcommerce/forms/edit_address", array('ajax' => 1, 'type' => $type ));
 			}
 			echo $address_details;
 			break;
@@ -106,7 +103,7 @@ EOF;
 					)) 			
 							
 			){
-				$list_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
+				$list_address = elgg_view("socialcommerce/list_address", array('entity'=>$address, 'display' => 'list_with_action', 'selected' => $selected_address, 'type' => 'myaccount' ));
 				$load_action = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/view_address"; 
 				$body = <<<EOF
 					<div>
@@ -121,7 +118,7 @@ EOF;
 					</div>
 EOF;
 			}else{
-				$body = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
+				$body = elgg_view("socialcommerce/forms/checkout_edit_address", array('ajax' => 1, 'type' => 'myaccount', 'first' => 1 ));
 			}
 			echo $body;
 			break;

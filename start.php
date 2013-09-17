@@ -276,11 +276,11 @@
 										break;
 				case "search":			require(get_config('pluginspath').'socialcommerce/search.php'); 
 										break;
-				case "sold":			require(get_config('pluginspath').'socialcommerce/sold.php');
+				case "sold":			require($base_path.'sold.php');
 									  	break;
-				case "type":			require(get_config('pluginspath').'socialcommerce/product_type.php');
+				case "type":			require($base_path.'product_type.php');
 									  	break;
-				case "view_address":	require(get_config('pluginspath').'socialcommerce/address_view.php'); 
+				case "view_address":	require($base_path.'address_view.php'); 
 									  	break;
 				case "wishlist":		require($base_path.'wishlist.php');
 										break;
