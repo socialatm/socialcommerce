@@ -14,7 +14,7 @@
 		require_once(get_config('path').'engine/start.php');
 
 		if(!elgg_is_logged_in()){
-			forward("pg/socialcommerce/" . $_SESSION['user']->username);
+			forward("socialcommerce/" . $_SESSION['user']->username);
 		}
 	// Get the current page's owner
 		$page_owner = elgg_get_page_owner_entity();
@@ -24,7 +24,7 @@
 		}
 
 	//set Category title
-		$title = elgg_view_title(elgg_echo('stores:category'));
+	$title = elgg_view_title(elgg_echo('stores:category'));
 		
 	// Get objects
 		$offset = 0;
@@ -39,32 +39,24 @@
 			'limit' => $limit,
 			));  	
 			
-		if($digital_cats){
+		if($digital_cats){									//	@todo - forward to create a category if none exist...
 			foreach($digital_cats as $digital_cat){
-				$d_area .= elgg_view_entity($digital_cat,$fullview);
+				$digital_area .= elgg_view_entity($digital_cat, $fullview);
 			}
-			$digital_cate_text = elgg_echo('stores:digital');
-			$digital_area = <<<EOF
-				<div style="width:330px;display:block;">
-					<div style="margin:10px 0;"><b>{$digital_cate_text}</b></div>
-					{$d_area}
-				</div>
-EOF;
+			$digital_category_text = elgg_echo('stores:digital');
+			
+			$digital_area = '<div style="width:330px;display:block;"><div style="margin:10px 0;"><b>'.$digital_category_text.'</b></div>'.$digital_area.'</div>';
 		}
-		//$area2 .= list_entities("object","category",page_owner(),10);
-		$area2 = <<<EOF
-			{$title}
-			<div class="contentWrapper stores" align="left">
-				{$digital_area}
-			</div>
-EOF;
-		elgg_set_context('category');
-	// These for left side menu
-		$area1 .= gettags();
-		//$area1 .= get_storestype_cloud(page_owner());
-	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
+		
+	$content = $title.'<div class="contentWrapper stores" align="left">'.$digital_area.'</div>';
+	elgg_set_context('category');
+	$sidebar .= gettags();
 	
-	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:category"), elgg_get_page_owner_entity()->name), $body);
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page($title, $body);
 ?>

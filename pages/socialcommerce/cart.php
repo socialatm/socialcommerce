@@ -30,24 +30,19 @@
 			$title = elgg_view_title($header_title);
 		}
 		
-	// Get objects
-		elgg_set_context('search');
-		$area2 = elgg_view("socialcommerce/cart");
-		$area2 = <<<EOF
-			{$title}
-			<div class="contentWrapper stores">
-				{$area2}
-			</div>
-EOF;
-
+	elgg_set_context('search');
+	$content = $title.'<div class="contentWrapper stores">'.elgg_view("socialcommerce/cart").'</div>';
 	$sidebar .= gettags();
-		
-	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
-		if($CONFIG->cart_item_count){
-			$count = " (".$CONFIG->cart_item_count.")";
-		}
-	// Finally draw the page
-		
-		page_draw(sprintf($header_title.$count, elgg_get_page_owner_entity()->name), $body);
+	
+	if($CONFIG->cart_item_count){
+			$count = ' ('.$CONFIG->cart_item_count.')';
+	}
+	
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page($header_title.$count, elgg_get_page_owner_entity()->name, $body);
 ?>

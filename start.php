@@ -230,11 +230,11 @@
 										break;
 				case "cancel":			view_cancel_page();
 										break;
-				case "cart":			require(get_config('pluginspath').'socialcommerce/cart.php');
+				case "cart":			require($base_path.'cart.php');
 										break;
 				case "cart_success":	view_success_page();
 										break;
-				case "category":		require(get_config('pluginspath').'socialcommerce/category.php'); 
+				case "category":		require($base_path.'category.php'); 
 										break;
 				case "cateread":		set_input('guid',$page[2]);
 										require(dirname(dirname(dirname(__FILE__))) . '/pages/entities/index.php');
