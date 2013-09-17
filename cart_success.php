@@ -74,9 +74,9 @@ EOF;
 		$area1 .= gettags();
 		
 	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
+	//	$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
 	
 	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name), $body);
+	//	page_draw(sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name), $body);
 	
 ?>
