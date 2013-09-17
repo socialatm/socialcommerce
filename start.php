@@ -243,11 +243,11 @@
 									  	break;
 				case "checkout_process": require($base_path.'checkout_process.php'); 
 									  	break;
-				case "confirm":			require(get_config('pluginspath').'socialcommerce/cart_confirm.php');
+				case "confirm":			require($base_path.'cart_confirm.php');
 										break;						
-				case "country_state":	require(get_config('pluginspath').'socialcommerce/manage_country_state.php'); 	
+				case "country_state":	require($base_path.'manage_country_state.php'); 	
 									  	break;						
-				case "currency_settings": require(get_config('pluginspath').'socialcommerce/load_currency_settings.php'); 
+				case "currency_settings": require($base_path.'load_currency_settings.php'); 
 									  	break;						
 				case "delete":			//	@todo - this doesn't work...
 									//	include(dirname(__FILE__) . "/cart_success.php");

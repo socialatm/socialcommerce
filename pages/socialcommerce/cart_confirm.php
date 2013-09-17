@@ -2,17 +2,18 @@
 	/**
 	 * Elgg cart - confirm page
 	 * 
-	* @package Elgg SocialCommerce
+	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
+	gatekeeper();
+	 
 	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
-		global $CONFIG;
-		gatekeeper();
+	require_once(get_config('path').'engine/start.php');
+	global $CONFIG;
 	
 	// Get the current page's owner
 		$page_owner = elgg_get_page_owner_entity();
@@ -25,25 +26,19 @@
 		if($page_owner == $_SESSION['user']){
 			$title = elgg_view_title(elgg_echo('cart:confirm'));
 		}
-
 	
 	// Get objects
-		elgg_set_context('confirm');
-		$area2 = elgg_view("socialcommerce/cart_confirm");
-		elgg_set_context('stores');
-		$area2 = <<<EOF
-			{$title}
-			<div class="contentWrapper stores">
-				{$area2}
-			</div>
-EOF;
-
-	// These for left side menu
-		$area1 .= gettags();
+	elgg_set_context('confirm');
+	$content = elgg_view("socialcommerce/cart_confirm");
+	elgg_set_context('stores');
+	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$sidebar .= gettags();
 		
-	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
-	
-	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name), $body);
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page($title, $body);
 ?>

@@ -14,13 +14,10 @@
 	global $CONFIG;
 	
 	$type = get_input('type');
-	if($type == "shipping")
-		$checkout_order = 1;
-	else 
-		$checkout_order = 0;
-	
-	$todo = get_input('todo');
+	$checkout_order = $type == "shipping" ? 1 : 0;
+		$todo = get_input('todo');
 	$class = get_input('class');
+	
 	switch ($todo){
 		case 'load_state':
 			$country = get_input('country');
