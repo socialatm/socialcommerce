@@ -11,21 +11,19 @@
 	 
 	require_once(get_config('path').'engine/start.php');
 	
-	$title = elgg_view_title($title = elgg_echo('stores:yours:friends'));
-	
+	$title = elgg_view_title(elgg_echo('stores:yours:friends'));
 	elgg_set_context('search');
 	$search_viewtype = get_input('search_viewtype');
-	
 	$limit = ($search_viewtype == 'gallery') ? 20 : 10 ;
-		
 	$view = get_input('view');
 	$user_guid = $_SESSION['user']->guid;
+	
 	if ($friends = get_user_friends($user_guid, $subtype, 999999, 0)) {
 		$friendguids = array();
 		foreach($friends as $friend) {
 			$friendguids[] = $friend->getGUID();
 		}
-		$area2 = elgg_list_entities_from_metadata(array(
+		$content = elgg_list_entities_from_metadata(array(
 					'status' => 1,
 					'entity_type' => 'object',
 					'entity_subtype' => 'stores',
@@ -34,22 +32,19 @@
 					));
 	}
 	if($view != 'rss'){
-		if(empty($area2)){
-			$area2 = elgg_echo('product:null');
+		if(empty($content)){
+			$content = elgg_echo('product:null');
 		}
-		$area2 = <<<EOF
-			{$title}
-			<div class="contentWrapper stores">
-				{$area2}
-			</div>
-EOF;
+		$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
 	}
 	elgg_set_context('stores');
+	$sidebar .= gettags();
 	
-	// These for left side menu
-	$area1 .= gettags();
-	$body = elgg_view_layout('two_column_left_sidebar',$area1, $area2);
-	
-	// Finally draw the page
-	page_draw(sprintf(elgg_echo("stores:friends"),$_SESSION['user']->name), $body);
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page(elgg_echo('stores:yours:friends'), $body);
 ?>
