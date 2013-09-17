@@ -11,7 +11,7 @@
 	 
 	global $CONFIG;
 	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
+	require_once(get_config('path').'engine/start.php');
 
 	// Get the current page's owner
 		$page_owner = elgg_get_page_owner_entity();
@@ -20,16 +20,11 @@
 			elgg_set_page_owner_guid($_SESSION['guid']);
 		}
 		
-		$product_category = get_input('stores_guid');
-		
-		$search_viewtype = get_input('search_viewtype');
-		if($search_viewtype == 'gallery'){
-			$limit = 20;
-		}else{
-			$limit = 10;
-		}
-	// Set stores title
-		$title = elgg_view_title(elgg_view('output/category',array('value' => $product_category,'display'=>1)));
+	$product_category = get_input('stores_guid');
+	$search_viewtype = get_input('search_viewtype');
+	$limit = $search_viewtype == 'gallery' ? 20 : 10 ;
+	
+	$title = elgg_view_title(elgg_view('output/category', array('value' => $product_category, 'display'=>1 )));
 	
 	// Get objects
 		elgg_set_context('search');
@@ -39,7 +34,7 @@
 				$filter = "active";
 			switch($filter){
 				case "active":
-					$area2 = elgg_get_entities_from_metadata(array(
+					$content = elgg_get_entities_from_metadata(array(
 								'meta_array' => array('status'=>1,'category'=>$product_category),
 								'entity_type' => 'object',
 								'entity_subtype' => 'stores',
@@ -48,7 +43,7 @@
 								));
 				break;
 				case "deleted":
-					$area2 = elgg_get_entities_from_metadata(array(
+					$content = elgg_get_entities_from_metadata(array(
 								'meta_array' => array('status'=>0,'category'=>$product_category),
 								'entity_type' => 'object',
 								'entity_subtype' => 'stores',
@@ -57,37 +52,38 @@
 								));
 				break;
 			}
-			if(empty($area2)){
-				$area2 = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
+			if(empty($content)){
+				$content = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
 			}
 			
-			$area2 = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter));
+			$content = elgg_view("socialcommerce/product_tab_view",array('base_view' => $content, "filter" => $filter));
 		}else{
-			$area2 .= elgg_get_entities_from_metadata(array(
+			$content .= elgg_get_entities_from_metadata(array(
 								'meta_array' => array('status'=>1,'category'=>$product_category),
 								'entity_type' => 'object',
 								'entity_subtype' => 'stores',
 								'owner_guid' => 0,
 								'limit' => $limit,
 								));
-			if(empty($area2)){
-				$area2 = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
+			if(empty($content)){
+				$content = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
 			}
 		}
 		
-		$area2 = <<<EOF
-			{$title}
-			<div class="contentWrapper stores">
-				{$area2}
-			</div>
-EOF;
-		elgg_set_context('stores');
-		// These for left side menu
-			$area1 .= gettags();
-		//$area1 .= get_storestype_cloud(page_owner());
-	// Create a layout
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2);
-	
-	// Finally draw the page
-		page_draw(sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name), $body);
+	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	elgg_set_context('stores');
+	$sidebar .= gettags();
+
+	/***** maybe
+		$title = sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name);
+	*****/
+		
+	$params = array(
+	'title' => $title,
+	'content' => $content,
+	'sidebar' => $sidebar,
+	);
+
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page($title, $body);
 ?>

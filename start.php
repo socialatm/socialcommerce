@@ -264,9 +264,9 @@
 										require($base_path.'order.php');
 										break;
 				case "order_products":	if($page[2]) { set_input('guid',$page[2]); }
-										require(get_config('pluginspath').'socialcommerce/order_products.php'); 
+										require($base_path.'order_products.php'); 
 										break;
-				case "product_cate":	require(get_config('pluginspath').'socialcommerce/product_category.php');
+				case "product_cate":	require($base_path.'product_category.php');
 									  	break;
 				case "read":			if($page[2] > 0){
 											set_input('guid',$page[2]);
