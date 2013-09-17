@@ -42,7 +42,7 @@
 			$filter = "active";
 		switch($filter){
 			case "active":	$area2 = elgg_list_entities_from_metadata(array(
-												'status' => 1'
+												'status' => 1,
 												'entity_type' => 'object',
 												'entity_subtype' => 'stores',
 												'owner_guid' => elgg_get_page_owner_guid(),
@@ -50,7 +50,7 @@
 												));
 							break;
 			case "deleted":	$area2 = elgg_list_entities_from_metadata(array(
-												'status' => 0'
+												'status' => 0,
 												'entity_type' => 'object',
 												'entity_subtype' => 'stores',
 												'owner_guid' => elgg_get_page_owner_guid(),
