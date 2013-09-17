@@ -928,7 +928,14 @@ function view_success_page(){
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_success';
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
-		page_draw($title1,elgg_view_layout("two_column_left_sidebar", '', elgg_view_title($title) . $body));
+		$content = $title.$body;
+		$params = array(
+			'title' => $title,
+			'content' => $content,
+			'sidebar' => $sidebar,
+			);
+		$body = elgg_view_layout('one_sidebar', $params);
+		echo elgg_view_page($title1, $body);
 	}else{
 		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
 	}
@@ -941,7 +948,14 @@ function view_cancel_page(){
 		$title = elgg_view_title(elgg_echo('cart:cancel'));
 		$title1 = elgg_echo('cart:cancel');
 		elgg_set_context('socialcommerce');
-		page_draw($title1,elgg_view_layout("two_column_left_sidebar", '', elgg_view_title($title) . $body));
+		$content = $title.$body;
+		$params = array(
+			'title' => $title,
+			'content' => $content,
+			'sidebar' => $sidebar,
+			);
+		$body = elgg_view_layout('one_sidebar', $params);
+		echo elgg_view_page($title, $body);
 	}else{
 		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
 	}
