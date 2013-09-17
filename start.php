@@ -282,9 +282,9 @@
 									  	break;
 				case "view_address":	require(get_config('pluginspath').'socialcommerce/address_view.php'); 
 									  	break;
-				case "wishlist":		require(get_config('pluginspath').'socialcommerce/wishlist.php');
+				case "wishlist":		require($base_path.'wishlist.php');
 										break;
-				default:				require(get_config('pluginspath').'socialcommerce/index.php'); 
+				default:				echo "request for $identifier $page[1]"; 
 										break;
 			}
 		/*****	If the URL is just 'socialcommerce/username', or just 'socialcommerce/', load index.php	*****/
