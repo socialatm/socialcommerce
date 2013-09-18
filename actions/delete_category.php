@@ -25,5 +25,5 @@
 		} else {
 			register_error(elgg_echo("category:deletefailed"));
 		}
-		forward( "pg/socialcommerce/" . $_SESSION['user']->username .'/category/');
+		forward( "socialcommerce/" . $_SESSION['user']->username .'/category/');
 ?>

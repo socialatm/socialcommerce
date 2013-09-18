@@ -28,5 +28,5 @@
 			}
 			$username = $_SESSION['user']->username;
 		}
-		forward("pg/socialcommerce/" . $username . "/cart/");
+		forward("socialcommerce/" . $username . "/cart/");
 ?>

@@ -30,5 +30,5 @@
 	} else {
 		register_error(elgg_echo("stores:retrievefailed"));
 	}
-	forward( "pg/socialcommerce/" . $_SESSION['user']->username);
+	forward( "socialcommerce/" . $_SESSION['user']->username);
 ?>

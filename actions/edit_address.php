@@ -79,7 +79,7 @@
 		if (!$address = get_entity($guid)) {
 			if(!$ajax){
 				register_error(elgg_echo("address:edit:failed"));
-				forward($CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username . "/address/");
+				forward($CONFIG->wwwroot . "socialcommerce/" . $container_user->username . "/address/");
 				exit;
 			}else{
 				echo elgg_echo("address:edit:failed");
@@ -127,6 +127,6 @@
 		}
 	}
 	if(!$ajax){
-		forward($CONFIG->wwwroot . "pg/socialcommerce/" . $container->username . "/address/");
+		forward($CONFIG->wwwroot . "socialcommerce/" . $container->username . "/address/");
 	}
 ?>

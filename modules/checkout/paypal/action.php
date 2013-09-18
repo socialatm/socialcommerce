@@ -99,9 +99,9 @@
 			'custom'		=> $custom,
 		
 			// Notification and return URLS
-			'return'		=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cart_success',
-			'cancel_return'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/cancel',
-			'notify_url'	=> get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/ipn',
+			'return'		=> get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cart_success',
+			'cancel_return'	=> get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cancel',
+			'notify_url'	=> get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/ipn',
 	
 			// Customer details
 			'first_name'	=> $BillingDetails->firstname,

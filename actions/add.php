@@ -248,7 +248,7 @@
 				register_error(elgg_echo("stores:uploadfailed"));
 			}
 			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->wwwroot . 'pg/socialcommerce/' . $container_user->username;
+			$redirect = $CONFIG->wwwroot . 'socialcommerce/' . $container_user->username;
 		}
 		
 	forward($redirect);

@@ -43,6 +43,6 @@
 	 }
 	 
 	system_message(elgg_echo("cart:updated"));
-	forward('pg/socialcommerce/'. $_SESSION['username'] . '/cart/');
+	forward('socialcommerce/'. $_SESSION['username'] . '/cart/');
 
 ?>

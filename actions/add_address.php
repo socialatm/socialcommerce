@@ -118,6 +118,6 @@
 		}
 	}
 	if(!$ajax){
-		forward($CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username . "/address/");
+		forward($CONFIG->wwwroot . "socialcommerce/" . $container_user->username . "/address/");
 	}
 ?>

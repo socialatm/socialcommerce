@@ -17,14 +17,14 @@
 			<?php if (elgg_is_admin_logged_in()) { ?>
 				<!--My Account-->
 				<div class="scommerce_settings">
-					<a href="<?php echo $CONFIG->wwwroot . 'pg/socialcommerce/' . $_SESSION['user']->username . '/settings/general'; ?>" />
+					<a href="<?php echo $CONFIG->wwwroot . 'socialcommerce/' . $_SESSION['user']->username . '/settings/general'; ?>" />
 						<?php echo elgg_echo('socialcommerce:settings'); ?>
 					</a>
 				</div>
 			<?php } ?>
 			<!--My Account-->
 			<div class="my_account">
-				<a href="<?php echo get_config('checkout_base_url').'pg/socialcommerce/'.$_SESSION['user']->username.'/my_account/address/"/>'; ?>
+				<a href="<?php echo get_config('checkout_base_url').'socialcommerce/'.$_SESSION['user']->username.'/my_account/address/"/>'; ?>
 					<?php echo elgg_echo('stores:my:account'); ?>
 				</a>
 			</div>
@@ -38,7 +38,7 @@
 				}
 			?>
 			<div class="cart">
-				<a href="<?php echo $CONFIG->wwwroot ?>pg/socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart" />
+				<a href="<?php echo $CONFIG->wwwroot ?>socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart" />
 					<?php echo elgg_echo('stores:my:cart').$c_count; ?>
 				</a>
 			</div>
@@ -49,13 +49,13 @@
 				}
 			?>
 			<div class="wishlist">
-				<a href='<?php echo $CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>' />
+				<a href='<?php echo $CONFIG->wwwroot."socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>' />
 					<?php echo elgg_echo('stores:my:wishlist').$w_count ?>
 				</a>
 			</div>
 			<!--orders-->
 			<div class="orders">
-				<a href='<?php echo $CONFIG->wwwroot."pg/socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>' />
+				<a href='<?php echo $CONFIG->wwwroot."socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>' />
 					<?php echo elgg_echo('stores:my:order') ?>
 				</a>
 			</div>
@@ -71,7 +71,7 @@
 		<div id="owner_block_stores">
 			<!--Cart-->
 			<div class="cart">
-				<a href="<?php echo $CONFIG->wwwroot ?>pg/socialcommerce/gust/cart" />
+				<a href="<?php echo $CONFIG->wwwroot ?>socialcommerce/gust/cart" />
 					<?php echo elgg_echo('stores:gust:cart').$c_count; ?>
 				</a>
 			</div>

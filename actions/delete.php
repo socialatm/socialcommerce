@@ -32,6 +32,6 @@
 	} else {
 		register_error(elgg_echo("stores:deletefailed"));
 	}
-	forward("pg/socialcommerce/" . $_SESSION['user']->username);
+	forward("socialcommerce/" . $_SESSION['user']->username);
 exit();
 ?>

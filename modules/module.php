@@ -345,7 +345,7 @@ function confirm_social_commerce_settings(){
 		
 		
 		if($checkout_messages || $shipping_messages || $withdraw_messages){
-			$general_error_msg = sprintf(elgg_echo('general:settings:errot:msg'),$CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings');
+			$general_error_msg = sprintf(elgg_echo('general:settings:errot:msg'),$CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/settings');
 			
 			$message_array = array($general_error_msg);
 			
@@ -397,7 +397,7 @@ function confirm_social_commerce_settings(){
 			}
 		}
 	}else{
-		system_message(sprintf(elgg_echo('no:settings:entity'),$CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/settings'));
+		system_message(sprintf(elgg_echo('no:settings:entity'),$CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/settings'));
 	}
 }
 
@@ -804,7 +804,7 @@ EOF;
 							</td>
 						</tr>
 EOF;
-					$order_page = get_config('url').'pg/socialcommerce/'.$user->username.'/order/';
+					$order_page = get_config('url').'socialcommerce/'.$user->username.'/order/';
 					if($product->mimetype && $product->product_type_id == 2){
 						$download_condition = <<<EOF
 							<div>
@@ -825,7 +825,7 @@ EOF;
 						$download_condition = "";
 					}
 						$ShippingMethod = 'None';
-					$order_link = get_config('url').'pg/socialcommerce/'.$user->username.'/order_products/'.$order_id;
+					$order_link = get_config('url').'socialcommerce/'.$user->username.'/order_products/'.$order_id;
 					$view_total_price = get_price_with_currency($grand_total_price);
 					$mail_body = sprintf(elgg_echo('order:mail'),
 										 $user->name,
@@ -937,7 +937,7 @@ function view_success_page(){
 		$body = elgg_view_layout('one_sidebar', $params);
 		echo elgg_view_page($title1, $body);
 	}else{
-		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
+		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
@@ -957,7 +957,7 @@ function view_cancel_page(){
 		$body = elgg_view_layout('one_sidebar', $params);
 		echo elgg_view_page($title, $body);
 	}else{
-		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
+		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
@@ -967,7 +967,7 @@ function view_checkout_error_page(){
 		$body = elgg_view($view);
 		return $body;
 	}else{
-		forward(get_config('url')."pg/socialcommerce/{$_SESSION['user']->username}/all");
+		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 

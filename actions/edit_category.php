@@ -20,7 +20,7 @@
 	
 	if (!$category = get_entity($guid)) {
 		register_error(elgg_echo("category:addfailed"));
-		forward($CONFIG->wwwroot . "pg/socialcommerce/" . $_SESSION['user']->username . "/category/");
+		forward($CONFIG->wwwroot . "socialcommerce/" . $_SESSION['user']->username . "/category/");
 		exit;
 	}
 	
@@ -61,7 +61,7 @@
 		}
 		
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username . "/category/";
+		$redirect = $CONFIG->wwwroot . "socialcommerce/" . $container_user->username . "/category/";
 	}
 	forward($redirect);
 ?>

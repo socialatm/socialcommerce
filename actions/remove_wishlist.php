@@ -27,6 +27,6 @@
 			register_error(elgg_echo("wishlist:delete:failed"));
 		}
 	}
-	$return = $CONFIG->url . "pg/socialcommerce/" . $product->getOwnerEntity()->username . "/wishlist";
+	$return = $CONFIG->url . "socialcommerce/" . $product->getOwnerEntity()->username . "/wishlist";
 	forward($return);
 ?>

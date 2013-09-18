@@ -65,7 +65,7 @@
 		
 		// Set up menu for logged in users
 			if (elgg_is_logged_in()) {
-				add_menu( elgg_echo('stores'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/all');
+				add_menu( elgg_echo('stores'), get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all');
 			}
 	
 		// Extend CSS
@@ -163,8 +163,8 @@
 		/*****	add submenu options	*****/
 		if (elgg_get_context() == "stores" || elgg_get_context() == "socialcommerce") {
 			if (isset($_SESSION['guid']) && elgg_is_logged_in()) {	
-				add_submenu_item(elgg_echo('stores:everyone'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
-				add_submenu_item(elgg_echo('stores:category'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
+				add_submenu_item(elgg_echo('stores:everyone'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
+				add_submenu_item(elgg_echo('stores:category'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
 				$splugin_settings = elgg_get_entities(array( 	
 					'type' => 'object',
 					'subtype' => 'splugin_settings',
@@ -175,21 +175,21 @@
 				}
 	
 				if( elgg_is_admin_logged_in() ){
-					add_submenu_item(elgg_echo('stores:addpost'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/add",'create');
-					add_submenu_item(elgg_echo('stores:sold:products'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
-					add_submenu_item(elgg_echo('stores:addcate'), get_config('url')."pg/socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
+					add_submenu_item(elgg_echo('stores:addpost'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/add",'create');
+					add_submenu_item(elgg_echo('stores:sold:products'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
+					add_submenu_item(elgg_echo('stores:addcate'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
 				}
 					
 			} else if ( elgg_get_page_owner_guid()) {
 				$page_owner = elgg_get_page_owner_entity();
-				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username);
+				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name), get_config('url')."socialcommerce/" . $page_owner->username);
 				if ($page_owner instanceof ElggUser)
-					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name), get_config('url')."pg/socialcommerce/" . $page_owner->username . "/friends/");
+					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name), get_config('url')."socialcommerce/" . $page_owner->username . "/friends/");
 			}
 		}
 		
 		if (elgg_get_context() == 'admin' && elgg_is_admin_logged_in()) {
-			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/settings/general/');
+			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/settings/general/');
 		}
 	}
 	
@@ -415,7 +415,7 @@
 	function stores_url( $entity ) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title($title);
-		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
+		return get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
 	}
 	
 	/**
@@ -427,13 +427,13 @@
 	function category_url($entity) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title($title);
-		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
+		return get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
 	}
 	
 	function cart_url($entity) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title($title);
-		return get_config('url').'pg/socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
+		return get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
 	}
 	
 	/**

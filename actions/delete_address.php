@@ -44,7 +44,7 @@
 		}
 	}
 	if(!$ajax){
-		forward('pg/socialcommerce/' . $_SESSION['user']->username . "/category/");
+		forward('socialcommerce/' . $_SESSION['user']->username . "/category/");
 	}
 
 ?>

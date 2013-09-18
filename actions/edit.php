@@ -24,7 +24,7 @@
 	//---------------- Check the entity --------------//
 	if (!$stores = get_entity($guid)) {
 		register_error(elgg_echo("stores:uploadfailed"));
-		forward($CONFIG->wwwroot . "pg/socialcommerce/" . $_SESSION['user']->username);
+		forward($CONFIG->wwwroot . "socialcommerce/" . $_SESSION['user']->username);
 		exit;
 	}
 	
@@ -277,7 +277,7 @@
 			register_error(elgg_echo("stores:uploadfailed"));
 		}
 		$container_user = get_entity($container_guid);	
-		$redirect = $CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username;
+		$redirect = $CONFIG->wwwroot . "socialcommerce/" . $container_user->username;
 	}
 	forward($redirect);
 ?>

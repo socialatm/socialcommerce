@@ -33,7 +33,7 @@
 		
 		register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username . "/addcategory/";
+		$redirect = $CONFIG->wwwroot . "socialcommerce/" . $container_user->username . "/addcategory/";
 	}else{
 		// Extract categories from, save to default social commerce (for now)
 		$category = new ElggObject();
@@ -58,7 +58,7 @@
 		}
 			
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "pg/socialcommerce/" . $container_user->username . "/category/";
+		$redirect = $CONFIG->wwwroot . "socialcommerce/" . $container_user->username . "/category/";
 	}
 	forward($redirect);
 ?>
