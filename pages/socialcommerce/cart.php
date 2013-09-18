@@ -24,7 +24,7 @@
 				elgg_set_page_owner_guid($_SESSION['guid']);
 			}
 			if( elgg_get_page_owner_guid() != $_SESSION['user']->guid){
-				forward("pg/socialcommerce/" . $_SESSION['user']->username . "/cart/");
+				forward("socialcommerce/" . $_SESSION['user']->username . "/cart/");
 			}
 			$header_title = elgg_echo('my:shopping:cart');
 			$title = elgg_view_title($header_title);

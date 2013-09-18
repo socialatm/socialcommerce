@@ -29,7 +29,7 @@
 		$body .= elgg_view('modules/currency/settings_form',array('status'=>'default'));
 	}
 	$action = $CONFIG->wwwroot.'action/socialcommerce/manage_socialcommerce';
-	$load_action = $CONFIG->wwwroot."pg/socialcommerce/".$_SESSION['user']->username."/currency_settings";
+	$load_action = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/currency_settings";
 	
 	if($ajax){
 		echo $body;

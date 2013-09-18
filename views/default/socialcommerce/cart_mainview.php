@@ -47,14 +47,14 @@
 			<div class="storesrepo_title_owner_wrapper">
 <?php
 					//get the user and a link to their gallery
-					$user_gallery = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
+					$user_gallery = get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
 ?>
 				<div class="storesrepo_title"><h2><a href="<?php echo $stores->getURL(); ?>"><?php echo $title; ?></a></h2></div>
 				<div class="storesrepo_owner">
 					<?php
 						echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'tiny'));
 					?>
-					<p class="storesrepo_owner_details"><b><a href="<?php echo $vars['url']; ?>pg/socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
+					<p class="storesrepo_owner_details"><b><a href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
 					<small><?php echo $friendlytime; ?></small></p>
 				</div>
 			</div>

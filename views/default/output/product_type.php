@@ -23,7 +23,7 @@
 	}else{
 		if (is_array($default_produt_types) && sizeof($default_produt_types) > 0 && $vars['value']) {	 
 ?>
-			<a  class="object_product_type_string" href="<?php echo $vars['url']; ?>pg/socialcommerce/<?php echo $vars['value'];?>/type">
+			<a  class="object_product_type_string" href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $vars['value'];?>/type">
 				<?php 
 					foreach ($default_produt_types as $default_produt_type){
 						if($default_produt_type->value == $vars['value']){
