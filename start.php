@@ -112,8 +112,8 @@
 		// Now override icons
 			register_plugin_hook('entity:icon:url', 'object', 'socialcommerce_image_hook');
 			
-		// Register entity type
-			register_entity_type('object','stores');
+		// register entity type
+			elgg_register_entity_type('object','stores');
 		
 		// Register socialcommerce settings
 			register_socialcommerce_settings();
