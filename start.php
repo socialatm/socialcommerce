@@ -105,9 +105,9 @@
 			add_widget_type('purchased',elgg_echo("stores:purchased:widget"),elgg_echo("stores:purchased:widget:description"));
 			}
 		// Register a URL handler for files
-			register_entity_url_handler('stores_url','object','stores');
-			register_entity_url_handler('category_url','object','category');
-			register_entity_url_handler('cart_url','object','cart');
+			elgg_register_entity_url_handler('object', 'stores', 'stores_url');
+			elgg_register_entity_url_handler('object', 'category', 'category_url');
+			elgg_register_entity_url_handler('object', 'cart', 'cart_url');
 			
 		// Now override icons
 			register_plugin_hook('entity:icon:url', 'object', 'socialcommerce_image_hook');
