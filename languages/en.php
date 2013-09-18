@@ -107,7 +107,7 @@
 			'stores:my:account' => "My Account",
 			'stores:user:not:match' => 'You are not allow to access this page!',
 			'stores:percentage' => "Stores Percentage",
-			'stores:percentage:null' => "You've installed the Stores plugin but you still need to put Stores Percentage in the <a href='%spg/admin/plugins/'>Tool Administration panel</a>.",
+			'stores:percentage:null' => "You've installed the Stores plugin but you still need to put Stores Percentage in the <a href='%sadmin/plugins/'>Tool Administration panel</a>.",
 			'site_commission' => "Site Commission",
 			'sold_product' => "Sold Product",
 			'features' => "Features",

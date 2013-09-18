@@ -323,7 +323,7 @@
 			$filehandler->setFilename("socialcommerce/" . $entity->guid . $size . ".jpg");
 			
 			if ($filehandler->exists()) {
-				$url = get_config('url')."pg/storesimage/{$entity->guid}/$size/$icontime.jpg";
+				$url = get_config('url')."storesimage/{$entity->guid}/$size/$icontime.jpg";
 				return $url;
 			}
 		}
