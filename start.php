@@ -110,7 +110,7 @@
 			elgg_register_entity_url_handler('object', 'cart', 'cart_url');
 			
 		// Now override icons
-			register_plugin_hook('entity:icon:url', 'object', 'socialcommerce_image_hook');
+			elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'socialcommerce_image_hook');
 			
 		// register entity type
 			elgg_register_entity_type('object','stores');
@@ -142,21 +142,21 @@
    		$default_produt_types = array((object)array('value'=> 2, 'display_val'=> elgg_echo('stores:digital:products'), 'addto_cart'=> 1 )
 								 );
 								 
-		$CONFIG->produt_type_default = trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_produt_types);
+		$CONFIG->produt_type_default = elgg_trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_produt_types);
 								 
    		//--- Default fields for digital products ----//
 		$product_fields[2] = array (
 			'upload' => array('field'=>'file','mandatory'=>1,'display'=>1),
 			'price' => array('field'=>'text','mandatory'=>1,'display'=>1)
 		);
-		$CONFIG->product_fields = trigger_plugin_hook('socialcommerce:fields', 'stores', NULL, $product_fields);
+		$CONFIG->product_fields = elgg_trigger_plugin_hook('socialcommerce:fields', 'stores', NULL, $product_fields);
 		
 		//--- Default related product types ----//
    		$default_relatedprodut_types = array((object)array('value'=>1,'display_val'=>elgg_echo('stores:related:product'),'addto_cart'=>0),
 								      (object)array('value'=>2,'display_val'=>elgg_echo('stores:services'),'addto_cart'=>0)
 								 );
 								 
-		$CONFIG->default_relatedprodut_types = trigger_plugin_hook('socialcommerce:relatedprodut:type', 'stores', NULL, $default_relatedprodut_types);
+		$CONFIG->default_relatedprodut_types = elgg_trigger_plugin_hook('socialcommerce:relatedprodut:type', 'stores', NULL, $default_relatedprodut_types);
    	}
 		
 	function socialcommerce_pagesetup() {
