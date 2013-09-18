@@ -849,31 +849,32 @@ EOT;
 		
 		register_elgg_event_handler('pagesetup','system','socialcommerce_pagesetup');
 		
-	// Register actions
-		register_action("socialcommerce/add", false, $CONFIG->pluginspath . "socialcommerce/actions/add.php");
-		register_action("socialcommerce/edit", false, $CONFIG->pluginspath . "socialcommerce/actions/edit.php");
-		register_action("socialcommerce/delete", false, $CONFIG->pluginspath . "socialcommerce/actions/delete.php");
-		register_action("socialcommerce/icon", false, $CONFIG->pluginspath . "socialcommerce/actions/icon.php");
-		register_action("socialcommerce/add_category", false, $CONFIG->pluginspath . "socialcommerce/actions/add_category.php");
-		register_action("socialcommerce/edit_category", false, $CONFIG->pluginspath . "socialcommerce/actions/edit_category.php");
-		register_action("socialcommerce/delete_category", false, $CONFIG->pluginspath . "socialcommerce/actions/delete_category.php");
-		register_action("socialcommerce/addcart", false, $CONFIG->pluginspath . "socialcommerce/actions/addcart.php");
-		register_action("socialcommerce/remove_cart", false, $CONFIG->pluginspath . "socialcommerce/actions/remove_cart.php");
-		register_action("socialcommerce/update_cart", false, $CONFIG->pluginspath . "socialcommerce/actions/update_cart.php");
-		register_action("socialcommerce/add_address", false, $CONFIG->pluginspath . "socialcommerce/actions/add_address.php");
-		register_action("socialcommerce/edit_address", false, $CONFIG->pluginspath . "socialcommerce/actions/edit_address.php");
-		register_action("socialcommerce/delete_address", false, $CONFIG->pluginspath . "socialcommerce/actions/delete_address.php");
-		register_action("socialcommerce/makepayment", false, $CONFIG->pluginspath . "socialcommerce/actions/makepayment.php");
-		register_action("socialcommerce/add_order", false, $CONFIG->pluginspath . "socialcommerce/actions/add_order.php");
-		register_action("socialcommerce/change_order_status", false, $CONFIG->pluginspath . "socialcommerce/actions/change_order_status.php");
-		register_action("socialcommerce/add_wishlist", false, $CONFIG->pluginspath . "socialcommerce/actions/add_wishlist.php");
-		register_action("socialcommerce/remove_wishlist", false, $CONFIG->pluginspath . "socialcommerce/actions/remove_wishlist.php");
-		register_action("socialcommerce/download", true, $CONFIG->pluginspath. "socialcommerce/actions/download.php");
-		register_action("socialcommerce/retrieve", false, $CONFIG->pluginspath . "socialcommerce/actions/retrieve.php");
-		register_action("socialcommerce/contry_tax", false, $CONFIG->pluginspath . "socialcommerce/actions/contry_tax.php");
-		register_action("socialcommerce/addcommon_tax",false,$CONFIG->pluginspath . "socialcommerce/actions/addcommon_tax.php");
-		register_action("socialcommerce/addcountry_tax",false,$CONFIG->pluginspath . "socialcommerce/actions/addcountry_tax.php");
-		register_action('socialcommerce/manage_socialcommerce', false, $CONFIG->pluginspath . 'socialcommerce/actions/manage_socialcommerce.php', false);
-		
-		elgg_register_action('socialcommerce/settings/save', $CONFIG->pluginspath . 'socialcommerce/actions/socialcommerce/settings/save.php' );
+	/*****	register actions	*****/
+		$action_path = $CONFIG->pluginspath.'socialcommerce/actions/';
+	
+		elgg_register_action("socialcommerce/add", $action_path.'add.php');
+		elgg_register_action("socialcommerce/edit", $action_path.'edit.php');
+		elgg_register_action("socialcommerce/delete", $action_path.'delete.php');
+		elgg_register_action("socialcommerce/icon", $action_path.'icon.php');
+		elgg_register_action("socialcommerce/add_category", $action_path.'add_category.php');
+		elgg_register_action("socialcommerce/edit_category", $action_path.'edit_category.php');
+		elgg_register_action("socialcommerce/delete_category", $action_path.'delete_category.php');
+		elgg_register_action("socialcommerce/addcart", $action_path.'addcart.php');
+		elgg_register_action("socialcommerce/remove_cart", $action_path.'remove_cart.php');
+		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
+		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
+		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
+		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
+		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
+		elgg_register_action("socialcommerce/add_order", $action_path.'add_order.php');
+		elgg_register_action("socialcommerce/change_order_status", $action_path.'change_order_status.php');
+		elgg_register_action("socialcommerce/add_wishlist", $action_path.'add_wishlist.php');
+		elgg_register_action("socialcommerce/remove_wishlist", $action_path.'remove_wishlist.php');
+		elgg_register_action("socialcommerce/download", $action_path.'download.php');
+		elgg_register_action("socialcommerce/retrieve", $action_path.'retrieve.php');
+		elgg_register_action("socialcommerce/contry_tax", $action_path.'contry_tax.php');
+		elgg_register_action("socialcommerce/addcommon_tax", $action_path.'addcommon_tax.php');
+		elgg_register_action("socialcommerce/addcountry_tax", $action_path.'addcountry_tax.php');
+		elgg_register_action('socialcommerce/manage_socialcommerce', $action_path.'manage_socialcommerce.php');
+		elgg_register_action('socialcommerce/settings/save', $action_path.'socialcommerce/settings/save.php' );
 ?>
