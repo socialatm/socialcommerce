@@ -15,14 +15,14 @@
 			$hidden = "<input type=\"hidden\" name=\"not_allow\" value=\"1\">";
 			$action = "#";
 		}else{
-			$action = $CONFIG->checkout_base_url."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+			$action = $CONFIG->checkout_base_url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		}
 		$username = "/".$_SESSION['user']->username;
 	}
 	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('check:out')));
 	$buy_more = elgg_echo('buy:more');
 	$hidden_values = elgg_view('input/securitytoken');
-	$buy_more_link = $CONFIG->wwwroot.'pg/socialcommerce'.$username."/all";
+	$buy_more_link = $CONFIG->wwwroot.'socialcommerce'.$username."/all";
 	$form_body = <<< BOTTOM
 		{$java_script}
 		<form method="post" id="checkout_form" action="{$action}" {$java_function}>

@@ -121,7 +121,7 @@ EOF;
 			}
 		    $order_total = '<b>'.elgg_echo('order:total').":</b> ".get_price_with_currency($grand_total);
 			$order_item_follows = sprintf(elgg_echo('order:item:follows'),$order->guid);
-			$action = $CONFIG->wwwroot.'pg/socialcommerce/'.$_SESSION['user']->username.'/order/';
+			$action = $CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/order/';
 			$display_grand_total = get_price_with_currency($grand_total);
 		
 			$cart_item_text = elgg_echo('checkout:cart:item');

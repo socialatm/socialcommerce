@@ -11,6 +11,6 @@
 ?>
 
 	<p class="user_menu_stores">
-		<a href="<?php echo $vars['url']; ?>pg/socialcommerce/<?php echo $vars['entity']->username; ?>"><?php echo elgg_echo("stores"); ?></a>	
+		<a href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $vars['entity']->username; ?>"><?php echo elgg_echo("stores"); ?></a>	
 	</p>
 	

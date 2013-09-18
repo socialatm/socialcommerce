@@ -25,7 +25,7 @@
 		if(!is_array($selected_shipping_methods))
 			$selected_shipping_methods = array($selected_shipping_methods);
 		$shipping_methods = get_shipping_methods();
-		$action = $CONFIG->checkout_base_url."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+		$action = $CONFIG->checkout_base_url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		
 		$shipping_method_select = elgg_echo('shipping:method:select');
 		$shipping_method_validation_text = elgg_echo('shipping:method:validation:text');
