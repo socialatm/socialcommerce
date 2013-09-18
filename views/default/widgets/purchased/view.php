@@ -211,7 +211,7 @@ EOF;
 EOF;
         }
         //get a link to the users files
-        $users_file_url = $vars['url'] . "pg/socialcommerce/" . get_user($f->owner_guid)->username;
+        $users_file_url = $vars['url'] . "socialcommerce/" . get_user($f->owner_guid)->username;
         echo '</div>';
 	} else {
 		echo elgg_echo("stores:none");

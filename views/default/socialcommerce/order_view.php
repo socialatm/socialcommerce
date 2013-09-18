@@ -79,7 +79,7 @@ echo $cart_body = <<<EOF
 			
 			user_id = {$_SESSION['user']->guid}
 			
-			$("#order_action_bg").load("{$base_url}pg/socialcommerce/" + order_item_id + "/more_order_item", {us: user_id});
+			$("#order_action_bg").load("{$base_url}socialcommerce/" + order_item_id + "/more_order_item", {us: user_id});
 			
 			$("#order_action").show();
 			$("#order_action").css({'width':window_width+'px','height':window_height+'px'});

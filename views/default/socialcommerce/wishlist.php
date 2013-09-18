@@ -22,7 +22,7 @@ if($products){
 		$product_url = $product->getURL();
 		$title = $product->title;
 		$mime = $product->mimetype;
-		$friendlytime = "<a href=\"{$vars['url']}pg/socialcommerce/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
+		$friendlytime = "<a href=\"{$vars['url']}socialcommerce/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
 		$info = "<p> <a href=\"{$product_url}\"><B>{$title}</B></a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";

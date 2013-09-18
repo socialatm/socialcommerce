@@ -29,7 +29,7 @@
 		$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
 		
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('shipping:address')));
-		$action = $CONFIG->checkout_base_url."pg/socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+		$action = $CONFIG->checkout_base_url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		$address_details = <<<EOF
 			<div>
 				<form method="post" action="{$action}" onsubmit="return validate_shipping_details();">
