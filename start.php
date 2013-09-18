@@ -840,14 +840,16 @@ EOT;
 		return null;
   	}
   	// Make sure the stores initialization function is called on initialization
-		register_elgg_event_handler('init','system','socialcommerce_init');
-		register_elgg_event_handler('init','system','product_fields_setup', 10000); 	// Ensure this runs after other plugins
+		elgg_register_event_handler('init','system','socialcommerce_init');
+		elgg_register_event_handler('init','system','product_fields_setup', 10000); 	// Ensure this runs after other plugins
+		
+		elgg_register_event_handler('pagesetup','system','socialcommerce_pagesetup');
 		
   	// Override permissions
-		register_plugin_hook('permissions_check','user','order_can_create');
-		register_plugin_hook('permissions_check','object','order_can_create');
+		elgg_register_plugin_hook_handler('permissions_check','user','order_can_create');
+		elgg_register_plugin_hook_handler('permissions_check','object','order_can_create');
 		
-		register_elgg_event_handler('pagesetup','system','socialcommerce_pagesetup');
+		
 		
 	/*****	register actions	*****/
 		$action_path = $CONFIG->pluginspath.'socialcommerce/actions/';
