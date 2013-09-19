@@ -62,10 +62,14 @@
 	    
 	    // Load system configuration
 			global $CONFIG;
-		
+			
 		// Set up menu for logged in users
 			if (elgg_is_logged_in()) {
-				add_menu( elgg_echo('stores'), get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all');
+				elgg_register_menu_item('site', array(
+					'name' => 'stores',
+					'text' => 'Stores',
+					'href' => 'socialcommerce/' . $_SESSION['user']->username.'/all/products/',
+				));
 			}
 	
 		// Extend CSS
@@ -112,16 +116,13 @@
 		// Now override icons
 			elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'socialcommerce_image_hook');
 			
-		// register entity type
-			elgg_register_entity_type('object','stores');
-		
 		// Register socialcommerce settings
 			register_socialcommerce_settings();
 			
 		// Register country and state for socialcommerce
 			register_country_state();
 
-			register_subtypes();
+		sc_register_subtypes();
 		
 	    	if (elgg_get_context() == "stores" || elgg_get_context() == "socialcommerce") {
 	    		if(!isset($_REQUEST['search_viewtype']))
@@ -160,36 +161,130 @@
    	}
 		
 	function socialcommerce_pagesetup() {
-		/*****	add submenu options	*****/
+	
+		/*****	add menu items	*****/
+		
+		$menu_item = array(
+			'name' => 'everyone',			
+			'text' => elgg_echo('stores:everyone'), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/all/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+			
+		$menu_item = array(
+			'name' => 'category',			
+			'text' => elgg_echo('stores:category'), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/category/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+		
+		
+		
+		
+		
 		if (elgg_get_context() == "stores" || elgg_get_context() == "socialcommerce") {
 			if (isset($_SESSION['guid']) && elgg_is_logged_in()) {	
-				add_submenu_item(elgg_echo('stores:everyone'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/all",'stores');
-				add_submenu_item(elgg_echo('stores:category'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/category/",'stores');
-				$splugin_settings = elgg_get_entities(array( 	
-					'type' => 'object',
-					'subtype' => 'splugin_settings',
-					)); 			
-				
-				if($splugin_settings){
-					$settings = $splugin_settings[0];
-				}
-	
+
 				if( elgg_is_admin_logged_in() ){
-					add_submenu_item(elgg_echo('stores:addpost'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/add",'create');
-					add_submenu_item(elgg_echo('stores:sold:products'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/sold",'sold');
-					add_submenu_item(elgg_echo('stores:addcate'), get_config('url')."socialcommerce/" . $_SESSION['user']->username . "/addcategory/",'create');
-				}
+				
+					$menu_item = array(
+			'name' => 'new_product',			
+			'text' => elgg_echo('stores:addpost'), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/add/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+			
+			$menu_item = array(
+			'name' => 'new_category',			
+			'text' => elgg_echo('stores:addcategory'), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/addcategory/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+			
+			$menu_item = array(
+			'name' => 'sold_items',			
+			'text' => elgg_echo('stores:sold:products'), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/sold/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+			
+			
+				
 					
-			} else if ( elgg_get_page_owner_guid()) {
-				$page_owner = elgg_get_page_owner_entity();
-				add_submenu_item(sprintf(elgg_echo('stores:user'),$page_owner->name), get_config('url')."socialcommerce/" . $page_owner->username);
-				if ($page_owner instanceof ElggUser)
-					add_submenu_item(sprintf(elgg_echo('stores:user:friends'),$page_owner->name), get_config('url')."socialcommerce/" . $page_owner->username . "/friends/");
-			}
-		}
-		
-		if (elgg_get_context() == 'admin' && elgg_is_admin_logged_in()) {
-			add_submenu_item(elgg_echo('socialcommerce:default:settings'), get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/settings/general/');
+				
+						
+				}		//	end if( elgg_is_admin_logged_in() ){
+					
+			} 
+			
+			
+	//		else if ( elgg_get_page_owner_guid()) {
+	
+	//		$page_owner = elgg_get_page_owner();
+			
+			$menu_item = array(
+			'name' => 'stores_user',			
+			'text' => sprintf(elgg_echo('stores:user'), $page_owner->name), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+			
+			$menu_item = array(
+			'name' => 'stores_user_friends',			
+			'text' => sprintf(elgg_echo('stores:user:friends'), $page_owner->name), 			
+			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/friends/',			
+			'contexts' => array('stores', 'socialcommerce'),	
+	//		'section' => '',		
+	//		'title' => '',			
+	//		'selected' => '',		
+			'parent_name' => 'stores',	
+	//		'link_class' => '',		
+	//		'item_class' => '',		
+			);
+			elgg_register_menu_item('site', $menu_item);
+			
 		}
 	}
 	
@@ -530,7 +625,7 @@ EOT;
 		$result = update_data("UPDATE {$CONFIG->dbprefix}metadata set value_id='$value', value_type='$value_type', access_id=$access_id, owner_guid=$owner_guid where id=$id and name_id='$name'");
 		if ($result!==false) {
 			$obj = elgg_get_metadata_from_id($id);
-			if (trigger_elgg_event('update', 'metadata', $obj)) {
+			if (elgg_trigger_event('update', 'metadata', $obj)) {
 				return true;
 			} else {
 				elgg_delete_metadata(array('metadata_id' => $id));
