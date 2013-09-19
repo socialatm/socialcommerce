@@ -132,8 +132,8 @@ function get_product_type_from_value($value) {
 	}	
 }
 
-function register_subtypes(){
-	$subtypes = array('stores','cart','cart_item','address','order','order_item','transaction','splugin_settings','s_checkout','s_shipping','s_withdraw','s_currency');
+function sc_register_subtypes(){
+	$subtypes = array('stores','cart','cart_item','address','order','order_item','transaction','splugin_settings','s_checkout','s_shipping','s_withdraw','s_currency', 'sc_category');
 	foreach ($subtypes as $subtype){
 		add_subtype('object',$subtype);
 	}
