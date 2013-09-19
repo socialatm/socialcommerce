@@ -10,14 +10,10 @@
 	 **/ 
 	 
 	gatekeeper();
+	$page_owner = elgg_get_logged_in_user_entity();
 	
-	// Get the current page's owner
-		$page_owner = elgg_get_page_owner_entity();
-		if ($page_owner === false || is_null($page_owner)) {
-			$page_owner = $_SESSION['user'];
-			elgg_set_page_owner_guid($_SESSION['guid']);
-		}
-		$container_guid = elgg_get_page_owner_guid();
+	$container_guid = elgg_get_page_owner_guid();	//	@todo - maybe change this
+	
 	//set the title
 	$title = elgg_view_title(elgg_echo('stores:addpost'));
 	// Get the form
@@ -32,5 +28,5 @@
 	);
 
 	$body = elgg_view_layout('one_sidebar', $params);
-	echo elgg_view_page($title, $body);
+	echo elgg_view_page(elgg_echo('stores:addpost'), $body);
 ?>
