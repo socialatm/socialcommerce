@@ -267,11 +267,10 @@
 			'settings:https:help' => 'If it is set, the checkout process continue with the url https.',
 			'settings:https:Url' => 'Url.',
 		
-		/**
-		 * Status messages
-		 */
+		/*****	Status messages	*****/
 		 
-		 	'item:object:address' => "Address",
+		 	'item:object:socialcommerce' => 'Socialcommerce',
+			'item:object:address' => "Address",
 		 	'item:object:stores' => 'Products',
 		 	'item:object:transaction' => "Transactions",
 		 	'item:object:category' => "Category",
@@ -359,8 +358,8 @@
 		 * category
 		 */
          	'stores:category' => "Category",
-         	'stores:addcate' => "Add New Category",
-         	'stores:editcate' => "Edit Stores Category",
+         	'stores:addcategory' => "Add New Category",
+         	'stores:editcategory' => "Edit Store Category",
          	'category:text' => "Description",
          	'category:edit' => 'Edit Category',
          	'category:delete:confirm' => "Are you sure you want to delete this category?",
