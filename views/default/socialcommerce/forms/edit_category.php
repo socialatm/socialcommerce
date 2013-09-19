@@ -9,16 +9,15 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	// Set title, form destination
 		if (isset($vars['entity'])) {
-			$title = sprintf(elgg_echo("stores:editcate"),$object->title);
+			$title = sprintf(elgg_echo("stores:editcategory"), $object->title);
 			$action = "socialcommerce/edit_category";
 			$title = $vars['entity']->title;
 			$product_type_id = $vars['entity']->product_type_id;
 			$body = $vars['entity']->description;
 		} else {
-			$title = elgg_echo("stores:addcate");
+			$title = elgg_echo("stores:addcategory");
 			$action = "socialcommerce/add_category";
 			$title = "";
 			$body = "";
