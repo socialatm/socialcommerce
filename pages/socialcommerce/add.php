@@ -17,7 +17,7 @@
 	//set the title
 	$title = elgg_view_title(elgg_echo('stores:addpost'));
 	// Get the form
-	$content = "<div class=\"contentWrapper\">".elgg_view("socialcommerce/forms/edit")."</div>";	//	@todo - elgg_get_form ??
+	$content = '<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit").'</div>';	//	@todo - elgg_get_form ??
 	// These for left side menu
 	$sidebar .= gettags();
 			
