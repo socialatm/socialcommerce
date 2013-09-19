@@ -13,8 +13,6 @@ global $CONFIG;
 $context = elgg_get_context();
 if($context == 'socialcommerce' || $context == 'stores' || $context == 'search' || $context == 'main'){
 	
-?>
-<?PHP
 }
 
 // @todo - set up like this it loads all the time ??
