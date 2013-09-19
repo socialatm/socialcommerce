@@ -8,7 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
  	**/
-	 
+	
 	// Set title, form destination
 		if (isset($vars['entity'])) {
 			$title = sprintf(elgg_echo("stores:editpost"),$object->title);	// @todo - why is title on both line 21 & line 23 ??
@@ -23,8 +23,9 @@
 			$tags = $vars['entity']->tags;
 			$access_id = $vars['entity']->access_id;
 			$product_type_id = $vars['entity']->product_type_id;
-		//	if($product_type_id <= 0)			// @todo - doesn't this make every product a digital product ??
-		//		$product_type_id = 2;
+				if($product_type_id <= 0) {			// @todo - doesn't this make every product a digital product ??
+					$product_type_id = 2;
+				}
 		} else  {
 			$title = elgg_echo("stores:addpost");
 			$action = "socialcommerce/add";
@@ -61,24 +62,18 @@
 		$chk_tax_type = '';
 		$country_details = '';
 				
-		$splugin_settings = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-		));
-
-        $title_label = elgg_echo('title');
+		$title_label = elgg_echo('title');
         $title_textbox = elgg_view('input/text', array('internalname' => 'storestitle', 'value' => $title));
         
         $produt_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
-        
-        $category_lists = elgg_get_entities_from_metadata(array(
+		
+	    $category_lists = elgg_get_entities_from_metadata(array(
 			'product_type_id' => $product_type_id,
 			'entity_type' =>'object',
-			'entity_subtype' => 'category',
-			'owner_guid' => 0,
-			'limit' => 99999,
+			'entity_subtype' => 'sc_category',
+			'container_guid' => elgg_get_plugin_from_id('socialcommerce')->guid,
 			));  	
-			
+		
         $options_values = array();
         if($category_lists){
         	foreach ($category_lists as $category_list){
