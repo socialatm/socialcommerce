@@ -46,15 +46,9 @@
 		$method = $_SESSION['CHECKOUT']['checkout_method'];		//	@todo - what if the $method != 'paypal'  ??
 		$total = $_SESSION['CHECKOUT']['total'];
 		$validate_currency = validate_currency(get_config('currency_code'), $total, 'paypal');
-	
-		$splugin_settings = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-			));
-		$splugin_settings = $splugin_settings[0];
-		$email = $splugin_settings->socialcommerce_paypal_email;
-		$paypal_environment = $splugin_settings->socialcommerce_paypal_environment;
-
+		$email = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
+		$paypal_environment = elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce');
+		
 		if($paypal_environment == "paypal") {
 			$paypal_url = "https://www.paypal.com/cgi-bin/webscr";
 		}else {
