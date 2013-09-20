@@ -23,7 +23,7 @@
 	$price_text = elgg_echo('price');
 	$search_viewtype = get_input('search_viewtype');
 	$mime = $stores->mimetype;
-	$product_type_details = get_product_type_from_value($stores->product_type_id);
+	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
 	if($stores->product_type_id == 1){
 		if($stores->quantity > 0){
 			$quantity = $stores->quantity;
