@@ -9,28 +9,20 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
-		gatekeeper();
-		global $CONFIG, $checkout_order;
-		
-	// Get the current page's owner
-		$page_owner = elgg_get_page_owner_entity();
-		if ($page_owner === false || is_null($page_owner)) {
-			$page_owner = $_SESSION['user'];
-			elgg_set_page_owner_guid($_SESSION['guid']);
-		}
-		$checkout_order = get_input('checkout_order');
-		if($checkout_order == ""){
+	gatekeeper();
+	$page_owner = elgg_get_logged_in_user_entity();
+	$checkout_order = get_input('checkout_order');
+	
+		if(is_null($checkout_order)){
 			$checkout_order = 0;
 			unset($_SESSION['CHECKOUT']);
 			$cart = elgg_get_entities(array( 	
 				'type' => 'object',
 				'subtype' => 'cart',
-				'owner_guid' => $_SESSION['user']->getGUID(),
-				)); 			
+				'owner_guid' => $page_owner->guid,
+				)); 
 				
-			if($cart){
+			if($cart){				//	@todo - should probably register an error and forward if cart is empty...
 				$cart = $cart[0];
 				$cart_items = elgg_get_entities_from_relationship(array(
 					'relationship' => 'cart_item',
@@ -308,7 +300,7 @@ EOF;
 			</div>
 EOF;
 		
-	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	$sidebar .= gettags();
 	
 	$params = array(
