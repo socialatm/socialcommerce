@@ -284,7 +284,6 @@
 			'item:object:addtax_country'=>'Country Tax',
 			'item:object:addtax_common'=>'Common Tax',
 			'item:object:wth_request'=>'Withdrawal Request',
-		 	'item:object:splugin_settings' => "Social Commerce Settings",
 		 	'item:object:cart' => "Carts",
 		 	'item:object:cart_item' => "Products in Carts",
 			'item:object:related_product_details' => "Related Products",
