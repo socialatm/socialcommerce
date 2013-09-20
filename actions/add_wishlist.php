@@ -18,7 +18,7 @@
 		$product_guid = (int) get_input('pgid');
 		if($product_guid > 0){
 			$product = get_entity($product_guid);
-			$product_type_details = get_product_type_from_value($product->product_type_id);
+			$product_type_details = sc_get_product_type_from_value($product->product_type_id);
 			if($product_type_details->addto_cart != 1){
 				$reditrect = $product->getURL();
 				forward($reditrect);
