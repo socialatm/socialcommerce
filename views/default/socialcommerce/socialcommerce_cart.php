@@ -19,6 +19,7 @@
 			
 			$form_body = elgg_view('input/hidden', array('internalname' => 'stores_guid', 'value' => $product->getGUID()));
 			$form_body .= $cart_btn;
+			
 			if($product->product_type_id == 1){
 				$label = "<div style=\"float:left;margin-bottom:5px;\"><label>".elgg_echo("enter:quantity").": </label></div>
 				<div style=\"float:left;\"><p>" . elgg_view('input/text',array('internalname' => 'cartquantity')) . "</p></div>
@@ -26,16 +27,14 @@
 			}elseif ($product->product_type_id == 2){
 				$label = $form_body;
 			}
-			
-			$form_body = <<<EOT
-				<div class="add_to_cart_form">
-            		<div style="float:left;width:310px;">
-            			{$label}
-            		</div>
-            		<div style="clear:both;"></div>
-            	</div>
-EOT;
-			$add_cart_url = addcartURL($product);
+			$form_body = '<div class="add_to_cart_form">
+							<div style="float:left;width:310px;">
+							'.$label.'
+							</div>
+							<div style="clear:both;"></div>
+						</div>';
+
+						$add_cart_url = addcartURL($product);
 			
 			if($phase == 1){
 				if ($product->canEdit()) {
