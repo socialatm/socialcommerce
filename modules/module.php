@@ -941,21 +941,20 @@ function view_success_page(){
 	}
 }
 
-function view_cancel_page(){
+function sc_view_cancel_page(){
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_cancel';
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
 		$title = elgg_view_title(elgg_echo('cart:cancel'));
-		$title1 = elgg_echo('cart:cancel');
 		elgg_set_context('socialcommerce');
-		$content = $title.$body;
+		$content = $body;
 		$params = array(
 			'title' => $title,
 			'content' => $content,
 			'sidebar' => $sidebar,
 			);
 		$body = elgg_view_layout('one_sidebar', $params);
-		echo elgg_view_page($title, $body);
+		echo elgg_view_page(elgg_echo('cart:cancel'), $body);
 	}else{
 		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
