@@ -8,20 +8,19 @@
 	* @copyright twentyfiveautumn.com 2013
 	* @link http://twentyfiveautumn.com/
 	**/ 
-	 
-global $CONFIG;
-if(get_input('not_allow') && get_input('not_allow') == 1){
-	register_error(elgg_echo('not:allow:error'));
-}
+	
+	gatekeeper();
+	if(get_input('not_allow') && get_input('not_allow') == 1){
+		register_error(elgg_echo('not:allow:error'));
+	}
 
-if(elgg_is_logged_in()){
 	$cart = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'cart',
-		'owner_guid' => $_SESSION['user']->getGUID(),
+		'owner_guid' => elgg_get_logged_in_user_entity()->guid,
 		)); 			
-		
 	$cart = $cart[0];
+	
 	if($cart){
 		$cart_items = elgg_get_entities_from_relationship(array(
 			'relationship' => 'cart_item',
@@ -30,7 +29,8 @@ if(elgg_is_logged_in()){
 	}else{
 		$display_cart_items = elgg_echo('cart:null');
 	}
-}	
+
+
 if($cart_items){
 	foreach ($cart_items as $cart_item){
 		if(is_array($cart_item)){
@@ -77,7 +77,7 @@ if($cart_items){
 				</table>
 EOF;
 			$info .= elgg_cart_quantity($cart_item);
-			$info .= "<div class=\"stores_remove\">";
+			$info .= '<div class= "stores_remove">';
 			
 			$info .= elgg_view('output/confirmlink',array(
 								'href' => $vars['url'] . "action/socialcommerce/remove_cart?" . $parameters,
@@ -111,18 +111,18 @@ EOF;
 }
 
 if($not_allow == 1){
-	$hidden = "<input type=\"hidden\" name=\"not_allow\" value=\"1\">";
+	$hidden = '<input type= "hidden" name="not_allow" value= "1">';
 	$action = "#";
 }else{
 	$action = $CONFIG->wwwroot."action/socialcommerce/update_cart";
 }
 $hidden .= elgg_view('input/securitytoken');
-echo $cart_body = <<<EOF
-	<form name="frm_cart" method="post" action="{$action}">
-		{$display_cart_items}
-		{$update_cart}
-		{$hidden}
-	</form>
-	{$confirm_cart_list}
-EOF;
+
+	echo $cart_body = 
+		'<form name="frm_cart" method="post" action="'.$action.'">'
+		.$display_cart_items
+		.$update_cart
+		.$hidden
+		.'</form>'
+		.$confirm_cart_list;
 ?>
