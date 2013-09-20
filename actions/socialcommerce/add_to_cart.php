@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg cart - add action
+	 * Elgg cart - add to cart action
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -8,27 +8,17 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
-	global $CONFIG;
 	
 	// Get variables
-	$quantity = get_input("cartquantity");
-	$product_guid = get_input("stores_guid");
-
-	$container_guid = (int) get_input('container_guid', 0);
-	if (!$container_guid && elgg_is_logged_in()){
-		$container_guid = $_SESSION['user']->getGUID();
-	}
-	// Get product enthity
+	$quantity = get_input("cartquantity") ? get_input("cartquantity") : 1;
+	$product_guid = get_input("product_guid");
+	$container_guid = (int) get_input('customer_guid') ? (int) get_input('customer_guid') : elgg_get_logged_in_user_entity()->guid ;
 	$product = get_entity($product_guid);
-	if($product->product_type_id == 2){
-		$quantity = 1;
+	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
+	if($product_type_details->addto_cart != 1){			//	@todo - trow an error message here...	
+		forward($product->getURL());
 	}
-	$product_type_details = get_product_type_from_value($product->product_type_id);
-	if($product_type_details->addto_cart != 1){
-		$reditrect = $product->getURL();
-		forward($reditrect);
-	}
+	
 	// Check the quantity of a product
 	if($product->quantity > 0 || $product->product_type_id == 2){
 		if(($product->quantity >= $quantity && $quantity > 0) || $product->product_type_id == 2){
@@ -54,7 +44,7 @@
 									;
 								}
 							}else{
-								register_error(sprintf(elgg_echo("cart:quantity:less"),$product->title));
+								register_error(sprintf(elgg_echo("cart:quantity:less"), $product->title));
 								$return = $CONFIG->url . 'socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 							}
 						} else {
@@ -69,12 +59,11 @@
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
 						$cart_item->amount = $product->price;
-						if ($container_guid){
-							$cart_item->container_guid = $container_guid;
-						}
+						$cart_item->container_guid = $container_guid;
+						
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
-							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
+							$result = add_entity_relationship($cart_guid, 'cart_item', $cart_item_guid );
 							
 						}
 					}
@@ -82,9 +71,8 @@
 					$cart = new ElggObject();
 					$cart->access_id = 2;
 					$cart->subtype = "cart";
-					if ($container_guid){
-						$cart->container_guid = $container_guid;
-					}
+					$cart->container_guid = $container_guid;
+					
 					$cart_guid = $cart->save();
 					if($cart_guid){
 						$cart_item = new ElggObject();
@@ -94,9 +82,8 @@
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
 						$cart_item->amount = $product->price;
-						if ($container_guid){
-							$cart_item->container_guid = $container_guid;
-						}
+						$cart_item->container_guid = $container_guid;
+						
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
