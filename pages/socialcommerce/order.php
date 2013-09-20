@@ -40,10 +40,11 @@
 		
 		if($view != 'rss'){
 		
-			$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+			$content = '<div class="contentWrapper stores">'.$content.'</div>';
 		}
 	
 	elgg_set_context('stores');
+	$sidebar .= elgg_view("socialcommerce/owner_block");
 	$sidebar .= gettags();
 	// set autofeed as false for not display the Subscribe to feed link in owner block
 	$autofeed = false;

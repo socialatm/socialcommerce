@@ -60,6 +60,7 @@
 		}
 	
 	elgg_set_context('stores');
+	$sidebar .= elgg_view("socialcommerce/owner_block");
 	$sidebar .= gettags();
 		
 	$params = array(

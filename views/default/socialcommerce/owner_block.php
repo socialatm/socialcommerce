@@ -17,7 +17,7 @@
 			<?php if (elgg_is_admin_logged_in()) { ?>
 				<!--My Account-->
 				<div class="scommerce_settings">
-					<a href="<?php echo $CONFIG->wwwroot . 'socialcommerce/' . $_SESSION['user']->username . '/settings/general'; ?>" />
+						<a href="<?php echo $CONFIG->url.'admin/plugin_settings/socialcommerce/'; ?>" />
 						<?php echo elgg_echo('socialcommerce:settings'); ?>
 					</a>
 				</div>
