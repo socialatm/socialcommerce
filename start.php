@@ -537,14 +537,13 @@
 	 * @param ElggEntity $entity File entity
 	 * @return string File URL
 	 */
-	function addcartURL($entity) {
-		global $CONFIG;
+	function addcartURL( $entity ) {
 		$title = $entity->title;
-		$title = elgg_get_friendly_title($title);
-		return	elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/addcart?stores_guid=".$entity->getGUID());		//	@todo - fix query string
+		$title = elgg_get_friendly_title( $title );								//	@todo - I have no idea why $title is in here...
+		return	get_config('url').'action/socialcommerce/add_to_cart/';
 	}
 	
-	function elgg_addcart($entity){
+	function elgg_addcart($entity){		//	@todo - this function does not get called from anywhere...
 		global $CONFIG;
 		
 		if ($entity->guid > 0 && (elgg_is_logged_in())) {
@@ -688,7 +687,7 @@ EOT;
 		return $sections;
 	}
 	
-	function get_sold_products($metavalue=null,$limit,$offset=0){
+	function get_sold_products($metavalue=null, $limit, $offset=0 ){
 		global $CONFIG;
 		$nameid = get_metastring_id('product_owner_guid');
 		if($nameid){
@@ -944,8 +943,6 @@ EOT;
 		elgg_register_plugin_hook_handler('permissions_check','user','order_can_create');
 		elgg_register_plugin_hook_handler('permissions_check','object','order_can_create');
 		
-		
-		
 	/*****	register actions	*****/
 		$action_path = $CONFIG->pluginspath.'socialcommerce/actions/';
 	
@@ -956,7 +953,6 @@ EOT;
 		elgg_register_action("socialcommerce/add_category", $action_path.'add_category.php');
 		elgg_register_action("socialcommerce/edit_category", $action_path.'edit_category.php');
 		elgg_register_action("socialcommerce/delete_category", $action_path.'delete_category.php');
-		elgg_register_action("socialcommerce/addcart", $action_path.'addcart.php');
 		elgg_register_action("socialcommerce/remove_cart", $action_path.'remove_cart.php');
 		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
@@ -974,4 +970,5 @@ EOT;
 		elgg_register_action("socialcommerce/addcountry_tax", $action_path.'addcountry_tax.php');
 		elgg_register_action('socialcommerce/manage_socialcommerce', $action_path.'manage_socialcommerce.php');
 		elgg_register_action('socialcommerce/settings/save', $action_path.'socialcommerce/settings/save.php' );
+		elgg_register_action('socialcommerce/add_to_cart', $action_path.'socialcommerce/add_to_cart.php' );
 ?>
