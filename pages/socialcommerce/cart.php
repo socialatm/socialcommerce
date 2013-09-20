@@ -13,7 +13,7 @@
 	$page_owner = elgg_get_logged_in_user_entity();
 	$title = elgg_view_title(elgg_echo('my:shopping:cart'));
 	elgg_set_context('search');
-	$content = $title.'<div class="contentWrapper stores">'.elgg_view("socialcommerce/cart").'</div>';
+	$content = '<div class="contentWrapper stores">'.elgg_view("socialcommerce/cart").'</div>';
 	$sidebar .= gettags();
 	
 	$params = array(
