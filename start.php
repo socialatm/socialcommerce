@@ -79,7 +79,7 @@
 			elgg_extend_view("index/righthandside", "socialcommerce/products_list",600);
 			elgg_extend_view("index/righthandside", "socialcommerce/most_popular_products",600);
 					
-			elgg_extend_view("owner_block/extend", "socialcommerce/owner_block",500);
+			elgg_extend_view("owner_block/extend", "socialcommerce/owner_block", 500);
 			
 			elgg_extend_view("page_elements/header_contents", "socialcommerce/header");
 			
