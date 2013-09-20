@@ -120,7 +120,7 @@ function SetGeneralValuesInConfig(){
 	load_module_configs();
 }
 
-function get_product_type_from_value($value) {
+function sc_get_product_type_from_value($value) {
 	global $CONFIG;
 	$default_produt_types = $CONFIG->produt_type_default;
 	if (is_array($default_produt_types) && sizeof($default_produt_types) > 0 && $value) { 
