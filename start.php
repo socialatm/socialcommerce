@@ -323,7 +323,7 @@
 				case "buy":				set_input('stores_guid', $page[2]);
 										require($base_path.'buy.php');
 										break;
-				case "cancel":			view_cancel_page();
+				case "cancel":			sc_view_cancel_page();
 										break;
 				case "cart":			require($base_path.'cart.php');
 										break;
