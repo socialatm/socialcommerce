@@ -53,7 +53,7 @@
 				{$nav}
 			</div>
 EOF;
-		
+	$sidebar .= elgg_view("socialcommerce/owner_block");	
 	$sidebar .= gettags();
 		
 	/*****	don't know if I'll use this part or not ?

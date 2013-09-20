@@ -36,6 +36,7 @@
 		
 	$content = '<div class="contentWrapper stores" align="left">'.$digital_area.'</div>';
 	elgg_set_context('category');
+	$sidebar .= elgg_view("socialcommerce/owner_block");
 	$sidebar .= gettags();
 	
 	$params = array(

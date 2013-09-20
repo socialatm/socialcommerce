@@ -14,6 +14,7 @@
 	$title = elgg_view_title(elgg_echo('my:shopping:cart'));
 	elgg_set_context('search');
 	$content = '<div class="contentWrapper stores">'.elgg_view("socialcommerce/cart").'</div>';
+	$sidebar .= elgg_view("socialcommerce/owner_block");
 	$sidebar .= gettags();
 	
 	$params = array(
