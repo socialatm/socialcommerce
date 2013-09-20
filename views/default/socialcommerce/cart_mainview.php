@@ -26,7 +26,7 @@
 	$price_text = elgg_echo('price');
 	$search_viewtype = get_input('search_viewtype');
 	$mime = $stores->mimetype;
-	$product_type_details = get_product_type_from_value($stores->product_type_id);
+	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
 	if($product_type_details->addto_cart != 1){
 		$reditrect = $stores->getURL();
 		forward($reditrect);
