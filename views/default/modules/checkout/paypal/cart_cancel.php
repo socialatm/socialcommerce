@@ -11,7 +11,7 @@
 
 	gatekeeper();
 	
- 	$area2 = $title
+ 	$content = $title
 		.'<div class="contentWrapper stores">'.
 			elgg_echo('cart:cancel:content')
 			.'<form action="'.get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cart" method="post">
@@ -19,5 +19,5 @@
 			</form><span class="buy_more"> or <a href="'.get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all">'.elgg_echo('buy:more').'</a></span>
 		</div>';
 
-	echo $area2;
+	echo $content;			//	@todo - look at these links
 ?>
