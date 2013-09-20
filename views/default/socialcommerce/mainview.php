@@ -9,16 +9,15 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	$stores = $vars['entity'];
-	$action = get_input('action');
 	$product_guid = $stores->getGUID();
 	$tags = $stores->tags;
 	$title = $stores->title;
 	$desc = $stores->description;
 	$price = $stores->price;
 	$ts = time();
-	
+	$customer = elgg_get_logged_in_user_entity();
+	$customer_guid = $customer->guid;
 	$quantity = $stores->quantity;
 	$owner = $vars['entity']->getOwnerEntity();
 	$friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
@@ -26,25 +25,26 @@
 	$price_text = elgg_echo('price');
 	$search_viewtype = get_input('search_viewtype');
 	$mime = $stores->mimetype;
-	$product_type_details = get_product_type_from_value($stores->product_type_id);
+	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
 	
-	if(isset($_SESSION['product']))
-		unset($_SESSION['product']);
-	if(isset($_SESSION['related_product']))
-		unset($_SESSION['related_product']);
+	if(isset($_SESSION['product'])) { unset($_SESSION['product']); }
+	if(isset($_SESSION['related_product'])) { unset($_SESSION['related_product']); }
 ?>
 	<div class="storesrepo_stores">
 	<div class="storesrepo_title"><h2><a href="<?php echo $stores->getURL(); ?>"><?php echo $title; ?></a></h2></div>
 		<div class="storesrepo_icon full_view">
 <?php 
 	echo elgg_view("socialcommerce/image", array(
-		'entity' => $vars['entity'],
-		'size' => 'large',
-		'display' => 'image'
-		));
+				'entity' => $vars['entity'],
+				'size' => 'large',
+				'display' => 'image'
+				));
 ?>	
 		</div>
+		
 		<form method="post" action="<?php echo addcartURL($stores); ?>">
+		<?php echo elgg_view('input/hidden', array('internalname' => 'product_guid', 'value' => $product_guid)); ?>
+		<?php echo elgg_view('input/hidden', array('internalname' => 'customer_guid', 'value' => $customer_guid )); ?>
 		<div class="right_section_contents">
 			<div class="storesrepo_title_owner_wrapper">
 <?php
@@ -72,7 +72,7 @@
 						if($vars['entity']->mimetype && $stores->product_type_id == 2){
 							echo "<div style=\"float:left;margin-top:20px;\">".elgg_view('output/product_type',array('value' => $stores->product_type_id))."</div>";
 							echo "<div style=\"float:left;\"><a href=\"{$stores->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
-							echo "<div class=\"clear\"></div>";
+							echo '<div class="clear"></div>';
 						}else{
 							echo elgg_view('output/product_type',array('value' => $stores->product_type_id));
 						} 
@@ -109,7 +109,7 @@
 							<div class="clear"></div>
 						</div>	
 <?php
-							if(elgg_is_admin_logged_in() || $_SESSION['user']->guid == $stores->owner_guid){
+							if(elgg_is_admin_logged_in() or $_SESSION['user']->guid == $stores->owner_guid){
 ?>
 								<div class="storesrepo_controls">
 <?php
@@ -155,7 +155,7 @@
 				}
 ?>
 				<!-- Cart Button -->
-				<?php echo elgg_view("socialcommerce/socialcommerce_cart",array('entity'=>$stores,'product_type_details'=>$product_type_details,'phase'=>1)); ?>
+				<?php echo elgg_view("socialcommerce/socialcommerce_cart", array('entity'=>$stores, 'product_type_details'=>$product_type_details, 'phase'=>1) ); ?>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -170,11 +170,7 @@
 								if($valtype['display'] == 1 && 	$shortname != 'price' && $shortname != 'quantity' && $shortname != 'upload'){
 									$display_name = elgg_echo('product:'.$shortname);
 									$output = elgg_view("output/{$valtype['field']}",array('value'=>$stores->$shortname));
-									$display_fields .= <<<EOF
-										<div class="storesrepo_description">
-											<B>{$display_name} :</B> {$output}
-										</div>
-EOF;
+									$display_fields .= '<div class="storesrepo_description"><B>'.$display_name.':</B>'.$output.'</div>';
 								}
 							}
 						}
