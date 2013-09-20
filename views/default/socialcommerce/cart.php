@@ -1,6 +1,6 @@
 <?php
    /**
-	* Elgg view - caet page
+	* Elgg view - cart page
 	* 
 	* @package Elgg SocialCommerce
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
