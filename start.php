@@ -12,41 +12,6 @@
 	// Load socialcommerce model
  	require(get_config('pluginspath').'socialcommerce/modules/module.php');
 	
-	/***** add a default plugin settings object here if there is not one. we'll move this to activate.php once we migrate to 1.8	*****/
-	
-	$splugin_settings = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-			));
-			$splugin_settings = $splugin_settings[0];
-			
-	if(count($splugin_settings) < 1){
-		$splugin_settings = new ElggObject;
-		$splugin_settings->subtype = 'splugin_settings';
-		$splugin_settings->owner_guid = elgg_get_logged_in_user_guid();
-		$splugin_settings->container_guid = elgg_get_logged_in_user_guid();
-		$splugin_settings->site_guid = get_config('site_id');
-		$splugin_settings->access_id = ACCESS_PUBLIC;
-		$splugin_settings->checkout_methods = 'paypal';
-		$splugin_settings->fund_withdraw_methods = '';
-		$splugin_settings->default_view = 'list';
-		$splugin_settings->https_allow = 0;
-		$splugin_settings->https_url_text = '0';
-		$splugin_settings->share_this = '0';
-		$splugin_settings->river_settings = array('product_add', 'product_checkout');
-		$splugin_settings->http_proxy_server = "";
-		$splugin_settings->http_proxy_port = "";
-		$splugin_settings->http_verify_ssl = "";
-		$splugin_settings->allow_add_product = "";
-		$splugin_settings->allow_shipping_method = 1;
-		$splugin_checkout_settings->display_name = 'PayPal Website Payments (Standard)';
-		$splugin_settings->socialcommerce_paypal_email = 'your paypal email goes here';
-		$splugin_settings->socialcommerce_paypal_environment = 'sandbox';
-		$splugin_settings->save();
-	}			/*****	end if(count($splugin_settings) < 1)	*****/
-	
-	/*****	end add a default plugin settings object	*****/
- 
 	// Set Config Values	
 	
 	if(!get_config('default_price_sign')) {
