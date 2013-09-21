@@ -20,17 +20,7 @@
 	
 	if($teansactions){
 		$grand_total = 0;
-		$settings = elgg_get_entities(array( 	
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-			'owner_guid' => 0,
-			'order_by' => '',
-			'limit' => 9999,
-			)); 			
 		
-		if($settings){
-			$settings = $settings[0];
-		}
 		foreach ($teansactions as $teansaction){
 			if($filter == "transactions"){
 				$teansaction = get_entity($teansaction->guid);
