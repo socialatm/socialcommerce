@@ -10,6 +10,9 @@
 	 **/ 
 	
 	function set_checkout_settings_paypal(){
+	
+	echo __FILE__ .' at '.__LINE__; die();  // search for this function came up empty but if we end up here we'll take a close look...
+		
 		$guid = get_input('guid');						//	@todo - check to make sure its not empty and throw an error if it is...
 		$display_name = get_input('display_name');
 		$paypal_email = get_input('socialcommerce_paypal_email');
@@ -131,12 +134,7 @@
 		$req .= "&$key=$value";
 	}
 // Now Post all of that back to PayPal's server using curl, and validate everything with PayPal
-	$splugin_settings = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-			));
-	$splugin_settings = $splugin_settings[0];
-	$paypal_environment = $splugin_settings->socialcommerce_paypal_environment;
+	$paypal_environment = elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce');
 		if($paypal_environment == "paypal") {
 			$url = "https://www.paypal.com/cgi-bin/webscr";
 		}else {
@@ -163,7 +161,7 @@ curl_close($ch);
 $process_payment = false;
 				
 	if (strcmp(trim($curl_result), 'VERIFIED') == 0) {
-		if(($_POST['receiver_email'] == $splugin_settings->socialcommerce_paypal_email)) {
+		if(($_POST['receiver_email'] == elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce'))) {
 							
 			switch($_POST['payment_status']) {
 				case "Completed":	$transaction_status = 'Completed';
