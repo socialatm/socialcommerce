@@ -28,7 +28,7 @@
 	$offset = get_input('offset');
 	if(!$offset) { $offset = 0; }
 			
-	$position = strstr($CONFIG->checkout_base_url,'https://') ? 'https://' : 'http://' ;
+	$position = strstr($CONFIG->url,'https://') ? 'https://' : 'http://' ;
 	$baseurl = $position.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	
 	$tab = get_input('tab') ? get_input('tab') : 'address';

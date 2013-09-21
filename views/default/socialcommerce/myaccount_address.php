@@ -37,8 +37,8 @@ EOF;
 		$content = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'myaccount','first'=>1));
 	}
 	$delete_confirm_msg = elgg_echo('delete:confirm:address');
-	$load_action = $CONFIG->checkout_base_url.'socialcommerce/'.$_SESSION['user']->username.'/view_address'; 
-	$delete_action = $CONFIG->checkout_base_url.'action/socialcommerce/delete_address';
+	$load_action = $CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/view_address'; 
+	$delete_action = $CONFIG->url.'action/socialcommerce/delete_address';
 	$content = <<<EOF
 		<script>
 			function add_myaddress(){

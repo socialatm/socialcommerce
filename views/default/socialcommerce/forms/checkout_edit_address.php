@@ -133,8 +133,8 @@ EOF;
 			$country_label_none = elgg_echo('country:none');
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
-			$address_post_url = "{$CONFIG->checkout_base_url}action/{$action}";
-			$address_reload_url = "{$CONFIG->checkout_base_url}socialcommerce/{$_SESSION['user']->username}/view_address";
+			$address_post_url = "{$CONFIG->url}action/{$action}";
+			$address_reload_url = "{$CONFIG->url}socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
 					var time_out;

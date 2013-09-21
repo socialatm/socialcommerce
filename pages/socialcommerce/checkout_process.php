@@ -32,7 +32,7 @@
 					foreach ($cart_items as $cart_item){
 						$product = get_entity($cart_item->product_id);
 						if($_SESSION['CHECKOUT']['allow_shipping'] != 1){
-							if($product->product_type_id == 2 || $CONFIG->allow_shipping_method == 2)
+							if( $product->product_type_id == 2 )				//	@todo - we can change this setting when we're building shipping methods.... 
 								$_SESSION['CHECKOUT']['allow_shipping'] = 0;
 							else 
 								$_SESSION['CHECKOUT']['allow_shipping'] = 1;

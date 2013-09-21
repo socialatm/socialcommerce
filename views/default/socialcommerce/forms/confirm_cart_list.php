@@ -15,7 +15,7 @@
 			$hidden = "<input type=\"hidden\" name=\"not_allow\" value=\"1\">";
 			$action = "#";
 		}else{
-			$action = $CONFIG->checkout_base_url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+			$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		}
 		$username = "/".$_SESSION['user']->username;
 	}
