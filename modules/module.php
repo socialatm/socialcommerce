@@ -33,10 +33,10 @@ function register_socialcommerce_settings(){
 
 function SetGeneralValuesInConfig(){
 
-echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
+echo __FILE__ .' at '.__LINE__; // die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
 
 	global $CONFIG;
-	set_default_currency_to_global();
+	sc_set_default_currency_to_global();
 
 	$splugin_settings = elgg_get_entities(array(
 		'type' => 'object',
@@ -1073,7 +1073,7 @@ function get_currency_name(){
 	}
 }
 
-function set_default_currency_to_global(){
+function sc_set_default_currency_to_global(){
 	global $CONFIG;
 
 	$default_currency = elgg_get_entities_from_metadata(array(
