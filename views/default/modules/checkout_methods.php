@@ -8,6 +8,12 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	
+	echo __FILE__ .' at '.__LINE__; die();
+	
+	/*****
+		next time we land here change $splugin_settings over to $socialcommerce plugin object...
+	*****/
 	 
 	$splugin_settings = elgg_get_entities(array(
 			'type' => 'object',
