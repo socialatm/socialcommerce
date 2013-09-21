@@ -33,39 +33,8 @@ function register_socialcommerce_settings(){
 
 function SetGeneralValuesInConfig(){
 
-echo __FILE__ .' at '.__LINE__; // die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
-
 	global $CONFIG;
 	sc_set_default_currency_to_global();
-
-	$splugin_settings = elgg_get_entities(array(
-		'type' => 'object',
-		'subtype' => 'splugin_settings',
-		));
-		
-	if($splugin_settings){
-		$settings = $splugin_settings[0];
-
-		$river_settings = $settings->river_settings;
-		if(!is_array($river_settings))
-			$river_settings = array($river_settings);
-		$CONFIG->river_settings = $river_settings;		//	@todo - these should be in the store object instead of $CONFIG
-
-		
-	    $allow_shipping_method =  $settings->allow_shipping_method;
-		if($allow_shipping_method == 1 ){
-			$CONFIG->allow_shipping_method = 1;
-		}else{
-			$CONFIG->allow_shipping_method = 2;
-		}
-
-			$CONFIG->checkout_base_url = $CONFIG->wwwroot;
-
-	}else{
-		$CONFIG->river_settings = array();
-		$CONFIG->allow_shipping_method = 2;
-		$CONFIG->checkout_base_url = $CONFIG->wwwroot;
-	}
 	
 	if(elgg_is_logged_in()){
 		$carts = elgg_get_entities(array(
@@ -195,7 +164,7 @@ function genarateCartFromSession(){
 						
 						if($cart_item_guid){
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
-							if(in_array('cart_add',$CONFIG->river_settings))
+							if(in_array('cart_add', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')) ))
 								add_to_river('river/object/cart/create','cartadd',$_SESSION['user']->guid,$product->guid);	
 						}
 					}
@@ -232,7 +201,7 @@ function genarateCartFromSession(){
 						
 						if($cart_item_guid){
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
-							if(in_array('cart_add',$CONFIG->river_settings))
+							if(in_array('product_checkout', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce'))))	//	@todo - maybe move this and add a 'cart_add' setting??
 								add_to_river('river/object/cart/create','cartadd',$_SESSION['user']->guid,$product->guid);
 						}
 					}
@@ -662,7 +631,7 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 					$order_item_id = $order_item->save();
 					
 					if($order_item_id){
-						if(in_array('product_checkout', get_config('river_settings'))) {
+						if(in_array('product_checkout', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')))) {
 							add_to_river('river/object/stores/purchase', 'purchase', $buyer_guid, $product_id );
 						}
 												

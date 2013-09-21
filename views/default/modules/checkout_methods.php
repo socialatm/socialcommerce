@@ -9,23 +9,8 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
-	echo __FILE__ .' at '.__LINE__; die();
-	
-	/*****
-		next time we land here change $splugin_settings over to $socialcommerce plugin object...
-	*****/
-	 
-	$splugin_settings = elgg_get_entities(array(
-			'type' => 'object',
-			'subtype' => 'splugin_settings',
-			));
-	$splugin_settings = $splugin_settings[0];
-	 
 	$checkout_methods = sc_get_checkout_methods();
-	$order = get_input('order') ? get_input('order') : 0 ;
-	$selected_checkoutmethods_guid = $splugin_settings->guid;
-	$selected_checkoutmethods = $splugin_settings->checkout_methods;
-	$selected_checkoutmethods = is_array($selected_checkoutmethods) ? $selected_checkoutmethods : array($selected_checkoutmethods);
+	$selected_checkoutmethods = unserialize(elgg_get_plugin_setting('checkout_method', 'socialcommerce'));
 	
 	if($checkout_methods && $selected_checkoutmethods){
 ?>
@@ -46,7 +31,7 @@
 				$i = 0;
 				foreach ($selected_checkoutmethods as $selected_checkoutmethod){
 					$method = $checkout_methods[$selected_checkoutmethod];
-					$checkout_contents = elgg_view('modules/checkout/'.$selected_checkoutmethod.'/'.$method->view, array('entity'=>$splugin_settings,'method'=>$method,'base'=>$selected_checkoutmethod,'order'=>$i));
+					$checkout_contents = elgg_view('modules/checkout/'.$selected_checkoutmethod.'/'.$method->view);
 ?>
 					<h3>
 						<a>
@@ -62,6 +47,6 @@
 <?php 
 					$i++;
 				}
-		echo "</div></div>";
+		echo '</div></div>';
 	}
 ?>
