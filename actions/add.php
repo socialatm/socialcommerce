@@ -157,8 +157,8 @@
 			$result = $stores->save();
 			
 			if ($result){
-				if(in_array('product_add',$CONFIG->river_settings))
-					add_to_river('river/object/stores/create','create',$_SESSION['user']->guid,$stores->guid);
+				if(in_array('product_add', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')) ))
+					add_to_river('river/object/stores/create', 'create', $_SESSION['user']->guid, $stores->guid );
 				
 				// Now see if we have a file product_image
 				if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/')))
