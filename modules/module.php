@@ -32,6 +32,9 @@ function register_socialcommerce_settings(){
 }
 
 function SetGeneralValuesInConfig(){
+
+echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
+
 	global $CONFIG;
 	set_default_currency_to_global();
 
@@ -306,6 +309,9 @@ function load_module_languages(){
 /*****	verify social commerce settings.	*****/
 
 function confirm_social_commerce_settings(){
+
+echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
+
 	global $CONFIG;
 	
 	$splugin_settings = elgg_get_entities(array(
@@ -539,6 +545,7 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 	$user = get_entity($buyer_guid);	//	@todo - change all instances of $user to $buyer ...
 	$buyer = get_entity($buyer_guid);
 	
+echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
 	
 	$container_guid = $buyer_guid;
 		
