@@ -9,7 +9,10 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-/****	add these to $CONFIG	*****/
+/*****************************************************************
+	add these to $CONFIG
+	@todo - http://us1.php.net/manual/en/function.define.php
+******************************************************************/
 function register_socialcommerce_settings(){
 	
 	
@@ -17,7 +20,7 @@ function register_socialcommerce_settings(){
 	$site_guid = get_config('site_guid'); 
 	
 	if(!get_config('checkout_path')) {
-		set_config('checkout_path' , $pluginspath.'socialcommerce/modules/checkout/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
+		set_config('checkout_path' , $pluginspath.'socialcommerce/modules/checkout/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG, or CONSTANTS
 	}
 	if(!get_config('shipping_path')) {
 	set_config('shipping_path' , $pluginspath.'socialcommerce/modules/shipping/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
@@ -234,9 +237,10 @@ function genarateCartFromSession(){
 	}
 }
 
-/*
- * Load config files from checkout, shipping and withdraw methods.
- */
+/*********************************************************************
+	Load config files from checkout, shipping and currency methods.
+	@todo - add taxes at some point....
+ *********************************************************************/
 function load_module_configs(){
 	global $CONFIG;
 	//---- load config from checkout methods -----//
@@ -250,12 +254,35 @@ function load_module_configs(){
 			}
 		}
 	}
+	//---- load config from shipping methods -----//
+	$shipping_lists = get_shipping_list();
+	if($shipping_lists){
+		load_shipping_actions();
+		foreach ($shipping_lists as $shipping_list){
+			$function = 'set_config_'.$shipping_list;
+			if(function_exists($function)){
+				$function();
+			}
+		}
+	}
+	//---- load config from currency methods -----//
+	$currency_lists = get_currency_list();
+	if($currency_lists){
+		load_currency_actions();
+		foreach ($currency_lists as $currency_list){
+			$function = 'set_config_'.$currency_list;
+			if(function_exists($function)){
+				$function();
+			}
+		}
+	}
 	
 }
 
-/*
- * Load language files from checkout, shipping and withdraw methods.
- */
+/*********************************************************************
+	Load language files from checkout, shipping and currency methods.
+**********************************************************************/
+
 function load_module_languages(){
 	global $CONFIG;
 	//---- load languages from checkout methods -----//
@@ -263,6 +290,14 @@ function load_module_languages(){
 	if($checkout_lists){
 		foreach ($checkout_lists as $checkout_list){
 			register_translations(get_config('checkout_path').$checkout_list.'/languages/');
+		}
+	}
+	
+	//---- load languages from shipping methods -----//
+	$shipping_lists = get_shipping_list();
+	if($shipping_lists){
+		foreach ($shipping_lists as $shipping_list){
+			register_translations(get_config('shipping_path').$shipping_list.'/languages/');
 		}
 	}
 
@@ -275,7 +310,9 @@ function load_module_languages(){
 	}
 }
 
-/*****	verify social commerce settings.	*****/
+/***********************************************	
+	verify social commerce settings.
+************************************************/
 
 function confirm_social_commerce_settings(){
 
@@ -376,8 +413,11 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 	}
 }
 
-/*****	CHECKOUT	*****/
-/*****	 Read the check out plugins and get checkout methods. Return them as an array.	*****/
+/***************************************************************************************	
+	CHECKOUT
+	Read the check out plugins and get checkout methods. Return them as an array.
+	@todo - these should be named 'payment' not 'checkout'
+****************************************************************************************/
 
 function sc_get_checkout_methods(){
 	$checkout_lists = get_checkout_list();
@@ -448,6 +488,81 @@ function check_checkout_form(){
 	}
 }
 
+/*******************************************************
+	Shipping
+********************************************************/
+
+function sc_get_shipping_methods(){
+	$shipping_lists = get_shipping_list();
+	if ($shipping_lists) {
+		$shipping_methods = array();
+		foreach ($shipping_lists as $shipping_list){
+			if (file_exists(get_config('shipping_path').$shipping_list.'/method.xml')) {
+				$xml = xml_to_object(file_get_contents(get_config('shipping_path').$shipping_list.'/method.xml'));
+				if ($xml){
+					$elements = array();
+					if($xml->children){
+						foreach ($xml->children as $element){
+							$key = $element->attributes['key'];
+							$value = $element->attributes['value'];
+							$elements[$key] = $value;
+						}
+					}
+					if($elements)
+						$shipping_methods[$shipping_list] = (object)$elements;
+				}
+			}
+		}
+		return $shipping_methods;
+	}
+	return false;
+}
+
+/*****	Get shipping plugins list. returns an array.	*****/
+
+function get_shipping_list(){
+	$shippings = array();
+	$shippings = array_diff(scandir(get_config('shipping_path')), array('..', '.'));
+	$shippings = count($shippings) > 0 ? $shippings : false ;
+	return $shippings;
+}
+
+function load_shipping_actions(){
+	global $CONFIG;
+	$shipping_lists = get_shipping_list();
+	if ($shipping_lists) {
+		$shipping_methods = array();
+		foreach ($shipping_lists as $shipping_list){
+			if (file_exists($CONFIG->shipping_path.$shipping_list.'/action.php')) {
+				include_once($CONFIG->shipping_path.$shipping_list."/action.php");
+			}else{
+				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:method'), $shipping_list));
+			}
+		}
+	}
+}
+
+function check_shipping_form(){
+	global $CONFIG;
+	if(is_dir($CONFIG->shipping_path.$_SESSION['SHIPPING']['shipping_method'])){
+		if (file_exists($CONFIG->shipping_path.$_SESSION['SHIPPING']['shipping_method'].'/action.php')) {
+			include_once($CONFIG->shipping_path.$_SESSION['SHIPPING']['shipping_method']."/action.php");
+			$function = 'verify_shipping_settings_'.$_SESSION['SHIPPING']['shipping_method'];
+			if(function_exists($function)){
+				return $function();
+			}else {
+				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:function'), $function));
+			}
+		}else{
+			throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:method'), $_SESSION['SHIPPING']['shipping_method']));
+		}
+	}else{
+		return false;	
+	}
+}
+
+/*****	end shipping	*****/
+
 function html_escape($text){
 	return htmlspecialchars($text, ENT_QUOTES);
 }
@@ -503,7 +618,9 @@ EOF;
 	exit;
 }
 
-/*****	Create the order after payment	*****/
+/*****************************************************	
+	the Create Order function
+******************************************************/
 
 function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod){
 
@@ -946,9 +1063,9 @@ function view_checkout_error_page(){
 	}
 }
 
-/*
+/***********************************************************************
  * Read withdraw plugins and withdraw methods. It return as an array.
- */
+ ***********************************************************************/
 
 
 function create_withdraw_transaction($amount,$receiver_email){
@@ -1403,9 +1520,8 @@ function get_product_from_metadata($meta_array,$type=null,$subtype=null,$where_s
 	return $products;
 }
 
-/*
- * Function for Convert a weight between the specified units.
- */
+/*****	Function to convert a weight between the specified units.	*****/
+
 function convert_weight($weight, $to_unit, $from_unit = null){
 	global $CONFIG;
 	

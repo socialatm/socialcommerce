@@ -13,11 +13,6 @@
 	$checkout_methods = sc_get_checkout_methods();
 	$checkout_methods = is_array($checkout_methods) ? $checkout_methods : array($checkout_methods) ;
 	
-	/*****	@todo - not used but left as a reminder to deal with shipping issues
-		$selected_shippingmethods = $socialcommerce->shipping_methods;
-		$shippingmethods = "No shipping methods available";
-	*****/
-	
 	$river_settings = $socialcommerce->river_settings;
 	if(!is_array($river_settings)) { $river_settings = array($river_settings); }
 			
@@ -82,4 +77,7 @@
 					'value' => $sc_river_settings,
 					));
 			?>
+		</div>
+		<div>
+			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/settings.png">
 		</div>

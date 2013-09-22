@@ -9,28 +9,18 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	echo 'Coming Soon';
-	 
-	 // $shipping_methods = get_shipping_methods();
-	$checkoutmethods = "";
+	$shipping_methods = sc_get_shipping_methods();
+	$selected_shippingmethods = unserialize(elgg_get_plugin_setting('shipping_method', 'socialcommerce'));
 	
-	$settings = $vars['entity'];
-	$order = get_input('order');
-	if(!$order)
-		$order = 0;
-	if($settings){
-		$settings = $settings[0];
-		$selected_shippingmethods_guid = $settings->guid;
-		$selected_shippingmethods = $settings->shipping_methods;
-		if(!is_array($selected_shippingmethods)){
-			$selected_shippingmethods = array($selected_shippingmethods);
-		}
+	if(!$selected_shippingmethods){
+		$selected_shippingmethods = array($shipping_methods['default']->view);
 	}
+
 	if($shipping_methods && $selected_shippingmethods){
 ?>
 		<div>
-			<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/js/chili-1.7.pack.js"></script>
-			<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/js/jquery.accordion.js"></script>
+			<script type="text/javascript" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/js/chili-1.7.pack.js"></script>
+			<script type="text/javascript" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/js/jquery.accordion.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function(){
 					jQuery('#list1b').accordion({
@@ -45,7 +35,7 @@
 				$i = 0;
 				foreach ($selected_shippingmethods as $selected_shippingmethod){
 					$method = $shipping_methods[$selected_shippingmethod];
-					$shipping_contents = elgg_view("modules/shipping/{$selected_shippingmethod}/{$method->view}",array('entity'=>$settings,'method'=>$method,'base'=>$selected_shippingmethod,'order'=>$i));
+					$shipping_contents = elgg_view("modules/shipping/".$selected_shippingmethod.'/'.$method->view);
 ?>
 					<h3>
 						<a>
@@ -61,6 +51,6 @@
 <?php 
 					$i++;
 				}
-		echo "</div></div>";
+		echo '</div></div>';
 	}
 ?>

@@ -67,7 +67,11 @@
 		return $shipping_price;
 	}
 	
-	function varyfy_shipping_settings_default(){					// @todo varyfy ???
+	function verify_shipping_settings_default(){
+
+		echo __FILE__ .' at '.__LINE__; die();
+		
+	
 		$settings = elgg_get_entities_from_metadata(array(
 			'shipping_method' => 'default',
 			'entity_type' =>'object',

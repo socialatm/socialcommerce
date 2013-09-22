@@ -223,6 +223,9 @@
 		<div id="currency_settings" class="currency_settings basic">
 			<?php echo $body; ?>
 		</div>
+		<div>
+			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/dollars.png">
+		</div>
 <?php
 	}
 ?>
