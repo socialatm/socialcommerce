@@ -224,7 +224,7 @@
 			<?php echo $body; ?>
 		</div>
 		<div>
-			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/dollars.png">
+			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/dollars.png" alt="" />
 		</div>
 <?php
 	}

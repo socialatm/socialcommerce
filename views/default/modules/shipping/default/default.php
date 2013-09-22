@@ -53,5 +53,5 @@
 			?>
 	</div>
 	<div>
-		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/shipping/default/images/shipping.png">
+		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/shipping/default/images/shipping.png" alt="" />
 	</div>

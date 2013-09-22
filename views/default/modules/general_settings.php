@@ -79,5 +79,5 @@
 			?>
 		</div>
 		<div>
-			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/settings.png">
+			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/settings.png" alt="" />
 		</div>
