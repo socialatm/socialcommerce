@@ -38,7 +38,7 @@
 				}
 			?>
 			<div class="cart">
-				<a href="<?php echo $CONFIG->wwwroot ?>socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart" />
+				<a href="<?php echo $CONFIG->url ?>socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart" />
 					<?php echo elgg_echo('stores:my:cart').$c_count; ?>
 				</a>
 			</div>
@@ -49,13 +49,13 @@
 				}
 			?>
 			<div class="wishlist">
-				<a href='<?php echo $CONFIG->wwwroot."socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>' />
+				<a href='<?php echo $CONFIG->url."socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>' />
 					<?php echo elgg_echo('stores:my:wishlist').$w_count ?>
 				</a>
 			</div>
 			<!--orders-->
 			<div class="orders">
-				<a href='<?php echo $CONFIG->wwwroot."socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>' />
+				<a href='<?php echo $CONFIG->url."socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>' />
 					<?php echo elgg_echo('stores:my:order') ?>
 				</a>
 			</div>
@@ -71,7 +71,7 @@
 		<div id="owner_block_stores">
 			<!--Cart-->
 			<div class="cart">
-				<a href="<?php echo $CONFIG->wwwroot ?>socialcommerce/gust/cart" />
+				<a href="<?php echo $CONFIG->url ?>socialcommerce/gust/cart" />
 					<?php echo elgg_echo('stores:gust:cart').$c_count; ?>
 				</a>
 			</div>
