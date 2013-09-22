@@ -125,7 +125,6 @@ EOF;
 		
 		$content = <<<EOF
 			<div class="checkout_process">
-				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/chili-1.7.pack.js"></script>
 				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/jquery.accordion.js"></script>
 				<script type="text/javascript">
 					$(document).ready(function(){
