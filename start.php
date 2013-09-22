@@ -37,15 +37,14 @@
 				));
 			}
 	
-		// Extend CSS
+		// extend CSS
 			elgg_extend_view("css", "socialcommerce/css");
-			elgg_extend_view("js", "socialcommerce/js/behavior");
+			
 			elgg_extend_view("js", "socialcommerce/js/rating");
+			
 			elgg_extend_view("index/righthandside", "socialcommerce/products_list",600);
 			elgg_extend_view("index/righthandside", "socialcommerce/most_popular_products",600);
 					
-			elgg_extend_view("owner_block/extend", "socialcommerce/owner_block", 500);
-			
 			elgg_extend_view("page_elements/header_contents", "socialcommerce/header");
 			
 			elgg_extend_view("metatags", "socialcommerce/extend_header");
@@ -54,8 +53,7 @@
 		
 		// Extend hover-over menu	
 			elgg_extend_view("profile/menu/links","socialcommerce/menu");
-			//extend_view('groups/right_column','stores/groupprofile_files');
-			
+					
 		// Load the language file
 			register_translations($CONFIG->pluginspath . "socialcommerce/languages/");
 			
