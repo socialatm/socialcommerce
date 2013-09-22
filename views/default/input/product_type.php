@@ -26,9 +26,9 @@
 			<?php
 			    foreach($default_produt_types as $option) {
 			        if ($option->value == $vars['value']  || in_array($option->value,$vars['value'])) {
-			            echo "<option value=\"{$option->value}\" selected=\"selected\">". htmlentities($option->display_val, ENT_QUOTES, 'UTF-8') ."</option>";
+			            echo '<option value="'.$option->value.' selected="selected">'. htmlentities($option->display_val, ENT_QUOTES, 'UTF-8') .'</option>';
 			        } else {
-			            echo "<option value=\"{$option->value}\">". htmlentities($option->display_val, ENT_QUOTES, 'UTF-8') ."</option>";
+			            echo '<option value="'.$option->value.'">'. htmlentities($option->display_val, ENT_QUOTES, 'UTF-8') .'</option>';
 			        }
 			    }
 			?> 
