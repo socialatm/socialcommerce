@@ -31,7 +31,6 @@
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";
 		$info .= elgg_cart_quantity($cart);
-		//$info .= "<a href=".$vars['url']."action/stores/remove_cart?cart_guid=".$cart->getGUID().">".elgg_echo('remove')."</a>&nbsp"; 
 		$info .= "<div class=\"stores_remove\">".elgg_view('output/confirmlink',array(
 							'href' => $vars['url'] . "action/socialcommerce/remove_cart?cart_guid=" . $cart->getGUID(),
 							'text' => elgg_echo("remove"),
