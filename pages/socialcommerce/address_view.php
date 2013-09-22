@@ -41,7 +41,7 @@
 				$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>$type));
 				
 				$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo($type.':address')));
-				$action = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+				$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 				$address_details = <<<EOF
 					<div>
 						<form method="post" action="{$action}" onsubmit="return validate_{$type}_details();">
@@ -104,7 +104,7 @@ EOF;
 							
 			){
 				$list_address = elgg_view("socialcommerce/list_address", array('entity'=>$address, 'display' => 'list_with_action', 'selected' => $selected_address, 'type' => 'myaccount' ));
-				$load_action = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/view_address"; 
+				$load_action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/view_address"; 
 				$body = <<<EOF
 					<div>
 						<div style="float:right;margin-bottom:10px;">

@@ -36,7 +36,7 @@
 	// Render the category upload page
 		if ($entity) {
 			if($entity->owner_guid == $_SESSION['user']->guid)
-				forward($CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
+				forward($CONFIG->url.'socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
 			elgg_set_context('cartadd');
 			$content .= elgg_view_entity($entity, true);
 			

@@ -22,7 +22,7 @@
 	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('check:out')));
 	$buy_more = elgg_echo('buy:more');
 	$hidden_values = elgg_view('input/securitytoken');
-	$buy_more_link = $CONFIG->wwwroot.'socialcommerce'.$username."/all";
+	$buy_more_link = $CONFIG->url.'socialcommerce'.$username."/all";
 	$form_body = <<< BOTTOM
 		{$java_script}
 		<form method="post" id="checkout_form" action="{$action}" {$java_function}>

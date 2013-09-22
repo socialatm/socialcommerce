@@ -188,7 +188,7 @@ EOF;
 						}else{
 							var elgg_token = $('[name=__elgg_token]');
 							var elgg_ts = $('[name=__elgg_ts]');
-							$.post("{$CONFIG->wwwroot}action/socialcommerce/manage_socialcommerce", { 
+							$.post("{$CONFIG->url}action/socialcommerce/manage_socialcommerce", { 
 									code: couponcode,
 									manage_action: "coupon_process",
 									__elgg_token: elgg_token.val(),
@@ -214,7 +214,7 @@ EOF;
 												$("#coupon_apply_result").css({"color":"#9F1313"});
 											break;
 										case 'coupon_applied':
-												$.post("{$CONFIG->wwwroot}action/socialcommerce/manage_socialcommerce", {
+												$.post("{$CONFIG->url}action/socialcommerce/manage_socialcommerce", {
 														manage_action: "coupon_reload_process",
 														__elgg_token: elgg_token.val(),
 														__elgg_ts: elgg_ts.val()
@@ -294,7 +294,7 @@ EOF;
 			</div>
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->wwwroot}mod/socialcommerce/images/loadingAnimation.gif">
+				<img src="{$CONFIG->url}mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Processing...</div>
 			</div>
 EOF;

@@ -57,7 +57,7 @@
 ?>
 			<div class="form_outer">
 				<div class="close">
-					<img onclick="view_order_details_close();" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/images/close.gif">
+					<img onclick="view_order_details_close();" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/images/close.gif">
 				</div>
 				<div class="head">
 					<?php echo elgg_echo("order:details");?>

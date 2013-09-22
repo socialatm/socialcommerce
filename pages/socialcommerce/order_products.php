@@ -25,7 +25,7 @@
 		if($order_guid){
 			$order = get_entity($order_guid);
 		}else{
-			$redirect = $CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/order';
+			$redirect = $CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/order';
 			forward($redirect);
 		}
 	

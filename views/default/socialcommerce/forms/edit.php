@@ -186,7 +186,7 @@ EOT;
 			$entity_hidden .= "<input type=\"hidden\" name=\"stores_guid\" id=\"stores_guid\" value=\"{$vars['entity']->getGUID()}\" />";
 			
 		$entity_hidden .= elgg_view('input/securitytoken');
-		$post_url = $CONFIG->wwwroot."mod/socialcommerce/onchange_product_type.php";
+		$post_url = $CONFIG->url."mod/socialcommerce/onchange_product_type.php";
 		
 		if(!$vars['entity']->guid)
 			$id = 0;

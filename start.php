@@ -513,7 +513,7 @@
 		
 		if ($entity->guid > 0 && (elgg_is_logged_in())) {
 			$form_body = elgg_view('input/hidden', array('internalname' => 'stores_guid', 'value' => $entity->getGUID()));
-			$form_body .= "<input type='image' src=\"{$CONFIG->wwwroot}mod/socialcommerce/images/shopping_cart_btn.jpg\">";//elgg_view('input/submit', array('value' => elgg_echo("add:to:cart")));
+			$form_body .= "<input type='image' src=\"{$CONFIG->url}mod/socialcommerce/images/shopping_cart_btn.jpg\">";//elgg_view('input/submit', array('value' => elgg_echo("add:to:cart")));
 			if($entity->product_type_id == 1){
 				$label = "<div style=\"float:left;margin-bottom:5px;\"><label>".elgg_echo("enter:quantity").": </label></div>
 				<div style=\"clear:both;float:left;width:300px;\"><div style=\"float:left;\"><p>" . elgg_view('input/text',array('internalname' => 'cartquantity')) . "</p></div><div style=\"float:left;padding-left:20px;\">{$form_body}</div></div>";
