@@ -9,17 +9,13 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
+	echo __FILE__ .' at '.__LINE__; die();
+	gatekeeper();
+	$page_owner = elgg_get_logged_in_user_entity();
+	 
 	global $CONFIG;
-	// Load Elgg engine
 	require_once(get_config('path').'engine/start.php');
 
-	// Get the current page's owner
-		$page_owner = elgg_get_page_owner_entity();
-		if ($page_owner === false || is_null($page_owner)) {
-			$page_owner = $_SESSION['user'];
-			elgg_set_page_owner_guid($_SESSION['guid']);
-		}
-		
 	$product_category = get_input('stores_guid');
 	$search_viewtype = get_input('search_viewtype');
 	$limit = $search_viewtype == 'gallery' ? 20 : 10 ;

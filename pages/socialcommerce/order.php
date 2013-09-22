@@ -9,21 +9,14 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
+	echo __FILE__ .' at '.__LINE__; die();
 	gatekeeper();
+	$page_owner = elgg_get_logged_in_user_entity();
 	
-	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
-		global $autofeed;
+	require_once(get_config('path').'engine/start.php');
+	global $autofeed;
 		
-	// Get the current page's owner
-		$page_owner = elgg_get_page_owner_entity();
-		if ($page_owner === false || is_null($page_owner)) {
-			$page_owner = $_SESSION['user'];
-			elgg_set_page_owner_guid($_SESSION['guid']);
-		}
-	
-	// Set stores title
-		$title = elgg_view_title(elgg_echo('stores:orders'));
+	$title = elgg_view_title(elgg_echo('stores:orders'));
 	
 	// Get objects
 		elgg_set_context('order');

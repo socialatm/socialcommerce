@@ -9,8 +9,13 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
+	echo __FILE__ .' at '.__LINE__; die();
+	 
 	require_once(get_config('path').'engine/start.php');
 	global $CONFIG;
+	
+	gatekeeper();
+	$page_owner = elgg_get_logged_in_user_entity();
 	
 	if (!elgg_is_logged_in()) {
 		system_message(elgg_echo("add:cart:not:login"));
@@ -24,13 +29,6 @@
 		}
 	}
 	
-	// Get the current page's owner
-		$page_owner = elgg_get_page_owner_entity();
-		if ($page_owner === false || is_null($page_owner)) {
-			$page_owner = $_SESSION['user'];
-			elgg_set_page_owner_guid($_SESSION['guid']);
-		}
-		
 	$title = elgg_view_title( elgg_echo('cart:add'));
 	
 	// Render the category upload page
