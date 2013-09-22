@@ -357,7 +357,7 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 		
 		
 		if($checkout_messages || $shipping_messages || $withdraw_messages){
-			$general_error_msg = sprintf(elgg_echo('general:settings:errot:msg'),$CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/settings');
+			$general_error_msg = sprintf(elgg_echo('general:settings:errot:msg'),$CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/settings');
 			
 			$message_array = array($general_error_msg);
 			
@@ -409,7 +409,7 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 			}
 		}
 	}else{
-		system_message(sprintf(elgg_echo('no:settings:entity'),$CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/settings'));
+		system_message(sprintf(elgg_echo('no:settings:entity'),$CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/settings'));
 	}
 }
 
@@ -586,7 +586,7 @@ function redirect_to_form( $url, $fields ){
 		$auto_redirect_script = <<<EOF
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->wwwroot}mod/socialcommerce/images/loadingAnimation.gif">
+				<img src="{$CONFIG->url}mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Loading...</div>
 			</div>
 			<script type="text/javascript">
@@ -812,7 +812,7 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 							$display_sub_total = get_price_with_currency($sub_total);
 							
 							if($product->mimetype && $product->product_type_id == 2){
-								$icon = "<div title='Download' class='order_icon_class'><a href=\"{$CONFIG->wwwroot}action/socialcommerce/download?product_guid={$order_item->guid}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div><div class='clear'></div>";
+								$icon = "<div title='Download' class='order_icon_class'><a href=\"{$CONFIG->url}action/socialcommerce/download?product_guid={$order_item->guid}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div><div class='clear'></div>";
 							}else{
 								$icon = "";
 							}
@@ -1018,6 +1018,9 @@ EOF;
 /***************************************
 	End create order function
 ****************************************/
+
+
+
 
 function view_success_page(){
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_success';
@@ -1680,7 +1683,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 		if($product->product_type_id == 1){
 			$quantity = "<div style='margin-bottom:5px;'><B>{$quantity_text}:</B> {$quantity_box}</div>";
 		}else if($product->product_type_id == 2 && elgg_get_context() == 'purchased_products'){
-			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->wwwroot}action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
+			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->url}action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
 		}
 		$info = <<<EOF
 			<div class="storesqua_stores">

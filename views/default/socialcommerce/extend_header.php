@@ -18,4 +18,4 @@ if($context == 'socialcommerce' || $context == 'stores' || $context == 'search' 
 // @todo - set up like this it loads all the time ??
 
 ?>
-<script type="text/javascript" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/js/socialcommerce.js"></script>
+<script type="text/javascript" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/js/socialcommerce.js"></script>

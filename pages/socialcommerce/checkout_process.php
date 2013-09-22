@@ -125,7 +125,7 @@ EOF;
 		
 		$content = <<<EOF
 			<div class="checkout_process">
-				<script type="text/javascript" src="{$CONFIG->wwwroot}mod/socialcommerce/js/jquery.accordion.js"></script>
+				<script type="text/javascript" src="{$CONFIG->url}mod/socialcommerce/js/jquery.accordion.js"></script>
 				<script type="text/javascript">
 					$(document).ready(function(){
 						jQuery('#list1b').accordion({

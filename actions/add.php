@@ -109,7 +109,7 @@
 			$error_field = substr($error_field,2);
 			
 			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->wwwroot . 'mod/socialcommerce/add.php';
+			$redirect = $CONFIG->url . 'mod/socialcommerce/add.php';
 		}else{
 			// Extract stores from, save to default stores (for now)
 			$stores = new ElggObject();
@@ -248,8 +248,7 @@
 				register_error(elgg_echo("stores:uploadfailed"));
 			}
 			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->wwwroot . 'socialcommerce/' . $container_user->username;
+			$redirect = $CONFIG->url . 'socialcommerce/' . $container_user->username;
 		}
-		
 	forward($redirect);
 ?>

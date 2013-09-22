@@ -24,7 +24,7 @@
 	//---------------- Check the entity --------------//
 	if (!$stores = get_entity($guid)) {
 		register_error(elgg_echo("stores:uploadfailed"));
-		forward($CONFIG->wwwroot . "socialcommerce/" . $_SESSION['user']->username);
+		forward($CONFIG->url . "socialcommerce/" . $_SESSION['user']->username);
 		exit;
 	}
 	
@@ -104,7 +104,7 @@
 		
 		register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->wwwroot . "mod/socialcommerce/edit.php?stores_guid=".$guid;
+		$redirect = $CONFIG->url . "mod/socialcommerce/edit.php?stores_guid=".$guid;
 	}else{
 		if ($stores->canEdit()) {
 			$old_product_type_id = $stores->product_type_id;
@@ -277,7 +277,7 @@
 			register_error(elgg_echo("stores:uploadfailed"));
 		}
 		$container_user = get_entity($container_guid);	
-		$redirect = $CONFIG->wwwroot . "socialcommerce/" . $container_user->username;
+		$redirect = $CONFIG->url . "socialcommerce/" . $container_user->username;
 	}
 	forward($redirect);
 ?>
