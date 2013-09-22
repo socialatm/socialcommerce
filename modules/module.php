@@ -1016,6 +1016,7 @@ function view_success_page(){
 	if(elgg_view_exists($view)){
 		$body = elgg_view($view);
 		$content = $title.$body;
+		$sidebar .= elgg_view("socialcommerce/sidebar");
 		$params = array(
 			'title' => $title,
 			'content' => $content,
@@ -1035,6 +1036,7 @@ function sc_view_cancel_page(){
 		$title = elgg_view_title(elgg_echo('cart:cancel'));
 		elgg_set_context('socialcommerce');
 		$content = $body;
+		$sidebar .= elgg_view("socialcommerce/sidebar");
 		$params = array(
 			'title' => $title,
 			'content' => $content,

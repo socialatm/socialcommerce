@@ -19,7 +19,7 @@
 	// Get the form
 	$content .= '<div class="contentWrapper">'.elgg_view('socialcommerce/forms/edit_category').'</div>';
 		
-	// sidebar
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 		
 	$params = array(

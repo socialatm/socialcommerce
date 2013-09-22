@@ -44,7 +44,7 @@
 			</div>
 EOF;
 
-	// sidebar
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 		
 	$params = array(

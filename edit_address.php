@@ -22,7 +22,8 @@
 	if ($address = get_entity($address)) {
 		if ($address->canEdit()) { 
     		$content = $title.'<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit_address", array('entity' => $address)).'</div>';
-    		$sidebar .= gettags();
+    		$sidebar .= elgg_view("socialcommerce/sidebar");
+			$sidebar .= gettags();
 			
 			$params = array(
 				'title' => $title,

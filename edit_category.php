@@ -20,7 +20,8 @@
 	if ($category = get_entity($category)) {
 		if ($category->canEdit()) { 
     		$content = $title.'<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit_category", array('entity' => $category)).'</div>';
-    		$sidebar .= gettags();
+    		$sidebar .= elgg_view("socialcommerce/sidebar");
+			$sidebar .= gettags();
 			
 			$params = array(
 				'title' => $title,
