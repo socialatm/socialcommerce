@@ -10,7 +10,6 @@
 	 **/ 
 	
 	gatekeeper();
-	$page_user = elgg_get_logged_in_user_entity();
 	$container_guid = elgg_get_plugin_from_id('socialcommerce')->guid;
 	$title = elgg_view_title(elgg_echo('stores:category'));
 		

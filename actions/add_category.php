@@ -15,7 +15,7 @@
 	$product_type_id = (int) get_input("product_type_id");
 	$description = get_input("categorybody");
 	$container_guid = elgg_get_plugin_from_id('socialcommerce')->guid;
-	$page_user = elgg_get_logged_in_user_entity();
+	$page_owner = elgg_get_logged_in_user_entity();
 	
 	//Validation
 	if(empty($title)){ $error_field = elgg_echo("title"); }
@@ -26,7 +26,7 @@
 		$_SESSION['category']['product_type_id'] = $product_type_id;
 		register_error(sprintf(elgg_echo("product:validation:null"), $error_field));
 		
-		$redirect = $CONFIG->url.'socialcommerce/'.$page_user->username.'/addcategory/';
+		$redirect = $CONFIG->url.'socialcommerce/'.$page_owner->username.'/addcategory/';
 	}else{
 		// Extract categories from, save to default social commerce (for now)
 		$category = new ElggObject();
@@ -45,7 +45,7 @@
 		}else{
 			register_error(elgg_echo("category:uploadfailed"));
 		}
-		$redirect = $CONFIG->url.'socialcommerce/'.$page_user->username.'/category/';
+		$redirect = $CONFIG->url.'socialcommerce/'.$page_owner->username.'/category/';
 	}
 	forward($redirect);
 ?>
