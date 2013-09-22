@@ -624,18 +624,9 @@
 			'related:produt:edit:faild' => 'Sorry! We could not be edit this related product at this time. Please try after some times.',
 			'delete:related:product:from:cart' => "Are you sure that you want to delete this related product from your cart?",
 			'related_product:delete:problem' => 'Sorry! We could not delete this related product from your cart at this time',
-	
-			'settings:share:this' => 'Share This Settings',
-			'settings:share:this:desc' => 'This setting allows administrator to add his/her sharethis code. The publisher id is the bolded value in bellow example.
-				 <br>&lt;script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=<b>d5b880d9-942b-41cd-8fb1-e3a70cdf8735</b>&amp;type=website" &gt;&lt;/script 	&gt;
-			',
-			'settings:share:this:publisher' => 'Publisher ID',
-			'settings:share:this:help' => 'This setting allows administrator to add his/her sharethis code',
-		 
-		 /*
-		  *	Order
-		  */
-		 	'stores:orders' => "Your Orders",
+					 
+			/*****	Order	*****/
+		  	'stores:orders' => "Your Orders",
 		 	'order:heading' => "Order #%s",
 		 	'order:date' => "Order Date",
 		 	'order:recipient' => "Recipient",

@@ -26,7 +26,7 @@
 			'site_guid' => get_config('site_id')'
 			'container_guid' => get_config('site_id'),
 			'access_id' => '2',
-			'enabled' => 'yes',
+			'enabled' => 'no',
 			'title' = 'socialcommerce',
 			'checkout_method' => serialize(array('paypal')),
 			'default_view' => 'list',
@@ -51,7 +51,6 @@
 		fund_withdraw_methods = '';
 		https_allow = 0;
 		https_url_text = '0';
-		share_this = '0';
 		http_proxy_server = "";
 		http_proxy_port = "";
 		http_verify_ssl = "";
