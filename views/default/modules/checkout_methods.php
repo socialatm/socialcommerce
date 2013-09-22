@@ -14,18 +14,6 @@
 	
 	if($checkout_methods && $selected_checkoutmethods){
 ?>
-		<div>
-			<script type="text/javascript" src="<?php echo get_config('url'); ?>mod/socialcommerce/js/chili-1.7.pack.js"></script>
-			<script type="text/javascript" src="<?php echo get_config('url'); ?>mod/socialcommerce/js/jquery.accordion.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function(){
-					jQuery('#list1b').accordion({
-						autoheight: false,
-						header: 'h3',
-						active: <?php echo $order; ?>
-					});
-				});
-			</script>
 			<div class="basic" id="list1b">
 <?php 
 				$i = 0;
@@ -47,6 +35,6 @@
 <?php 
 					$i++;
 				}
-		echo '</div></div>';
+echo 		'</div>';
 	}
 ?>

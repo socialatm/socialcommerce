@@ -1015,7 +1015,9 @@ EOF;
 	return $order_id;
 }
 
-/***** end function create_order	*****/
+/***************************************
+	End create order function
+****************************************/
 
 function view_success_page(){
 	$view = 'modules/checkout/'.$_SESSION['CHECKOUT']['checkout_method'].'/cart_success';

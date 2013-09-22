@@ -84,7 +84,6 @@ EOF;
 			$display_name = $shipping_settings->display_name;
 			if(!$display_name)
 				$display_name = $shipping_methods[$selected_shipping_method]->label;
-			//	echo 'dddddddd'. $_SESSION['CHECKOUT']['shipping_method'];
 			if($selected_shipping_method == $_SESSION['CHECKOUT']['shipping_method']){
 				 $checked = "checked='checked'";
 			}

@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg view - shipping detais
+	 * Elgg view - shipping details
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html

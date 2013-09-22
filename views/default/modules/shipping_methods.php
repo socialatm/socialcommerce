@@ -18,18 +18,6 @@
 
 	if($shipping_methods && $selected_shippingmethods){
 ?>
-		<div>
-			<script type="text/javascript" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/js/chili-1.7.pack.js"></script>
-			<script type="text/javascript" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/js/jquery.accordion.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function(){
-					jQuery('#list1b').accordion({
-						autoheight: false,
-						header: 'h3',
-						active: <?php echo $order; ?>
-					});
-				});
-			</script>
 			<div class="basic" id="list1b">
 <?php 
 				$i = 0;
@@ -51,6 +39,6 @@
 <?php 
 					$i++;
 				}
-		echo '</div></div>';
+	echo    '</div>';
 	}
 ?>
