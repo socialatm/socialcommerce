@@ -41,9 +41,9 @@
 				}
 			} else {
 				if ($size == 'large') {
-					echo "<img src=\"{$CONFIG->wwwroot}mod/socialcommerce/graphics/icons/general_lrg.gif\" border=\"0\" />";
+					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general_lrg.gif\" border=\"0\" />";
 				} else {
-					echo "<img src=\"{$CONFIG->wwwroot}mod/socialcommerce/graphics/icons/general.gif\" border=\"0\" />";
+					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" border=\"0\" />";
 				}
 			}
 		break;
@@ -53,7 +53,7 @@
 			} else if (!empty($mime) && elgg_view_exists("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default")) {
 				echo elgg_view("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default");
 			} else {
-				echo "<img src=\"{$CONFIG->wwwroot}mod/socialcommerce/graphics/icons/general.gif\" border=\"0\" />";
+				echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" border=\"0\" />";
 			}	 
 		break;
 	}

@@ -28,8 +28,8 @@
 		$body = '<div style="text-align:center;padding:5px 0 10px 0;"><B>'.elgg_echo('add:default:currency').'</B></div>';
 		$body .= elgg_view('modules/currency/settings_form',array('status'=>'default'));
 	}
-	$action = $CONFIG->wwwroot.'action/socialcommerce/manage_socialcommerce';
-	$load_action = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/currency_settings";
+	$action = $CONFIG->url.'action/socialcommerce/manage_socialcommerce';
+	$load_action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/currency_settings";
 	
 	if($ajax){
 		echo $body;

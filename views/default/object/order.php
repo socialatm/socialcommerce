@@ -26,12 +26,12 @@
 				}
 			}
 			$order_datre = date("dS M Y", $order->time_created);
-			$action = $CONFIG->wwwroot.'socialcommerce/'.$_SESSION['user']->username.'/order_products';
+			$action = $CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/order_products';
 ?>
 			<div class="search_listing">
 				<div style="float:right;">
 					<form method="post" action="<?php echo $action; ?>">
-						<input class="order_view_details" type="image" src="<?php echo $CONFIG->wwwroot; ?>mod/socialcommerce/images/order_details.gif" value="View Detais">
+						<input class="order_view_details" type="image" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/images/order_details.gif" value="View Detais">
 						<input type="hidden" name="guid" value="<?php echo $order->guid; ?>">
 					</form>
 				</div>

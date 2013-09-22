@@ -13,11 +13,11 @@
 	
 	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('check:out')));
 	
-	$buy_more_link = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/all";
+	$buy_more_link = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/all";
 	$buy_more = elgg_echo('buy:more');
-	$modify_cart_link = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/cart/";
+	$modify_cart_link = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart/";
 	$modify_cart = elgg_echo('modify:cart');
-	$change_address_link = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/address/";
+	$change_address_link = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/address/";
 	$change_address = elgg_echo('change:address');
 	
 	$form_body = <<< BOTTOM

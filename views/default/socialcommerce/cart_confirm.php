@@ -106,9 +106,9 @@ if($environment == "sandbox"){
 	$business = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
 	$paypalurl = "https://www.paypal.com/cgi-bin/webscr";	
 }
-$cencelurl = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/cancel/";
-$returnurl = $CONFIG->wwwroot."socialcommerce/".$_SESSION['user']->username."/cart_success/";
-$ipnurl = $CONFIG->wwwroot."action/socialcommerce/makepayment?page_owner=". elgg_get_page_owner_guid();
+$cencelurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cancel/";
+$returnurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart_success/";
+$ipnurl = $CONFIG->url."action/socialcommerce/makepayment?page_owner=". elgg_get_page_owner_guid();
 
 echo $cart_body = <<<EOF
 	<form name="frm_cart" method="post" action="{$paypalurl}">
