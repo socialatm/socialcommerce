@@ -31,7 +31,7 @@
 			<div class="search_listing">
 				<div style="float:right;">
 					<form method="post" action="<?php echo $action; ?>">
-						<input class="order_view_details" type="image" src="<?php echo $CONFIG->url; ?>mod/socialcommerce/images/order_details.gif" value="View Detais">
+						<input class="elgg-button" type="submit" value="<?php echo elgg_echo("view:order:details"); ?>" />
 						<input type="hidden" name="guid" value="<?php echo $order->guid; ?>">
 					</form>
 				</div>

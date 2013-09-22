@@ -8,12 +8,10 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	
-	echo __FILE__ .' at '.__LINE__; die();
+	 
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 	
-	require_once(get_config('path').'engine/start.php');
 	global $autofeed;
 		
 	$title = elgg_view_title(elgg_echo('stores:orders'));

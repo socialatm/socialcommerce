@@ -8,14 +8,10 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	
-	echo __FILE__ .' at '.__LINE__; die();
+	 
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 	 
-	require_once(get_config('path').'engine/start.php');
-	global $CONFIG;
-	
 	$order_guid = get_input('guid');
 		if($order_guid){
 			$order = get_entity($order_guid);
@@ -24,12 +20,12 @@
 			forward($redirect);
 		}
 	
-	$title = elgg_view_title(sprintf(elgg_echo('order:heading'),$order->guid));
+	$title = elgg_view_title(sprintf(elgg_echo('order:heading'), $order->guid));
 	
 	// Get objects
 	elgg_set_context('order');
 	$content .= elgg_view("socialcommerce/order_products",array('entity'=>$order));
-	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	elgg_set_context('stores');
 	$sidebar .= gettags();
 		
@@ -39,5 +35,5 @@
 		'sidebar' => $sidebar,
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
-	echo elgg_view_page($title, $body);
+	echo elgg_view_page(sprintf(elgg_echo('order:heading'), $order->guid), $body);
 ?>

@@ -626,13 +626,15 @@
 			'related_product:delete:problem' => 'Sorry! We could not delete this related product from your cart at this time',
 					 
 			/*****	Order	*****/
-		  	'stores:orders' => "Your Orders",
+		  	'stores:orders' => "My Orders",
 		 	'order:heading' => "Order #%s",
 		 	'order:date' => "Order Date",
 		 	'order:recipient' => "Recipient",
 		 	'order:item:head' => "Your Order Contains the Following Items",
 		 	'order:item:follows' => "Order #%s Contained the Following Items:",
 		 	'order:total' => "Order Total",
+			'back:to:orders' => " &#9664; Back to My Orders",
+			'view:order:details' => "View Order Details &#9654;",
 		 /*
 		  *	Order mail
 		  */

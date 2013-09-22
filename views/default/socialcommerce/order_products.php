@@ -130,11 +130,12 @@ EOF;
 			$cart_item_total_text = elgg_echo('checkout:item:total');
 			$cart_total_cost = elgg_echo('checkout:total:cost');
 			$order_status = elgg_echo('order:status');
+			$orders_back = elgg_echo('back:to:orders');
 			$order_body = <<<EOF
 				<div class="ordered_items">
 					<div style="float:right;">
 						<form method="post" action="{$action}">
-							<input class="order_view_details" type="image" src="{$CONFIG->url}mod/socialcommerce/images/order_back.gif" value="Back To Order">
+							<input class="elgg-button" type="submit" value="{$orders_back}" />
 						</form>
 					</div>
 					<div style="margin-bottom:10px;line-height:20px;">
