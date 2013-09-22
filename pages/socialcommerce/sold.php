@@ -44,6 +44,7 @@
 	
 	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
 	elgg_set_context('socialcommerce');
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 	
 	$params = array(
