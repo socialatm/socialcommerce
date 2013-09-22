@@ -62,7 +62,7 @@ EOF;
 	}
 }
 
-$action = $CONFIG->wwwroot."action/socialcommerce/update_cart";
+$action = $CONFIG->url."action/socialcommerce/update_cart";
 $title = elgg_echo('stores:purchased:orders');
 echo $cart_body = <<<EOF
 	<script>

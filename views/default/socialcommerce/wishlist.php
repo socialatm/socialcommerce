@@ -31,7 +31,7 @@ if($products){
 		$total = $product->price;
 		//$status = elgg_view('stores/product_status',array('entity'=>$order_item,'action'=>'view'));
 		$remove_wishlist_text = elgg_echo('remove:wishlish');
-		$remove_wishlist_action = $CONFIG->wwwroot."action/socialcommerce/remove_wishlist?__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
+		$remove_wishlist_action = $CONFIG->url."action/socialcommerce/remove_wishlist?__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
 		$rating = elgg_view("socialcommerce/view_rating",array('id'=>$product->guid,'units'=>5,'static'=>''));
 		if($product->status == 1){
 			$not_available = "";

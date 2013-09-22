@@ -72,7 +72,7 @@ EOF;
 	$wishlist_text = elgg_echo('add:wishlist');
 	if($stores->status == 1){
 		if($stores->owner_guid != $_SESSION['user']->guid && $product_type_details->addto_cart == 1){
-			$wishlist_action = $CONFIG->wwwroot."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
+			$wishlist_action = $CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
 			$cart_wishlist = <<<EOF
 				<div class="cart_wishlist">
 					<a title="{$cart_text}" class="cart" href="{$cart_url}">Add To Cart</a>

@@ -15,6 +15,6 @@
 	} else {
 		$ext = '';
 	}
-	echo "<img src=\"{$CONFIG->wwwroot}mod/socialcommerce/graphics/icons/excel{$ext}.gif\" border=\"0\" />";
+	echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/excel{$ext}.gif\" border=\"0\" />";
 
 ?>

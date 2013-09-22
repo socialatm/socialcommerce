@@ -173,7 +173,7 @@ EOF;
 							<a title="{$cart_text}" class="cart" href="{$cart_url}">&nbsp;</a>
 						</div>
 						<div class="cart_wishlist">
-							<form name="frm_wishlist_{$f->guid}" method="POST" action="{$CONFIG->wwwroot}action/socialcommerce/add_wishlist">
+							<form name="frm_wishlist_{$f->guid}" method="POST" action="{$CONFIG->url}action/socialcommerce/add_wishlist">
 								<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$f->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
 								<INPUT type="hidden" name="product_guid" value="{$f->guid}">
 							</form>

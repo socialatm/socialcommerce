@@ -114,7 +114,7 @@ if($not_allow == 1){
 	$hidden = '<input type= "hidden" name="not_allow" value= "1">';
 	$action = "#";
 }else{
-	$action = $CONFIG->wwwroot."action/socialcommerce/update_cart";
+	$action = $CONFIG->url."action/socialcommerce/update_cart";
 }
 $hidden .= elgg_view('input/securitytoken');
 
