@@ -17,7 +17,7 @@
 	if ($stores) {
 		if ($stores->canEdit()) { 
   			$content = '<div class="contentWrapper">'.elgg_view('socialcommerce/forms/edit',array('entity' => $stores)).'</div>';
-			
+			$sidebar .= elgg_view("socialcommerce/sidebar");
 			$params = array(
 				'title' => $title,
 				'content' => $content,

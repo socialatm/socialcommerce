@@ -50,7 +50,7 @@
 								break;
 	}
 		
-	$sidebar .= elgg_view("socialcommerce/owner_block");	//	@todo - not working ??
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar = gettags();
 			
 	$params = array(

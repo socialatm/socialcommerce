@@ -18,6 +18,7 @@
 		}
 	$content = elgg_view("socialcommerce/login");
 	$title = sprintf(elgg_echo("stores:your"), elgg_get_page_owner_entity()->name);	
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$params = array(
 		'title' => $title,
 		'content' => $content,

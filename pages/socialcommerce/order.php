@@ -35,7 +35,7 @@
 		}
 	
 	elgg_set_context('stores');
-	$sidebar .= elgg_view("socialcommerce/owner_block");
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 	// set autofeed as false for not display the Subscribe to feed link in owner block
 	$autofeed = false;
