@@ -20,7 +20,7 @@
 		)) 			
 	){
 
- 		$list_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list_with_action','selected'=>$selected_address,'type'=>'myaccount'));
+ 		$list_address = elgg_view("socialcommerce/list_address", array('entity'=>$address, 'display'=>'list_with_action', 'selected'=>$selected_address, 'type'=>'myaccount' ));
 		$content = <<<EOF
 			<div>
 				<div style="float:right;margin-bottom:10px;">
