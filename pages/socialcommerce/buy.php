@@ -37,7 +37,7 @@
 				forward($CONFIG->url.'socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
 			elgg_set_context('cartadd');
 			$content .= elgg_view_entity($entity, true);
-			
+			$sidebar .= elgg_view("socialcommerce/sidebar");
 			$sidebar .= gettags();
 			
 			$params = array(

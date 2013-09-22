@@ -27,6 +27,7 @@
 	$content = elgg_view("socialcommerce/cart_confirm");
 	elgg_set_context('stores');
 	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 		
 	$params = array(

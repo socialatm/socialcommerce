@@ -300,6 +300,7 @@ EOF;
 EOF;
 		
 	$content = '<div class="contentWrapper stores">'.$content.'</div>';
+	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 	
 	$params = array(
