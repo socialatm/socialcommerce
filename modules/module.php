@@ -575,6 +575,7 @@ function html_escape($text){
  */
  
 function redirect_to_form( $url, $fields ){
+
 	global $CONFIG;
 	$formFields = '';
 	if(is_array($fields)){
@@ -586,7 +587,7 @@ function redirect_to_form( $url, $fields ){
 		$auto_redirect_script = <<<EOF
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->url}mod/socialcommerce/images/loadingAnimation.gif">
+				<img src="{$CONFIG->url}mod/socialcommerce/views/default/modules/checkout/paypal/images/loading.gif" alt="" />
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Loading...</div>
 			</div>
 			<script type="text/javascript">
@@ -600,20 +601,19 @@ function redirect_to_form( $url, $fields ){
 					$("#load_action_div").css("top",scroll_pos+"px");
 					$("#load_action_div").css({'width':window_width+'px'});
 					$("#load_action_div").show();
-					/*document.payment_redirect_form.submit();*/
 					$("#payment_redirect_form").submit();
 				}
 			</script>
 EOF;
-	$form = <<<EOF
-		<div>
-			<form id="payment_redirect_form" action="{$url}" method="post">
-				{$detailed_view}
-				{$formFields}
-			</form>
-			{$auto_redirect_script}
-		</div>
-EOF;
+	$form = 
+	   '<div>
+			<form id="payment_redirect_form" action="'.$url.'" method="post">'
+				.$detailed_view
+				.$formFields
+			.'</form>'
+			.$auto_redirect_script
+	  .'</div>';
+
 	return $form;
 	exit;
 }
@@ -623,32 +623,25 @@ EOF;
 ******************************************************/
 
 function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod){
-
+	
 	global $CONFIG;					//	@todo	-	working on making this go away...
 	$used_coupons = array();
 	elgg_set_context('add_order');
-	
-	$user = get_entity($buyer_guid);	//	@todo - change all instances of $user to $buyer ...
 	$buyer = get_entity($buyer_guid);
-	
-echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $socialcommerce plugin object
-	
 	$container_guid = $buyer_guid;
-		
-	$splugin_settings = elgg_get_entities(array( 	
-		'type' => 'object',
-		'subtype' => 'splugin_settings',
-		)); 			
-	$splugin_settings = $splugin_settings[0];
-	$seller_guid = $splugin_settings->owner_guid;
-
+	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
+	$seller = elgg_get_admins();
+	$seller = get_entity( $seller[0]->guid);
+	
 	$carts = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'cart',
 		'owner_guid' => $buyer_guid,
+		'limit' => 1,
 		)); 
 	$carts = $carts[0];
-	
+	if(!$carts){echo 'cart not found at '.__FILE__ .' at '.__LINE__; die(); } //	@todo - fix this. it's a bit of a hack...
+		
 	if($carts){
 		$payment_fee = (float)$posted_values['fee'];
 		$payment_gross = (float)$posted_values['total'];
@@ -686,22 +679,21 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 		if($BillingAddress->phoneno) { $order->b_phoneno = $BillingAddress->phoneno; }
 		
 		$order->container_guid = $container_guid;
-		$order_id = $order->save();		
-	
-		if($order_id){
+		$order_guid = $order->save();		
+		
+		if($order_guid){
 			$cart_guid = $carts->guid;
-			$tot = $tax_total_price = 0;
+			$tot = $tax_total_price = 0;		//	@todo - is this even used
 			$item_details_for_store_owner = array();
 			//-------- Site admin ----------------//
 			$admin_user = get_site_admin();
 			//-------- Site entity ----------------//
 			$site = get_entity(get_config('site_guid'));
-			
-	
+				
 			$cart_items = elgg_get_entities_from_relationship(array(
 				'relationship' => 'cart_item',
 				'relationship_guid' => $cart->guid, 
-				)); 
+				));
 
 			if($cart_items){
 				if($ShippingMethod){						//	@todo -  will need to test this function
@@ -746,14 +738,14 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 					$coupon_discount = 0;
 			
 					$order_item_id = $order_item->save();
-					
+										
 					if($order_item_id){
 						if(in_array('product_checkout', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')))) {
 							add_to_river('river/object/stores/purchase', 'purchase', $buyer_guid, $product_id );
 						}
 												
-						//-------- User Price ----------------//
-						$user_price = ( $product->price * $cart_item->quantity );
+						//-------- Buyer Price ----------------//
+						$buyer_price = ( $product->price * $cart_item->quantity );
 						
 						$admin_transaction = new ElggObject();
 						$admin_transaction->access_id = 2;
@@ -763,27 +755,27 @@ echo __FILE__ .' at '.__LINE__; die();	//	@todo - $splugin_settings change to $s
 						$admin_transaction->trans_type = "credit";
 						$admin_transaction->title = 'site_commission';
 						$admin_transaction->trans_category = 'site_commission';
-						$admin_transaction->order_guid = $order_id;
+						$admin_transaction->order_guid = $order_guid;
 						$admin_transaction->order_item_guid = $order_item_id;
 						$admin_transaction->amount = 0;
 						$admin_transaction->payment_fee = $item_payment_fee * $cart_item->quantity;
 						$admin_transaction->save();
+												
+						$buyer_transaction = new ElggObject();
+						$buyer_transaction->access_id = 2;
+						$buyer_transaction->owner_guid = $product->owner_guid;
+						$buyer_transaction->container_guid = $product->owner_guid;
+						$buyer_transaction->subtype = 'transaction';
+						$buyer_transaction->total_amount = $product->price * $cart_item->quantity;
+						$buyer_transaction->trans_type = "credit";
+						$buyer_transaction->title = 'sold_product';
+						$buyer_transaction->trans_category = 'sold_product';
+						$buyer_transaction->order_guid = $order_guid;
+						$buyer_transaction->order_item_guid = $order_item_id;
+						$buyer_transaction->amount = $buyer_price;
+						$buyer_transaction->save();
 						
-						$user_transaction = new ElggObject();
-						$user_transaction->access_id = 2;
-						$user_transaction->owner_guid = $product->owner_guid;
-						$user_transaction->container_guid = $product->owner_guid;
-						$user_transaction->subtype = 'transaction';
-						$user_transaction->total_amount = $product->price * $cart_item->quantity;
-						$user_transaction->trans_type = "credit";
-						$user_transaction->title = 'sold_product';
-						$user_transaction->trans_category = 'sold_product';
-						$user_transaction->order_guid = $order_id;
-						$user_transaction->order_item_guid = $order_item_id;
-						$user_transaction->amount = $user_price;
-						$user_transaction->save();
-
-						$result = add_entity_relationship($order_id,'order_item',$order_item_id);
+						$result = add_entity_relationship($order_guid, 'order_item', $order_item_id );
 						if($product->product_type_id == 1){
 							$product->quantity = $product->quantity - $cart_item->quantity;
 							$product_update_guid = $product->save();
@@ -851,10 +843,10 @@ EOF;
 						$item_details_for_store_owner[$product->owner_guid]['total'] += $sub_total;
 					}
 					$cart_item = get_entity($cart_item->guid);
-					$cart_item->delete();
+					$cart_item->delete();				
 				}
 				if($result){
-					$user_email = $user->email;
+					$buyer_email = $buyer->email;
 					$site_email = $site->email;
 					
 					$order_date = date("dS M Y");
@@ -897,7 +889,7 @@ EOF;
 							</td>
 						</tr>
 EOF;
-					$order_page = get_config('url').'socialcommerce/'.$user->username.'/order/';
+					$order_page = get_config('url').'socialcommerce/'.$buyer->username.'/order/';
 					if($product->mimetype && $product->product_type_id == 2){
 						$download_condition = <<<EOF
 							<div>
@@ -918,29 +910,28 @@ EOF;
 						$download_condition = "";
 					}
 						$ShippingMethod = 'None';
-					$order_link = get_config('url').'socialcommerce/'.$user->username.'/order_products/'.$order_id;
+					$order_link = get_config('url').'socialcommerce/'.$buyer->username.'/order_products/'.$order_guid;
 					$view_total_price = get_price_with_currency($grand_total_price);
 					$mail_body = sprintf(elgg_echo('order:mail'),
-										 $user->name,
-										 $order_id,
+										 $buyer->name,
+										 $order_guid,
 										 $order_link,
 										 $order_link,
-										 $order_id,
+										 $order_guid,
 										 $order_date,
 										 $order_recipient,
 										 $view_total_price,
 										 $adderss_details,
-										 $order_id,
+										 $order_guid,
 										 $item_details,
 										 $tax_display,
 										 $shipping_price,
 										 $grand_total,
 										 $download_condition
 					);
-					//echo $mail_body;
 					$subject = "New {$site->name} Purchase completed";
 					stores_send_mail(	 $site, 					// From entity
-										 $user, 					// To entity
+										 $buyer, 					// To entity
 										 $subject,					// The subject
 										 $mail_body					// Message
 								);
@@ -950,18 +941,17 @@ EOF;
 										 $admin_user->name,
 										 $site->name,
 										 $order_link,
-										 $order_id,
+										 $order_guid,
 										 $order_date,
 										 $order_recipient,
 										 $view_total_price,
 										 $adderss_details,
-										 $order_id,
+										 $order_guid,
 										 $item_details,
 										 $tax_display,
 										 $shipping_price,
 										 $grand_total
 						);
-						//echo $mail_body;
 						$subject = "New order created on {$site->name}";
 						stores_send_mail($site, 					// From entity
 										 $admin_user, 				// To entity
@@ -985,15 +975,14 @@ EOF;
 							$mail_body = sprintf(elgg_echo('order:mail:for:store:owner'),
 										 $product_owner->name,
 										 $site->name,
-										 $order_id,
+										 $order_guid,
 										 $order_date,
 										 $order_recipient,
 										 $adderss_details,
-										 $order_id,
+										 $order_guid,
 										 $item_detaile['content'],
 										 $grand_total
 								);
-							//echo $mail_body;
 							$subject = "Sold product(s) from {$site->name}";
 							stores_send_mail($site, 				// From entity
 										 $product_owner, 			// To entity
@@ -1006,13 +995,13 @@ EOF;
 			}
 			if(count($used_coupons) > 0 && $used_coupons){
 				foreach($used_coupons as $coupon_guid=>$coupon_code){
-					add_entity_relationship($coupon_guid,'coupon_uses',$order_id);
+					add_entity_relationship($coupon_guid, 'coupon_uses', $order_guid);
 				}
 			}
 		}
 		$cart->delete();		//	not until we're finished...
 	}
-	return $order_id;
+	return $order_guid;
 }
 
 /***************************************
@@ -1419,7 +1408,7 @@ function notification_for_scommerce($hook, $entity_type, $returnvalue, $params){
 												   $site->name
 					);
 					$subject = sprintf(elgg_echo('less:quantity:notification:mail:subject'),$site->name);
-					//$user = "akhi.pv@gmail.com";
+					
 					stores_send_mail($site, 					// From entity
 									 $user, 					// To entity
 									 $subject,					// The subject
