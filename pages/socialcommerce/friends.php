@@ -25,8 +25,7 @@
 		}
 		$content = elgg_list_entities_from_metadata(array(
 					'status' => 1,
-					'entity_type' => 'object',
-					'entity_subtype' => 'stores',
+					'type_subtype_pairs' => array('object' => 'stores'),
 					'owner_guid' => $friendguids,
 					'limit' => $limit,
 					));

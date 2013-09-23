@@ -28,16 +28,14 @@
 		switch($filter){
 			case "active":	$content = elgg_list_entities_from_metadata(array(
 												'status' => 1,
-												'entity_type' => 'object',
-												'entity_subtype' => 'stores',
+												'type_subtype_pairs' => array('object' => 'stores'),
 												'owner_guid' => elgg_get_page_owner_guid(),
 												'limit' => $limit,
 												));
 							break;
 			case "deleted":	$content = elgg_list_entities_from_metadata(array(
 												'status' => 0,
-												'entity_type' => 'object',
-												'entity_subtype' => 'stores',
+												'type_subtype_pairs' => array('object' => 'stores'),
 												'owner_guid' => elgg_get_page_owner_guid(),
 												'limit' => $limit,
 												));

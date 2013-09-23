@@ -30,8 +30,7 @@
 				case "active":
 					$content = elgg_get_entities_from_metadata(array(
 									'meta_array' => array('status'=>1,'product_type_id'=>$product_type_id),
-									'entity_type' => 'object',
-									'entity_subtype' => 'stores',
+									'type_subtype_pairs' => array('object' => 'stores'),
 									'owner_guid' => 0,
 									'limit' => $limit,
 									));
@@ -39,8 +38,7 @@
 				case "deleted":
 					$content = elgg_get_entities_from_metadata(array(
 									'meta_array' => array('status'=>0,'product_type_id'=>$product_type_id),
-									'entity_type' => 'object',
-									'entity_subtype' => 'stores',
+									'type_subtype_pairs' => array('object' => 'stores'),
 									'owner_guid' => 0,
 									'limit' => $limit,
 									));
@@ -53,8 +51,7 @@
 		}else{
 			$content .= elgg_get_entities_from_metadata(array(
 									'meta_array' => array('status'=>1,'product_type_id'=>$product_type_id),
-									'entity_type' => 'object',
-									'entity_subtype' => 'stores',
+									'type_subtype_pairs' => array('object' => 'stores'),
 									'owner_guid' => 0,
 									'limit' => $limit,
 									));

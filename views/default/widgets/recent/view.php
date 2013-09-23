@@ -48,8 +48,7 @@ $('a.show_product_recent_desc').click(function () {
 	if($display == 1){
 		$product = elgg_get_entities_from_metadata(array(
 			'status' => 1,
-			'entity_type' =>'object',
-			'entity_subtype' => 'stores',
+			'type_subtype_pairs' => array('object' => 'stores'),
 			'owner_guid' => elgg_get_page_owner_guid(),
 			'limit' => $number,
 			))  	
@@ -62,8 +61,7 @@ $('a.show_product_recent_desc').click(function () {
 			}
 			$product = elgg_get_entities_from_metadata(array(
 				'status' => 1,
-				'entity_type' =>'object',
-				'entity_subtype' => 'stores',
+				'type_subtype_pairs' => array('object' => 'stores'),
 				'owner_guid' => $friendguids,
 				'limit' => $number,
 				))  	
@@ -71,8 +69,7 @@ $('a.show_product_recent_desc').click(function () {
 	}else if($display == 3){
 		$product = elgg_get_entities_from_metadata(array(
 				'status' => 1,
-				'entity_type' =>'object',
-				'entity_subtype' => 'stores',
+				'type_subtype_pairs' => array('object' => 'stores'),
 				'owner_guid' => 0,
 				'limit' => $number,
 				))  	
