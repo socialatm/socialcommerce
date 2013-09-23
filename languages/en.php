@@ -31,6 +31,7 @@
 			'stores:editpost' => "Edit Stores post",
 			'stores:text' => "Description",
 			'stores:price' => "Price",
+			'stores:sold' => "Sold Products",
 			'product:price' => "Price",
 			'product:edit:file' => 'Change This File',
 			'stores:base:stocek' => "Base Stock",
