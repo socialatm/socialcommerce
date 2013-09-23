@@ -14,7 +14,7 @@
 	krumo($arr2); die();
 	
 	/*****
-	$user_gallery = get_config('url').'pg/socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
+	$user_gallery = get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
 	
 	md_type = metadata type
 	
@@ -25,39 +25,32 @@
 		$tag = get_input('tag');
 		$search_viewtype = get_input('search_viewtype');
 
-		if (empty($tag)) {
-			$title = elgg_view_title(elgg_echo('stores:type:all'));
-		} else {
-			$title = elgg_view_title(elgg_echo($tag));
-		}
+	$title = empty($tag) ? elgg_view_title(elgg_echo('stores:type:all')) : elgg_view_title(elgg_echo($tag));
 		
-		$area1 = gettags();
+	$sidebar .= elgg_view("socialcommerce/sidebar");
+	$sidebar = gettags();
 		
-		// Set context
-		elgg_set_context('search');
-		
-		$limit = 10;
+	// Set context
+	elgg_set_context('search');
+	$limit = 10;
 		
 		if (elgg_is_admin_logged_in()) {
 		
-			$filter = get_input("filter");
-			if(!$filter)
-				$filter = "active";
+			$filter = get_input("filter") ? get_input("filter") : 'active' ;
+			
 			switch($filter){
 				case "active":
 					if (!empty($tag)) {
-						$area2 = elgg_get_entities_from_metadata(array(
+						$content = elgg_get_entities_from_metadata(array(
 										'meta_array' => array('status'=>1, $md_type=>$tag),
-										'entity_type' => 'object',
-										'entity_subtype' => 'stores',
+										'type_subtype_pairs' => array('object' => 'stores'),
 										'owner_guid' => 0,
 										'limit' => 10,
 										));
 					}else{
-						$area2 = elgg_list_entities_from_metadata(array(
-													'status' => 1'
-													'entity_type' => 'object',
-													'entity_subtype' => 'stores',
+						$content = elgg_list_entities_from_metadata(array(
+													'status' => 1,
+													'type_subtype_pairs' => array('object' => 'stores'),
 													'owner_guid' => 0,
 													'limit' => 10,
 													));
@@ -65,43 +58,45 @@
 				break;
 				case "deleted":
 					if (!empty($tag)) {
-						$area2 = elgg_get_entities_from_metadata(array(
+						$content = elgg_get_entities_from_metadata(array(
 										'meta_array' => array('status'=>0, $md_type=>$tag),
-										'entity_type' => 'object',
-										'entity_subtype' => 'stores',
+										'type_subtype_pairs' => array('object' => 'stores'),
 										'owner_guid' => 0,
 										'limit' => 10,
 										));
 					}else{
-						$area2 = elgg_list_entities_from_metadata(array(
-													'status' => 0'
-													'entity_type' => 'object',
-													'entity_subtype' => 'stores',
+						$content = elgg_list_entities_from_metadata(array(
+													'status' => 0,
+													'type_subtype_pairs' => array('object' => 'stores'),
 													'owner_guid' => 0,
 													'limit' => 10,
 													));
 					}
 				break;
 			}
-			if(empty($area2)){
-				$area2 = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
+			if(empty($content)){
+				$content = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
 			}
 			
-			$area2 = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter ));
+			$content = elgg_view("socialcommerce/product_tab_view",array('base_view' => $area2, "filter" => $filter ));
 		}else{
 			if (!empty($tag)) {
-				$area2 = elgg_get_entities_from_metadata(array(
+				$content = elgg_get_entities_from_metadata(array(
 										'meta_array' => array('status'=>1, $md_type=>$tag),
-										'entity_type' => 'object',
-										'entity_subtype' => 'stores',
+										'type_subtype_pairs' => array('object' => 'stores'),
 										'owner_guid' => 0,
 										'limit' => 10,
 										));
 			}else{
-				$area2 .= elgg_list_entities_from_metadata('status', 1, "object", "stores", 0, 10 );
+				$content = elgg_list_entities_from_metadata(array(
+													'status' => 1,
+													'type_subtype_pairs' => array('object' => 'stores'),
+													'owner_guid' => 0,
+													'limit' => 10,
+													));
 			}
 		}
-		$area2 = <<<EOF
+		$content = <<<EOF
 			{$title}
 			<div class="contentWrapper stores">
 				{$area2}
@@ -109,7 +104,12 @@
 EOF;
 		elgg_set_context("stores");
 		
-		$body = elgg_view_layout('two_column_left_sidebar', $area1, $area2 );
-		
-		page_draw(sprintf(elgg_echo('searchtitle'), $tag ),$body );
+	$params = array(
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
+
+	$body = elgg_view_layout('one_sidebar', $params);
+	echo elgg_view_page($title, $body);
 ?>
