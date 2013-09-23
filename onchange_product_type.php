@@ -22,8 +22,7 @@
 	if($action == 'get_category'){
 		$category_lists = elgg_get_entities_from_metadata(array(
 			'product_type_id' => $product_type_id,
-			'entity_type' =>'object',
-			'entity_subtype' => 'sc_category',
+			'type_subtype_pairs' => array('object' => 'sc_category'),
 			'owner_guid' => 0,
 			'limit' => 999999,
 			)); 

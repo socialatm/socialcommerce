@@ -19,8 +19,7 @@
 	elgg_set_context('search');
 	$digital_cats = elgg_get_entities_from_metadata(array(
 			'product_type_id' => 2,
-			'entity_type' =>'object',
-			'entity_subtype' => 'sc_category',
+			'type_subtype_pairs' => array('object' => 'sc_category'),
 			'container_guid' => $container_guid,
 			'limit' => $limit,
 			));  	
