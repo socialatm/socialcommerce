@@ -35,7 +35,7 @@
 		if(empty($content)){
 			$content = elgg_echo('product:null');
 		}
-		$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+		$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	}
 	elgg_set_context('stores');
 	$sidebar .= elgg_view("socialcommerce/sidebar");

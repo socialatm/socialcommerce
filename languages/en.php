@@ -45,7 +45,7 @@
 			'stores:file' => 'Upload File',
 			'stores:edit' => 'Edit Product',
 			'stores:upload' => 'Upload a Product',
-			'stores:yours:friends' => 'Your friends\' Prosucts',
+			'stores:yours:friends' => 'Your friends Products',
 			'stores:river:created' => "%s Created",
 			'stores:river:updated' => "%s Updated",
 			'stores:river:purchased' => "%s Purchased",

@@ -124,23 +124,9 @@
    	}
 		
 	function socialcommerce_pagesetup() {
-	
+		global $CONFIG;
 		/*****	add menu items	*****/
-		
-		$menu_item = array(
-			'name' => 'everyone',			
-			'text' => elgg_echo('stores:everyone'), 			
-			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/all/',			
-			'contexts' => array('stores', 'socialcommerce'),	
-	//		'section' => '',		
-	//		'title' => '',			
-	//		'selected' => '',		
-			'parent_name' => 'stores',	
-	//		'link_class' => '',		
-	//		'item_class' => '',		
-			);
-			elgg_register_menu_item('site', $menu_item);
-			
+
 		$menu_item = array(
 			'name' => 'category',			
 			'text' => elgg_echo('stores:category'), 			
@@ -155,11 +141,7 @@
 			);
 			elgg_register_menu_item('site', $menu_item);
 		
-		
-		
-		
-		
-		if (elgg_get_context() == "stores" || elgg_get_context() == "socialcommerce") {
+		if (elgg_get_context() == "stores" or elgg_get_context() == "socialcommerce") {
 			if (isset($_SESSION['guid']) && elgg_is_logged_in()) {	
 
 				if( elgg_is_admin_logged_in() ){
@@ -216,14 +198,12 @@
 			} 
 			
 			
-	//		else if ( elgg_get_page_owner_guid()) {
-	
-	//		$page_owner = elgg_get_page_owner();
+			$page_owner = elgg_get_logged_in_user_entity();
 			
 			$menu_item = array(
 			'name' => 'stores_user',			
-			'text' => sprintf(elgg_echo('stores:user'), $page_owner->name), 			
-			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/',			
+			'text' => sprintf(elgg_echo('stores:user'), $page_owner->username), 			
+			'href' => get_config('url').'socialcommerce/'. $page_owner->username .'/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 	//		'section' => '',		
 	//		'title' => '',			
@@ -236,8 +216,8 @@
 			
 			$menu_item = array(
 			'name' => 'stores_user_friends',			
-			'text' => sprintf(elgg_echo('stores:user:friends'), $page_owner->name), 			
-			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/friends/',			
+			'text' => sprintf(elgg_echo('stores:user:friends'), $page_owner->username), 			
+			'href' => get_config('url').'socialcommerce/'. $page_owner->username .'/friends/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 	//		'section' => '',		
 	//		'title' => '',			
@@ -311,7 +291,9 @@
 									//	include(dirname(__FILE__) . "/cart_success.php");
 										break;	
 				case "edit":			require($base_path.'edit.php'); 	
-										break;											
+										break;
+				case "friends":			require($base_path.'friends.php'); 	
+										break;
 				case "ipn":				makepayment_paypal();
 										break;						
 				case "more_order_item":	require($base_path.'more_order_item.php');
