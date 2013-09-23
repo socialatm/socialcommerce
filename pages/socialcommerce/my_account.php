@@ -60,5 +60,5 @@
 	);
 
 	$body = elgg_view_layout('one_sidebar', $params);
-	echo elgg_view_page($title, $body);
+	echo elgg_view_page(elgg_echo('stores:my:account'), $body);
 ?>
