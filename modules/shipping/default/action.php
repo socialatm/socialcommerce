@@ -49,8 +49,7 @@
 	function price_calc_default($products){
 		$shipping_settings = elgg_get_entities_from_metadata(array(
 			'shipping_method' => 'default',
-			'entity_type' =>'object',
-			'entity_subtype' => 's_shipping',
+			'type_subtype_pairs' => array('object' => 's_shipping'),
 			'owner_guid' => 0,
 			'limit' => 1,
 			));  	
@@ -74,8 +73,7 @@
 	
 		$settings = elgg_get_entities_from_metadata(array(
 			'shipping_method' => 'default',
-			'entity_type' =>'object',
-			'entity_subtype' => 's_shipping',
+			'type_subtype_pairs' => array('object' => 's_shipping'),
 			'owner_guid' => 0,
 			'limit' => 1,
 			));  	

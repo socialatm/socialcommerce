@@ -50,8 +50,7 @@ EOF;
 		foreach ($selected_shipping_methods as $selected_shipping_method){
 			$shipping_settings = elgg_get_entities_from_metadata(array(
 				'shipping_method' => $selected_shipping_method,
-				'entity_type' =>'object',
-				'entity_subtype' => 's_shipping',
+				'type_subtype_pairs' => array('object' => 's_shipping'),
 				'owner_guid' => 0,
 				'limit' => 1,
 				));  	
