@@ -42,7 +42,7 @@
 		$content = elgg_echo('no:data');
 	}
 	
-	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	elgg_set_context('socialcommerce');
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
