@@ -25,15 +25,13 @@
 			switch($filter){
 				case "active":	$content = elgg_list_entities_from_metadata(array(
 													'status' => 1,
-													'entity_type' => 'object',
-													'entity_subtype' => 'stores',
+													'type_subtype_pairs' => array('object' => 'stores'),
 													'limit' => $limit,
 													));
 								break;
 				case "deleted":	$content = elgg_list_entities_from_metadata(array(
 													'status' => 0,
-													'entity_type' => 'object',
-													'entity_subtype' => 'stores',
+													'type_subtype_pairs' => array('object' => 'stores'),
 													'limit' => $limit,
 													));
 								break;
@@ -48,8 +46,7 @@
 		}else{
 			$content = elgg_list_entities_from_metadata(array(
 								'status' => 1,
-								'entity_type' => 'object',
-								'entity_subtype' => 'stores',
+								'type_subtype_pairs' => array('object' => 'stores'),
 								'limit' => $limit,
 								));					
 								
