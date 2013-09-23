@@ -27,8 +27,7 @@
 	
 	$rating_val = elgg_get_entities_from_metadata(array(
 		'product_guid' => $id_sent,
-		'entity_type' =>'object',
-		'entity_subtype' => 'rating',
+		'type_subtype_pairs' => array('object' => 'rating'),
 		));  	
 
 	if(!$rating_val){
@@ -50,8 +49,7 @@
 	//connecting to the database to get some information
 	$rating_val = elgg_get_entities_from_metadata(array(
 		'product_guid' => $id_sent,
-		'entity_type' =>'object',
-		'entity_subtype' => 'rating',
+		'type_subtype_pairs' => array('object' => 'rating'),
 		));  	
 
 	if($rating_val){
@@ -84,8 +82,7 @@
 	
 	$newtotals = elgg_get_entities_from_metadata(array(
 		'product_guid' => $id_sent,
-		'entity_type' =>'object',
-		'entity_subtype' => 'rating',
+		'type_subtype_pairs' => array('object' => 'rating'),
 		));  	
 	
 	$numbers = $newtotals[0];
