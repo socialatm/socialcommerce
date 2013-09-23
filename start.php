@@ -27,6 +27,9 @@
 	    
 	    // Load system configuration
 			global $CONFIG;
+		
+		// make products show up in seach results
+		elgg_register_entity_type( 'object', 'stores' );
 			
 		// Set up menu for logged in users
 			if (elgg_is_logged_in()) {
