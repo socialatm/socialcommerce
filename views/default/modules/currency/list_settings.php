@@ -1,4 +1,4 @@
-<?PHP
+<?php
 	/**
 	 * Elgg currency - list settings
 	 * 
