@@ -103,7 +103,7 @@
 	 * Note: This is a secondary system:init call and is run at a super low priority to guarantee that it is called after all
 	 * other plugins have initialised.
 	 */
-   	function product_fields_setup(){
+   	function sc_product_fields_setup(){
    		global $CONFIG;
    		//--- Default product types ----//
    		$default_product_types = array((object)array('value'=> 2, 'display_val'=> elgg_echo('stores:digital:products'), 'addto_cart'=> 1 )
@@ -119,11 +119,11 @@
 		$CONFIG->product_fields = elgg_trigger_plugin_hook('socialcommerce:fields', 'stores', NULL, $product_fields);
 		
 		//--- Default related product types ----//
-   		$default_relatedproduct_types = array((object)array('value'=>1,'display_val'=>elgg_echo('stores:related:product'),'addto_cart'=>0),
+   		$default_related_product_types = array((object)array('value'=>1,'display_val'=>elgg_echo('stores:related:product'),'addto_cart'=>0),
 								      (object)array('value'=>2,'display_val'=>elgg_echo('stores:services'),'addto_cart'=>0)
 								 );
 								 
-		$CONFIG->default_relatedproduct_types = elgg_trigger_plugin_hook('socialcommerce:relatedproduct:type', 'stores', NULL, $default_relatedproduct_types);
+		$CONFIG->default_related_product_types = elgg_trigger_plugin_hook('socialcommerce:relatedproduct:type', 'stores', NULL, $default_related_product_types);
    	}
 		
 	function socialcommerce_pagesetup() {
@@ -883,7 +883,7 @@ EOT;
   	}
   	// Make sure the stores initialization function is called on initialization
 		elgg_register_event_handler('init','system','socialcommerce_init');
-		elgg_register_event_handler('init','system','product_fields_setup', 10000); 	// Ensure this runs after other plugins
+		elgg_register_event_handler('init','system','sc_product_fields_setup', 10000); 	// Ensure this runs after other plugins
 		
 		elgg_register_event_handler('pagesetup','system','socialcommerce_pagesetup');
 		
