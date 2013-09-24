@@ -80,7 +80,7 @@
 	$title = elgg_view_title(elgg_echo('checkout:process'));
 		
 	//--------- Billing Address Details ----------//
-	$billing_details = elgg_view("socialcommerce/billing_details",array('checkout_order'=>$checkout_order));
+	$billing_details = elgg_view("socialcommerce/billing_details", array('checkout_order'=>$checkout_order));
 	if($_SESSION['CHECKOUT']['confirm_billing_address'] == 1){
 		$billing_address_modify = "<span id='checkout_modify_0' class='checkout_modify' onclick='change_modified(0);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 	}
