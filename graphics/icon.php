@@ -8,10 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
-	global $CONFIG;
-	require_once(get_config('path').'engine/start.php');
-
+	 
 	$stores_guid = get_input('stores_guid');
 	$stores = get_entity($stores_guid);
 	
