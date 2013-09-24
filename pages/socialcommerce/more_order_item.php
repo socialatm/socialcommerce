@@ -7,12 +7,8 @@
 	 * @author twentyfiveautumn.com
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
-	 **/ 
-	
-	// Load Elgg engine
-	require_once(get_config('path').'engine/start.php');
-	global $CONFIG;
-	
+	 **/
+
 	$user_guid = get_input('us');
 	$order_item_id = get_input('stores_guid');
 	if($order_item_id){
