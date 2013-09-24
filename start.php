@@ -106,9 +106,11 @@
    	function sc_product_fields_setup(){
    		global $CONFIG;
    		//--- Default product types ----//
-   		$default_product_types = array((object)array('value'=> 2, 'display_val'=> elgg_echo('stores:digital:products'), 'addto_cart'=> 1 )
-								 );
-								 
+   		$default_product_types = array(
+								(object)array('value'=> 1, 'display_val'=> elgg_echo('stores:simple:products'), 'addto_cart'=> 1 ),
+								(object)array('value'=> 2, 'display_val'=> elgg_echo('stores:digital:products'), 'addto_cart'=> 1 ),
+								(object)array('value'=> 3, 'display_val'=> elgg_echo('stores:virtual:products'), 'addto_cart'=> 1 ),
+								);
 		$CONFIG->product_type_default = elgg_trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_product_types);
 								 
    		//--- Default fields for digital products ----//
