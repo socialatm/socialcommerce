@@ -8,8 +8,6 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	require_once(get_config('path').'engine/start.php');
 	
 	$title = elgg_view_title(elgg_echo('stores:yours:friends'));
 	elgg_set_context('search');
