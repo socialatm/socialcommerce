@@ -9,13 +9,9 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
-	echo __FILE__ .' at '.__LINE__; die();
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 
-	global $CONFIG;
-	require_once(get_config('path').'engine/start.php');
-		
 	$title = $page_owner == $_SESSION['user'] ? elgg_view_title(elgg_echo('stores:your')) : elgg_view_title($page_owner->username . "'s " . elgg_echo('products'));
 		
 	// Get objects
