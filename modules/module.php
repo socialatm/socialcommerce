@@ -97,11 +97,11 @@ function SetGeneralValuesInConfig(){
 
 function sc_get_product_type_from_value($value) {
 	global $CONFIG;
-	$default_produt_types = $CONFIG->produt_type_default;
-	if (is_array($default_produt_types) && sizeof($default_produt_types) > 0 && $value) { 
-		foreach ($default_produt_types as $default_produt_type){
-			if($default_produt_type->value == $value){
-				return $default_produt_type; 
+	$default_product_types = $CONFIG->product_type_default;
+	if (is_array($default_product_types) && sizeof($default_product_types) > 0 && $value) { 
+		foreach ($default_product_types as $default_product_type){
+			if($default_product_type->value == $value){
+				return $default_product_type; 
 			}
 		}
 	}	
