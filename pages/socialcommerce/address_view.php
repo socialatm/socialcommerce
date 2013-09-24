@@ -8,10 +8,6 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	// Load Elgg engine
-	require_once(get_config('path').'engine/start.php');
-	global $CONFIG;
 	
 	$type = get_input('type');
 	$check_order = $type == "shipping" ? 1 : 0;
