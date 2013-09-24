@@ -9,9 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
-	global $CONFIG;
-	require_once(get_config('path').'engine/start.php');
-
 	$last_forward_from = get_input('forward_url');
 		if($last_forward_from){
 			$_SESSION['last_forward_from'] = $last_forward_from;

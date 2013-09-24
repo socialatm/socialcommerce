@@ -780,7 +780,7 @@ unit-rating a.r1-unit{left: 0px;}
 	width:60px;
 }
 .object_product_type_string {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/product_type.gif) no-repeat scroll left 2px;
+	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/graphics/software.png) no-repeat scroll left 2px;
 	margin:0 0 0 15px;
 	padding:0 0 0 16px;
 }
@@ -1318,7 +1318,7 @@ unit-rating a.r1-unit{left: 0px;}
 	width:100px;
 }
 .gallery_product_inner .object_product_type_string {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/product_type.gif) no-repeat scroll left 0px;
+	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/graphics/software.png) no-repeat scroll left 0px;
 	margin: 0;
 }
 .stbutton:link { 
