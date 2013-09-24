@@ -8,11 +8,6 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
  	**/
-	 
-	// Get engine
-	require_once(get_config('path').'engine/start.php');
-
-	global $CONFIG;
 	
 	$mime = $vars['mimetype'];
 	if (isset($vars['thumbnail'])) {
