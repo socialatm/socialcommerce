@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin_manifest>
-	<field key="author" value="twentyfiveautumn.com"/>
-	<field key="version" value="1.0"/>
-	<field key="description" value="the Elgg eCommerce plugin."/>
-	<field key="licence" value="GNU Public License version 2"/>
-	<field key="website" value="http://twentyfiveautumn.com/"/>
-	<field key="copyright" value="(C) twentyfiveautumn.con 2013"/>
-	<field key="elgg_version" value="2009031301" />
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>Social Commerce</name>
+	<author>Ray Peaslee</author>
+	<version>1.0</version>
+	<blurb>an Elgg eCommerce plugin.</blurb>
+	<description>This is a simple example of a manifest file.  In this example, there are many options used, including screenshots, dependencies, and additional information about the plugin.</description>
+	<website>http://twentyfiveautumn.com/</website>
+	<copyright>(C) twentyfiveautumn.com 2013</copyright>
+	<license>GNU Public License version 2</license>
+ 
+	<category>eCommerce</category>
+ 
+	<!-- All plugins must require either elgg_version or elgg_release. -->
+	<requires>
+		<type>elgg_release</type>
+		<version>1.8</version>
+	</requires>
+	<requires>
+		<type>php_extension</type>
+		<name>curl</name>
+	</requires>
+	
+	<!-- The path is relative to the plugin's root. -->
+	<screenshot>
+		<description>Elgg profile.</description>
+		<path>screenshots/profile.png</path>
+	</screenshot>
+ 
+	<provides>
+		<type>plugin</type>
+		<name>socialcommerce</name>
+		<version>1.0</version>
+	</provides>
+ 
+	<suggests>
+		<type>plugin</type>
+		<name>twitter</name>
+		<version>1.0</version>
+	</suggests>
 </plugin_manifest>
