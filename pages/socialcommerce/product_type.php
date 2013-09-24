@@ -9,13 +9,9 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	echo __FILE__ .' at '.__LINE__; die();
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 	 
-	global $CONFIG;
-	require_once(get_config('path').'engine/start.php');
-
 	$product_type_id = get_input('stores_guid');
 	$title = elgg_view_title(elgg_view('output/product_type',array('value' => $product_type_id,'display'=>1)));
 	$search_viewtype = get_input('search_viewtype');
