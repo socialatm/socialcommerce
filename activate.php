@@ -23,11 +23,11 @@
 			'type' => 'object',
 			'subtype' => 'plugin',
 			'owner_guid' => get_config('site_id'),
-			'site_guid' => get_config('site_id')'
+			'site_guid' => get_config('site_id'),
 			'container_guid' => get_config('site_id'),
 			'access_id' => '2',
 			'enabled' => 'no',
-			'title' = 'socialcommerce',
+			'title' => 'socialcommerce',
 			'checkout_method' => serialize(array('paypal')),
 			'default_view' => 'list',
 			'river_settings' => serialize(array('product_add', 'product_checkout')),
