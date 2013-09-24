@@ -43,7 +43,7 @@
 				break;
 			}
 			if(empty($content)){
-				$content = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
+				$content = '<div style="padding:10px;">'.elgg_echo('no:data').'</div>';	
 			}
 			
 			$content = elgg_view("socialcommerce/product_tab_view",array('base_view' => $content, "filter" => $filter));
@@ -55,11 +55,11 @@
 								'limit' => $limit,
 								));
 			if(empty($content)){
-				$content = "<div style=\"padding:10px;\">".elgg_echo('no:data')."</div>";	
+				$content = '<div style="padding:10px;">'.elgg_echo('no:data').'</div>';	
 			}
 		}
 		
-	$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+	$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	elgg_set_context('stores');
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
@@ -75,5 +75,5 @@
 	);
 
 	$body = elgg_view_layout('one_sidebar', $params);
-	echo elgg_view_page($title, $body);
+	echo elgg_view_page(elgg_view('output/category', array('value' => $product_category, 'display'=>1 )), $body);
 ?>
