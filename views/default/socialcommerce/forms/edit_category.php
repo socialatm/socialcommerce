@@ -34,7 +34,7 @@
 
             $title_label = elgg_echo('title');
 			$title_textbox = elgg_view('input/text', array('internalname' => 'categorytitle', 'value' => $title));
-            $produt_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));	//	@TODO - $produt_type?? spelling
+            $product_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
                
 $text_label = elgg_echo('category:text');
                 $text_textarea = elgg_view('input/longtext', array('internalname' => 'categorybody', 'value' => $body));
@@ -53,7 +53,7 @@ $text_label = elgg_echo('category:text');
 							<label><span style="color:red">*</span> $title_label</label><br />
 				                        $title_textbox
 						</p>
-						{$produt_type}
+						{$product_type}
 						<p>
 							<label>$text_label</label><br />
 				                        $text_textarea
