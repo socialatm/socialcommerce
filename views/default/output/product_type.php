@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg output - produt type view
+	 * Elgg output - product type view
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,18 +16,18 @@
 	if ($vars['display'] <= 0)
 		$vars['display'] = "";
 		
-	$default_produt_types = $CONFIG->produt_type_default;
+	$default_product_types = $CONFIG->product_type_default;
 		
 	if($vars['display'] == 1){
 		echo $vars['options'][$vars['value']];
 	}else{
-		if (is_array($default_produt_types) && sizeof($default_produt_types) > 0 && $vars['value']) {	 
+		if (is_array($default_product_types) && sizeof($default_product_types) > 0 && $vars['value']) {	 
 ?>
 			<a  class="object_product_type_string" href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $vars['value'];?>/type">
 				<?php 
-					foreach ($default_produt_types as $default_produt_type){
-						if($default_produt_type->value == $vars['value']){
-							echo $default_produt_type->display_val; 
+					foreach ($default_product_types as $default_product_type){
+						if($default_product_type->value == $vars['value']){
+							echo $default_product_type->display_val; 
 							break;
 						}
 					}
