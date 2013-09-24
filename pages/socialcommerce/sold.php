@@ -11,9 +11,6 @@
 	
 	gatekeeper();
 
-	require_once(get_config('path').'engine/start.php');
-	global $CONFIG;
-	
 	$title = elgg_view_title($title = elgg_echo('stores:sold:products'));
 	elgg_set_context('search');
 	$limit = 10;
