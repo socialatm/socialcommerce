@@ -65,7 +65,7 @@
 		$title_label = elgg_echo('title');
         $title_textbox = elgg_view('input/text', array('internalname' => 'storestitle', 'value' => $title));
         
-        $produt_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
+        $product_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
 		
 	    $category_lists = elgg_get_entities_from_metadata(array(
 			'product_type_id' => $product_type_id,
@@ -206,7 +206,7 @@ EOT;
 					<label><span style="color:red">*</span>{$title_label}</label><br />
 					{$title_textbox}
 				</p>
-				{$produt_type}
+				{$product_type}
 				<div id="change_by_product_type">
 					<p>
 						<label><span style="color:red">*</span>{$category_label}</label><br />
