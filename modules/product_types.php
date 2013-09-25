@@ -28,7 +28,7 @@
 		$CONFIG->product_type_default = elgg_trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_product_types);
 								 
    		//--- Default fields for simple products ----//
-		$product_fields[2] = array (
+		$product_fields[1] = array (
 			'quantity' => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 			'price'  => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 		);
@@ -38,8 +38,8 @@
 			'price'  => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 		);
 		//--- Default fields for virtual products ----//
-		$product_fields[2] = array (
-			'upload' => array('field'=>'file','mandatory'=>1,'display'=>1 ),
+		$product_fields[3] = array (
+			'quantity' => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 			'price'  => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 		);
 		$CONFIG->product_fields = elgg_trigger_plugin_hook('socialcommerce:fields', 'stores', NULL, $product_fields );
@@ -52,6 +52,4 @@
 								 
 		$CONFIG->default_related_product_types = elgg_trigger_plugin_hook('socialcommerce:relatedproduct:type', 'stores', NULL, $default_related_product_types);
    	}
-	
-	
 ?>
