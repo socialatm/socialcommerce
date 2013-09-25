@@ -26,7 +26,6 @@
 			'stores:everyone' => "All site Stores",
 			'stores:read' => "Read Stores",
 			'stores:addpost' => "Add New Product",
-			'stores:editpost' => "Edit Stores post",
 			'stores:text' => "Description",
 			'stores:price' => "Price",
 			'stores:sold' => "Sold Products",
