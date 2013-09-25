@@ -11,10 +11,8 @@
 	 
 	$english = array(
 	
-		/**
-		 * Menu items and titles
-		 */
-	
+		/*****	Menu items and titles	*****/
+			
 			'store' => "Store",
 			'title' => "Title",
 			'stores' => "Social Commerce",
@@ -114,10 +112,11 @@
 			'features' => "Features",
 	        'features:des' => "Description",
 			'stores:physical:products' => "Physical Products",
-			'stores:simple:products' => "Simple Products",
-			'stores:digital:products' => "Downloadable Products",
-			'stores:virtual:products' => "Virtual Products",
+			'stores:simple:products' => "Simple Product",
+			'stores:digital:products' => "Downloadable Product",
+			'stores:virtual:products' => "Virtual Product",
 			'product:type' => "Product Type",
+			'product:type:menu' => "New %s",
 			'product:image' => "Image",
 			'grand:total' => "Grand Total",
 			'transactions' => 'Transactions',
