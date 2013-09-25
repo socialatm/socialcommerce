@@ -8,15 +8,14 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
+	 
 	admin_gatekeeper();
-
 	$stores = get_entity((int)$page[2]);
 	
-	$title = elgg_view_title($title = elgg_echo('stores:edit'));
+	$title = elgg_view_title(elgg_echo('stores:edit'));
 	if ($stores) {
 		if ($stores->canEdit()) { 
-  			$content = '<div class="contentWrapper">'.elgg_view('socialcommerce/forms/edit',array('entity' => $stores)).'</div>';
+  			$content = '<div class="contentWrapper">'.elgg_view('socialcommerce/forms/edit', array('entity' => $stores)).'</div>';
 			$sidebar .= elgg_view("socialcommerce/sidebar");
 			$params = array(
 				'title' => $title,
@@ -24,7 +23,7 @@
 				'sidebar' => $sidebar,
 				);
 			$body = elgg_view_layout('one_sidebar', $params);
-			echo elgg_view_page($title, $body);
+			echo elgg_view_page(elgg_echo('stores:edit'), $body);
 			exit;
 		}
 	} else {
