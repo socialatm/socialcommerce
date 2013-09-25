@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg add product entry page
+	 * Elgg add product page
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,13 +11,11 @@
 	 
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
-	
-	$container_guid = elgg_get_page_owner_guid();	//	@todo - maybe change this
-	
-	//set the title
+	$container_guid = elgg_get_page_owner_guid();
 	$title = elgg_view_title(elgg_echo('stores:addpost'));
-	// Get the form
-	$content = '<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit").'</div>';	//	@todo - elgg_get_form ??
+	set_input('product_type_id', $page[2]);
+	
+	$content = '<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit").'</div>';
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 			
