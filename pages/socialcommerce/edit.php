@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg product - edit
+	 * Elgg product - product edit page
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
