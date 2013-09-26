@@ -9,24 +9,12 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-
-	global $CONFIG;
-
-	$settings = elgg_get_entities(array( 	
-		'type' => 'object',
-		'subtype' => 'splugin_settings',
-		'owner_guid' => 0,
-		'order_by' => '',
-		'limit' => 9999,
-		)); 			
+	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
 	
-	if($settings && $CONFIG->no_shipping !=2){
-		$selected_shipping_methods = $settings[0]->shipping_methods;
-		if(!is_array($selected_shipping_methods))
-			$selected_shipping_methods = array($selected_shipping_methods);
-		$shipping_methods = get_shipping_methods();
+	if($socialcommerce){
+		$selected_shipping_methods = unserialize(elgg_get_plugin_setting('shipping_method', 'socialcommerce'));
+		$shipping_methods = sc_get_shipping_methods();
 		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
-		
 		$shipping_method_select = elgg_echo('shipping:method:select');
 		$shipping_method_validation_text = elgg_echo('shipping:method:validation:text');
 		$method_display = <<<EOF
@@ -45,58 +33,57 @@
 			</div>
 			<form onsubmit='return shipping_method_validation();' name='shipping_method_selection' method='post' action='{$action}'>
 EOF;
+
+
+
+
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('checkout:select:shipping:method')));
 		
 		foreach ($selected_shipping_methods as $selected_shipping_method){
-			$shipping_settings = elgg_get_entities_from_metadata(array(
-				'shipping_method' => $selected_shipping_method,
-				'type_subtype_pairs' => array('object' => 's_shipping'),
-				'owner_guid' => 0,
-				'limit' => 1,
-				));  	
-				
-			if($shipping_settings)
-				$shipping_settings = $shipping_settings[0];
-			
+		
 			if(file_exists($CONFIG->shipping_path.$selected_shipping_method.'/action.php')) {
-				include_once($CONFIG->shipping_path.$selected_shipping_method."/action.php");
+				require_once($CONFIG->shipping_path.$selected_shipping_method."/action.php");
 			}else{
 				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:method'), $selected_shipping_method));
 			}
 			
-			$products = $_SESSION['CHECKOUT']['product'];
+		$products = $_SESSION['CHECKOUT']['product'];
 			
-			$function = "price_calc_".$selected_shipping_method;
-			if(function_exists($function)){
-				$prince = $function($products);
-			}else {
-				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:function'), $function));
+		$function = 'price_calc_'.$selected_shipping_method;
+		if(function_exists($function)){
+			$price = $function($products);
+		}else {
+			throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:function'), $function));
+		}
+
+		$shipping_price = 0;
+		if(is_array($price)){
+			foreach ($price as $s_price){
+				$shipping_price += $s_price;		//	@todo - we could actuall assign the shipping cost to the individual items here
 			}
+		}
+	
+		$display_name = $shipping_settings->display_name ? $shipping_settings->display_name : $shipping_methods[$selected_shipping_method]->label;
 			
-			$shipping_price = 0;
-			if(is_array($prince)){
-				foreach ($prince as $s_price)	{
-					$shipping_price += $s_price;
-				}
+		if($selected_shipping_method == $_SESSION['CHECKOUT']['shipping_method']){
+			$checked = "checked='checked'";
+		}else{
+			if((empty($_SESSION['CHECKOUT']['shipping_method']))){
+				$checked = "checked='checked'";
+			}else{
+				$checked = "";
 			}
+		} 
 			
-			$display_name = $shipping_settings->display_name;
-			if(!$display_name)
-				$display_name = $shipping_methods[$selected_shipping_method]->label;
-			if($selected_shipping_method == $_SESSION['CHECKOUT']['shipping_method']){
-				 $checked = "checked='checked'";
-			}
-			else
-			{
-				if((empty($_SESSION['CHECKOUT']['shipping_method']))){
-					 $checked = "checked='checked'";
-				}
-				else{
-					$checked = "";
-				}
-			} 
-			$display_shipping_price = get_price_with_currency($shipping_price);
-			$method_display .= <<<EOF
+		$display_shipping_price = get_price_with_currency( $shipping_price );
+		
+		$_SESSION['CHECKOUT']['shipping_price'] = $shipping_price;
+		
+		
+	
+		
+		
+		$method_display .= <<<EOF
 				<div style='padding:5px;'>
 					<input type='radio' name='shipping_method' value='{$selected_shipping_method}' {$checked}> 
 					<input type='hidden' name='shipping_price' value='{$shipping_price}'> 
