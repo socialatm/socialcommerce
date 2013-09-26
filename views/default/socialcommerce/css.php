@@ -773,7 +773,7 @@ unit-rating a.r1-unit{left: 0px;}
 	margin:5px 0 0;
 	padding:3px;
 }
-.input-pulldown{
+.input-dropdown{
 	margin:5px 0 0;
 }
 .full_view .product_image img{

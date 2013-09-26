@@ -14,10 +14,10 @@
 
 	$vars = array(
         'tabs' => array(
-                  array('title' => elgg_echo('general:settings:tab'), 'url' => "$url" . '?tab=general', 'selected' => ($tab == 'general')),
-                  array('title' => elgg_echo('payment:methods:tab'), 'url' => "$url" . '?tab=payment', 'selected' => ($tab == 'payment')),
-				  array('title' => elgg_echo('shipping:methods:tab'), 'url' => "$url" . '?tab=shipping', 'selected' => ($tab == 'shipping')),
-                  array('title' => elgg_echo('currency:tab'), 'url' => "$url" . '?tab=currency', 'selected' => ($tab == 'currency')),
+                  array('title' => '<h3>'.elgg_echo('general:settings:tab').'</h3>', 'url' => "$url" . '?tab=general', 'selected' => ($tab == 'general')),
+                  array('title' => '<h3>'.elgg_echo('payment:methods:tab').'</h3>', 'url' => "$url" . '?tab=payment', 'selected' => ($tab == 'payment')),
+				  array('title' => '<h3>'.elgg_echo('shipping:methods:tab').'</h3>', 'url' => "$url" . '?tab=shipping', 'selected' => ($tab == 'shipping')),
+                  array('title' => '<h3>'.elgg_echo('currency:tab').'</h3>', 'url' => "$url" . '?tab=currency', 'selected' => ($tab == 'currency')),
         )
 	);
 

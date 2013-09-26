@@ -18,6 +18,7 @@
 
 	if($shipping_methods && $selected_shippingmethods){
 ?>
+			<br />
 			<div class="basic" id="list1b">
 <?php 
 				$i = 0;
@@ -25,12 +26,12 @@
 					$method = $shipping_methods[$selected_shippingmethod];
 					$shipping_contents = elgg_view("modules/shipping/".$selected_shippingmethod.'/'.$method->view);
 ?>
-					<h3>
+					<h2>
 						<a>
 							<span class="list1b_icon"></span>
 							<B><?php echo $method->label; ?> :</B>
 						</a>
-					</h3>
+					</h2>
 					<div class="ui_content">
 						<div class="content">
 							<?php echo $shipping_contents; ?>
