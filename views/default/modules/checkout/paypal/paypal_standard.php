@@ -18,9 +18,9 @@
 ?>
 	<div>
 		<?php echo sprintf(elgg_echo('paypal:instruction1'),'https://www.paypal.com/us/cgi-bin/webscr?cmd=_registration-run'); ?>
-	</div>
+	</div><br />
 	<div>
-		<label for="payment_name"><?php echo elgg_echo('payment:name'); ?>:</label>
+		<label for="payment_name"><h3><?php echo elgg_echo('payment:name'); ?>:</h3></label>
 			<?php echo elgg_view('input/text', array(
 					'name' => 'params[payment_name]',
 					'id' => 'payment_name',
@@ -29,9 +29,9 @@
 					'internalname'=>'payment_name',
 					));
 			?>
-	</div>
+	</div><br />
 	<div> 
-		<label for="socialcommerce_paypal_email"><?php echo elgg_echo('paypal:email'); ?>:</label>
+		<label for="socialcommerce_paypal_email"><h3><?php echo elgg_echo('paypal:email'); ?>:</h3></label>
 			<?php echo elgg_view('input/email', array(
 					'name' => 'params[socialcommerce_paypal_email]',
 					'id' => 'socialcommerce_paypal_email',
@@ -40,9 +40,9 @@
 					'internalname'=>'socialcommerce_paypal_email'
 					));
 			?>
-	</div>
+	</div><br />
 	<div>
-		<label for="socialcommerce_paypal_environment"> <?php echo elgg_echo('mode'); ?>:</label>
+		<label for="socialcommerce_paypal_environment"><h3><?php echo elgg_echo('mode'); ?>:</h3></label>
 			<?php echo elgg_view('input/radio', array(
 					'name' => 'params[socialcommerce_paypal_environment]',
 					'id' => 'socialcommerce_paypal_environment',
@@ -53,5 +53,5 @@
 			?>
 	</div>
 	<div>
-		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/checkout/paypal/images/paypal.png" alt="" />
+		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/checkout/paypal/images/paypal.png" alt="" style="float:right"; />
 	</div>

@@ -41,6 +41,7 @@
 	$sc_river_settings = $socialcommerce->river_settings ? unserialize($socialcommerce->river_settings) : elgg_echo('no:river:settings');
 	
 ?>
+		<br />
 		<div class="checkout_title"><h2>
 			<?php echo elgg_echo('general:settings'); ?>:</h2>
 		</div>
@@ -79,5 +80,5 @@
 			?>
 		</div>
 		<div>
-			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/settings.png" alt="" />
+			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/settings.png" alt="" style="float:right"; />
 		</div>

@@ -14,6 +14,7 @@
 	
 	if($checkout_methods && $selected_checkoutmethods){
 ?>
+			<br />
 			<div class="basic" id="list1b">
 <?php 
 				$i = 0;
@@ -21,12 +22,12 @@
 					$method = $checkout_methods[$selected_checkoutmethod];
 					$checkout_contents = elgg_view('modules/checkout/'.$selected_checkoutmethod.'/'.$method->view);
 ?>
-					<h3>
+					<h2>
 						<a>
 							<span class="list1b_icon"></span>
 							<B><?php echo $method->label; ?> :</B>
 						</a>
-					</h3>
+					</h2>
 					<div class="ui_content">
 						<div class="content">
 							<?php echo $checkout_contents; ?>

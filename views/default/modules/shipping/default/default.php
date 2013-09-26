@@ -17,7 +17,7 @@
 ?>
 	<div>
 		<?php echo elgg_echo('default:shipping:instructions'); ?>
-	</div>
+	</div><br />
 	<div>
 		<label for="shipping_method"><h3><?php echo elgg_echo('flat:rate:per:item'); ?>:</h3></label>
 		<?php echo elgg_view('input/checkboxes', array(
@@ -29,7 +29,7 @@
 				'options' => array(elgg_echo('use:flat:rate:per:item') => 'default', ),
 				));
 		?>
-	</div>
+	</div><br />
 	<div>
 		<label for="shipping_name"><h3><?php echo elgg_echo('shipping:name'); ?>:</h3></label>
 			<?php echo elgg_view('input/text', array(
@@ -40,7 +40,7 @@
 					'internalname'=>'shipping_name',
 					));
 			?>
-	</div>
+	</div><br />
 	<div> 
 		<label for="shipping_per_item"><h3><?php echo elgg_echo('shipping:cost:per:item'); ?>:</h3></label>
 			<?php echo elgg_view('input/text', array(
@@ -51,7 +51,7 @@
 					'internalname'=> 'shipping_per_item'
 					));
 			?>
-	</div>
+	</div><br />
 	<div>
-		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/shipping/default/images/shipping.png" alt="" />
+		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/shipping/default/images/shipping.png" alt="" style="float:right";/>
 	</div>
