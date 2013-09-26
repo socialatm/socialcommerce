@@ -9,223 +9,123 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	//$socialcommerce_settings = $vars['entity'];
-	$ajax = $vars['ajax'];
-	
-	// @todo - what about this 9999 limit??
-	$currency_settings = elgg_get_entities(array( 	
-		'type' => 'object',
-		'subtype' => 's_currency',
-		'owner_guid' => 0,
-		'order_by' => '',
-		'limit' => 9999,
-		)); 			
+	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
+	 
+	$currency_name = $socialcommerce->currency_name ? $socialcommerce->currency_name : 'American Dollar';
+	$currency_country = $socialcommerce->currency_country ? $socialcommerce->currency_country : 'USA';
+	$currency_code = $socialcommerce->currency_code ? : 'USD';
+	$exchange_rate = $socialcommerce->exchange_rate ? $socialcommerce->exchange_rate : 1;
+	$currency_token = $socialcommerce->currency_token ? $socialcommerce->currency_token	: '$';
+	$token_location = $socialcommerce->token_location ? $socialcommerce->token_location	: 'left';
+	$decimal_token = $socialcommerce->decimal_token ? $socialcommerce->decimal_token	: 2;
+	$default = $socialcommerce->set_default ? $socialcommerce->set_default	: 1;		//	default exchange rate...
 		
-	if($currency_settings){
-		$body = elgg_view('modules/currency/list_settings',array('entity'=>$currency_settings));
-	}else{
-		$body = '<div style="text-align:center;padding:5px 0 10px 0;"><B>'.elgg_echo('add:default:currency').'</B></div>';
-		$body .= elgg_view('modules/currency/settings_form',array('status'=>'default'));
-	}
-	$action = $CONFIG->url.'action/socialcommerce/manage_socialcommerce';
-	$load_action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/currency_settings";
-	
-	if($ajax){
-		echo $body;
-	}else{
-?>
-		<script>
-			function save_currency_settings(){
-				var guid = $('[name=guid]');
-				var m_action = $('#manage_action');
-				var c_name = $('[name=currency_name]');
-				var c_country = $('[name=currency_country]');
-				var c_code = $('[name=currency_code]');
-				var e_rate = $('[name=exchange_rate]');
-				var c_token = $('[name=currency_token]');
-				var t_location = $('[name=token_location]');
-				var d_token = $('[name=decimal_token]');
-				var set_def = $('[name=set_default]');
-				var elgg_token = $('[name=__elgg_token]');
-				var elgg_ts = $('[name=__elgg_ts]');
-				if(guid.val() > 0){
-					guid = guid.val();
-				}else{
-					guid = 0;
-				}
-				if($.trim(c_name.val()) == ""){
-					alert('Please enter a currency name.');
-					c_name.focus();
-					return false;
-				}
-				
-				if($.trim(c_country.val()) == ""){
-					alert('Please enter a currency Country.');
-					c_country.focus();
-					return false;
-				}
-				
-				if($.trim(c_code.val()) == ""){
-					alert('Please enter a currency code.');
-					c_code.focus();
-					return false;
-				}
-				
-				if($.trim(e_rate.val()) == ""){
-					alert('Please enter an exchange rate for this currency.');
-					e_rate.focus();
-					return false;
-				}else{
-					var regex = /^((\d+(\.\d*)?)|((\d*\.)?\d+))$/;
-					if(!regex.test(e_rate.val())){
-						alert("Please enter a valid exchange rate. The exchange rate must be a decimal number.");
-						e_rate.focus();
-						return false;
-					}	
-				}
-				
-				if($.trim(c_token.val()) == ""){
-					alert('Please enter a currency Sign.');
-					c_token.focus();
-					return false;
-				}
-				
-				if($.trim(t_location.val()) == ""){
-					alert('Please enter the Sign Location.');
-					t_location.focus();
-					return false;
-				}
-				
-				if($.trim(d_token.val()) == ""){
-					alert('Please enter the Decimal Places.');
-					d_token.focus();
-					return false;
-				}else{
-					var regex = /^\d+$/;
-					if(!regex.test(d_token.val())){
-						alert('Please enter a vlid Decimal Places. The Decimal Places must be a number.');
-						d_token.focus();
-						return false;
-					}
-				}
-				
-				$.post("<?php echo $action; ?>", {
-					guid: guid,
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					c_name: c_name.val(),
-					manage_action: m_action.val(),
-					c_country: c_country.val(),
-					c_code: c_code.val(),
-					e_rate: e_rate.val(),
-					c_token: c_token.val(),
-					t_location: t_location.val(),
-					d_token: d_token.val(),
-					set_def: set_def.val(),
-					__elgg_token: elgg_token.val(),
-					__elgg_ts: elgg_ts.val()
-				},
-				function(data){
-					if(data > 0){
-						$("#currency_settings").load("<?php echo $load_action; ?>", { 
-							u_id: <?php echo $_SESSION['user']->guid; ?>,
-							todo:'currency_settings'
-						});
-					}else{
-						alert(data);
-					}
-				});
-			}
-			function add_currency(){
-				$("#currency_settings").load("<?php echo $load_action; ?>", { 
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					todo:'settings_form'
-				});
-			}
-			function cancel_currency_settings(){
-				$("#currency_settings").load("<?php echo $load_action; ?>", { 
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					todo:'currency_settings'
-				});
-			}
-			function edit_currency(c_guid){
-				$("#currency_settings").load("<?php echo $load_action; ?>", { 
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					c_id: c_guid,
-					todo:'edit_settings'
-				});
-			}
-			function delete_currency(c_guid){
-				var elgg_token = $('[name=__elgg_token]');
-				var elgg_ts = $('[name=__elgg_ts]');
-				$.post("<?php echo $action; ?>", {
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					c_id: c_guid,
-					__elgg_token: elgg_token.val(),
-					__elgg_ts: elgg_ts.val(),
-					manage_action:'delete_currency'
-				},
-				function(data){
-					if(data > 0){
-						$("#currency_settings").load("<?php echo $load_action; ?>", { 
-							u_id: <?php echo $_SESSION['user']->guid; ?>,
-							todo:'currency_settings'
-						});
-					}else{
-						alert(data);
-					}
-				});
-			}
-			function set_default_currency(c_guid){
-				var elgg_token = $('[name=__elgg_token]');
-				var elgg_ts = $('[name=__elgg_ts]');
-				$.post("<?php echo $action; ?>", {
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					c_id: c_guid,
-					__elgg_token: elgg_token.val(),
-					__elgg_ts: elgg_ts.val(),
-					manage_action:'set_default_currency'
-				},
-				function(data){
-					if(data > 0){
-						$("#currency_settings").load("<?php echo $load_action; ?>", { 
-							u_id: <?php echo $_SESSION['user']->guid; ?>,
-							todo:'currency_settings'
-						});
-					}else{
-						alert(data);
-					}
-				});
-			}
-			function get_exchange_rate(){
-				var c_code = 'USD';
-				var e_rate = $('[name=exchange_rate]');
-				var elgg_token = $('[name=__elgg_token]');
-				var elgg_ts = $('[name=__elgg_ts]');
-				$("#run_exchange_rate").css("display","block");
-				$.post("<?php echo $action; ?>", {
-					u_id: <?php echo $_SESSION['user']->guid; ?>,
-					c_code: c_code,
-					__elgg_token: elgg_token.val(),
-					__elgg_ts: elgg_ts.val(),
-					manage_action:'get_exchange_rate'
-				},
-				function(data){
-					$("#run_exchange_rate").css("display","none");
-					if(data >= 0){
-						e_rate.val(data);
-					}else{
-						alert(data);
-					}
-				});
-			}
-		</script>
-		<div id="currency_settings" class="currency_settings basic">
-			<?php echo $body; ?>
-		</div>
-		<div>
-			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/dollars.png" alt="" />
-		</div>
-<?php
+	foreach ($CONFIG->country as $country){
+		$countries[$country['iso3']] = $country['name'] ;
 	}
 ?>
+	<br />
+	<div>
+		<h2><?php echo elgg_echo('add:default:currency'); ?>:</h2>
+	</div>
+<div>
+	<div>
+		<label for="currency_name"><h3><?php echo elgg_echo('currency:name'); ?>:</h3></label>
+			<?php echo elgg_view('input/text', array(
+					'name' => 'params[currency_name]',
+					'id' => 'currency_name',
+					'value' => $currency_name,
+					'class' => 'elgg-input-text',
+					'internalname'=>'currency_name',
+					));
+			?>
+	</div><br />
+	<div>
+		<label for="currency_country"><h3><?php echo elgg_echo('currency:country'); ?>:</h3></label>
+		<?php echo elgg_view('input/dropdown', array(
+				'name' => 'f5',
+				'id' => 'f5',
+				'value' => $currency_country,
+				'options_values' => $countries,
+				'style' => array(
+					'border: 1px solid #CCCCCC;',
+					'border-radius: 5px 5px 5px 5px;',
+					'color: #666666;',
+					'font: 120% Arial,Helvetica,sans-serif;',
+					'margin: 0;',
+					'padding: 5px;',),
+				));
+		?>
+	</div><br />
+	<div>
+		<label for="currency_code"><h3><?php echo elgg_echo('currency:code'); ?>:</h3></label>
+		<?php echo elgg_view('input/text', array(
+				'name' => 'params[currency_code]',
+				'id' => 'currency_code',
+				'value' => $currency_code,
+				'class' => 'elgg-input-text',
+				'internalname'=>'currency_code',
+				));
+		?>
+	</div><br />
+	<div>
+		<label for="exchange_rate"><h3><?php echo elgg_echo('exchange:rate'); ?>:</h3></label>
+		<?php echo elgg_view('input/text', array(
+				'name' => 'params[exchange_rate]',
+				'id' => 'exchange_rate',
+				'value' => $exchange_rate,
+				'class' => 'elgg-input-text',
+				'internalname'=>'exchange_rate',
+				));
+		?>
+	</div><br />
+	<div class="buttonwrapper" >
+		<a onclick="get_exchange_rate();" class="squarebutton"><?php echo '     '.elgg_echo('get:exchange:rate'); ?></a>
+		<span><img id="run_exchange_rate" style="display:none;" src="<?php echo $CONFIG->url."mod/socialcommerce"; ?>/images/working.gif"> </span>
+	</div><br />
+	<div>
+		<label for="currency_token"><h3><?php echo elgg_echo('currency:token'); ?>:</h3></label>
+		<?php echo elgg_view('input/text', array(
+				'name' => 'params[currency_token]',
+				'id' => 'currency_token',
+				'value' => $currency_token,
+				'class' => 'elgg-input-text',
+				'internalname'=>'currency_token',
+				));
+		?>
+	</div><br />
+	<div>
+		<label for="token_location"><h3><?php echo elgg_echo('token:location'); ?>:</h3></label>
+		<?php echo elgg_view('input/radio', array(
+				'name' => 'params[token_location]',
+				'id' => 'token_location',
+				'value' => $token_location,
+				'options' => array(elgg_echo('left') => 'left', elgg_echo('right') => 'right'),
+				'class' => 'horizontal',
+				));
+		?>
+	</div><br />
+	<div>
+		<label for="decimal_token"><h3><?php echo elgg_echo('decimal:token'); ?>:</h3></label>
+		<?php echo elgg_view('input/text', array(
+				'name' => 'params[decimal_token]',
+				'id' => 'decimal_token',
+				'value' => $decimal_token,
+				'class' => 'elgg-input-text',
+				'internalname'=>'decimal_token',
+				));
+		?>
+	</div><br />
+	<div>
+		<?php echo elgg_view('input/hidden', array('internalname' => 'set_default', 'value' => $default )); ?>
+	</div>
+	<div>
+		<?php if($default == 0 || $status != 'default'){ ?>
+			<div class="buttonwrapper">
+				<a onclick="cancel_currency_settings();" class="squarebutton"><span> <?php echo elgg_echo('stores:cancel'); ?> </span></a>
+			</div>
+		<?php } ?>
+	</div>
+	<div>
+		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/dollars.png" alt="" style="float:right"; />
+	</div>
