@@ -71,6 +71,10 @@
 					$_SESSION['CHECKOUT']['checkout_method'] = get_input('checkout_method');
 					break;
 				case 3:
+					$_SESSION['CHECKOUT']['confirm_shipping_method'] = 1;	
+					$_SESSION['CHECKOUT']['shipping_method'] = get_input('shipping_method');
+					break;
+				case 4:
 					$checkout_confirm = 1;
 					$redirect = check_checkout_form();
 					break;
@@ -84,11 +88,15 @@
 	if($_SESSION['CHECKOUT']['confirm_billing_address'] == 1){
 		$billing_address_modify = "<span id='checkout_modify_0' class='checkout_modify' onclick='change_modified(0);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 	}
-
 	//--------- Checkout Methods Details ----------//
 	$checkout_method_details = elgg_view("socialcommerce/list_checkout_methods");
 	if($_SESSION['CHECKOUT']['confirm_checkout_method'] == 1){
 		$checkout_method_modify = "<span id='checkout_modify_1' class='checkout_modify' onclick='change_modified(1);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
+	}
+	//--------- Shipping Methods Details ----------//
+	$shipping_method_details = elgg_view("socialcommerce/list_shipping_methods");
+	if($_SESSION['CHECKOUT']['confirm_shipping_method'] == 1){
+		$shipping_method_modify = "<span id='checkout_modify_2' class='checkout_modify' onclick='change_modified(2);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 	}
 	//--------- Order Confirmation ----------//	
 		if(isset($_SESSION['CHECKOUT']['checkout_method']) && $_SESSION['CHECKOUT']['checkout_method'] != ""){
@@ -121,6 +129,7 @@ EOF;
 		$coupon_applied = elgg_echo('coupon:applied');
 		$checkout_billing_details = elgg_echo('checkout:billing:details');
 		$checkout_checkout_method = elgg_echo('checkout:checkout:method');
+		$checkout_shipping_method = elgg_echo('checkout:shipping:method');
 		$checkout_order_confirm = elgg_echo('checkout:order:confirm');
 		
 		$content = <<<EOF
@@ -273,7 +282,22 @@ EOF;
 							<div class="clear"></div>
 						</div>
 					</div>
-					
+					<h3>
+						<a>
+							<span class="list1b_icon"></span>
+							<B>{$checkout_shipping_method}</B>
+							{$shipping_method_modify}
+						</a>
+					</h3>
+					<div class="ui_content">
+						<div class="content">
+							<div id="checkout_methods">
+								{$shipping_method_details}
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
 					<h3>
 						<a>
 							<span class="list1b_icon"></span>
