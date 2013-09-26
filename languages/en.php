@@ -559,7 +559,7 @@
 			 'not:select:withdraw:method' => "You should select any one of <B>Fund Withdraw Method</B>",
 			 
 			 'currencies' => "Currencies",
-			 'add:default:currency' => "Add Default Currency Details",
+			 'add:default:currency' => "Default Currency Settings",
 			 'currency:details' => "Currency Details",
 			 'currency:name' => "Currency Name",
 			 'currency:country' => "Currency Country",
