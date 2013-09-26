@@ -85,9 +85,9 @@ if($checkout_confirm)
 	$disabled = 'disabled';
 else 
 	$disabled = '';
-
+	
 if($_SESSION['CHECKOUT']['allow_shipping'] == 1){
-	$display_shipping_price = get_price_with_currency($_SESSION['CHECKOUT']['shipping_price']);
+	$display_shipping_price = $_SESSION['CHECKOUT']['shipping_price'];
 	$checkout_shipping_text = elgg_echo('checkout:shipping');
 	$shipping_details = <<<EOF
 		<tr>
@@ -135,8 +135,8 @@ echo $cart_body = <<<EOF
 			</table>
 		</div>
 		{$coupon_applay}
-		<input {$disabled} class="submit_button" type="submit" name="order_confirm" value="{$checkout_confirm_btn}">
-		<input type="hidden" name="checkout_order" value="2">
+		<input {$disabled} class="elgg-button elgg-button-submit" type="submit" name="order_confirm" value="{$checkout_confirm_btn}">
+		<input type="hidden" name="checkout_order" value="3">
 	</form>
 EOF;
 ?>
