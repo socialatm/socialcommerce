@@ -35,7 +35,7 @@
 		}
 		$category_label = elgg_echo('category');
 		if(!empty($category_lists)){
-			$category = elgg_view('input/pulldown', array('internalname' => 'storescategory', 
+			$category = elgg_view('input/dropdown', array('internalname' => 'storescategory', 
 													  'value' => "$category", 
 													  'options_values' => $options_values));
 		}else{
