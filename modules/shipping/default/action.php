@@ -46,21 +46,12 @@
 		}
 	}
 	
-	function price_calc_default($products){
-		$shipping_settings = elgg_get_entities_from_metadata(array(
-			'shipping_method' => 'default',
-			'type_subtype_pairs' => array('object' => 's_shipping'),
-			'owner_guid' => 0,
-			'limit' => 1,
-			));  	
-			
-		if($shipping_settings){
-			$shipping_settings = $shipping_settings[0];
-			$shipping_per_item = $shipping_settings->shipping_per_item;
-		}
+	function price_calc_default( $products ){
+	
+		$shipping_per_item = elgg_get_plugin_setting('shipping_per_item', 'socialcommerce');
 		$shipping_price = array();
-		foreach($products as $product_guid=>$product){
-			if($product->type == 1)
+		foreach($products as $product_guid => $product ){
+			if($product->type != 2)
 				$shipping_price[$product_guid] = $shipping_per_item * $product->quantity;
 		}
 		return $shipping_price;
