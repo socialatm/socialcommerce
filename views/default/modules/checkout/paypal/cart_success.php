@@ -10,8 +10,7 @@
 	 **/ 
 	
 	gatekeeper();
-	// Get objects
-	
+		
 		if(isset($_SESSION['CHECKOUT'])){
 			$method = $_SESSION['CHECKOUT']['checkout_method'];
 			$function = 'makepayment_'.$method;
