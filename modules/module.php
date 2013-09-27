@@ -1018,23 +1018,13 @@ function get_price_with_currency( $price ){
 }
 
 function get_currency_name(){
-	global $CONFIG;
-
-	$default_currency = elgg_get_entities_from_metadata(array(
-		'metadata_name' => 'set_default',
-		'metadata_value' => 1,
-		'type' => 'object',
-		'subtype' => 's_currency',
-		'owner_guid' => 0, 
-		'limit' =>'1'
-		));
-		
-	if($default_currency){
-		$default_currency = $default_currency[0];
-		return $default_currency->currency_name;
-	}else{
-		return $CONFIG->default_currency_name;
+	
+	if(!$default_currency = elgg_get_plugin_from_id('socialcommerce')) {
+		register_error(elgg_echo("default:currency:fail"));						
+		FORWARD();																//	@todo - forward to where? by default it's the website homepage...
 	}
+
+	return $default_currency->currency_name;
 }
 
 function sc_set_default_currency_to_global(){
