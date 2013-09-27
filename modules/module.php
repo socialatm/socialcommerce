@@ -37,7 +37,6 @@ function register_socialcommerce_settings(){
 function SetGeneralValuesInConfig(){
 
 	global $CONFIG;
-	sc_set_default_currency_to_global();
 	
 	if(elgg_is_logged_in()){
 		$carts = elgg_get_entities(array(
@@ -1025,28 +1024,6 @@ function get_currency_name(){
 	}
 
 	return $default_currency->currency_name;
-}
-
-function sc_set_default_currency_to_global(){
-	global $CONFIG;
-
-	$default_currency = elgg_get_entities_from_metadata(array(
-		'metadata_name' => 'set_default',
-		'metadata_value' => 1,
-		'type' => 'object',
-		'subtype' => 's_currency',
-		'owner_guid' => 0, 
-		'limit' =>'1'
-		));
-		
-	if($default_currency){
-		$default_currency = $default_currency[0];
-		$CONFIG->default_currency_name = $default_currency->currency_name;
-		$currency_token = $default_currency->currency_token;
-		$CONFIG->default_currency_sign = htmlentities($currency_token, ENT_QUOTES, "UTF-8");
-		$CONFIG->default_currency_location = $default_currency->token_location;
-		$CONFIG->default_currency_decimal_token = $default_currency->decimal_token;
-	}
 }
 
 function validate_currency( $c_code = "", $amount = 0, $method = "" ){

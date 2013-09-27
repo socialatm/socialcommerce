@@ -9,20 +9,14 @@
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
-	// load socialcommerce model
- 	require(get_config('pluginspath').'socialcommerce/modules/module.php');
+	/*****	Social Commerce plugin initialization functions.	*****/
 	
-	// Set Config Values	
-		
-	if(!get_config('default_currency_name')) {
-		set_config('default_currency_name', 'US Dollar');				//	@todo - these should be plugin settings anyway
-	}
-	
-		/*****	Social Commerce plugin initialization functions.	*****/
 	function socialcommerce_init() {
 	    
 	    // Load system configuration
-			global $CONFIG;
+		global $CONFIG;
+		// load socialcommerce model
+		require(get_config('pluginspath').'socialcommerce/modules/module.php');
 		
 		// make products show up in seach results
 		elgg_register_entity_type( 'object', 'stores' );
