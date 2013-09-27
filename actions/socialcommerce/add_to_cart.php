@@ -8,14 +8,14 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	 
 	
-	// Get variables
-	$quantity = get_input("cartquantity") ? get_input("cartquantity") : 1;
+	$quantity = (get_input("cartquantity")) ? get_input("cartquantity") : 1;
 	$product_guid = get_input("product_guid");
 	$container_guid = (int) get_input('customer_guid') ? (int) get_input('customer_guid') : elgg_get_logged_in_user_entity()->guid ;
 	$product = get_entity($product_guid);
 	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
-	if($product_type_details->addto_cart != 1){			//	@todo - trow an error message here...	
+	if($product_type_details->addto_cart != 1){			//	@todo - throw an error message here...	
 		forward($product->getURL());
 	}
 	
