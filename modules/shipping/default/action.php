@@ -24,14 +24,10 @@
 
 		echo __FILE__ .' at '.__LINE__; die();
 		
-	
-		$settings = elgg_get_entities_from_metadata(array(
-			'shipping_method' => 'default',
-			'type_subtype_pairs' => array('object' => 's_shipping'),
-			'owner_guid' => 0,
-			'limit' => 1,
-			));  	
+		$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
 		
+	//	@todo - not yet implemented...
+				
 		if($settings){
 			$settings = $settings[0];
 			$display_name = trim($settings->display_name);

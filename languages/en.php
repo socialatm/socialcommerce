@@ -280,7 +280,6 @@
 		 	'item:object:rating' => "Rated Products",
 		 	'item:object:s_checkout' => "Checkout Methods",
 		 	'item:object:s_currency' => "Currency Methods",
-		 	'item:object:s_shipping' => "Shipping Methods",
 		 	'item:object:s_withdraw' => "Withdrawal Methods",
 			'item:object:addtax_country'=>'Country Tax',
 			'item:object:addtax_common'=>'Common Tax',

@@ -93,7 +93,7 @@ function sc_get_product_type_from_value($value) {
 }
 
 function sc_register_subtypes(){
-	$subtypes = array('stores','cart','cart_item','address','order','order_item','transaction', 's_checkout','s_shipping','s_withdraw','s_currency', 'sc_category');
+	$subtypes = array('stores','cart','cart_item','address','order','order_item','transaction', 's_checkout', 's_withdraw','s_currency', 'sc_category');
 	foreach ($subtypes as $subtype){
 		add_subtype('object',$subtype);
 	}
