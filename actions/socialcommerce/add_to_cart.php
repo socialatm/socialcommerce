@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	
 	$quantity = (get_input("cartquantity")) ? get_input("cartquantity") : 1;
 	$product_guid = get_input("product_guid");
 	$container_guid = (int) get_input('customer_guid') ? (int) get_input('customer_guid') : elgg_get_logged_in_user_entity()->guid ;
