@@ -353,6 +353,7 @@
 			'denied:sendfailed' =>'Sorry; we could not denied this request ! plaese try again ',
 			'wth_request:status:desc' =>'Sorry; You do not have sent any request so far!',
 			'settings:save:error' =>'Social Commerce Settings were not saved. Please try again!',
+			'default:currency:fail' => 'Unable to load Default Currency',
 					
 		/**
 		 * category
