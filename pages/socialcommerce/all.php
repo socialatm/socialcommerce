@@ -12,11 +12,10 @@
 	$page_owner = elgg_get_logged_in_user_entity();
 	$title = elgg_view_title(elgg_echo('stores:all:products'));
 		
-	// Get objects
 	elgg_set_context('search');
 		
 	$search_viewtype = get_input('search_viewtype');
-	$limit = $search_viewtype == 'gallery' ? 20 : 10;
+	$limit = ($search_viewtype == 'gallery') ? 20 : 10;
 	$view = get_input('view');
 	
 		if (elgg_is_admin_logged_in()) {
@@ -48,8 +47,8 @@
 								'status' => 1,
 								'type_subtype_pairs' => array('object' => 'stores'),
 								'limit' => $limit,
-								));					
-								
+								));	
+
 			if(empty($content)){ $content = elgg_echo('product:null');}
 		}
 		if($view != 'rss'){
