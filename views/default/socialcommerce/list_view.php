@@ -24,6 +24,7 @@
 	$search_viewtype = get_input('search_viewtype');
 	$mime = $stores->mimetype;
 	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
+	
 	if($stores->product_type_id == 1){
 		if($stores->quantity > 0){
 			$quantity = $stores->quantity;
@@ -33,17 +34,20 @@
 		$quantity = "<span><B>{$quantity_text}:</B> {$quantity}</span>";
 	}
 	
-	$info = "<p> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></p>";
-	$info .= "<p class=\"owner_timestamp\">
-		<a href=\"{$owner->getURL()}\">{$owner->name}</a> {$friendlytime}";
-		$numcomments = $stores->countComments();
-		if ($numcomments)
-			$info .= ", <a href=\"{$stores->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
-	$info .= "</p>";
+	$info = '<p><a href="'.$stores->getURL().'"><b>'.$title.'</b></a></p>';
+	$info .= '<p class="owner_timestamp">
+		<a href="'.$owner->getURL().'">'.$owner->name.'</a> '.$friendlytime;
+	
+	$numcomments = $stores->countComments();
+		if ($numcomments) {
+			$info .= ', <a href="'.$stores->getURL().'">'.sprintf(elgg_echo("comments")).' ('.$numcomments.')</a></p>';
+		}
+	
 	$tags_out =  elgg_view('output/tags',array('value' => $tags));
 	$product_type_out =  elgg_view('output/product_type',array('value' => $stores->product_type_id));
 	$category_out =  elgg_view('output/category',array('value' => $stores->category));
 	$display_price = get_price_with_currency($stores->price);
+	
 	$info .= <<<EOF
 		<div style="margin:5px 0;">
 			<span style="width:115px;"><B>{$price_text}:</B> {$display_price}</span>
@@ -67,22 +71,25 @@
 		</table>
 EOF;
 
-	$cart_url = addcartURL($stores);
+
+	$cart_url = elgg_add_action_tokens_to_url(addcartURL($stores)).'&product_guid='.$product_guid;
 	$cart_text = elgg_echo('add:to:cart');
 	$wishlist_text = elgg_echo('add:wishlist');
+	
 	if($stores->status == 1){
 		if($stores->owner_guid != $_SESSION['user']->guid && $product_type_details->addto_cart == 1){
-			$wishlist_action = $CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
-			$cart_wishlist = <<<EOF
+			$wishlist_action = elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid);
+
+			$cart_wishlist = '
 				<div class="cart_wishlist">
-					<a title="{$cart_text}" class="cart" href="{$cart_url}">Add To Cart</a>
+					<a title="'.$cart_text.'" class="cart" href="'.$cart_url.'">Add To Cart</a>
 				</div>
 				<div class="cart_wishlist">
-					<a class="wishlist" href="{$wishlist_action}">{$wishlist_text}</a>
-				</div>
-EOF;
+					<a class="wishlist" href="'.$wishlist_action.'">'.$wishlist_text.'</a>
+				</div>';
 		}
 	}
+	
 	$info .= <<<EOF
 		<div class="storesqua_stores">
 			<table style="width:100%;">
