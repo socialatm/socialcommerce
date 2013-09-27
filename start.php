@@ -426,34 +426,6 @@
 		return	get_config('url').'action/socialcommerce/add_to_cart/';
 	}
 	
-	function elgg_addcart($entity){		//	@todo - this function does not get called from anywhere...
-		global $CONFIG;
-		
-		if ($entity->guid > 0 && (elgg_is_logged_in())) {
-			$form_body = elgg_view('input/hidden', array('internalname' => 'stores_guid', 'value' => $entity->getGUID()));
-			$form_body .= "<input type='image' src=\"{$CONFIG->url}mod/socialcommerce/images/shopping_cart_btn.jpg\">";//elgg_view('input/submit', array('value' => elgg_echo("add:to:cart")));
-			if($entity->product_type_id == 1){
-				$label = "<div style=\"float:left;margin-bottom:5px;\"><label>".elgg_echo("enter:quantity").": </label></div>
-				<div style=\"clear:both;float:left;width:300px;\"><div style=\"float:left;\"><p>" . elgg_view('input/text',array('internalname' => 'cartquantity')) . "</p></div><div style=\"float:left;padding-left:20px;\">{$form_body}</div></div>";
-			}elseif ($entity->product_type_id == 2){
-				$label = $form_body;
-			}
-			
-			$hidden_values = elgg_view('input/securitytoken');
-			$form_body = <<<EOT
-            	<form action="{$CONFIG->url}action/socialcommerce/addcart" method="post">
-            		<div class="add_to_cart_form">
-            			<div style="float:left;width:310px;">
-            				{$label}
-            			</div>
-            			<div style="clear:both;"></div>
-            		</div>
-            	</form>
-EOT;
-			return $form_body;
-		}
-	}
-	
 	/**
 	 * Update an item of metadata for stores.
 	 *
