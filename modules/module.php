@@ -108,7 +108,7 @@ function sc_get_product_type_from_value($value) {
 }
 
 function sc_register_subtypes(){
-	$subtypes = array('stores','cart','cart_item','address','order','order_item','transaction','splugin_settings','s_checkout','s_shipping','s_withdraw','s_currency', 'sc_category');
+	$subtypes = array('stores','cart','cart_item','address','order','order_item','transaction', 's_checkout','s_shipping','s_withdraw','s_currency', 'sc_category');
 	foreach ($subtypes as $subtype){
 		add_subtype('object',$subtype);
 	}
@@ -1001,35 +1001,20 @@ function load_currency_actions() {
 	}
 }
 
-function get_price_with_currency($price){
-	global $CONFIG;
-	
-	$default_currency = elgg_get_entities_from_metadata(array(
-		'metadata_name' => 'set_default',
-		'metadata_value' => 1,
-		'type' => 'object',
-		'subtype' => 's_currency',
-		'owner_guid' => 0, 
-		'limit' =>'1'
-		));
-		
-	if($default_currency){
-		$default_currency = $default_currency[0];
-		$currency_token = $default_currency->currency_token;
-		$currency_token = htmlentities($currency_token, ENT_QUOTES, "UTF-8");
-		$token_location = $default_currency->token_location;
-		$decimal_token = $default_currency->decimal_token;
-		$price = number_format(round($price,$decimal_token),$decimal_token,'.','');
-		
-		if($token_location == 'left')
-			return $currency_token.' '.$price;
-		elseif ($token_location == 'right')
-			return $price.' '.$currency_token;
-		else 
-			return $currency_token.' '.$price;
-	}else{
-		return $CONFIG->default_price_sign.' '.$price;
+function get_price_with_currency( $price ){		
+
+	if(!$default_currency = elgg_get_plugin_from_id('socialcommerce')) {
+		register_error(elgg_echo("default:currency:fail"));						
+		FORWARD();																//	@todo - forward to where? by default it's the website homepage...
 	}
+	
+	$currency_token = htmlentities($default_currency->currency_token, ENT_QUOTES, "UTF-8");
+	$token_location = $default_currency->token_location;
+	$decimal_token =  $default_currency->decimal_token;
+	$price = number_format(round($price, $decimal_token), $decimal_token,'.','');
+	$return = ($token_location == 'left') ? $currency_token.' '.$price : $price.' '.$currency_token;
+		
+	return $return;
 }
 
 function get_currency_name(){
