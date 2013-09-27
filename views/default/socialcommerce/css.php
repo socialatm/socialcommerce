@@ -341,11 +341,6 @@ p.storesrepo_owner {
 	padding-left:20px;
 	font-weight:bold;
 }
-.product_cart_btn .cart{
-	/*background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/Cart_add.png) no-repeat left top;*/
-	padding-left:20px;
-	font-weight:bold;
-}
 .cart_wishlist .wishlist{
 	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/add_wishlist.gif) no-repeat left top;
 }
@@ -928,18 +923,6 @@ unit-rating a.r1-unit{left: 0px;}
 }
 .field_results{
 	padding:0 3px 3px 10px;
-}
-
-.product_cart_btn .input_img {
-	border:0;
-	padding:0;
-	margin:0;
-
-}
-.product_cart_btn .input-text {
-	margin-left:10px;
-	padding:2px;
-	width:50px;
 }
 
 .field_list_table {

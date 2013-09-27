@@ -60,6 +60,6 @@
 		}
 	}
 ?>
-<div class="product_cart_btn">
+<div>
 	<?php echo $body; ?>
 </div>
