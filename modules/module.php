@@ -9,25 +9,11 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-/*****************************************************************
-	add these to $CONFIG
-	@todo - http://us1.php.net/manual/en/function.define.php
-******************************************************************/
 function register_socialcommerce_settings(){
-	
-	
-	$pluginspath = get_config('pluginspath');
-	$site_guid = get_config('site_guid'); 
-	
-	if(!get_config('checkout_path')) {
-		set_config('checkout_path' , $pluginspath.'socialcommerce/modules/checkout/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG, or CONSTANTS
-	}
-	if(!get_config('shipping_path')) {
-	set_config('shipping_path' , $pluginspath.'socialcommerce/modules/shipping/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
-	}
-	if(!get_config('currency_path')) {
-	set_config('currency_path' , $pluginspath.'socialcommerce/modules/currency/', $site_guid);	//	@todo - these should be plugin settings instead of $CONFIG
-	}
+
+	define("CHECKOUT_PATH", get_config('pluginspath').'socialcommerce/modules/checkout/');
+	define("SHIPPING_PATH", get_config('pluginspath').'socialcommerce/modules/shipping/');
+	define("CURRENCY_PATH", get_config('pluginspath').'socialcommerce/modules/currency/');
 	
 	load_module_languages();
 	SetGeneralValuesInConfig();
@@ -283,12 +269,11 @@ function load_module_configs(){
 **********************************************************************/
 
 function load_module_languages(){
-	global $CONFIG;
 	//---- load languages from checkout methods -----//
 	$checkout_lists = get_checkout_list();
 	if($checkout_lists){
 		foreach ($checkout_lists as $checkout_list){
-			register_translations(get_config('checkout_path').$checkout_list.'/languages/');
+			register_translations(CHECKOUT_PATH.$checkout_list.'/languages/');
 		}
 	}
 	
@@ -296,7 +281,7 @@ function load_module_languages(){
 	$shipping_lists = get_shipping_list();
 	if($shipping_lists){
 		foreach ($shipping_lists as $shipping_list){
-			register_translations(get_config('shipping_path').$shipping_list.'/languages/');
+			register_translations(SHIPPING_PATH.$shipping_list.'/languages/');
 		}
 	}
 
@@ -304,7 +289,7 @@ function load_module_languages(){
 	$currency_lists = get_currency_list();
 	if($currency_lists){
 		foreach ($currency_lists as $currency_list){
-			register_translations(get_config('currency_path').$currency_list . '/languages/');
+			register_translations(CURRENCY_PATH.$currency_list . '/languages/');
 		}
 	}
 }
@@ -320,8 +305,8 @@ function sc_get_checkout_methods(){
 	if ($checkout_lists) {
 		$checkout_methods = array();
 		foreach ($checkout_lists as $checkout_list){
-			if (file_exists(get_config('checkout_path').$checkout_list.'/method.xml')) {
-				$xml = xml_to_object(file_get_contents(get_config('checkout_path').$checkout_list.'/method.xml'));
+			if (file_exists(CHECKOUT_PATH.$checkout_list.'/method.xml')) {
+				$xml = xml_to_object(file_get_contents(CHECKOUT_PATH.$checkout_list.'/method.xml'));
 				if ($xml){
 					$elements = array();
 					if($xml->children){
@@ -345,19 +330,18 @@ function sc_get_checkout_methods(){
 
 function get_checkout_list(){
 	$checkouts = array();
-	$checkouts = array_diff(scandir(get_config('checkout_path')), array('..', '.'));
-	$checkouts = count($checkouts) > 0 ? $checkouts : false ;
+	$checkouts = array_diff(scandir(CHECKOUT_PATH), array('..', '.'));
+	$checkouts = (count($checkouts) > 0) ? $checkouts : false ;
 	return $checkouts;
 }
 
 function load_checkout_actions(){
-	global $CONFIG;
 	$checkout_lists = get_checkout_list();
 	if ($checkout_lists) {
 		$checkout_methods = array();
 		foreach ($checkout_lists as $checkout_list){
-			if (file_exists($CONFIG->checkout_path.$checkout_list.'/action.php')) {
-				include_once($CONFIG->checkout_path.$checkout_list."/action.php");
+			if (file_exists(CHECKOUT_PATH.$checkout_list.'/action.php')) {
+				require_once(CHECKOUT_PATH.$checkout_list."/action.php");
 			}else{
 				throw new PluginException(sprintf(elgg_echo('misconfigured:checkout:method'), $checkout_list));
 			}
@@ -366,10 +350,9 @@ function load_checkout_actions(){
 }
 
 function check_checkout_form(){
-	global $CONFIG;
-	if(is_dir($CONFIG->checkout_path.$_SESSION['CHECKOUT']['checkout_method'])){
-		if (file_exists($CONFIG->checkout_path.$_SESSION['CHECKOUT']['checkout_method'].'/action.php')) {
-			include_once($CONFIG->checkout_path.$_SESSION['CHECKOUT']['checkout_method']."/action.php");
+	if(is_dir(CHECKOUT_PATH.$_SESSION['CHECKOUT']['checkout_method'])){
+		if (file_exists(CHECKOUT_PATH.$_SESSION['CHECKOUT']['checkout_method'].'/action.php')) {
+			require_once(CHECKOUT_PATH.$_SESSION['CHECKOUT']['checkout_method']."/action.php");
 			$function = 'checkout_payment_settings_'.$_SESSION['CHECKOUT']['checkout_method'];
 			if(function_exists($function)){
 				return $function();
@@ -393,8 +376,8 @@ function sc_get_shipping_methods(){
 	if ($shipping_lists) {
 		$shipping_methods = array();
 		foreach ($shipping_lists as $shipping_list){
-			if (file_exists(get_config('shipping_path').$shipping_list.'/method.xml')) {
-				$xml = xml_to_object(file_get_contents(get_config('shipping_path').$shipping_list.'/method.xml'));
+			if (file_exists(SHIPPING_PATH.$shipping_list.'/method.xml')) {
+				$xml = xml_to_object(file_get_contents(SHIPPING_PATH.$shipping_list.'/method.xml'));
 				if ($xml){
 					$elements = array();
 					if($xml->children){
@@ -418,19 +401,18 @@ function sc_get_shipping_methods(){
 
 function get_shipping_list(){
 	$shippings = array();
-	$shippings = array_diff(scandir(get_config('shipping_path')), array('..', '.'));
+	$shippings = array_diff(scandir(SHIPPING_PATH), array('..', '.'));
 	$shippings = count($shippings) > 0 ? $shippings : false ;
 	return $shippings;
 }
 
 function load_shipping_actions(){
-	global $CONFIG;
 	$shipping_lists = get_shipping_list();
 	if ($shipping_lists) {
 		$shipping_methods = array();
 		foreach ($shipping_lists as $shipping_list){
-			if (file_exists($CONFIG->shipping_path.$shipping_list.'/action.php')) {
-				include_once($CONFIG->shipping_path.$shipping_list."/action.php");
+			if (file_exists(SHIPPING_PATH.$shipping_list.'/action.php')) {
+				require_once(SHIPPING_PATH.$shipping_list."/action.php");
 			}else{
 				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:method'), $shipping_list));
 			}
@@ -439,10 +421,12 @@ function load_shipping_actions(){
 }
 
 function check_shipping_form(){
-	global $CONFIG;
-	if(is_dir($CONFIG->shipping_path.$_SESSION['SHIPPING']['shipping_method'])){
-		if (file_exists($CONFIG->shipping_path.$_SESSION['SHIPPING']['shipping_method'].'/action.php')) {
-			include_once($CONFIG->shipping_path.$_SESSION['SHIPPING']['shipping_method']."/action.php");
+
+echo __FILE__ .' at '.__LINE__; die();	//	@todo - need to error check this function
+
+	if(is_dir(SHIPPING_PATH.$_SESSION['SHIPPING']['shipping_method'])){
+		if (file_exists(SHIPPING_PATH.$_SESSION['SHIPPING']['shipping_method'].'/action.php')) {
+			require_once(SHIPPING_PATH.$_SESSION['SHIPPING']['shipping_method']."/action.php");
 			$function = 'verify_shipping_settings_'.$_SESSION['SHIPPING']['shipping_method'];
 			if(function_exists($function)){
 				return $function();
@@ -980,7 +964,7 @@ function create_withdraw_transaction($amount,$receiver_email){
 /*****	currency	*****/
 
 function get_currency_list(){
-	$currencies = array_diff(scandir(get_config('currency_path')), array('..', '.'));
+	$currencies = array_diff(scandir(CURRENCY_PATH), array('..', '.'));
 	if($currencies){
 		return $currencies;
 	}else{
@@ -990,10 +974,9 @@ function get_currency_list(){
 
 function load_currency_actions() {
 	$currency_lists = get_currency_list();
-	
 	if ($currency_lists) {
 		foreach ($currency_lists as $currency_list){
-			if(!require_once(get_config('currency_path').$currency_list.'/action.php')){
+			if(!require_once(CURRENCY_PATH.$currency_list.'/action.php')){
 				throw new PluginException(sprintf(elgg_echo('misconfigured:currency:method'), $currency_list));
 			}
 		}
