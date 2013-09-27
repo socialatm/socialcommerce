@@ -34,15 +34,11 @@
 			<form onsubmit='return shipping_method_validation();' name='shipping_method_selection' method='post' action='{$action}'>
 EOF;
 
-
-
-
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('checkout:select:shipping:method')));
 		
 		foreach ($selected_shipping_methods as $selected_shipping_method){
-		
-			if(file_exists($CONFIG->shipping_path.$selected_shipping_method.'/action.php')) {
-				require_once($CONFIG->shipping_path.$selected_shipping_method."/action.php");
+			if(file_exists(SHIPPING_PATH.$selected_shipping_method.'/action.php')) {
+				require_once(SHIPPING_PATH.$selected_shipping_method."/action.php");
 			}else{
 				throw new PluginException(sprintf(elgg_echo('misconfigured:shipping:method'), $selected_shipping_method));
 			}
@@ -78,10 +74,6 @@ EOF;
 		$display_shipping_price = get_price_with_currency( $shipping_price );
 		
 		$_SESSION['CHECKOUT']['shipping_price'] = $shipping_price;
-		
-		
-	
-		
 		
 		$method_display .= <<<EOF
 				<div style='padding:5px;'>
