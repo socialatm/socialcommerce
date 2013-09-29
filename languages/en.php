@@ -94,6 +94,13 @@
 			'stores:digital' => 'Digital',
 			'tax:country:settings:basedon' => 'Tax based On',
 			
+			/*****	checkout wizard	*****/
+			
+			'checkout:billing' => 'Billing',
+			'checkout:shipping' => 'Shipping',
+			'checkout:payment' => 'Payment',
+			'checkout:confirmation' => 'Confirmation',
+						
 			'most:popular:products' => "Most Popular products",
 			'latest:products' => "Latest products",
 			'stores:gallery_list' => "View",
