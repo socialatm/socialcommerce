@@ -8,7 +8,7 @@
 	* @copyright twentyfiveautumn.com 2013
 	* @link http://twentyfiveautumn.com/
 	**/ 
-	 
+	
 	global $CONFIG;
 	$ajax = $vars['ajax'];
 	$type = $vars['type'];
@@ -74,7 +74,7 @@
         $submit_input = elgg_echo('save');
 
         if (isset($vars['container_guid']))
-			$entity_hidden = "<input type=\"hidden\" name=\"container_guid\" value=\"{$vars['container_guid']}\" />";
+			$entity_hidden = '<input type="hidden" name="container_guid" value="'.$vars['container_guid'].'" />';
 		if (isset($vars['entity']))
 			$entity_hidden .= "<input type=\"hidden\" id=\"{$type}_address_guid\" name=\"address_guid\" value=\"{$vars['entity']->getGUID()}\" />";
 		$entity_hidden .= elgg_view('input/securitytoken');
@@ -257,7 +257,7 @@ EOF;
 					}
 					function find_state(type){
 						if(time_out)
-							clearTimeout(time_out);
+						clearTimeout(time_out);
 						time_out = setTimeout ("find_state_process('"+type+"')", 600 );
 					}
 				</script>
