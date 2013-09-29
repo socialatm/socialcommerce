@@ -32,7 +32,8 @@
 			
 		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null ) 	
 		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce.checkout.js', $location = 'footer', $priority = null );
-		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/jquery.steps.min.js', $location = 'footer', $priority = null ); 
+		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/jquery.steps.min.js', $location = 'footer', $priority = null );
+		elgg_register_js( 'jquery.easytabs.min', $CONFIG->url.'mod/socialcommerce/js/jquery.easytabs.min.js', $location = 'footer', $priority = null ); 
 		
 		//	register css
 		elgg_register_css( 'jquery.steps', $CONFIG->url.'mod/socialcommerce/views/default/socialcommerce/css/jquery.steps.css', $priority = null ); 		
