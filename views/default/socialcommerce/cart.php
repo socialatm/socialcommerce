@@ -105,7 +105,7 @@ EOF;
 		}
 	}
 	$update_cart = elgg_view("socialcommerce/forms/updatecart");
-	$confirm_cart_list = elgg_view("socialcommerce/forms/confirm_cart_list",array('not_allow'=>$not_allow));
+	$confirm_cart_list = elgg_view("socialcommerce/forms/confirm_cart_list", array('not_allow'=>$not_allow) );
 }else{
 	$display_cart_items = elgg_echo('cart:null');
 }
