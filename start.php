@@ -29,7 +29,14 @@
 					'href' => 'socialcommerce/' . $_SESSION['user']->username.'/all/products/',
 				));
 			}
-	
+			
+		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null ) 	
+		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce.checkout.js', $location = 'footer', $priority = null );
+		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/jquery.steps.min.js', $location = 'footer', $priority = null ); 
+		
+		//	register css
+		elgg_register_css( 'jquery.steps', $CONFIG->url.'mod/socialcommerce/views/default/socialcommerce/css/jquery.steps.css', $priority = null ); 		
+		
 		// extend CSS
 			elgg_extend_view("css", "socialcommerce/css");
 			
@@ -209,6 +216,8 @@
 				case "cateread":		set_input('guid',$page[2]);
 										require(dirname(dirname(dirname(__FILE__))) . '/pages/entities/index.php');
 										break;
+				case "checkout":		require($base_path.'checkout.php'); 
+									  	break;
 				case "checkout_address": require($base_path.'checkout_address.php'); 
 									  	break;
 				case "checkout_process": require($base_path.'checkout_process.php'); 
