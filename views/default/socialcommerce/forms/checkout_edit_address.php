@@ -331,7 +331,7 @@ EOF;
 							$entity_hidden
 							<div>
 								<div class="buttonwrapper" style="float:left;">
-									<a onclick="{$type}_save_address();" class="squarebutton"><span> {$submit_input} </span></a>
+									<a onclick="{$type}_save_address();" class="elgg-button elgg-button-submit">{$submit_input}</a>
 								</div>
 								{$cancel_btn}
 							</div>
