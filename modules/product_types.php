@@ -29,7 +29,7 @@
 								 
    		//--- Default fields for simple products ----//
 		$product_fields[1] = array (
-			'quantity' => array('field'=>'text','mandatory'=>1,'display'=>1 ),
+			'quantity' => array('field'=>'text','mandatory'=>1,'display'=>1 ),		// @todo - mandatory is a clunker 
 			'price'  => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 		);
 		//--- Default fields for digital products ----//
