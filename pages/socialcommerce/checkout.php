@@ -7,16 +7,7 @@ $content = <<<EOF
         <div class="content">
             <h1>Checkout</h1><br />
 
-            <script>
-                $(function ()
-                {
-                    $("#wizard").steps({
-                        headerTag: "h2",
-                        bodyTag: "section",
-                        transitionEffect: "fade"
-                    });
-                });
-            </script>
+            
 
             <div id="wizard">
                 <h2>First Step</h2>
@@ -67,7 +58,8 @@ $content = '<div class="contentWrapper stores">'.$content.'</div>';
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
 	elgg_load_css('jquery.steps');  	
-	elgg_load_js('jquery.steps.min');  
+	elgg_load_js('jquery.steps.min');
+	elgg_load_js('socialcommerce.checkout');
 	echo elgg_view_page(elgg_echo("checkout:process"), $body);
 	
 ?>
