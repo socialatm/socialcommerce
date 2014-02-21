@@ -5,55 +5,66 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
-	 
 	$product_category = get_input('stores_guid');
 	$search_viewtype = get_input('search_viewtype');
 	$limit = $search_viewtype == 'gallery' ? 20 : 10 ;
 	
 	$title = elgg_view_title(elgg_view('output/category', array('value' => $product_category, 'display'=>1 )));
 	
-	// Get objects
-		elgg_set_context('search');
+	elgg_set_context('search');
 		if (elgg_is_admin_logged_in()) {
-			$filter = get_input("filter");
-			if(!$filter)
-				$filter = "active";
-			switch($filter){
-				case "active":
-					$content = elgg_get_entities_from_metadata(array(
-								'meta_array' => array('status'=>1,'category'=>$product_category),
-								'type_subtype_pairs' => array('object' => 'stores'),
-								'owner_guid' => 0,
-								'limit' => $limit,
-								));
-				break;
+			$filter = get_input("filter")? get_input("filter") : "active" ;
+			switch ($filter){
 				case "deleted":
-					$content = elgg_get_entities_from_metadata(array(
-								'meta_array' => array('status'=>0,'category'=>$product_category),
-								'type_subtype_pairs' => array('object' => 'stores'),
-								'owner_guid' => 0,
-								'limit' => $limit,
-								));
+					$options = array(
+					'metadata_name_value_pairs' => array(
+						array('name' => 'status', 'operand' => '=', 'value' => 0 ),
+						array('name' => 'category', 'operand' => '=', 'value' => $product_category)
+					),
+					'metadata_name_value_pairs_operator' => 'AND',
+					'type_subtype_pairs' => array('object' => 'stores'),
+					);
+	
+					$content = elgg_list_entities_from_metadata($options);
 				break;
+				default:
+					$options = array(
+					'metadata_name_value_pairs' => array(
+						array('name' => 'status', 'operand' => '=', 'value' => 1 ),
+						array('name' => 'category', 'operand' => '=', 'value' => $product_category)
+						),
+					'metadata_name_value_pairs_operator' => 'AND',
+					'type_subtype_pairs' => array('object' => 'stores'),
+					);
+	
+					$content = elgg_list_entities_from_metadata($options);
+					$filter = "active";
 			}
+
 			if(empty($content)){
-				$content = '<div style="padding:10px;">'.elgg_echo('no:data').'</div>';	
+				$content = '<div>'.elgg_echo('no:data').'</div>';	
 			}
 			
 			$content = elgg_view("socialcommerce/product_tab_view",array('base_view' => $content, "filter" => $filter));
 		}else{
-			$content .= elgg_get_entities_from_metadata(array(
-								'meta_array' => array('status'=>1,'category'=>$product_category),
-								'type_subtype_pairs' => array('object' => 'stores'),
-								'owner_guid' => 0,
-								'limit' => $limit,
-								));
+			
+			$options = array(
+			'metadata_name_value_pairs' => array(
+				array('name' => 'status', 'operand' => '=', 'value' => 1 ),
+				array('name' => 'category', 'operand' => '=', 'value' => $product_category)
+				),
+			'metadata_name_value_pairs_operator' => 'AND',
+			'type_subtype_pairs' => array('object' => 'stores'),
+			);
+	
+	$content = elgg_list_entities_from_metadata($options);
+
 			if(empty($content)){
 				$content = '<div style="padding:10px;">'.elgg_echo('no:data').'</div>';	
 			}
