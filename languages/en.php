@@ -267,9 +267,8 @@
 			'settings:send:mail:on:outofstock:desc' => 'Yes',
 			'settings:send:mail:on:outofstock:help' => 'If enabled, out of stock emails are sent to the store owner when the product stock goes below the base stock quantity.',
 			
-		/*
-		Set up checkout url 
-		*/
+		/*****	Set up checkout url	*****/
+		
 			'settings:https:for:checkout' => 'Set https for checkout',
 			'settings:https:yes' => 'Yes',
 			'settings:https:help' => 'If it is set, the checkout process continue with the url https.',
@@ -443,9 +442,8 @@
 		 	'product:validation:null' => "Please Enter the following mandatory filelds \n %s.",
 		 	'order:addfailed' => "Sorry, We could not copleate process in this time, ",
 		 	
-		 /**
-		 * Address
-		 */ 	
+		 /*****	Address	*****/ 	
+		 
 		 	'stores:address' => "Your Address Details",
 		 	'confirm:address' => "Confirm Address",
 		 	'edit:address' => "Edit This Address",
@@ -480,9 +478,7 @@
 			'address:deletefailed' => "Sorry we could not be deleted this address.",
 			'delete:confirm:address' => "Are you sure that you want to delete this address?",
 			
-		/*
-		 *	Settings
-		 */
+		/*****	Settings	*****/
 		 
 			 'general:settings:tab' => "General",
 			 'payment:methods:tab' => "Payment",
@@ -503,7 +499,9 @@
 			 'cart:item:name' => "Product Purchase",
 			 'checkout:back:text' => "Go To Home",
 			 'billing:address:exist' => " I want to use an existing billing address",
-			 'billing:address:new' => " I want to use a new billing address",
+			 'billing:address:current' => " Current Billing Address",
+			 'billing:address:new' => "New Billing Address",
+			 'address:book' => "Address Book",
 			 'billing:address' => "Bill To This Address",
 			 'shipping:address:exist' => " I want to use an existing shipping address",
 			 'shipping:address:new' => " I want to use a new shipping address",
