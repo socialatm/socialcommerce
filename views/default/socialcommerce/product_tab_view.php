@@ -20,12 +20,10 @@
 		$separator .= "?";
 	}
 ?>
-<div class="bookraiser_profile">
 	<div id="elgg_horizontal_tabbed_nav">
-		<ul>
-			<li <?php if($filter == "active") echo "class='selected'"; ?>><a href="<?php echo $url.$separator; ?>filter=active"><?php echo elgg_echo('active:products'); ?></a></li>
-			<li <?php if($filter == "deleted") echo "class='selected'"; ?>><a href="<?php echo $url.$separator; ?>filter=deleted"><?php echo elgg_echo('deleted:products'); ?></a></li>
+		<ul class="elgg-menu elgg-menu-filter elgg-menu-hz elgg-menu-filter-default">
+			<li <?php if($filter == "active") echo "class='elgg-state-selected'"; ?>><a href="<?php echo $url.$separator; ?>filter=active"><?php echo elgg_echo('active:products'); ?></a></li>
+			<li <?php if($filter == "deleted") echo "class='elgg-state-selected'"; ?>><a href="<?php echo $url.$separator; ?>filter=deleted"><?php echo elgg_echo('deleted:products'); ?></a></li>
 		</ul>
 	</div>
 	<?php echo $base_view; ?>
-</div>
