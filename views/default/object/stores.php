@@ -5,17 +5,20 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
+	$context = elgg_get_context();
 	
-	if (elgg_get_context() == "search") { 	// Start search listing version @todo - switch statement here maybe?
-		echo elgg_view("socialcommerce/short_view", $vars );
-	}elseif (elgg_get_context() == "cartadd") {
-		echo elgg_view("socialcommerce/cart_mainview", $vars );
-	}else {
-		echo elgg_view("socialcommerce/mainview", $vars );
+	switch ($context) {
+    case "search":
+        echo elgg_view("socialcommerce/short_view", $vars );
+        break;
+    case "cartadd":
+        echo elgg_view("socialcommerce/cart_mainview", $vars );
+        break;
+    default:
+       echo elgg_view("socialcommerce/mainview", $vars );
 	}
 ?>
