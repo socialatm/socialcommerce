@@ -91,7 +91,6 @@
 			'subject:null' => "Please Enter Subject",
 			'save:category' => 'Save Category',
 			'stores:physical' => 'Physical',
-			'stores:digital' => 'Digital',
 			'tax:country:settings:basedon' => 'Tax based On',
 			
 			/*****	checkout wizard	*****/
@@ -360,9 +359,8 @@
 			'settings:save:error' =>'Social Commerce Settings were not saved. Please try again!',
 			'default:currency:fail' => 'Unable to load Default Currency',
 					
-		/**
-		 * category
-		 */
+		/*****	category	*****/
+		 
          	'stores:category' => "Category",
          	'stores:addcategory' => "Add New Category",
          	'stores:editcategory' => "Edit Store Category",
