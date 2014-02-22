@@ -252,11 +252,7 @@
 										break;
 				case "product_cate":	require($base_path.'product_category.php');
 									  	break;
-				case "read":			if($page[2] > 0){
-											set_input('guid',$page[2]);
-											$product = get_entity($page[2]);
-										}
-										require(dirname(dirname(dirname(__FILE__))) . '/pages/entities/index.php');
+				case "read":			require($base_path.'product.php');
 										break;
 				case "search":			require(get_config('pluginspath').'socialcommerce/search.php'); 
 										break;
