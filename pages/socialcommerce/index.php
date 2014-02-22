@@ -41,7 +41,7 @@
 	
 	if($view != 'rss'){
 		$content = elgg_view("socialcommerce/product_tab_view",array('base_view' => $content, "filter" => $filter));
-		$content = $title.'<div class="contentWrapper stores">'.$content.'</div>';
+		$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	}
 	elgg_set_context('stores');
 	$sidebar .= elgg_view("socialcommerce/sidebar");
