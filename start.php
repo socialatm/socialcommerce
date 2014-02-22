@@ -234,6 +234,8 @@
 										break;	
 				case "edit":			require($base_path.'edit.php'); 	
 										break;
+				case "edit_category":	require($base_path.'add_category.php'); 
+										break;
 				case "friends":			require($base_path.'friends.php'); 	
 										break;
 				case "ipn":				makepayment_paypal();
@@ -815,6 +817,7 @@
 		elgg_register_action("socialcommerce/remove_cart", $action_path.'remove_cart.php');
 		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
+		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
 		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
 		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
 		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
