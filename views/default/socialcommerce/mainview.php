@@ -9,6 +9,9 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
+	 
+	echo (__FILE__);
+	 
 	$stores = $vars['entity'];
 	$product_guid = $stores->getGUID();
 	$tags = $stores->tags;
@@ -31,7 +34,6 @@
 	if(isset($_SESSION['related_product'])) { unset($_SESSION['related_product']); }
 ?>
 	<div class="storesrepo_stores">
-	<div class="storesrepo_title"><h2><a href="<?php echo $stores->getURL(); ?>"><?php echo $title; ?></a></h2></div>
 		<div class="storesrepo_icon full_view">
 <?php 
 	echo elgg_view("socialcommerce/image", array(
