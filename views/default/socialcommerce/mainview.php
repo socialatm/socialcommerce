@@ -121,17 +121,12 @@
 			if($stores->status == 1){
 				if($product_type_details->addto_cart == 1) { 
 ?>
-							<div class="storesrepo_controls">
-								<div class="cart_wishlist">
-										<a class="wishlist" href="<?php echo $CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
-								</div>
-								<div style="clear:both;"></div>
-							</div>
+							
 	<!-- start new wishlist	-->						
 							<div class="storesrepo_controls">
 								<div class="cart_wishlist">
-									<p>New Wishlist form goes here</p>
-									<?php echo elgg_view_form('products/add_wishlist'); ?>
+									<?php $body_vars = array('product_guid' => $stores->guid); ?>
+									<?php echo elgg_view_form('products/add_wishlist', $form_vars, $body_vars); ?>
 								</div>
 								<div style="clear:both;"></div>
 							</div>
