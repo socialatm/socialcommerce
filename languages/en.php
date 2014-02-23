@@ -340,9 +340,9 @@
 			'wth_request:pending:desc' => 'Your Withdrawal request has been pending..',
 			'approval:saved' =>'You have successfully apporvod your request',
 			'denied:saved' =>'You have successfully denied your request',
-		/**
-		 * Error messages
-		 */
+		
+		/*****	Error messages	*****/
+		
 		 	'stores:uploadfailed' => "Sorry; we could not save your product.",
 		 	'stores:deletefailed' => "Your product could not be deleted at this time.",
 		 	'cart:quantity:less' => "Sorry; %s have limitted stock only.",
@@ -355,6 +355,7 @@
 			'wth_request:status:desc' =>'Sorry; You do not have sent any request so far!',
 			'settings:save:error' =>'Social Commerce Settings were not saved. Please try again!',
 			'default:currency:fail' => 'Unable to load Default Currency',
+			'product:edit:fail' => 'Unable to Edit Product',
 					
 		/*****	category	*****/
 		 
