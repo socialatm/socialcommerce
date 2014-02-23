@@ -93,7 +93,6 @@
 				</div>
 						
 <?php
-
 				/*****	start edit & delete buttons	*****/
 		
 					if(can_edit_entity( $product_guid, $customer_guid )){
@@ -119,37 +118,33 @@
 					}		//	end if(can_edit_entity( $product_guid, $customer_guid )){
 				
 				
-				/*****	if you don't own it we'll show you the wishlist and add to cart links	*****/
+	/*****	if you don't own it we'll show you the wishlist and add to cart links	*****/
 				
-				if($customer_guid != $owner_guid){
-				
-					if($stores->status == 1){
-?>	
-						<div class="storesrepo_controls">
-							<?php if($product_type_details->addto_cart == 1) { ?>
-							
-							
-							<?php echo __FILE__ .' at '.__LINE__; ?>
-							
-							
+		if($customer_guid != $owner_guid){
+			if($stores->status == 1){
+				if($product_type_details->addto_cart == 1) { 
+?>
+							<div class="storesrepo_controls">
 								<div class="cart_wishlist">
 										<a class="wishlist" href="<?php echo $CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
 								</div>
-							<?php } ?>
-							<div style="clear:both;"></div>	
-						</div>
-<?php	
-					}
-				
-?>
+								<div style="clear:both;"></div>
+							</div>
+
 				<!-- Cart Button -->
 				<?php echo elgg_view("socialcommerce/socialcommerce_cart", array('entity'=>$stores, 'product_type_details'=>$product_type_details, 'phase'=>1) ); ?>
 			</div>
 		</div>
 		<div class="clear"></div>
 		
-		<!--	end wishlist/add to cart links	-->
-<?php }	?>		
+			
+<?php 
+				}	//	end if($product_type_details->addto_cart == 1)
+			}	//	end if($stores->status == 1)
+		}					/*****	end if($customer_guid != $owner_guid)	*****/
+
+	/*****	End if you don't own it we'll show you the wishlist and add to cart links	*****/
+?>		
 		
 		<table width="100%">
 			<tr>
