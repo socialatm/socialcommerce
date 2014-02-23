@@ -36,11 +36,11 @@
 	<div class="storesrepo_stores">
 		<div class="storesrepo_icon full_view">
 <?php 
-	echo elgg_view("socialcommerce/image", array(
+			echo elgg_view("socialcommerce/image", array(
 				'entity' => $vars['entity'],
 				'size' => 'large',
 				'display' => 'image'
-				));
+			));
 ?>	
 		</div>
 		
@@ -53,16 +53,12 @@
 					//get the user and a link to their gallery
 					$user_gallery = get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
 ?>
-				<div class="storesrepo_owner">
-					<?php
-						echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'tiny'));
-					?>
-					<p class="storesrepo_owner_details"><b><a href="<?php echo $owner->getURL(); ?>"><?php echo $owner->name; ?></a></b><br />
-					<small><?php echo $friendlytime; ?></small></p>
-				</div>
+					<?php echo elgg_view_entity($owner, array('full_view' => false)); ?>
+					<small><?php echo $friendlytime; ?></small>
 			</div>
+			
 			<div class="storesrepo_maincontent">
-				<?PHP if($price > 0){?>
+				<?php if($price > 0){?>
 					<div class="product_odd"><B><?php echo elgg_echo("Price");?></B></div>
 					<div class="field_results s_price"><B><?php echo get_price_with_currency($price); ?></B></div>
 				<?php }
@@ -99,9 +95,6 @@
 						<div class="storesrepo_controls">
 <?php
 							if($stores->status == 1){ ; } 	//	@todo - why is this here ??
-?>
-								
-<?php
 							if($_SESSION['user']->guid != $stores->owner_guid && $stores->status == 1 && $product_type_details->addto_cart == 1){
 ?>
 								<div class="cart_wishlist">
@@ -110,37 +103,27 @@
 							<?php } ?>
 							<div class="clear"></div>
 						</div>	
+						
 <?php
-							if(elgg_is_admin_logged_in() or $_SESSION['user']->guid == $stores->owner_guid){
+					if(can_edit_entity( $product_guid, $customer_guid )){
 ?>
-								<div class="storesrepo_controls">
-<?php
-								 if($stores->status == 1){ 
-?>
-									<div class="edit_btn" style="float:left;">
-										<a href="<?php echo $vars['url']; ?>socialcommerce/product/edit/<?php echo $stores->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>
-									</div>
+						<div class="storesrepo_controls">
+							<div class="edit_btn" style="float:left;">
+								<a href="<?php echo $vars['url']; ?>socialcommerce/product/edit/<?php echo $stores->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>
+							</div>
 									
-									<div class="delete_btn" style="float:left;padding-left:10px;">
-										<?php 
-											echo elgg_view('output/confirmlink',array(
-												'href' => $vars['url'] . "action/socialcommerce/delete?stores=" . $stores->getGUID(),
-												'text' => elgg_echo("delete"),
-												'confirm' => elgg_echo("stores:delete:confirm"),
-											));  
-										?>
-									</div>
-							<?PHP } else { ?>
-									<div class="retrieve_btn" style="float:left;">
-										<a href="<?php echo $vars['url']; ?>action/socialcommerce/retrieve?stores_guid=<?php echo $stores->getGUID(); ?>&__elgg_token=<?php echo generate_action_token($ts); ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo('retrieve'); ?></a>&nbsp; 
-									</div>
-						<?php 
-								}
-						?>
-								<div style="clear:both;"></div>
+								<div class="delete_btn" style="float:left;padding-left:10px;">
+									<?php 
+										echo elgg_view('output/confirmlink',array(
+											'href' => $vars['url'] . "action/socialcommerce/delete?stores=" . $stores->getGUID(),
+											'text' => elgg_echo("delete"),
+											'confirm' => elgg_echo("stores:delete:confirm"),
+										));  
+									?>
 								</div>
-						<?php
-							}
+						</div>
+<?php
+					}		//	end if(can_edit_entity( $product_guid, $customer_guid )){
 				}else{
 					if($stores->status == 1){
 ?>	
