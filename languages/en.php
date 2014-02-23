@@ -146,7 +146,6 @@
 			'no:data' => "No Data Found",
 			'not:activate' => "This product is not activated now",
 			'not:available' => "This product is not available for now",
-			'retrieve' => "Retrieve",
 			'stores:list' => "List",
 			'stores:gallery' => "Gallery",
 			'order:more' => "More Details",
@@ -332,7 +331,6 @@
 		 */
 			'stores:saved' => "Your product was successfully saved.",
 			'stores:deleted' => "Your Product was successfully deleted.",
-			'stores:retrieved' => "Your Product was successfully retrieved.",
 			'order:status:changed' => "You are successfully changed the status.",
 			'wishlist:added' => "You are successfully added this product in your wishlist.",
 			'wishlist:already:added' => "You are already added this product in your wishlist.",
@@ -347,7 +345,6 @@
 		 */
 		 	'stores:uploadfailed' => "Sorry; we could not save your product.",
 		 	'stores:deletefailed' => "Your product could not be deleted at this time.",
-		 	'stores:retrievefailed' => "Your product could not be retrieved at this time.",
 		 	'cart:quantity:less' => "Sorry; %s have limitted stock only.",
 		 	'order:status:change:error' => "Sorry; we could not change the status.",
 		 	'wishlist:added:failed' => "Sorry; we could not added this product in your wishlist.",
