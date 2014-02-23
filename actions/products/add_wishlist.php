@@ -9,13 +9,12 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
-	global $CONFIG;
 	if (!elgg_is_logged_in()) {
 		system_message(elgg_echo("add:wishlist:not:login"));
 		$_SESSION['last_forward_from'] = current_page_url();
 		forward();
 	}else {
-		$product_guid = (int) get_input('pgid');
+		$product_guid = (int) get_input('product_guid');
 		if($product_guid > 0){
 			$product = get_entity($product_guid);
 			$product_type_details = sc_get_product_type_from_value($product->product_type_id);
