@@ -91,10 +91,9 @@
 					</span>
 				</div>
 <?php
-				if ($stores->canEdit()) {?>
+				if ($stores->canEdit()) { ?>
 						<div class="storesrepo_controls">
 <?php
-							if($stores->status == 1){ ; } 	//	@todo - why is this here ??
 							if($_SESSION['user']->guid != $stores->owner_guid && $stores->status == 1 && $product_type_details->addto_cart == 1){
 ?>
 								<div class="cart_wishlist">
@@ -175,8 +174,7 @@
 	if(elgg_is_logged_in() && $vars['entity']->owner_guid == $_SESSION['user']->guid){
 		echo elgg_view("socialcommerce/order_view",array('entity'=>$vars['entity']));
 	}
-?>
-<?php
+
 	if ($vars['full']) {
 		echo elgg_view_comments($stores);
 	}
