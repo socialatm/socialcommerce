@@ -44,10 +44,7 @@
 			));
 ?>	
 		</div>
-		
-		<form method="post" action="<?php echo addcartURL($stores); ?>">
-		<?php echo elgg_view('input/hidden', array('internalname' => 'product_guid', 'value' => $product_guid)); ?>
-		<?php echo elgg_view('input/hidden', array('internalname' => 'customer_guid', 'value' => $customer_guid )); ?>
+
 		<div class="right_section_contents">
 			<div class="storesrepo_title_owner_wrapper">
 <?php
@@ -130,9 +127,23 @@
 								</div>
 								<div style="clear:both;"></div>
 							</div>
-
-				<!-- Cart Button -->
+	<!-- start new wishlist	-->						
+							<div class="storesrepo_controls">
+								<div class="cart_wishlist">
+									<p>New Wishlist form goes here</p>
+									<?php echo elgg_view_form('products/add_wishlist'); ?>
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+	<!-- end new wishlist	-->	
+				<!-- Add to Cart Form -->
+				
+				<form method="post" action="<?php echo addcartURL($stores); ?>">
+				<?php echo elgg_view('input/hidden', array('internalname' => 'product_guid', 'value' => $product_guid)); ?>
+				<?php echo elgg_view('input/hidden', array('internalname' => 'customer_guid', 'value' => $customer_guid )); ?>
 				<?php echo elgg_view("socialcommerce/socialcommerce_cart", array('entity'=>$stores, 'product_type_details'=>$product_type_details, 'phase'=>1) ); ?>
+				<?php echo elgg_view('input/securitytoken'); ?>
+				</form>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -169,8 +180,6 @@
 				</td>
 		</tr>
 		</table>
-		<?php echo elgg_view('input/securitytoken'); ?>
-		</form>
 	</div>
 	
 <?php
