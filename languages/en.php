@@ -326,15 +326,15 @@
 	        'tax:countrytax:add:fail'=> 'Error in this action',
 	        'tax:commontax:add:success'=> 'Tax rate is added successfully',
 	        'tax:commontax:add:fail' =>  'Error in this action',
-		/**
-		 * Status messages
-		 */
+			
+		/*****	Status messages	*****/
+		
 			'stores:saved' => "Your product was successfully saved.",
 			'stores:deleted' => "Your Product was successfully deleted.",
 			'order:status:changed' => "You are successfully changed the status.",
 			'wishlist:added' => "You are successfully added this product in your wishlist.",
-			'wishlist:already:added' => "You are already added this product in your wishlist.",
-			'wishlist:deleted' => "You are successfully deleted %s from your wishlist.",
+			'wishlist:already:added' => "You have already added this product to your wishlist.",
+			'wishlist:deleted' => "You have successfully deleted %s from your wishlist.",
 			'product:already:added:to:cart' => "You have already added this product.",
 			'request:saved' =>'Your request was successfully sent to site owner,The site owner will approve later',
 			'wth_request:pending:desc' => 'Your Withdrawal request has been pending..',
