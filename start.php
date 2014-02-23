@@ -819,7 +819,8 @@
 		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
 		elgg_register_action("socialcommerce/add_order", $action_path.'add_order.php');
 		elgg_register_action("socialcommerce/change_order_status", $action_path.'change_order_status.php');
-		elgg_register_action("socialcommerce/add_wishlist", $action_path.'add_wishlist.php');
+		elgg_register_action("socialcommerce/add_wishlist", $action_path.'add_wishlist.php');	// remove once the new add wishlist form is working
+		elgg_register_action("products/add_wishlist", $action_path.'products/add_wishlist.php');
 		elgg_register_action("socialcommerce/remove_wishlist", $action_path.'remove_wishlist.php');
 		elgg_register_action("socialcommerce/download", $action_path.'download.php');
 		elgg_register_action("socialcommerce/contry_tax", $action_path.'contry_tax.php');
