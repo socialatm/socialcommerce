@@ -579,11 +579,6 @@ unit-rating a.r1-unit{left: 0px;}
 	padding-left:20px;
 	font-weight:bold;
 }
-.retrieve_btn a{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/retrieve.gif) no-repeat left top;
-	padding-left:20px;
-	font-weight:bold;
-}
 .more_btn a{
 	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/more.gif) no-repeat right 4px;
 	padding-right:15px;
