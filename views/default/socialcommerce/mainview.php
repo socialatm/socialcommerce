@@ -23,6 +23,7 @@
 	$customer_guid = $customer->guid;
 	$quantity = $stores->quantity;
 	$owner = $vars['entity']->getOwnerEntity();
+	$owner_guid = $owner->guid;
 	$friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
 	$quantity_text = elgg_echo('quantity');
 	$price_text = elgg_echo('price');
@@ -90,20 +91,11 @@
 						<?php echo elgg_view('output/tags',array('value' => $tags)); ?>
 					</span>
 				</div>
-<?php
-				if ($stores->canEdit()) { ?>
-						<div class="storesrepo_controls">
-<?php
-							if($_SESSION['user']->guid != $stores->owner_guid && $stores->status == 1 && $product_type_details->addto_cart == 1){
-?>
-								<div class="cart_wishlist">
-									<a class="wishlist" href="<?php echo $CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
-								</div>
-							<?php } ?>
-							<div class="clear"></div>
-						</div>	
 						
 <?php
+
+				/*****	start edit & delete buttons	*****/
+		
 					if(can_edit_entity( $product_guid, $customer_guid )){
 ?>
 						<div class="storesrepo_controls">
@@ -122,12 +114,24 @@
 								</div>
 						</div>
 <?php
+				/*****	end edit & delete buttons	*****/
+				
 					}		//	end if(can_edit_entity( $product_guid, $customer_guid )){
-				}else{
+				
+				
+				/*****	if you don't own it we'll show you the wishlist and add to cart links	*****/
+				
+				if($customer_guid != $owner_guid){
+				
 					if($stores->status == 1){
 ?>	
 						<div class="storesrepo_controls">
 							<?php if($product_type_details->addto_cart == 1) { ?>
+							
+							
+							<?php echo __FILE__ .' at '.__LINE__; ?>
+							
+							
 								<div class="cart_wishlist">
 										<a class="wishlist" href="<?php echo $CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid."&__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";  ?>"><?php echo elgg_echo('add:wishlist');?></a>
 								</div>
@@ -136,13 +140,17 @@
 						</div>
 <?php	
 					}
-				}
+				
 ?>
 				<!-- Cart Button -->
 				<?php echo elgg_view("socialcommerce/socialcommerce_cart", array('entity'=>$stores, 'product_type_details'=>$product_type_details, 'phase'=>1) ); ?>
 			</div>
 		</div>
 		<div class="clear"></div>
+		
+		<!--	end wishlist/add to cart links	-->
+<?php }	?>		
+		
 		<table width="100%">
 			<tr>
 				<td>
