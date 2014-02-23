@@ -822,7 +822,6 @@
 		elgg_register_action("socialcommerce/add_wishlist", $action_path.'add_wishlist.php');
 		elgg_register_action("socialcommerce/remove_wishlist", $action_path.'remove_wishlist.php');
 		elgg_register_action("socialcommerce/download", $action_path.'download.php');
-		elgg_register_action("socialcommerce/retrieve", $action_path.'retrieve.php');
 		elgg_register_action("socialcommerce/contry_tax", $action_path.'contry_tax.php');
 		elgg_register_action("socialcommerce/addcommon_tax", $action_path.'addcommon_tax.php');
 		elgg_register_action("socialcommerce/addcountry_tax", $action_path.'addcountry_tax.php');
