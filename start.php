@@ -223,6 +223,8 @@
 									  	break;
 				case "checkout_process": require($base_path.'checkout_process.php'); 
 									  	break;
+				case "checkout_process_new": require($base_path.'checkout_process_new.php'); 
+									  	break;
 				case "confirm":			require($base_path.'cart_confirm.php');
 										break;						
 				case "country_state":	require($base_path.'manage_country_state.php'); 	
@@ -814,6 +816,7 @@
 		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
 		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
+		elgg_register_action("address/address", $action_path.'address/address.php');
 		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
 		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
 		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
