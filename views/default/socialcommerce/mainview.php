@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	 
 	echo (__FILE__);
 	 
 	$stores = $vars['entity'];
@@ -18,7 +17,6 @@
 	$title = $stores->title;
 	$desc = $stores->description;
 	$price = $stores->price;
-	$ts = time();
 	$customer = elgg_get_logged_in_user_entity();
 	$customer_guid = $customer->guid;
 	$quantity = $stores->quantity;
