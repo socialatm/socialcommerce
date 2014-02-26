@@ -459,11 +459,11 @@
 			'state:none' => "Please enter the State",
 			'country' => "Country",
 			'country:none' => "Please enter the Country",
-			'pincode' => "PIN/ZIP",
+			'pincode' => "Zip Code",
 			'pincode:none' => "Please enter the PIN/ZIP",
 			'mob:no' => "Mobile No",
 			'mob:no:none' => "Please enter the Mobile No",
-			'phone:no' => "Phone No",
+			'phone:no' => "Phone",
 			'change:address' => "Change Address",
 			'address:saved' => "Address was successfully added.",
 			'address:addfailed' => "Sorry; We could not be added this address in this time.",
@@ -473,6 +473,7 @@
 			'address:deleted' => "Address was successfully deleted",
 			'address:deletefailed' => "Sorry we could not be deleted this address.",
 			'delete:confirm:address' => "Are you sure that you want to delete this address?",
+			'save:address' => "Save Address",
 			
 		/*****	Settings	*****/
 		 
