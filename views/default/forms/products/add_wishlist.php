@@ -22,7 +22,7 @@
 		'name' => 'submit_add_wishlist',
 		'id' => 'submit_add_wishlist',
 		'value' => elgg_echo('add:wishlist'),
-		'class' => 'elgg-button elgg-button-submit',
+		'class' => 'elgg-button-action',
 		'internalname'=>'last_name',
 		));
 ?>
