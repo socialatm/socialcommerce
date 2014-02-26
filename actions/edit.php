@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg product - edit action
+	 * Elgg product - edit product action
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -8,6 +8,8 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	 
+	 echo __FILE__ .' at '.__LINE__; // die();
 
 	global $CONFIG;
 	$CONFIG->pluginlistcache = null;
