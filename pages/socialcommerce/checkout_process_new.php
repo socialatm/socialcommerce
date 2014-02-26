@@ -96,19 +96,19 @@
 		$billing_address_modify = "<span id='checkout_modify_0' class='checkout_modify' onclick='change_modified(0);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 	}
 	//--------- Checkout Methods Details ----------//
-	$checkout_method_details = elgg_view("socialcommerce/list_checkout_methods");
+	$checkout_method_details = elgg_view("socialcommerce/list_checkout_methods_new");
 	if($_SESSION['CHECKOUT']['confirm_checkout_method'] == 1){
 		$checkout_method_modify = "<span id='checkout_modify_1' class='checkout_modify' onclick='change_modified(1);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 	}
 	//--------- Shipping Methods Details ----------//
-	$shipping_method_details = elgg_view("socialcommerce/list_shipping_methods");
+	$shipping_method_details = elgg_view("socialcommerce/list_shipping_methods_new");
 	if($_SESSION['CHECKOUT']['confirm_shipping_method'] == 1){
 		$shipping_method_modify = "<span id='checkout_modify_2' class='checkout_modify' onclick='change_modified(2);'>".elgg_echo('checkout:modify')."</span><span style='clear:both'></span>";
 	}
 	//--------- Order Confirmation ----------//	
 		if(isset($_SESSION['CHECKOUT']['checkout_method']) && $_SESSION['CHECKOUT']['checkout_method'] != ""){
 			$checkout_plugin = $_SESSION['CHECKOUT']['checkout_method'];
-			$order_confirmation_details = elgg_view("socialcommerce/cart_confirm_list",array('checkout_confirm'=>$checkout_confirm));
+			$order_confirmation_details = elgg_view("socialcommerce/cart_confirm_list_new",array('checkout_confirm'=>$checkout_confirm));
 			$checkout_checkout_confirm = elgg_echo('checkout:checkout:confirm');
 			if($checkout_confirm){
 				$check_out_details = <<<EOF
