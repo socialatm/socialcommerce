@@ -9,6 +9,8 @@
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
+	echo(__FILE__);
+	
 	if (isset($vars['entity'])) {
 		$action = 'socialcommerce/edit/';
 		$title = $vars['entity']->title;
