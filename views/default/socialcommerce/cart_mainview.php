@@ -9,6 +9,8 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
+	echo (__FILE__);
+	 
 	global $CONFIG;
 	
 	$stores = $vars['entity'];
