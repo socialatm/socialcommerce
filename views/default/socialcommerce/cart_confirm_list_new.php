@@ -79,7 +79,7 @@ EOF;
 $cencelurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cancel/";
 $returnurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart_success/";
 $ipnurl = $CONFIG->url."action/socialcommerce/makepayment?page_owner=".elgg_get_page_owner_guid();
-$redirectlurl = $CONFIG->url."socialcommerce/{$_SESSION['user']->username}/checkout_process/";
+$redirectlurl = $CONFIG->url."socialcommerce/{$_SESSION['user']->username}/checkout_process_new/";
 
 if($checkout_confirm)
 	$disabled = 'disabled';
