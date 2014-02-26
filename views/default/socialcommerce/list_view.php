@@ -31,8 +31,12 @@
 		}else{
 			$quantity = 0;
 		}
-		$quantity = "<span><B>{$quantity_text}:</B> {$quantity}</span>";
+	//	$quantity = "<span><B>{$quantity_text}:</B>{$quantity}</span>";
+		
+		$quantity = '<span><B>'.$quantity_text.':</B>'.$quantity.'</span>';
 	}
+	
+//	$quantity = '<span><B>'.$quantity_text.':</B>'.$quantity.'</span>';
 	
 	$info = '<p><a href="'.$stores->getURL().'"><b>'.$title.'</b></a></p>';
 	$info .= '<p class="owner_timestamp">
@@ -48,28 +52,34 @@
 	$category_out =  elgg_view('output/category',array('value' => $stores->category));
 	$display_price = get_price_with_currency($stores->price);
 	
-	$info .= <<<EOF
-		<div style="margin:5px 0;">
-			<span style="width:115px;"><B>{$price_text}:</B> {$display_price}</span>
-			<span>&nbsp;</span>
-			{$quantity}
+	
+
+/*****	new	*****/
+
+	$info .= 
+		'<div style="margin:5px 0;">
+			<span style="width:115px;"><B>'.$price_text.':</B>'.$display_price.'</span>
+			<span>&nbsp;</span>'.
+			$quantity.'
 		</div>
 		<table style="margin-top:3px;width:100%;">
 			<tr>
 				<td style="width:300px;" class="tag_td">
-					<div class="object_tag_string">{$tags_out}</div>
+					<div class="object_tag_string">'.$tags_out.'</div>
 				</td>
 				<td>
-					<div style="float:left;">
-						{$product_type_out}
+					<div style="float:left;">'.
+						$product_type_out.'
 					</div>
-					<div style="float:left;">
-						{$category_out}
+					<div style="float:left;">'.
+						$category_out.'
 					</div>
 				</td>
 			</tr>
-		</table>
-EOF;
+		</table>';
+
+
+/*****	end new	*****/
 
 
 	$cart_url = elgg_add_action_tokens_to_url(addcartURL($stores)).'&product_guid='.$product_guid;
