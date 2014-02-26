@@ -51,15 +51,16 @@ echo '<b>'. __FILE__ .' at '.__LINE__.'</b>';
 					</div>
 					<div>
 						<input id="billing_address_new" name="billing_address_type" type="radio" value="add" onclick="toggle_address_type('billing','add');"/> {$new}
-						<div class="add_billing_address" style="display:none;">
-							{$address_add}
-						</div>
+						
 					</div>
 					<div>
 						{$submit_input}
 						<input type="hidden" id="checkout_order" name="checkout_order" value="0">
 					</div>
 				</form>
+				<div class="add_billing_address" style="display:none;">
+					{$address_add}
+				</div>
 			</div>
 EOF;
 	}else{
