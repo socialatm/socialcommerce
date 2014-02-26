@@ -150,7 +150,7 @@
 			'stores:gallery' => "Gallery",
 			'order:more' => "More Details",
 			'order:details' => "Order Details",
-			'checkout:billing:details' => 'Step 1: Billing Details',
+			'checkout:billing:details' => 'Step 1: Billing Address',
 			'checkout:shipping:details' => 'Step 2: Shipping Details',
 			'checkout:shipping:method' => 'Step 3: Select Shipping Method',
 			'checkout:checkout:method' => 'Step 2: Select Checkout Method',
