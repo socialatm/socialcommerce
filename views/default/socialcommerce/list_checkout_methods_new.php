@@ -9,14 +9,14 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	$settings = elgg_get_plugin_from_id('socialcommerce');	//	@todo - we can remove this if we remove the if($settings){ wrapper that is just below...
+	$settings = elgg_get_plugin_from_id('socialcommerce');
 	
 	if($settings){
 		$selected_checkout_methods = unserialize(elgg_get_plugin_setting('checkout_method', 'socialcommerce'));	
 		
 		if(!is_array($selected_checkout_methods)) { $selected_checkout_methods = array($selected_checkout_methods); }
 		$checkout_methods = sc_get_checkout_methods();
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process_new/";
 		$checkout_method_validation_text = elgg_echo('checkout:method:validation:text');
 		$checkout_method_title_text = elgg_echo('checkout:method:title:text');
 		$method_display = <<<EOF
