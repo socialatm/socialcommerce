@@ -14,7 +14,7 @@
 	if($socialcommerce){
 		$selected_shipping_methods = unserialize(elgg_get_plugin_setting('shipping_method', 'socialcommerce'));
 		$shipping_methods = sc_get_shipping_methods();
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process_new/";
 		$shipping_method_select = elgg_echo('shipping:method:select');
 		$shipping_method_validation_text = elgg_echo('shipping:method:validation:text');
 		$method_display = <<<EOF
@@ -55,7 +55,7 @@ EOF;
 		$shipping_price = 0;
 		if(is_array($price)){
 			foreach ($price as $s_price){
-				$shipping_price += $s_price;		//	@todo - we could actuall assign the shipping cost to the individual items here
+				$shipping_price += $s_price;		//	@todo - we could actually assign the shipping cost to the individual items here
 			}
 		}
 	
