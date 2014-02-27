@@ -150,7 +150,23 @@ EOF;
 							event: '',
 							active: {$checkout_order}
 						});
+						
+			//	toggle between the current and add new billing address forms
+			
+					$("#billing_address_type > li:nth-child(1)").change(function() { 
+					 	$("#current_billing_address, #add_billing_address").toggle(); 
 					});
+					
+					$("#billing_address_type > li:nth-child(2)").change(function() { 
+					 	$("#current_billing_address, #add_billing_address").toggle(); 
+					});
+			
+			//	end toggle between the current and add new billing address forms
+					
+					
+					}); 	// end document.ready
+					
+					
 					function change_modified(order){
 						jQuery('#list1b').accordion("activate",order);
 					}
