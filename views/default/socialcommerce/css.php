@@ -1947,6 +1947,6 @@ a.coupon_delete:hover {
 	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/change_file.gif) no-repeat scroll left 0;
 	padding-left:20px;
 }
-#product_file_change {
+#product_file_change, #add_billing_address {
 	display:none;
 }
