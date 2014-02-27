@@ -9,9 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
-echo '<b>'. __FILE__ .' at '.__LINE__.'</b>'; 	
-	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-	
 	$page_owner = elgg_get_logged_in_user_entity();
 	
 	if(
@@ -23,45 +20,44 @@ echo '<b>'. __FILE__ .' at '.__LINE__.'</b>';
 								))
 	){
 
-	
-//  krumo($_SESSION['CHECKOUT']['billing_address']);   die();
-
-
 		if($address) { $selected_address = $address->guid; }
 		
+		$action = $CONFIG->url."socialcommerce/".$page_owner->username."/checkout_process_new/";
 		$exist = elgg_echo('billing:address:exist');
-		$exist_address = elgg_view("socialcommerce/list_address",array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'billing'));
+		$exist_address = elgg_view("socialcommerce/list_address", array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'billing'));
 		
 		$new = elgg_echo('billing:address:new');
+
+	/*	form for current billing address	*/
 		
+		$form_vars = array('action' => $action, 'onsubmit'=> 'return validate_billing_details();' ); 
+		$body_vars = array('checked' => 1,'exist_address' => $exist_address); 
+		$address_billing = elgg_view_form("address/billing", $form_vars, $body_vars);
+	
+	/*	form to add a new billing address	*/
 		$body_vars = array('type' => 'billing'); 
 		$address_add = elgg_view_form("address/address", $form_vars, $body_vars);
 		
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('billing:address')));
-		$action = $CONFIG->url."socialcommerce/".$page_owner->username."/checkout_process_new/";
+		
+		$billing_checkboxes = elgg_view('input/radio', array(
+					'name' => 'billing_address_type',
+					'id' => 'billing_address_type',
+					'align' => 'horizontal',
+					'value' => 1,
+					'options' => array(elgg_echo('billing:address:exist') => 1, elgg_echo('billing:address:new') => 2),
+					));
 		
 		$address_details = <<<EOF
-			<div>
-				<form method="post" action="{$action}" onsubmit="return validate_billing_details();">
-					<div style="margin-bottom:10px;">
-						<input id="billing_address_exist" name="billing_address_type" checked="checked" type="radio" value="existing" onclick="toggle_address_type('billing','select');"/> {$exist}
-						<div class="select_billing_address">
-							{$exist_address}
-						</div>
-					</div>
-					<div>
-						<input id="billing_address_new" name="billing_address_type" type="radio" value="add" onclick="toggle_address_type('billing','add');"/> {$new}
-						
-					</div>
-					<div>
-						{$submit_input}
-						<input type="hidden" id="checkout_order" name="checkout_order" value="0">
-					</div>
-				</form>
-				<div class="add_billing_address" style="display:none;">
-					{$address_add}
+			{$billing_checkboxes}
+				<div id = "current_billing_address">
+				{$address_billing}
 				</div>
-			</div>
+				<div id = "add_billing_address">
+				{$address_add}
+				</div>
+			<hr>
+	
 EOF;
 	}else{
 		$body_vars = array('type' => 'billing'); 
