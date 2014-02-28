@@ -30,8 +30,9 @@
 				));
 			}
 			
-		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null ) 	
-		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce.checkout.js', $location = 'footer', $priority = null );
+		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null )
+		elgg_register_js( 'jquery.accordion', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout_process_new/jquery.accordion.js', $location = 'footer', $priority = null );
+		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout_process_new/socialcommerce.checkout.js', $location = 'footer', $priority = null );
 						
 		//	register css
 				

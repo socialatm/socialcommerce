@@ -141,7 +141,6 @@ EOF;
 		
 		$content = <<<EOF
 			<div class="checkout_process">
-				<script type="text/javascript" src="{$CONFIG->url}mod/socialcommerce/js/jquery.accordion.js"></script>
 				<script type="text/javascript">
 					$(document).ready(function(){
 						jQuery('#list1b').accordion({
@@ -355,6 +354,7 @@ EOF;
 		'content' => $content,
 		'sidebar' => $sidebar,
 		);
+	elgg_load_js('jquery.accordion');
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_echo("checkout:process"), $body);
 ?>
