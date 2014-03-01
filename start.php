@@ -31,10 +31,16 @@
 			}
 			
 		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null )
+		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.steps.min.js', $location = 'footer', $priority = null );
 		elgg_register_js( 'jquery.accordion', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout_process_new/jquery.accordion.js', $location = 'footer', $priority = null );
 		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout_process_new/socialcommerce.checkout.js', $location = 'footer', $priority = null );
 						
 		//	register css
+		elgg_register_css('jquery.steps', $CONFIG->url.'mod/socialcommerce/views/default/socialcommerce/css/checkout/jquery.steps.css', $priority = null);
+		
+		//we use google jquery instead of Elgg's as it is more up-to-date and required for bootstrap
+	$google_jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js';
+	elgg_register_js('jquery', $google_jquery);
 				
 		// extend CSS
 			elgg_extend_view("css", "socialcommerce/css");
