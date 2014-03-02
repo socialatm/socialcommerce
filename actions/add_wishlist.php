@@ -3,13 +3,12 @@
 	 * Elgg wishlist - add action
 	 * 
 	 * @package Elgg SocialCommerce
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
+	 * @license http://www.gnu.org/licenses/gpl-2.0.html		REMOVE THIS FILE AFTER NEW WISHLIST IS WORKING
 	 * @author twentyfiveautumn.com
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
-	global $CONFIG;
+	
 	if (!elgg_is_logged_in()) {
 		system_message(elgg_echo("add:wishlist:not:login"));
 		$_SESSION['last_forward_from'] = current_page_url();
