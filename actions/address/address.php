@@ -93,5 +93,5 @@
 	}
 	
 //	forward(REFERER);
-	forward($CONFIG->url . "socialcommerce/" . $page_owner->username . "/checkout_process_new/");
+	forward($CONFIG->url . "socialcommerce/" . $page_owner->username . "/checkout/");
 ?>
