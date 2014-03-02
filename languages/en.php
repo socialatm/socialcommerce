@@ -440,7 +440,7 @@
 		 	
 		 /*****	Address	*****/ 	
 		 
-		 	'stores:address' => "Your Address Details",
+		 	'stores:address' => "Your Address Book",
 		 	'confirm:address' => "Confirm Address",
 		 	'edit:address' => "Edit This Address",
 		 	'address:edit' => "Edit Address",
