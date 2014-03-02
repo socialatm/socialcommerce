@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	echo (__FILE__);
-	 
 	$stores = $vars['entity'];
 	$product_guid = $stores->getGUID();
 	$tags = $stores->tags;
@@ -94,13 +92,13 @@
 ?>
 						<div class="storesrepo_controls">
 							<div class="edit_btn" style="float:left;">
-								<a href="<?php echo $vars['url']; ?>socialcommerce/product/edit/<?php echo $stores->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>
+								<a href="<?php echo $vars['url']; ?>socialcommerce/product/edit/<?php echo $stores->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
 							</div>
 									
 								<div class="delete_btn" style="float:left;padding-left:10px;">
 									<?php 
 										echo elgg_view('output/confirmlink',array(
-											'href' => $vars['url'] . "action/socialcommerce/delete?stores=" . $stores->getGUID(),
+											'href' => $CONFIG->url.'socialcommerce/'.$customer->username.'/delete/'.$stores->guid,
 											'text' => elgg_echo("delete"),
 											'confirm' => elgg_echo("stores:delete:confirm"),
 										));  
