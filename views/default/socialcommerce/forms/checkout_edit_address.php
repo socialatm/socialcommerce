@@ -5,14 +5,14 @@
 	* @package Elgg SocialCommerce
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
 	* @author twentyfiveautumn.com
-	* @copyright twentyfiveautumn.com 2013
+	* @copyright twentyfiveautumn.com 2014
 	* @link http://twentyfiveautumn.com/
 	**/ 
 	
-	global $CONFIG;
 	$ajax = $vars['ajax'];
 	$type = $vars['type'];
 	$first = $vars['first'];
+	
 	// Set title, form destination
 		if (isset($vars['entity'])) {
 			$action = "socialcommerce/edit_address";
@@ -78,38 +78,43 @@
 		if (isset($vars['entity']))
 			$entity_hidden .= "<input type=\"hidden\" id=\"{$type}_address_guid\" name=\"address_guid\" value=\"{$vars['entity']->getGUID()}\" />";
 		$entity_hidden .= elgg_view('input/securitytoken');
+
+		
 		if($CONFIG->country){
-			$country_list = '<select onkeyup="find_state(\''.$type.'\')"  onkeydown="find_state(\''.$type.'\')" onchange="find_state(\''.$type.'\')" name="currency_country" id="'.$type.'_country" class="input-text">';
+			$options_values = array();
 			foreach ($CONFIG->country as $country){
-				if($selected_country == $country['iso3']){
-					$selected = "selected";
-				}else{
-					$selected = "";
-				}
-				$country_list .= "<option value='".$country['iso3']."' ".$selected.">".$country['name']."</option>";
+				$options_values[$country['iso3']] = $country['name'];
 			}
-			$country_list .= "</select>";
+	
+		$country_list = elgg_view('input/dropdown', array(
+													'name' => 'currency_country',
+													'id' => $type.'_country',
+													'value' => $selected_country,
+													'options_values' => $options_values,
+													));
+
 			if($selected_country){
 				$states = get_state_by_fields('iso3',$selected_country);
 				if(!empty($states)){
-					$state_list = '<select name="state" id="'.$type.'_state" class="input-text">';
+					$options_values = array();
 					foreach ($states as $state){
-						if($selected_state == $state->name){
-							$selected = "selected";
-						}else{
-							$selected = "";
-						}
-						$state_list .= "<option value='" . $state->name . "' " . $selected . ">" . $state->name . "</option>";
+						$options_values[$state->abbrv] = $state->name;
 					}
-					$state_list .= '</select>';
+					$state_list = elgg_view('input/dropdown', array(
+													'name' => 'state',
+													'id' => $type.'_state',
+													'value' => $selected_state,
+													'options_values' => $options_values,
+													));
 				}else{
 					$state_list = '<input class="input-text" type="text" value="'.$selected_state.'" id="'.$type.'_state" name="state"/>';
 				}
 			}
+			
 		}else {
 			$country_list = '<input class="input-text" type="text" value="'.$selected_country.'" id="'.$type.'_country" name="country"/>';
 		}
-		
+			
 		if($ajax == 1){
 			if($type == 'myaccount'){
 				$todo = 'reload_myaccount_address';
