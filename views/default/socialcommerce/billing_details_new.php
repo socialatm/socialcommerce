@@ -22,7 +22,7 @@
 
 		if($address) { $selected_address = $address->guid; }
 		
-		$action = $CONFIG->url."socialcommerce/".$page_owner->username."/checkout_process_new/";
+		$action = $CONFIG->url."socialcommerce/".$page_owner->username."/checkout/";
 		$exist = elgg_echo('billing:address:exist');
 		$exist_address = elgg_view("socialcommerce/list_address", array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'billing'));
 		
