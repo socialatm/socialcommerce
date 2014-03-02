@@ -238,6 +238,8 @@
 										break;	
 				case "edit":			require($base_path.'edit.php'); 	
 										break;
+				case "edit_address":	require($base_path.'edit_address.php'); 	
+										break;
 				case "edit_category":	require($base_path.'add_category.php'); 
 										break;
 				case "friends":			require($base_path.'friends.php'); 	
