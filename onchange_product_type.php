@@ -71,7 +71,6 @@ EOF;
 															));
 				}
 				$fields .= '</p>';
-	
 			}
 		}
 		echo $fields.$cstom_fields;
