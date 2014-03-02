@@ -38,6 +38,9 @@
 		//	register css
 		elgg_register_css('jquery.steps', $CONFIG->url.'mod/socialcommerce/views/default/socialcommerce/css/checkout/jquery.steps.css', $priority = null);
 		
+		// register ajax views
+		elgg_register_ajax_view('socialcommerce/change_country_state');
+		
 		//we use google jquery instead of Elgg's as it is more up-to-date and required for bootstrap
 	$google_jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js';
 	elgg_register_js('jquery', $google_jquery);
