@@ -43,8 +43,5 @@
 			echo elgg_echo("address:deletefailed");
 		}
 	}
-	if(!$ajax){
-		forward('socialcommerce/' . $_SESSION['user']->username . "/category/");
-	}
-
+	if(!$ajax){ forward('socialcommerce/' . $_SESSION['user']->username . "/category/");}
 ?>
