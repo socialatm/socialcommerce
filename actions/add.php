@@ -1,32 +1,14 @@
 <?php
 	/**
-	 * Elgg product - add action
+	 * Elgg product - add product action
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	
-	// Get variables
-	
-	$All_Store_Entities = elgg_get_entities(array( 	
-		'type' => 'object',
-		'subtype' => 'stores',
-		'owner_guid' => 0,
-		'order_by' => "",
-		'limit' => 15,
-		'offset' => 0,
-		'count' => true,
-		'site_guid' => 0,
-		'container_guid' => null,
-		'timelower' => 0,
-		'timeupper' => 0,	 
-	)); 	
-	
 	$title = trim(get_input("storestitle"));
 	$file_name = trim($_FILES['upload']['name']);
 	$desc = trim(get_input("storesbody"));
@@ -37,7 +19,7 @@
 	$container_guid = (int) get_input('container_guid', 0);
 	$tax_country = trim(get_input("tax_country"));
 	$error_field = "";
-
+	
 		if (!$container_guid){
 			$container_guid = $_SESSION['user']->getGUID();
 		}
@@ -107,7 +89,6 @@
 			}
 			
 			$error_field = substr($error_field,2);
-			
 			$container_user = get_entity($container_guid);
 			$redirect = $CONFIG->url . 'mod/socialcommerce/add.php';
 		}else{
@@ -150,9 +131,7 @@
 			$tags = explode(",", $tags);
 			$stores->tags = $tags;
 			
-			if ($container_guid){
-				$stores->container_guid = $container_guid;
-			}
+			if ($container_guid){ $stores->container_guid = $container_guid; }
 	
 			$result = $stores->save();
 			
