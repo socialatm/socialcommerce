@@ -142,6 +142,21 @@ EOF;
 			$address_reload_url = "{$CONFIG->url}socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
+/*****	country/state dropdown	*****/
+				
+$("#myaccount_country").change(function () {
+    var country = $(this).val();
+    var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
+    $.post(url, {
+        selected_country: country
+    })
+        .done(function (data) {
+        $("#myaccount_state_list").empty().html(data);
+    });
+});
+
+/*****	end country/state dropdown	*****/
+				
 					var time_out;
 					function {$type}_save_address(){
 						var type = '{$type}';
@@ -256,15 +271,7 @@ EOF;
 						return false;
 						*/
 					}
-					function find_state_process(type){
-						var country = $('#'+type+'_country').val();
-						$('#'+type+'_state_list').load("{$address_reload_url}", {type:type,todo:'load_state',country:country});
-					}
-					function find_state(type){
-						if(time_out)
-						clearTimeout(time_out);
-						time_out = setTimeout ("find_state_process('"+type+"')", 600 );
-					}
+					
 				</script>
 EOF;
 		}else{
