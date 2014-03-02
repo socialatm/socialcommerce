@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -19,31 +19,25 @@
 	if(	elgg_get_entities(array( 	
 			'type' => 'object',
 			'subtype' => 'address',
-			'owner_guid' => elgg_get_page_owner_guid(),
+			'owner_guid' => $page_owner->guid,
 			)) 
-		){
+	){
 			
 	elgg_set_context('search');
 			
-			$content .= elgg_list_entities(array(
+			$content = elgg_list_entities(array(
 						'type' => 'object',
 						'subtype' => 'address',
-						'owner_guid' => elgg_get_page_owner_guid(),
+						'owner_guid' => $page_owner->guid,
 						'limit' => 10,
 						));
 						
-			$content .= elgg_view("socialcommerce/forms/confirm_address");
-			elgg_set_context('address');
+		elgg_set_context('address');
 	}else{
-			$content .= elgg_view("socialcommerce/forms/edit_address");
+			$content = elgg_view("socialcommerce/forms/edit_address");
 		}
 		
-		$content = <<<EOF
-			<div class="contentWrapper stores">
-				{$content}
-			</div>
-EOF;
-
+	$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 		
