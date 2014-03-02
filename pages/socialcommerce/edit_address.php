@@ -5,23 +5,19 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
 	gatekeeper();
 
-	require_once(get_config('path').'engine/start.php');
-	global $CONFIG;
-		
-	// Render the category upload page
-	
-	$address = (int) get_input('address_guid');
+	$address_guid = (int)$page[2];
 	$title = elgg_view_title($title = elgg_echo('address:edit'));
 	
-	if ($address = get_entity($address)) {
+	if ($address = get_entity($address_guid)) {
+	
 		if ($address->canEdit()) { 
-    		$content = $title.'<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit_address", array('entity' => $address)).'</div>';
+    		$content = '<div class="contentWrapper">'.elgg_view("socialcommerce/forms/edit_address", array('entity' => $address)).'</div>';
     		$sidebar .= elgg_view("socialcommerce/sidebar");
 			$sidebar .= gettags();
 			
