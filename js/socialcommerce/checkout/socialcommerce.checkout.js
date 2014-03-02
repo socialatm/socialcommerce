@@ -21,6 +21,21 @@ $(document).ready(function () {
         });
 
         //	end toggle between the current and add new billing address forms
+		
+		/*****	country/state dropdown	*****/
+				
+$("#myaccount_country").change(function () {
+    var country = $(this).val();
+    var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
+    $.post(url, {
+        selected_country: country
+    })
+        .done(function (data) {
+        $("#myaccount_state_list").empty().html(data);
+    });
+});
+
+/*****	end country/state dropdown	*****/
 
     }); // all code needs to be above here to work inside the jquery.steps wizard
 
