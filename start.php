@@ -32,8 +32,8 @@
 			
 		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null )
 		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.steps.min.js', $location = 'footer', $priority = null );
-		elgg_register_js( 'jquery.accordion', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout_process_new/jquery.accordion.js', $location = 'footer', $priority = null );
-		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout_process_new/socialcommerce.checkout.js', $location = 'footer', $priority = null );
+		elgg_register_js( 'jquery.accordion', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.accordion.js', $location = 'footer', $priority = null );
+		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/socialcommerce.checkout.js', $location = 'footer', $priority = null );
 						
 		//	register css
 		elgg_register_css('jquery.steps', $CONFIG->url.'mod/socialcommerce/views/default/socialcommerce/css/checkout/jquery.steps.css', $priority = null);
@@ -226,8 +226,6 @@
 				case "checkout_address": require($base_path.'checkout_address.php'); 
 									  	break;
 				case "checkout_process": require($base_path.'checkout_process.php'); 
-									  	break;
-				case "checkout_process_new": require($base_path.'checkout_process_new.php'); 
 									  	break;
 				case "confirm":			require($base_path.'cart_confirm.php');
 										break;						
