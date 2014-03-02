@@ -5,11 +5,10 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-global $CONFIG;
+
 $checkout_confirm = $vars['checkout_confirm'];
 
 $cart = elgg_get_entities(array( 	
@@ -79,7 +78,7 @@ EOF;
 $cencelurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cancel/";
 $returnurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart_success/";
 $ipnurl = $CONFIG->url."action/socialcommerce/makepayment?page_owner=".elgg_get_page_owner_guid();
-$redirectlurl = $CONFIG->url."socialcommerce/{$_SESSION['user']->username}/checkout_process_new/";
+$redirectlurl = $CONFIG->url."socialcommerce/{$_SESSION['user']->username}/checkout/";
 
 if($checkout_confirm)
 	$disabled = 'disabled';
@@ -136,7 +135,7 @@ echo $cart_body = <<<EOF
 		</div>
 		{$coupon_applay}
 		<input {$disabled} class="elgg-button elgg-button-submit" type="submit" name="order_confirm" value="{$checkout_confirm_btn}">
-		<input type="hidden" name="checkout_order" value="3">
+		<input type="hidden" name="checkout_status" value="confirmation">
 	</form>
 EOF;
 ?>
