@@ -22,9 +22,9 @@
 </div>
 <div>
 			<?php echo elgg_view('input/hidden', array(
-					'value' => 0,
-					'id' => 'checkout_order',
-					'name' => 'checkout_order',
+					'value' => 'billing',
+					'id' => 'checkout_status',
+					'name' => 'checkout_status',
 					));
 			?>
 </div>
