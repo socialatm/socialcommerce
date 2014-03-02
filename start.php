@@ -233,8 +233,7 @@
 									  	break;						
 				case "currency_settings": require($base_path.'load_currency_settings.php'); 
 									  	break;						
-				case "delete":			//	@todo - this doesn't work...
-									//	include(dirname(__FILE__) . "/cart_success.php");
+				case "delete":			require($CONFIG->pluginspath.'socialcommerce/actions/delete.php'); 
 										break;	
 				case "edit":			require($base_path.'edit.php'); 	
 										break;
