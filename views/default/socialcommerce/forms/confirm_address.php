@@ -8,8 +8,8 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	global $CONFIG,$checkout_order;
+
+	global $checkout_order;
 	$ajax = $vars['ajax'];
 	$address = $vars['entity'];
 	if($address)
