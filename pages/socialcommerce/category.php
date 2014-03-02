@@ -5,7 +5,7 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
@@ -18,21 +18,21 @@
 	$fullview = false;
 	elgg_set_context('search');
 	$digital_cats = elgg_get_entities_from_metadata(array(
-			'product_type_id' => 2,
+	//		'product_type_id' => 2,
 			'type_subtype_pairs' => array('object' => 'sc_category'),
 			'container_guid' => $container_guid,
 			'limit' => $limit,
 			));  	
-
+			
 	if($digital_cats){									//	@todo - forward to create a category if none exist...
 		foreach($digital_cats as $digital_cat){
 			$digital_area .= elgg_view_entity($digital_cat, $fullview);
 		}
-		$digital_category_text = elgg_echo('stores:digital');
-		$digital_area = '<div style="width:330px;display:block;"><div style="margin:10px 0;"><b>'.$digital_category_text.'</b></div>'.$digital_area.'</div>';
+			
+		$digital_area = '<div style="width:330px;display:block;">'.$digital_area.'</div>';
 	}
 		
-	$content = '<div class="contentWrapper stores" align="left">'.$digital_area.'</div>';
+	$content = '<div class="contentWrapper stores" >'.$digital_area.'</div>';
 	elgg_set_context('category');
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
