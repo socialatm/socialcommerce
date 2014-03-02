@@ -5,15 +5,15 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
-	global $CONFIG;
+	 
+	$page_owner = elgg_get_page_owner_entity();
 	
 	$address = $vars['entity'];
 	
-	$address_guid = $address->getGUID();
+	$address_guid = $address->guid;
 	$title = $address->title;
 	$firstname = $address->first_name;
 	$lastname = $address->last_name;
@@ -49,12 +49,11 @@
 			</div>
 		
 <?php
-		if ($address->canEdit()) {
+		
+		if(can_edit_entity($address_guid, $page_owner->guid )) { 			
 ?>
 			<div class="storesrepo_controls">
-				<p>
-					<a href="<?php echo $vars['url']; ?>mod/socialcommerce/edit_address.php?address_guid=<?php echo $address->getGUID(); ?>"><?php echo elgg_echo('edit:address'); ?></a>&nbsp; 		
-				</p>
+				<a href="<?php echo $CONFIG->url; ?>socialcommerce/<?php echo $page_owner->username;?>/edit_address/<?php echo $address->guid; ?>"><?php echo elgg_echo('edit:address'); ?></a> 	
 			</div>
 <?php
 		}
@@ -113,6 +112,4 @@
 			<input type="hidden" name="first_name" value="<?php echo $firstname ?>">	
 			<input type="hidden" name="last_name" value="<?php echo $lastname ?>">	
 			</div>
-<?php
-	}
-?>
+<?php }	?>
