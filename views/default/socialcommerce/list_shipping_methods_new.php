@@ -14,7 +14,7 @@
 	if($socialcommerce){
 		$selected_shipping_methods = unserialize(elgg_get_plugin_setting('shipping_method', 'socialcommerce'));
 		$shipping_methods = sc_get_shipping_methods();
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process_new/";
+		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout/";
 		$shipping_method_select = elgg_echo('shipping:method:select');
 		$shipping_method_validation_text = elgg_echo('shipping:method:validation:text');
 		$method_display = <<<EOF
@@ -86,7 +86,7 @@ EOF;
 		$method_display .= <<<EOF
 				<div>
 					{$submit_input}
-					<input type="hidden" name="checkout_order" value="2">
+					<input type="hidden" name="checkout_status" value="shipping">
 				</div>
 			</form>
 EOF;
