@@ -46,13 +46,8 @@
 							header("Content-type: $mime");
 							echo $contents;
 							exit;
-							
 						} 
-					
 				}
-				
 			}
-			
 		}
-		
 ?>
