@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg socialcommerce activate page
+	 * Elgg socialcommerce address/address form
 	 * 
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -8,8 +8,44 @@
 	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
  	 **/
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-$arr2 = get_defined_vars();
+
+$selected_state = $vars['entity']->state? $vars['entity']->state : "" ;
+$selected_country = $vars['entity']->country ? $vars['entity']->country : 'USA' ;
+
+if($CONFIG->country){
+			$options_values = array();
+			foreach ($CONFIG->country as $country){
+				$options_values[$country['iso3']] = $country['name'];
+			}
+	
+		$country_list = elgg_view('input/dropdown', array(
+													'name' => 'currency_country',
+													'id' => 'country',
+													'value' => $selected_country,
+													'options_values' => $options_values,
+													));
+
+			if($selected_country){
+				$states = get_state_by_fields('iso3',$selected_country);
+				if(!empty($states)){
+					$options_values = array();
+					foreach ($states as $state){
+						$options_values[$state->abbrv] = $state->name;
+					}
+					$state_list = elgg_view('input/dropdown', array(
+													'name' => 'state',
+													'id' => 'state',
+													'value' => $selected_state,
+													'options_values' => $options_values,
+													));
+				}else{
+					$state_list = '<input class="input-text" type="text" value="'.$selected_state.'" id="'.$type.'_state" name="state"/>';
+				}
+			}
+			
+		}else {
+			$country_list = '<input class="input-text" type="text" value="'.$selected_country.'" id="'.$type.'_country" name="country"/>';
+		}
 	 
 ?>
 
@@ -60,14 +96,9 @@ $arr2 = get_defined_vars();
 					));
 			?>
 <label for="state"><?php echo elgg_echo('state'); ?>:</label>
-			<?php echo elgg_view('input/text', array(
-					'name' => 'state',
-					'id' => 'state',
-					'value' => $state,
-					'class' => '',
-					'internalname'=>'state',
-					));
-			?>
+<div id="state_list">
+			<?php echo $state_list; ?>
+</div>
 <label for="pincode"><?php echo elgg_echo('pincode'); ?>:</label>
 			<?php echo elgg_view('input/text', array(
 					'name' => 'pincode',
@@ -78,16 +109,7 @@ $arr2 = get_defined_vars();
 					));
 			?>
 <label for="country"><?php echo elgg_echo('country'); ?>:</label>
-			<?php echo elgg_view('input/text', array(
-					'name' => 'country',
-					'id' => 'country',
-					'value' => $country,
-					'class' => '',
-					'internalname'=>'country',
-					));
-			?>
-
-
+			<?php echo $country_list; ?>
 <div>
 <label for="phoneno"><?php echo elgg_echo('phone:no'); ?>:</label>
 			<?php echo elgg_view('input/text', array(

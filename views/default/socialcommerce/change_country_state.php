@@ -1,6 +1,6 @@
 <?php
 	 /**
-	* Elgg social commerce view - state dropdown for Country/State
+	* Elgg socialcommerce view - state dropdown for Country/State
 	* 
 	* @package Elgg SocialCommerce
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,12 +20,12 @@ if($selected_country){
 	}
 	$state_list = elgg_view('input/dropdown', array(
 											'name' => 'state',
-											'id' => $type.'_state',
+											'id' => 'state',
 											'value' => $selected_state,
 											'options_values' => $options_values,
 											));
 	}else{
-		$state_list = '<input class="input-text" type="text" value="'.$selected_state.'" id="'.$type.'_state" name="state"/>';
+		$state_list = '<input class="input-text" type="text" value="'.$selected_state.'" id="'.'state" name="state"/>';
 	}
 }
 echo $state_list;

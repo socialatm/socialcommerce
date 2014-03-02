@@ -24,14 +24,14 @@ $(document).ready(function () {
 		
 		/*****	country/state dropdown	*****/
 				
-$("#myaccount_country").change(function () {
+$("#country").change(function () {
     var country = $(this).val();
     var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
     $.post(url, {
         selected_country: country
     })
         .done(function (data) {
-        $("#myaccount_state_list").empty().html(data);
+        $("#state_list").empty().html(data);
     });
 });
 
