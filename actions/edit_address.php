@@ -1,11 +1,11 @@
 <?php
 	/**
-	 * Elgg address - edit action
+	 * Elgg address - edit address action
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
@@ -116,7 +116,7 @@
 			}else{
 				echo "$result";
 			}
-			// Remove the blog post cache
+
 			unset($_SESSION['address']);
 		}else{
 			if(!$ajax){
