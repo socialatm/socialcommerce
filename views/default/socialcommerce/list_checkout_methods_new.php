@@ -16,7 +16,7 @@
 		
 		if(!is_array($selected_checkout_methods)) { $selected_checkout_methods = array($selected_checkout_methods); }
 		$checkout_methods = sc_get_checkout_methods();
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process_new/";
+		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout/";
 		$checkout_method_validation_text = elgg_echo('checkout:method:validation:text');
 		$checkout_method_title_text = elgg_echo('checkout:method:title:text');
 		$method_display = <<<EOF
@@ -58,7 +58,7 @@ EOF;
 		$method_display .= <<<EOF
 				<div>
 					{$submit_input}
-					<input type="hidden" name="checkout_order" value="1">
+					<input type="hidden" name="checkout_status" value="payment">
 				</div>
 			</form>
 EOF;
