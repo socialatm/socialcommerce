@@ -1,21 +1,20 @@
 <?php
 	/**
-	 * Elgg cart - view
+	 * Elgg products shopping cart page
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
 	gatekeeper();
-	$page_owner = elgg_get_logged_in_user_entity();
 	$title = elgg_view_title(elgg_echo('my:shopping:cart'));
-	elgg_set_context('search');
+	elgg_set_context('shopping_cart');
 	$content = '<div class="contentWrapper stores">'.elgg_view("socialcommerce/cart").'</div>';
 	$sidebar .= elgg_view("socialcommerce/sidebar");
-	$sidebar .= gettags();
+	$sidebar .= get_tags();
 	
 	$params = array(
 		'title' => $title,
@@ -24,4 +23,3 @@
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_echo('my:shopping:cart'), $body);
-?>
