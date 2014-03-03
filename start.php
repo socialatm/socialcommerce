@@ -1,15 +1,13 @@
 <?php
 	/**
-	 * Elgg Commerce - start page
+	 * Elgg products - start page
 	 * 
-	 * @package Elgg Commerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
  	**/
-	
-	/*****	Social Commerce plugin initialization functions.	*****/
 	
 	function socialcommerce_init() {
 	    
