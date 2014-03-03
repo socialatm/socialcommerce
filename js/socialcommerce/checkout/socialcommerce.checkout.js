@@ -6,6 +6,49 @@ $(document).ready(function () {
             bodyTag: "div",
             transitionEffect: "fade",
             transitionEffectSpeed: "slow",
+			onStepChanging: function (event, currentIndex, newIndex)
+                {
+                    alert("Step Changing Fired");
+					
+					//	start testing jquery.form
+    var options = { 
+        beforeSubmit:  showRequest,  // pre-submit callback 
+        success:       showResponse  // post-submit callback 
+	}; 
+    $('#current_billing_address_form').ajaxForm(options); 
+
+function showRequest(formData, jqForm, options) { 
+    var queryString = $.param(formData); 
+    alert('About to submit: \n\n' + queryString); 
+    return true; 
+} 
+ 
+function showResponse(responseText, statusText, xhr, $form)  { 
+    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
+        '\n\nThe output div should have already been updated with the responseText.'); 
+} 
+
+$('#current_billing_address_form').submit();
+
+//	end testing jquery.form
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					return true;
+                },
         });
 
         //	new code has to go below the wizard in order to work inside the wizard
