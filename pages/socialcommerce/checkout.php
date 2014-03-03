@@ -71,8 +71,7 @@ switch ($checkout_status):
 	case 'confirmation':
         $checkout_confirm = 1;
 		$redirect = check_checkout_form();
-		krumo($_SESSION);  // die();
-        break;
+		break;
     default:
         continue;
 endswitch;
@@ -162,7 +161,7 @@ $content .= '<div>'.
 
 /***** END lets try this	*****/
 
-$title = elgg_view_title(elgg_echo('checkout:confirm:btn'));
+$title = elgg_echo('checkout:confirm:btn');
 $content = '<div class="contentWrapper stores">'.$content.'</div>';
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();

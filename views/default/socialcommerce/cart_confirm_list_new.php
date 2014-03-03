@@ -135,7 +135,7 @@ echo $cart_body = <<<EOF
 		</div>
 		{$coupon_applay}
 		<input {$disabled} class="elgg-button elgg-button-submit" type="submit" name="order_confirm" value="{$checkout_confirm_btn}">
-		<input type="hidden" name="checkout_status" value="confirmation">
+		<input type="hidden" name="checkout_status" value="confirmation"/>
 	</form>
 EOF;
 ?>

@@ -86,7 +86,7 @@ EOF;
 		$method_display .= <<<EOF
 				<div>
 					{$submit_input}
-					<input type="hidden" name="checkout_status" value="shipping">
+					<input type="hidden" name="checkout_status" value="shipping"/>
 				</div>
 			</form>
 EOF;

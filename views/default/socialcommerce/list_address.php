@@ -82,9 +82,10 @@ EOF;
 				}
 				$i++;
 				$address_list = <<<EOF
+				<div>
 					<input style="margin-bottom:10px;" {$checked} name="{$type}_address_guid" type="radio" value="{$address_guid}"/>
 					{$firstname} {$lastname}, {$address_line_1}, {$address_line_2}, {$city}, {$state}, {$pincode}, {$country}
-					<br>
+				</div>
 EOF;
 				echo $address_list;
 			}else if($display == 'list_with_action'){
