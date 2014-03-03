@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-
 	$page_owner = elgg_get_logged_in_user_entity();
 	 
 	// Get variables
@@ -53,11 +51,6 @@
 	}
 	
 	//	end validation
-	
-//	$arr2 = get_defined_vars();
-// krumo($arr2);
-
-// die();
 	
 	if(!empty($error_field)){
 		echo sprintf(elgg_echo("address:validation:null"),$error_field);	//	@todo - this could be better too

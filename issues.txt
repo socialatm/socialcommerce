@@ -51,22 +51,7 @@ add to river issue...
 
 ============================================================================
 
-
-
-/************************************
-	Query string issues
-*************************************/
-
-
-
-
-
-
-/************************************
-	End Query string issues
-*************************************/
-	
-	throw new PluginException(sprintf(elgg_echo('misconfigured:checkout:method'), $checkout_list));
+throw new PluginException(sprintf(elgg_echo('misconfigured:checkout:method'), $checkout_list));
 	
 
 $CONFIG->url
@@ -74,10 +59,3 @@ get_config('url')
 
 $vars['url']
 $base_url
-
-
-
-echo __FILE__ .' at '.__LINE__; die();
-gatekeeper();
-$page_owner = elgg_get_logged_in_user_entity();
-

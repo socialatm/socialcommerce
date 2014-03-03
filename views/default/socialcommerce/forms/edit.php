@@ -38,11 +38,6 @@
 	// http://docs.elgg.org/wiki/Scalability#System_cache
 	if (isset($vars['product'])) {
 			
-		/*****	for testing purposes	*****/
-		require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-		krumo($vars['product']); die();
-		/*****	for testing purposes	*****/
-		
 		//unset($_SESSION['product']);
 		$title = $vars['product']['storestitle'];
 		$product_type_id = $vars['product']['product_type_id'];

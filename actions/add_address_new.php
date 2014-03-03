@@ -5,18 +5,10 @@
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-	
-	krumo($vars); die();
-	
-	
-	
-	global $CONFIG;
-	
 	// Get variables
 	//$title = trim(get_input('title'));
 	$firstname = trim(get_input('first_name'));
