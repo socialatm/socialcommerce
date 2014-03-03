@@ -82,34 +82,34 @@ $content = '
         <div class="content">
 			<div id="wizard">
                 <h2>'.elgg_echo('checkout:billing').'</h2>
-                <section>';
+                <div>';
 $content .= 		elgg_view("socialcommerce/billing_details_new", array('checkout_order'=>$checkout_order)).'
-                </section>';
+                </div>';
 				
 $content .= '
                 <h2>'.elgg_echo('checkout:shipping').'</h2>
-                <section>';
+                <div>';
 				
 $content .= 		elgg_view("socialcommerce/shipping_details_new", array('checkout_order'=>$checkout_order)).
 					 elgg_view("socialcommerce/list_shipping_methods_new").'
-                </section>';
+                </div>';
 
 $content .= '
                 <h2>'.elgg_echo('checkout:payment').'</h2>
-                <section>';
+                <div>';
 				
 $content .= 				elgg_view("socialcommerce/list_checkout_methods_new").'
 				
                    
-                </section>';
+                </div>';
 
 $content .= '
                 <h2>'.elgg_echo('checkout:confirmation').'</h2>
-                <section>';
+                <div>';
 				
 $content .= 				 elgg_view("socialcommerce/cart_confirm_list_new", array('checkout_confirm'=>$checkout_confirm)).'
                     
-                </section>
+                </div>
             </div>
         </div>';
 

@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(function () {
         $("#wizard").steps({
             headerTag: "h2",
-            bodyTag: "section",
+            bodyTag: "div",
             transitionEffect: "fade",
             transitionEffectSpeed: "slow",
         });
