@@ -1,14 +1,14 @@
 ﻿<?php
 	/**
-	 * Elgg socialcommerce - checkout page
+	 * Elgg products - checkout page
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
 	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
+	 
 $page_owner = elgg_get_logged_in_user_entity();
 $checkout_status = get_input('checkout_status')? get_input('checkout_status') : 'begin';
 
@@ -167,9 +167,10 @@ $content = '<div class="contentWrapper stores">'.$content.'</div>';
 	$sidebar .= gettags();
 	
 	elgg_load_css('jquery.steps');
+	elgg_load_js('jquery.validate');
 	elgg_load_js('jquery.steps.min');
 	elgg_load_js('socialcommerce.checkout');
-	
+
 	$params = array(
 		'title' => $title,
 		'content' => $content,
@@ -177,4 +178,3 @@ $content = '<div class="contentWrapper stores">'.$content.'</div>';
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_echo('checkout:confirm:btn'), $body);
-?>

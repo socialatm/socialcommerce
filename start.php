@@ -29,6 +29,7 @@
 			}
 			
 		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null )
+		elgg_register_js( 'jquery.validate', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.validate.js', $location = 'footer', $priority = null );
 		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.steps.min.js', $location = 'footer', $priority = null );
 		elgg_register_js( 'jquery.accordion', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.accordion.js', $location = 'footer', $priority = null );
 		elgg_register_js( 'socialcommerce.checkout', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/socialcommerce.checkout.js', $location = 'footer', $priority = null );
