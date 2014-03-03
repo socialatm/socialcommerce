@@ -1,19 +1,15 @@
 <?php
    /**
-	* Elgg view - cart page
+	* Elgg view - shopping cart
 	* 
-	* @package Elgg SocialCommerce
+	* @package Elgg products
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
 	* @author twentyfiveautumn.com
-	* @copyright twentyfiveautumn.com 2013
+	* @copyright twentyfiveautumn.com 2014
 	* @link http://twentyfiveautumn.com/
 	**/ 
 	
 	gatekeeper();
-	if(get_input('not_allow') && get_input('not_allow') == 1){
-		register_error(elgg_echo('not:allow:error'));
-	}
-
 	$cart = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'cart',
@@ -21,6 +17,12 @@
 		)); 			
 	$cart = $cart[0];
 	
+	// be sure user has permission to view the shopping cart before continuing. If they don't we'll tell them it's empty.
+	if(!can_edit_entity( $cart->guid, elgg_get_page_owner_guid())){
+		register_error(elgg_echo("cart:null"));
+		forward('socialcommerce/'.$_SESSION['user']->username.'/all/');
+	}
+		
 	if($cart){
 		$cart_items = elgg_get_entities_from_relationship(array(
 			'relationship' => 'cart_item',
@@ -125,4 +127,3 @@ $hidden .= elgg_view('input/securitytoken');
 		.$hidden
 		.'</form>'
 		.$confirm_cart_list;
-?>
