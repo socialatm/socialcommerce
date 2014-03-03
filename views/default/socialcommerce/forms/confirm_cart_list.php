@@ -1,21 +1,20 @@
 <?php
 	/**
-	 * Elgg form - confirm cart lists
+	 * Elgg products shopping cart form
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	if(elgg_is_logged_in()){
 		if($vars['not_allow'] == 1){
 			$hidden = '<input type="hidden" name="not_allow" value="1">';
 			$action = "#";
 		}else{
-			$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+			$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout/";
 		}
 		$username = "/".$_SESSION['user']->username;
 	}
@@ -37,7 +36,4 @@ $form_body = <<< BOTTOM
 		</form>
 BOTTOM;
 
-
-
 echo $form_body;
-?>
