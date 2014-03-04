@@ -16,24 +16,15 @@
 		
 		if(!is_array($selected_checkout_methods)) { $selected_checkout_methods = array($selected_checkout_methods); }
 		$checkout_methods = sc_get_checkout_methods();
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout/";
+		$action = $CONFIG->url."ajax/view/socialcommerce/checkout";
 		$checkout_method_validation_text = elgg_echo('checkout:method:validation:text');
 		$checkout_method_title_text = elgg_echo('checkout:method:title:text');
 		$method_display = <<<EOF
-			<script type="text/javascript">
-				function checkout_method_validation(){
-					if ($("input[name='checkout_method']").is(':checked')){
-						return true;
-					}else{
-						alert("{$checkout_method_validation_text}");
-						return false;
-					}
-				}
-			</script>
+			
 			<div style='padding:10px 5px;'>
 				<B>{$checkout_method_title_text}</B>
 			</div>
-			<form onsubmit="javascript:return checkout_method_validation();" name='checkout_method_selection' method='post' action='{$action}'>
+			<form id='select_payment_form' name='select_payment_form' method='post' action='{$action}'>
 EOF;
 		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('checkout:select:checkout:method')));
 		$i = 1;

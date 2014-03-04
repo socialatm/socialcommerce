@@ -30,8 +30,10 @@ case "shipping":
 	echo "Checkout Status is Shipping!";
 	break;
 case "payment":
-  echo "Your favorite color is green!";
-  break;
+	$_SESSION['CHECKOUT']['confirm_checkout_method'] = 1;	
+	$_SESSION['CHECKOUT']['checkout_method'] = get_input('checkout_method');
+	echo "Checkout Status is Payment!";
+	break;
 case "confirmation":
   echo "Your favorite color is green!";
   break;

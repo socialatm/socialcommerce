@@ -108,8 +108,8 @@ case 1:
   return true;
   break;
 case 2:
-  var currentForm = $('#current_billing_address_form').prop("id");
-  alert('the Current Form: '+currentForm);
+  window.currentForm = $('#select_payment_form').prop("id");
+  alert('the Current Form: '+window.currentForm);
   return true;
   break;
 default:
