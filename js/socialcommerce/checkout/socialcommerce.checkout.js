@@ -6,29 +6,27 @@ $(document).ready(function () {
             bodyTag: "div",
             transitionEffect: "fade",
             transitionEffectSpeed: "slow",
-			onStepChanging: function (event, currentIndex, newIndex)
-                {
-                    alert("Step Changing Fired \n\n Current Index:"+currentIndex);
-					myFunction(currentIndex);
+			onStepChanging: function (event, currentIndex, newIndex) {
+				alert("Step Changing Fired \n\n Current Index:"+currentIndex);
+				myFunction(currentIndex);
 					
 					//	start testing jquery.form
-    var options = { 
-        beforeSubmit:  showRequest,  // pre-submit callback 
-        success:       showResponse  // post-submit callback 
-	}; 
-    $('#current_billing_address_form').ajaxForm(options); 
+				var options = { 
+					beforeSubmit:  showRequest,  // pre-submit callback 
+					success:       showResponse  // post-submit callback 
+				}; 
+				$('#current_billing_address_form').ajaxForm(options); 
 
-function showRequest(formData, jqForm, options) { 
-    var queryString = $.param(formData); 
-    alert('About to submit: \n\n' + queryString); 
-    return true; 
-} 
+				function showRequest(formData, jqForm, options) { 
+					var queryString = $.param(formData); 
+					alert('About to submit: \n\n' + queryString); 
+					return true; 
+				} 
  
-function showResponse(responseText, statusText, xhr, $form)  { 
-    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
-        '\n\nThe output div should have already been updated with the responseText.'); 
-} 
-
+				function showResponse(responseText, statusText, xhr, $form)  { 
+					alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
+					'\n\nThe output div should have already been updated with the responseText.'); 
+				} 
 				
 				if ("currentForm" in window) {
 					alert(window.currentForm);
@@ -38,32 +36,27 @@ function showResponse(responseText, statusText, xhr, $form)  {
 				$(test).ajaxForm(options);
 				$(test).submit();
 				
-			//	$('#current_billing_address_form').submit();
+				//	$('#current_billing_address_form').submit();
 
-//	end testing jquery.form
+					//	end testing jquery.form
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					return true;
-                },
-        });
+				return true;
+			},		//	end onStepChanging
+				
+				/*****	start onFinishing	*****/
+			onFinishing: function (event, currentIndex) {
+				alert("Submitted!");
+				myFunction(currentIndex);
+			//	$('#buy_now_form').ajaxForm(options);
+			//	$('#buy_now_form').submit();
+				return true;
+			},		//	end onFinishing
+				
+        });			//	end $("#wizard").steps
 
-        //	new code has to go below the wizard in order to work inside the wizard
+			//	new code has to go below the wizard in order to work inside the wizard
 
-        //	toggle between the current and add new billing address forms
+			//	toggle between the current and add new billing address forms
 
         $("#billing_address_type > li:nth-child(1) > label:nth-child(1) > input:nth-child(1)").change(function () {
             $("#current_billing_address, #add_billing_address").toggle();
@@ -73,71 +66,63 @@ function showResponse(responseText, statusText, xhr, $form)  {
             $("#current_billing_address, #add_billing_address").toggle();
         });
 
-        //	end toggle between the current and add new billing address forms
+			//	end toggle between the current and add new billing address forms
 		
 		/*****	country/state dropdown	*****/
 				
-$("#country").change(function () {
-    var country = $(this).val();
-    var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
-    $.post(url, {
-        selected_country: country
-    })
-        .done(function (data) {
-        $("#state_list").empty().html(data);
-    });
-});
+		$("#country").change(function () {
+			var country = $(this).val();
+			var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
+			$.post(url, {
+				selected_country: country
+			})
+			.done(function (data) {
+			$("#state_list").empty().html(data);
+			});
+		});
 
-/*****	end country/state dropdown	*****/
+			/*****	end country/state dropdown	*****/
 
-/**** start assignCurrentForm	*****/
+			/**** start assignCurrentForm	*****/
 
-	function myFunction(currentIndex) {
-	//	alert("Current Index: " + currentIndex);
-	//	return true;
-		switch(currentIndex) 
-{
-case 0:
-  window.currentForm = $('#current_billing_address_form').prop("id");
-  alert('the Current Form: '+window.currentForm);
-  return true;
-  break;
-case 1:
-  window.currentForm = $('#select_shipping_method_form').prop("id");
-  alert('the Current Form: '+window.currentForm);
-  return true;
-  break;
-case 2:
-  window.currentForm = $('#select_payment_form').prop("id");
-  alert('the Current Form: '+window.currentForm);
-  return true;
-  break;
-default:
-  alert('No Current Form');
-  return true;
-}
-	}
+		function myFunction(currentIndex) {
+			switch(currentIndex) 
+			{
+			case 0:
+				window.currentForm = $('#current_billing_address_form').prop("id");
+				alert('the Current Form: '+window.currentForm);
+				return true;
+				break;
+			case 1:
+				window.currentForm = $('#select_shipping_method_form').prop("id");
+				alert('the Current Form: '+window.currentForm);
+				return true;
+				break;
+			case 2:
+				window.currentForm = $('#select_payment_form').prop("id");
+				alert('the Current Form: '+window.currentForm);
+				return true;
+				break;
+			case 3:
+				window.currentForm = $('#buy_now_form').prop("id");
+				alert('the Current Form: '+window.currentForm);
+				return true;
+				break;
+			default:
+				alert('No Current Form');
+				return true;
+			}
+		}
 
-/**** end assignCurrentForm	*****/
+			/**** end assignCurrentForm	*****/
 
 
     }); // all code needs to be above here to work inside the jquery.steps wizard
 
-}); // end document.ready
+}); 	// end document.ready
 
 function change_modified(order) {
     jQuery('#list1b').accordion("activate", order);
-}
-
-// we maybe able to remove function toggle_address_type(address,type) . Being replaced by billing address toggle code above
-function toggle_address_type(address, type) {
-    if (type == 'select') {
-        $('.select_' + address + '_address').show();
-        $('.add_' + address + '_address').hide();
-    } else {
-        $('.add_' + address + '_address').show();
-        $('.select_' + address + '_address').hide();
-    }
 }
 
 function apply_couponcode() {
