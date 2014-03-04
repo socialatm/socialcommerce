@@ -78,7 +78,7 @@ EOF;
 $cencelurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cancel/";
 $returnurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart_success/";
 $ipnurl = $CONFIG->url."action/socialcommerce/makepayment?page_owner=".elgg_get_page_owner_guid();
-$redirectlurl = $CONFIG->url."socialcommerce/{$_SESSION['user']->username}/checkout/";
+$action = $CONFIG->url."ajax/view/socialcommerce/checkout";
 
 if($checkout_confirm)
 	$disabled = 'disabled';
@@ -111,9 +111,10 @@ $item_price_text = elgg_echo('checkout:item:price');
 $cart_item_total_text = elgg_echo('checkout:item:total');
 $cart_total_cost = elgg_echo('checkout:total:cost');
 $checkout_confirm_btn = elgg_echo('checkout:confirm:btn');
+
 echo $cart_body = <<<EOF
-	<div id="coupon_apply_result"></div>
-	<form name="frm_cart" method="post" action="{$redirectlurl}">
+<div id="coupon_apply_result"></div>
+	<form id="buy_now_form" name="buy_now_form" method="post" action="{$action}">
 		<div id="checkout_confirm_list">
 			<table class="checkout_table">
 				<tr>
