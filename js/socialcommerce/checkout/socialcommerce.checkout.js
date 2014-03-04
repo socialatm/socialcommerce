@@ -140,36 +140,6 @@ function toggle_address_type(address, type) {
     }
 }
 
-function validate_billing_details() {
-    var billing_address_type = $("input[@name='billing_address_type']:checked").val();
-    var billing_address = $("input[@name='billing_address_guid']:checked").val();
-    if (billing_address_type == "existing") {
-        if ($.trim(billing_address) == "") {
-            alert("Please select one Address");
-            return false;
-        }
-    } else if (billing_address_type == "add") {
-        alert("Please Add Address");
-        return false;
-    }
-    return true;
-}
-
-function validate_shipping_details() {
-    var shipping_address_type = $("input[@name='shipping_address_type']:checked").val();
-    var shipping_address = $("input[@name='shipping_address_guid']:checked").val();
-    if (shipping_address_type == "existing") {
-        if ($.trim(shipping_address) == "") {
-            alert("Please select one Address");
-            return false;
-        }
-    } else if (shipping_address_type == "add") {
-        alert("Please Add Address");
-        return false;
-    }
-    return true;
-}
-
 function apply_couponcode() {
     var couponcode = $("#couponcode").val();
     if ($.trim(couponcode) == '') {
