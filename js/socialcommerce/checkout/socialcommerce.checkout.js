@@ -8,7 +8,8 @@ $(document).ready(function () {
             transitionEffectSpeed: "slow",
 			onStepChanging: function (event, currentIndex, newIndex)
                 {
-                    alert("Step Changing Fired");
+                    alert("Step Changing Fired \n\n Current Index:"+currentIndex);
+					myFunction(currentIndex);
 					
 					//	start testing jquery.form
     var options = { 
@@ -28,7 +29,16 @@ function showResponse(responseText, statusText, xhr, $form)  {
         '\n\nThe output div should have already been updated with the responseText.'); 
 } 
 
-$('#current_billing_address_form').submit();
+				
+				if ("currentForm" in window) {
+					alert(window.currentForm);
+				}
+				var test = '#'+window.currentForm;
+				
+				$(test).ajaxForm(options);
+				$(test).submit();
+				
+			//	$('#current_billing_address_form').submit();
 
 //	end testing jquery.form
 					
@@ -79,6 +89,37 @@ $("#country").change(function () {
 });
 
 /*****	end country/state dropdown	*****/
+
+/**** start assignCurrentForm	*****/
+
+	function myFunction(currentIndex) {
+	//	alert("Current Index: " + currentIndex);
+	//	return true;
+		switch(currentIndex) 
+{
+case 0:
+  window.currentForm = $('#current_billing_address_form').prop("id");
+  alert('the Current Form: '+window.currentForm);
+  return true;
+  break;
+case 1:
+  window.currentForm = $('#select_shipping_method_form').prop("id");
+  alert('the Current Form: '+window.currentForm);
+  return true;
+  break;
+case 2:
+  var currentForm = $('#current_billing_address_form').prop("id");
+  alert('the Current Form: '+currentForm);
+  return true;
+  break;
+default:
+  alert('No Current Form');
+  return true;
+}
+	}
+
+/**** end assignCurrentForm	*****/
+
 
     }); // all code needs to be above here to work inside the jquery.steps wizard
 
