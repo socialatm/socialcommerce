@@ -22,7 +22,7 @@
 
 		if($address) { $selected_address = $address->guid; }
 		
-		$action = $CONFIG->url."socialcommerce/".$page_owner->username."/checkout/";
+		$action = $CONFIG->url."ajax/view/socialcommerce/checkout";
 		$exist = elgg_echo('billing:address:exist');
 		$exist_address = elgg_view("socialcommerce/list_address", array('entity'=>$address,'display'=>'list','selected'=>$selected_address,'type'=>'billing'));
 		
@@ -30,8 +30,8 @@
 
 	/*	form for current billing address	*/
 		
-		$form_vars = array('action' => $action, 'onsubmit'=> 'return validate_billing_details();' ); 
-		$body_vars = array('checked' => 1,'exist_address' => $exist_address); 
+		$form_vars = array('action' => $action, 'id'=> 'current_billing_address_form' ); 
+		$body_vars = array('checked' => 'checked','exist_address' => $exist_address); 
 		$address_billing = elgg_view_form("address/billing", $form_vars, $body_vars);
 	
 	/*	form to add a new billing address	*/
