@@ -1,11 +1,11 @@
 <?php
 	/**
-	 * Elgg paypal checkout - actions
+	 * Elgg paypal payment actions
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
