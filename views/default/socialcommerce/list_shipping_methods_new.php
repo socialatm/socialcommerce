@@ -14,28 +14,11 @@
 	if($socialcommerce){
 		$selected_shipping_methods = unserialize(elgg_get_plugin_setting('shipping_method', 'socialcommerce'));
 		$shipping_methods = sc_get_shipping_methods();
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout/";
 		$shipping_method_select = elgg_echo('shipping:method:select');
 		$shipping_method_validation_text = elgg_echo('shipping:method:validation:text');
-		$method_display = <<<EOF
-			<script>
-				function shipping_method_validation(){
-					if ($("input[name='shipping_method']").is(":checked")){
-						return true;
-					}else{
-						alert("{$shipping_method_validation_text}");
-						return false;
-					}
-				}
-			</script>
-			<div style='padding:10px 5px;'>
-				<B>{$shipping_method_select}</B>
-			</div>
-			<form onsubmit='return shipping_method_validation();' name='shipping_method_selection' method='post' action='{$action}'>
-EOF;
-
-		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('checkout:select:shipping:method')));
 		
+		$body_vars = array();
+
 		foreach ($selected_shipping_methods as $selected_shipping_method){
 			if(file_exists(SHIPPING_PATH.$selected_shipping_method.'/action.php')) {
 				require_once(SHIPPING_PATH.$selected_shipping_method."/action.php");
@@ -62,10 +45,10 @@ EOF;
 		$display_name = $shipping_settings->display_name ? $shipping_settings->display_name : $shipping_methods[$selected_shipping_method]->label;
 			
 		if($selected_shipping_method == $_SESSION['CHECKOUT']['shipping_method']){
-			$checked = "checked='checked'";
+			$checked = "checked";
 		}else{
 			if((empty($_SESSION['CHECKOUT']['shipping_method']))){
-				$checked = "checked='checked'";
+				$checked = "checked";
 			}else{
 				$checked = "";
 			}
@@ -75,21 +58,27 @@ EOF;
 		
 		$_SESSION['CHECKOUT']['shipping_price'] = $shipping_price;
 		
-		$method_display .= <<<EOF
-				<div style='padding:5px;'>
-					<input type='radio' name='shipping_method' value='{$selected_shipping_method}' {$checked}> 
-					<input type='hidden' name='shipping_price' value='{$shipping_price}'> 
-					<span style='margin-left:5px;'>{$display_name}</span> <span style="font-weight:bold;color:#4F0A0A;">{$display_shipping_price}</span>
-				</div>
-EOF;
-		}
-		$method_display .= <<<EOF
-				<div>
-					{$submit_input}
-					<input type="hidden" name="checkout_status" value="shipping"/>
-				</div>
-			</form>
-EOF;
+		$body_vars['shipping_methods'] = (object)array(
+										'selected_shipping_method' => $selected_shipping_method,
+										'checked' => $checked, 
+										'shipping_price' => $shipping_price,
+										'display_name' => $display_name,
+										'display_shipping_price' => $display_shipping_price
+										);
+		
+
+		}		/*****	end foreach ($selected_shipping_methods as $selected_shipping_method) *****/
+		
+		
+		/*	select shipping method form */
+		
+		$action = $CONFIG->url."ajax/view/socialcommerce/checkout";
+		$form_vars = array('action' => $action, 'id'=> 'select_shipping_method_form' ); 
+		$shipping_method_form = elgg_view_form("address/shipping", $form_vars, $body_vars);
+		
+		$method_display = '<div>'.$shipping_method_select.'</div>';
+		$method_display .= '<div>'.$shipping_method_form.'</div>';
+		
 	}
 	else{
 		if($CONFIG->no_shipping ==2){
@@ -102,4 +91,3 @@ EOF;
 		}
 	}
 	echo $method_display;
-?>
