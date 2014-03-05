@@ -35,8 +35,10 @@ case "payment":
 	echo "Checkout Status is Payment!";
 	break;
 case "confirmation":
-  echo "Your favorite color is green!";
-  break;
+	 echo elgg_view('socialcommerce/buy_now');
+	// check_checkout_form();
+	//echo "Checkout Status is Confirmation!";
+	break;
 default:
   echo "Your favorite color is neither red, blue, or green!";
 endswitch;
