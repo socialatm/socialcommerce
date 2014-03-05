@@ -46,15 +46,62 @@ $(document).ready(function () {
 				/*****	start onFinishing	*****/
 			onFinishing: function (event, currentIndex) {
 				alert("Submitted!");
+				alert(target);
 				myFunction(currentIndex);
 			//	$('#buy_now_form').ajaxForm(options);
 			//	$('#buy_now_form').submit();
+			
+			var target = $(".body_current");
+			
+			//	start testing jquery.form
+				var options = { 
+					beforeSubmit:  showRequest,  // pre-submit callback 
+					success:       showResponse  // post-submit callback 
+	//				dataType:  	   json 
+	//				target;		   '#target'
+				}; 
+				$('#current_billing_address_form').ajaxForm(options); 
+
+				function showRequest(formData, jqForm, options) { 
+					var queryString = $.param(formData); 
+					alert('About to submit: \n\n' + queryString); 
+					return true; 
+				} 
+ 
+				function showResponse(responseText, statusText, xhr, $form)  { 
+					alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
+					'\n\nThe output div should have already been updated with the responseText.'); 
+					$("#wizard-p-3").empty().html(responseText);
+				} 
+				
+				if ("currentForm" in window) {
+					alert(window.currentForm);
+				}
+				var test = '#'+window.currentForm;
+				
+				$(test).ajaxForm(options);
+				$(test).submit();
+				
+				//	$('#current_billing_address_form').submit();
+
+					//	end testing jquery.form
+			
 				return true;
 			},		//	end onFinishing
+			
+					//	start onFinished
+				onFinished: function (event, currentIndex)
+                {
+                    alert("Submit the form to PayPal here!");
+                },
+					
+					// end onFinished
 				
         });			//	end $("#wizard").steps
 
 			//	new code has to go below the wizard in order to work inside the wizard
+			
+			
 
 			//	toggle between the current and add new billing address forms
 
@@ -120,10 +167,6 @@ $(document).ready(function () {
     }); // all code needs to be above here to work inside the jquery.steps wizard
 
 }); 	// end document.ready
-
-function change_modified(order) {
-    jQuery('#list1b').accordion("activate", order);
-}
 
 function apply_couponcode() {
     var couponcode = $("#couponcode").val();
