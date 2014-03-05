@@ -10,12 +10,12 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	$url = elgg_normalize_url('socialcommerce/graphics/paypal.gif');
+	$url = elgg_normalize_url('mod/socialcommerce/graphics/paypal.gif');
 	$image = elgg_view('output/img', array(
 				'src' => $url,
 				'alt' => 'Buy Now',
 				'class' => 'elgg-border-plain elgg-transition',
 			));
 			
-	$content = '<div id="buy_now">'.$image.'</div>';
+	$content = '<div id="buy_now">'.$image.'<span>Connecting to PayPal</span></div>';
 	echo $content;
