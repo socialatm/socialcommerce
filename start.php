@@ -55,7 +55,7 @@
 					
 			elgg_extend_view("page_elements/header_contents", "socialcommerce/header");
 			
-			elgg_extend_view("metatags", "socialcommerce/extend_header");
+			elgg_extend_view("page/elements/head", "socialcommerce/extend_header");
 			
 			elgg_extend_view("page_elements/footer", "socialcommerce/extend_footer",400);
 		
