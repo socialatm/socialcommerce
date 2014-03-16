@@ -71,14 +71,17 @@
 		// Register an image handler for stores
 			elgg_register_page_handler("storesimage","socialcommerce_image_handler");
 			
-		// Add a new file widget
+		// Add widgets
 			if(elgg_is_admin_logged_in()){
-			add_widget_type('recent', elgg_echo("stores:recent:widget"),elgg_echo("stores:recent:widget:description"));
+				elgg_register_widget_type('recent', elgg_echo("stores:recent:widget"),elgg_echo("stores:recent:widget:description"));
 			}
-			//add_widget_type('mostly',elgg_echo("stores:mostly:widget"),elgg_echo("stores:mostly:widget:description"));
+			
+			elgg_register_widget_type('mostly',elgg_echo("stores:mostly:widget"),elgg_echo("stores:mostly:widget:description"));
+			
 			if(!elgg_is_admin_logged_in()){
-			add_widget_type('purchased',elgg_echo("stores:purchased:widget"),elgg_echo("stores:purchased:widget:description"));
+				elgg_register_widget_type('purchased',elgg_echo("stores:purchased:widget"),elgg_echo("stores:purchased:widget:description"));
 			}
+			
 		// Register a URL handler for files
 			elgg_register_entity_url_handler('object', 'stores', 'stores_url');
 			elgg_register_entity_url_handler('object', 'category', 'category_url');

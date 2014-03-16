@@ -53,7 +53,7 @@
 			'stores:recent:widget' => "Recent Products",
 			'stores:recent:widget:description' => "Show the recent products",
 			'stores:mostly:widget' => "Hot Products",
-			'stores:mostly:widget:description' => "Show the mostly rated products",
+			'stores:mostly:widget:description' => "Show the highest rated products",
 			'stores:purchased:widget' => "Purchased Products",
 			'stores:purchased:widget:description' => "Show the recent purchased products",
 			'stores:more' => "More Products",
