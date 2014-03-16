@@ -394,7 +394,17 @@
 		} else {
 			$friendofguid = false;
 		}
-		return elgg_view("socialcommerce/typecloud", array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'simpletype','object','stores',$owner_guid)));
+		
+		$tag_options = array(
+			'threshold' => 0,
+			'limit' => 10,
+			'metadata_name' => 'simpletype',
+			'entity_type' => 'object',
+			'entity_subtype' => 'stores',
+			'owner_guid' => $owner_guid,
+		);
+		
+		return elgg_view("socialcommerce/typecloud", array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => elgg_get_tags($tag_options)));
 	}
 	
 	/**
