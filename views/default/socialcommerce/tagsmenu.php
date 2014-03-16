@@ -2,10 +2,10 @@
 	/**
 	 * Elgg view - tags menu
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -32,7 +32,6 @@
 				$class = "";
 			}
 				
-			$submenu .= add_submenu_item( $label, $url, 'stores_tag');
+			$submenu .= elgg_register_menu_item(array('name' => 'stores_tag', 'text' => $label, 'href' => $url ));
 		}
 	}
-?>
