@@ -32,6 +32,6 @@
 				$class = "";
 			}
 				
-			$submenu .= elgg_register_menu_item(array('name' => 'stores_tag', 'text' => $label, 'href' => $url ));
+			$submenu .= elgg_register_menu_item( $inputtag, array('text' => $label, 'href' => $url ));
 		}
 	}

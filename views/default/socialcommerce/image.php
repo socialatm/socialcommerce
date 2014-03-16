@@ -46,18 +46,18 @@
 				}
 			</script>
 			<div class="product_image">
-			<a href="<?php echo $vars['entity']->getURL(); ?>" class="icon" ><img onmouseover="display_zoome_image(<?php echo $vars['entity']->guid; ?>,this)" onmouseout="hide_zoome_image(<?php echo $vars['entity']->guid; ?>)"  title="<?php echo $vars['entity']->title; ?>" src="<?php echo $vars['entity']->getIcon($vars['size']); ?>" border="0" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> /></a>
+			<a href="<?php echo $vars['entity']->getURL(); ?>" class="icon" ><img onmouseover="display_zoome_image(<?php echo $vars['entity']->guid; ?>,this)" onmouseout="hide_zoome_image(<?php echo $vars['entity']->guid; ?>)"  title="<?php echo $vars['entity']->title; ?>" src="<?php echo $vars['entity']->getIconURL($vars['size']); ?>" border="0" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> /></a>
 			</div>
 			<div id="zome_product_image_<?php echo $vars['entity']->guid; ?>" class="zome_product_image">
-				<img src="<?php echo $vars['entity']->getIcon('large'); ?>">
+				<img src="<?php echo $vars['entity']->getIconURL('large'); ?>">
 			</div>
 <?php
 		}else if ($vars['display'] == "image"){
 ?>
-			<img title="<?php echo $vars['entity']->title; ?>" src="<?php echo $vars['entity']->getIcon($vars['size']); ?>" border="0" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> />
+			<img title="<?php echo $vars['entity']->title; ?>" src="<?php echo $vars['entity']->getIconURL($vars['size']); ?>" border="0" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> />
 <?php
 		}else if ($vars['display'] == "url"){
-			echo $vars['entity']->getIcon($vars['size']); 
+			echo $vars['entity']->getIconURL($vars['size']); 
 		}
 	}
 ?>

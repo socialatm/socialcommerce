@@ -287,7 +287,7 @@
 	}
 	
 	/**
-	 * This hooks into the getIcon API and provides nice user image for users where possible.
+	 * This hooks into the getIconURL API and provides nice user image for users where possible.
 	 *
 	 * @param unknown_type $hook
 	 * @param unknown_type $entity_type
