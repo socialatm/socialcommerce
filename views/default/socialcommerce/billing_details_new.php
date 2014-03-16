@@ -2,7 +2,7 @@
 	/**
 	 * Elgg view - billing details
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
 	 * @copyright twentyfiveautumn.com 2014
@@ -38,7 +38,7 @@
 		$body_vars = array('type' => 'billing'); 
 		$address_add = elgg_view_form("address/address", $form_vars, $body_vars);
 		
-		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('billing:address')));
+		$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('billing:address')));
 		
 		$billing_checkboxes = elgg_view('input/radio', array(
 					'name' => 'billing_address_type',

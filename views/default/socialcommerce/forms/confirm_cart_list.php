@@ -18,7 +18,7 @@
 		}
 		$username = "/".$_SESSION['user']->username;
 	}
-	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('check:out')));
+	$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('check:out')));
 	$buy_more = elgg_echo('buy:more');
 	$hidden_values = elgg_view('input/securitytoken');
 	$buy_more_link = $CONFIG->url.'socialcommerce'.$username."/all";

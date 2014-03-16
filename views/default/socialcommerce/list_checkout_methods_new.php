@@ -26,7 +26,7 @@
 			</div>
 			<form id='select_payment_form' name='select_payment_form' method='post' action='{$action}'>
 EOF;
-		$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('checkout:select:checkout:method')));
+		$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('checkout:select:checkout:method')));
 		$i = 1;
 		foreach ($selected_checkout_methods as $selected_checkout_method){
 			if($i == 1 && empty($_SESSION['CHECKOUT']['checkout_method'])){
