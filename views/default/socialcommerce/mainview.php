@@ -45,7 +45,7 @@
 			<div class="storesrepo_title_owner_wrapper">
 <?php
 					//get the user and a link to their gallery
-					$user_gallery = get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
+					$user_gallery = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$owner->guid.'search_viewtype/gallery';
 ?>
 					<?php echo elgg_view_entity($owner, array('full_view' => false)); ?>
 					<small><?php echo $friendlytime; ?></small>

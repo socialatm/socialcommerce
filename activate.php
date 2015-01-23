@@ -22,9 +22,9 @@
 		$sc_settings = array(
 			'type' => 'object',
 			'subtype' => 'plugin',
-			'owner_guid' => get_config('site_id'),
-			'site_guid' => get_config('site_id'),
-			'container_guid' => get_config('site_id'),
+			'owner_guid' => elgg_get_config('site_id'),
+			'site_guid' => elgg_get_config('site_id'),
+			'container_guid' => elgg_get_config('site_id'),
 			'access_id' => '2',
 			'enabled' => 'no',
 			'title' => 'socialcommerce',

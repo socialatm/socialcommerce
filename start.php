@@ -14,7 +14,7 @@
 	    // Load system configuration
 		global $CONFIG;
 		// load socialcommerce model
-		require(get_config('pluginspath').'socialcommerce/modules/module.php');
+		require(elgg_get_config('pluginspath').'socialcommerce/modules/module.php');
 		
 		// make products show up in seach results
 		elgg_register_entity_type( 'object', 'stores' );
@@ -105,7 +105,7 @@
     }
    
 	// load product types
- 	require(get_config('pluginspath').'socialcommerce/modules/product_types.php');
+ 	require(elgg_get_config('pluginspath').'socialcommerce/modules/product_types.php');
 		
 	function socialcommerce_pagesetup() {
 		global $CONFIG;
@@ -114,7 +114,7 @@
 		$menu_item = array(
 			'name' => 'category',			
 			'text' => elgg_echo('stores:category'), 			
-			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/category/',			
+			'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/category/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -126,12 +126,12 @@
 				if( elgg_is_admin_logged_in() ){
 				
 					// load socialcommerce menu
-					require(get_config('pluginspath').'socialcommerce/modules/menu.php');
+					require(elgg_get_config('pluginspath').'socialcommerce/modules/menu.php');
 				
 					$menu_item = array(
 						'name' => 'new_product',			
 						'text' => elgg_echo('stores:addpost'), 			
-						'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/add/',			
+						'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/add/',			
 						'contexts' => array('stores', 'socialcommerce'),	
 						'parent_name' => 'stores',	
 						);
@@ -140,7 +140,7 @@
 					$menu_item = array(
 						'name' => 'new_category',			
 						'text' => elgg_echo('stores:addcategory'), 			
-						'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/addcategory/',			
+						'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/addcategory/',			
 						'contexts' => array('stores', 'socialcommerce'),	
 						'parent_name' => 'stores',	
 						);
@@ -149,7 +149,7 @@
 					$menu_item = array(
 						'name' => 'sold_items',			
 						'text' => elgg_echo('stores:sold:products'), 			
-						'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/sold/',			
+						'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/sold/',			
 						'contexts' => array('stores', 'socialcommerce'),	
 						'parent_name' => 'stores',	
 						);
@@ -164,7 +164,7 @@
 		$menu_item = array(
 			'name' => 'stores_user',			
 			'text' => sprintf(elgg_echo('stores:user'), $page_owner->username), 			
-			'href' => get_config('url').'socialcommerce/'. $page_owner->username .'/products/',			
+			'href' => elgg_get_config('url').'socialcommerce/'. $page_owner->username .'/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -173,7 +173,7 @@
 		$menu_item = array(
 			'name' => 'stores_user_friends',			
 			'text' => sprintf(elgg_echo('stores:user:friends'), $page_owner->username), 			
-			'href' => get_config('url').'socialcommerce/'. $page_owner->username .'/friends/products/',			
+			'href' => elgg_get_config('url').'socialcommerce/'. $page_owner->username .'/friends/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -183,7 +183,7 @@
 	
 	function socialcommerce_page_handler( $page ) {
 		global $CONFIG;
-		$base_path = get_config('pluginspath').'socialcommerce/pages/socialcommerce/';
+		$base_path = elgg_get_config('pluginspath').'socialcommerce/pages/socialcommerce/';
 		
 		/*****	The first component of a socialcommerce URL is the username	*****/
 		if (isset($page[0]) && !is_numeric($page[0])){
@@ -265,7 +265,7 @@
 									  	break;
 				case "read":			require($base_path.'product.php');
 										break;
-				case "search":			require(get_config('pluginspath').'socialcommerce/search.php'); 
+				case "search":			require(elgg_get_config('pluginspath').'socialcommerce/search.php'); 
 										break;
 				case "sold":			require($base_path.'sold.php');
 									  	break;
@@ -314,7 +314,7 @@
 			$filehandler->setFilename("socialcommerce/" . $entity->guid . $size . ".jpg");
 			
 			if ($filehandler->exists()) {
-				$url = get_config('url')."storesimage/{$entity->guid}/$size/$icontime.jpg";
+				$url = elgg_get_config('url')."storesimage/{$entity->guid}/$size/$icontime.jpg";
 				return $url;
 			}
 		}
@@ -334,7 +334,7 @@
 			set_input('size',$page[1]);
 		}
 		// Include the standard profile index
-		include( get_config('pluginspath').'socialcommerce/graphics/icon.php' );
+		include( elgg_get_config('pluginspath').'socialcommerce/graphics/icon.php' );
 	}
 	
 	/**
@@ -416,7 +416,7 @@
 	function stores_url( $entity ) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title($title);
-		return get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
+		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
 	}
 	
 	/**
@@ -428,13 +428,13 @@
 	function category_url($entity) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title($title);
-		return get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
+		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
 	}
 	
 	function cart_url($entity) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title($title);
-		return get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
+		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
 	}
 	
 	/**
@@ -446,7 +446,7 @@
 	function addcartURL( $entity ) {
 		$title = $entity->title;
 		$title = elgg_get_friendly_title( $title );								//	@todo - I have no idea why $title is in here...
-		return	get_config('url').'action/socialcommerce/add_to_cart/';
+		return	elgg_get_config('url').'action/socialcommerce/add_to_cart/';
 	}
 	
 	/**

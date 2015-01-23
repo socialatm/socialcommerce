@@ -11,7 +11,7 @@
 
 	echo __FILE__ .' at '.__LINE__; die();
 	 
-	require_once(get_config('path').'engine/start.php');
+	require_once(elgg_get_config('path').'engine/start.php');
 	global $CONFIG;
 	
 	gatekeeper();

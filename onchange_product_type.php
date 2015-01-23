@@ -10,7 +10,7 @@
 	 **/ 
 	 
 	global $CONFIG;
-	require_once(get_config('path').'engine/start.php');
+	require_once(elgg_get_config('path').'engine/start.php');
 	
 	$product_type_id = get_input('pt');
 	$action = get_input('at');

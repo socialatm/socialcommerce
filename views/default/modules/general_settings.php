@@ -21,7 +21,7 @@
 	$https_url_text= $socialcommerce->https_url_text;
 	// For check the check out url		//	@todo - need to look at this stuff... leave for now
 		if($https_url_text == "") {
-			$https_url_text = str_replace("http://", "https://", get_config('url'));
+			$https_url_text = str_replace("http://", "https://", elgg_get_config('url'));
 		}
 		
 	if($checkout_methods){
@@ -33,7 +33,7 @@
 	
 	// For check the check out url			//	@todo - need to look at this stuff... leave for now
 		if($https_url_text == "") {
-			$https_url_text = str_replace("http://", "https://", get_config('url'));
+			$https_url_text = str_replace("http://", "https://", elgg_get_config('url'));
 		}
 			
 	$sc_default_view = $socialcommerce->default_view ? $socialcommerce->default_view : elgg_echo('list');
@@ -80,5 +80,5 @@
 			?>
 		</div>
 		<div>
-			<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/settings.png" alt="" style="float:right"; />
+			<img src="<?php echo elgg_get_config('url'); ?>mod/socialcommerce/graphics/settings.png" alt="" style="float:right"; />
 		</div>

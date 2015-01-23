@@ -14,7 +14,7 @@
 	$page_owner = elgg_get_logged_in_user_entity();
 	
 	// Load Elgg engine
-	require_once(get_config('path').'engine/start.php');
+	require_once(elgg_get_config('path').'engine/start.php');
 	global $CONFIG;
 
 	// Set stores title

@@ -10,7 +10,7 @@
  	**/
 
 	// Get engine
-		require_once(get_config('path').'engine/start.php');
+		require_once(elgg_get_config('path').'engine/start.php');
 	// Get file GUID
 		$file_guid = (int) get_input('stores_guid',0);
 		

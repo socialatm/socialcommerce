@@ -9,7 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
-	require_once(get_config('path').'engine/start.php');
+	require_once(elgg_get_config('path').'engine/start.php');
 	global $CONFIG;
 	$address = (int) get_input('guid');
 	$title = elgg_view_title(elgg_echo('address:edit'));

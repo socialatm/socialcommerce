@@ -11,9 +11,9 @@
 	 
 function register_socialcommerce_settings(){
 
-	define("CHECKOUT_PATH", get_config('pluginspath').'socialcommerce/modules/checkout/');
-	define("SHIPPING_PATH", get_config('pluginspath').'socialcommerce/modules/shipping/');
-	define("CURRENCY_PATH", get_config('pluginspath').'socialcommerce/modules/currency/');
+	define("CHECKOUT_PATH", elgg_get_config('pluginspath').'socialcommerce/modules/checkout/');
+	define("SHIPPING_PATH", elgg_get_config('pluginspath').'socialcommerce/modules/shipping/');
+	define("CURRENCY_PATH", elgg_get_config('pluginspath').'socialcommerce/modules/currency/');
 	
 	load_module_languages();
 	SetGeneralValuesInConfig();
@@ -586,7 +586,7 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 			//-------- Site admin ----------------//
 			$admin_user = get_site_admin();
 			//-------- Site entity ----------------//
-			$site = get_entity(get_config('site_guid'));
+			$site = get_entity(elgg_get_config('site_guid'));
 				
 			$cart_items = elgg_get_entities_from_relationship(array(
 				'relationship' => 'cart_item',
@@ -787,7 +787,7 @@ EOF;
 							</td>
 						</tr>
 EOF;
-					$order_page = get_config('url').'socialcommerce/'.$buyer->username.'/order/';
+					$order_page = elgg_get_config('url').'socialcommerce/'.$buyer->username.'/order/';
 					if($product->mimetype && $product->product_type_id == 2){
 						$download_condition = <<<EOF
 							<div>
@@ -808,7 +808,7 @@ EOF;
 						$download_condition = "";
 					}
 						$ShippingMethod = 'None';
-					$order_link = get_config('url').'socialcommerce/'.$buyer->username.'/order_products/'.$order_guid;
+					$order_link = elgg_get_config('url').'socialcommerce/'.$buyer->username.'/order_products/'.$order_guid;
 					$view_total_price = get_price_with_currency($grand_total_price);
 					$mail_body = sprintf(elgg_echo('order:mail'),
 										 $buyer->name,
@@ -923,7 +923,7 @@ function view_success_page(){
 		$body = elgg_view_layout('one_sidebar', $params);
 		echo elgg_view_page($title1, $body);
 	}else{
-		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
+		forward(elgg_get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
@@ -943,7 +943,7 @@ function sc_view_cancel_page(){
 		$body = elgg_view_layout('one_sidebar', $params);
 		echo elgg_view_page(elgg_echo('cart:cancel'), $body);
 	}else{
-		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
+		forward(elgg_get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 
@@ -953,7 +953,7 @@ function view_checkout_error_page(){
 		$body = elgg_view($view);
 		return $body;
 	}else{
-		forward(get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
+		forward(elgg_get_config('url')."socialcommerce/{$_SESSION['user']->username}/all");
 	}
 }
 

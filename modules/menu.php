@@ -14,7 +14,7 @@
 		$menu_item = array(
 			'name' => 'new_product_'.$key->display_val,			
 			'text' => sprintf(elgg_echo("product:type:menu"),$key->display_val), 			
-			'href' => get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/add/'.$key->value.'/',			
+			'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/add/'.$key->value.'/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);

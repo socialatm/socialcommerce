@@ -34,7 +34,7 @@
 					}else{
 						$body = elgg_echo('cart:success:content');
 						$back_text = elgg_echo('checkout:back:text');
-						$action = get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all';
+						$action = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all';
 						
 						$area2 = <<< AREA2
 							<div class="contentWrapper stores">
@@ -53,6 +53,6 @@ AREA2;
 			}
 			unset($_SESSION['CHECKOUT']);
 		}else{
-			forward(get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all');
+			forward(elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all');
 		}
 ?>

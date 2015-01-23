@@ -20,7 +20,7 @@
 
 			$label = $tag != 'all' ? elgg_echo($tag) : elgg_echo('all') ;
 			
-			$url = get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/';
+			$url = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/';
 			
 			if ($tag != "all")
 				$url .= 'md_type/simpletype/tag/'.urlencode($tag);

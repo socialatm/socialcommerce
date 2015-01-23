@@ -10,7 +10,7 @@
 	 **/ 
 	 
 	// Load Elgg engine
-		require_once(get_config('path').'engine/start.php');
+		require_once(elgg_get_config('path').'engine/start.php');
 		
 		$user_guid = get_input('u_id');
 		elgg_set_page_owner_guid($user_guid);

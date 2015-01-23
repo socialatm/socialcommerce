@@ -11,7 +11,7 @@
 	 
 	global $CONFIG;
 	
-	$site = get_entity(get_config('site_guid'));
+	$site = get_entity(elgg_get_config('site_guid'));
 	$from = get_input('contact_email');
 	$name = get_input('contact_name');
 	$subject = get_input('subject');

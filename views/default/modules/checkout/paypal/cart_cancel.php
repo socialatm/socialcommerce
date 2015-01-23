@@ -14,9 +14,9 @@
  	$content = $title
 		.'<div class="contentWrapper stores">'.
 			elgg_echo('cart:cancel:content')
-			.'<form action="'.get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cart" method="post">
+			.'<form action="'.elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cart" method="post">
 				<input type="submit" name="btn_submit" value="'.elgg_echo("checkout:confirm:btn").'" class="elgg-button elgg-button-submit">
-			</form><br /><span class="buy_more"> or <a href="'.get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all">'.elgg_echo('buy:more').'</a></span>
+			</form><br /><span class="buy_more"> or <a href="'.elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/all">'.elgg_echo('buy:more').'</a></span>
 		</div>';
 
 	echo $content;			//	@todo - look at these links

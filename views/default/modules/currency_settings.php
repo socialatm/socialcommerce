@@ -127,5 +127,5 @@
 		<?php } ?>
 	</div>
 	<div>
-		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/graphics/dollars.png" alt="" style="float:right"; />
+		<img src="<?php echo elgg_get_config('url'); ?>mod/socialcommerce/graphics/dollars.png" alt="" style="float:right"; />
 	</div>

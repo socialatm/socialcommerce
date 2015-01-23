@@ -13,7 +13,7 @@
 	header("Cache-Control: no-cache");
 	header("Pragma: nocache");
 	
-	require_once(get_config('path').'engine/start.php');
+	require_once(elgg_get_config('path').'engine/start.php');
 	
 	//getting the values
 	elgg_set_context('add_order');

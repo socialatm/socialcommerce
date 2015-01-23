@@ -12,7 +12,7 @@
 	admin_gatekeeper();
 
 	 global $CONFIG;
-	require_once(get_config('path').'engine/start.php');
+	require_once(elgg_get_config('path').'engine/start.php');
 	
 	$category = (int) get_input('category_guid');
 	$title = elgg_view_title(elgg_echo('category:edit'));

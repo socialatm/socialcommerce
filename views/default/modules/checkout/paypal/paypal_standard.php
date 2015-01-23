@@ -53,5 +53,5 @@
 			?>
 	</div>
 	<div>
-		<img src="<?php echo get_config('url'); ?>mod/socialcommerce/views/default/modules/checkout/paypal/images/paypal.png" alt="" style="float:right"; />
+		<img src="<?php echo elgg_get_config('url'); ?>mod/socialcommerce/views/default/modules/checkout/paypal/images/paypal.png" alt="" style="float:right"; />
 	</div>

@@ -51,7 +51,7 @@
 	
 		$method = $_SESSION['CHECKOUT']['checkout_method'];		//	@todo - what if the $method != 'paypal'  ??
 		$total = $_SESSION['CHECKOUT']['total'];
-		$validate_currency = validate_currency(get_config('currency_code'), $total, 'paypal');
+		$validate_currency = validate_currency(elgg_get_config('currency_code'), $total, 'paypal');
 		$email = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
 		$paypal_environment = elgg_get_plugin_setting('socialcommerce_paypal_environment', 'socialcommerce');
 		
@@ -101,9 +101,9 @@
 			'custom'		=> $custom,
 		
 			// Notification and return URLS
-			'return'		=> get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cart_success',
-			'cancel_return'	=> get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cancel',
-			'notify_url'	=> get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/ipn',
+			'return'		=> elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cart_success',
+			'cancel_return'	=> elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/cancel',
+			'notify_url'	=> elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/ipn',
 	
 			// Customer details
 			'first_name'	=> $BillingDetails->firstname,
@@ -202,10 +202,10 @@ if($process_payment){
 	$post_values = $_POST;
 	
 /*****	@todo - need to test this part	*****/
-	if(get_config('currency_code') != $payment_currency){
-		$converted_currency = convert_currency($payment_currency, get_config('currency_code'), $payment_gross);
+	if(elgg_get_config('currency_code') != $payment_currency){
+		$converted_currency = convert_currency($payment_currency, elgg_get_config('currency_code'), $payment_gross);
 		$payment_gross = $converted_currency;
-		$converted_currency = convert_currency($payment_currency, get_config('currency_code'), $payment_fee);
+		$converted_currency = convert_currency($payment_currency, elgg_get_config('currency_code'), $payment_fee);
 		$payment_fee = $converted_currency;
 	}
 	

@@ -12,7 +12,7 @@
 	gatekeeper();
 	load_checkout_actions();
 	load_currency_actions();
-	$site = get_entity(get_config('site_guid'));
+	$site = get_entity(elgg_get_config('site_guid'));
 	
 	$manage_action = get_input('manage_action');
 	
