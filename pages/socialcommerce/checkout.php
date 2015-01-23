@@ -8,9 +8,22 @@
 	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+
+// echo __FILE__ .' at '.__LINE__; 
+
+$payment = new stdClass();
+$_SESSION['PAYMENT'] = $payment;
+
+
+require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+$arr2 = get_defined_vars();
+krumo($_SESSION['CHECKOUT']); // die();
+krumo($_SESSION);
+//krumo(get_input('checkout_status'));
 	 
 $page_owner = elgg_get_logged_in_user_entity();
 $checkout_status = get_input('checkout_status')? get_input('checkout_status') : 'begin';
+krumo($checkout_status);
 
 switch ($checkout_status):
 	case 'begin':
@@ -108,6 +121,7 @@ $content .= '
                 <div>';
 				
 $content .= 				 elgg_view("socialcommerce/cart_confirm_list_new", array('checkout_confirm'=>$checkout_confirm)).'
+							 
                     
                 </div>
             </div>

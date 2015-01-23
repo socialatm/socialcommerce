@@ -142,7 +142,7 @@ $(document).ready(function () {
 				break;
 			case 1:
 				window.currentForm = $('#select_shipping_method_form').prop("id");
-				alert('the Current Form: '+window.currentForm);
+				alert('the Current Form: <b>'+window.currentForm+'</b>');
 				return true;
 				break;
 			case 2:

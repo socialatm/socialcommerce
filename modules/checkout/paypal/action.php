@@ -46,6 +46,9 @@
 	}
 	
 	function checkout_payment_settings_paypal(){
+	
+	
+	
 		$method = $_SESSION['CHECKOUT']['checkout_method'];		//	@todo - what if the $method != 'paypal'  ??
 		$total = $_SESSION['CHECKOUT']['total'];
 		$validate_currency = validate_currency(get_config('currency_code'), $total, 'paypal');
@@ -82,6 +85,8 @@
 		/****	make custom setting into an array	*****/
 		$custom = array( $method, elgg_get_page_owner_guid(), $BillingDetails->guid, $ShippingDetails->guid, $_SESSION['CHECKOUT']['shipping_method'] );	//	@todo - replace the page owner thing...
 		
+		$custom = serialize($custom);
+		
 		$hiddenFields = array(
 			'cmd'			=> '_cart',
 			'upload'			=> 1,
@@ -106,7 +111,8 @@
 			'address1'		=> $BillingDetails->address_line_1,
 			'address2'		=> $BillingDetails->address_line_2,
 			'city'			=> $BillingDetails->city,
-			'state'			=> $state_abbrv,
+			'state'			=> $BillingDetails->state,
+	//		'state'			=> 'me',
 			'zip'			=> $BillingDetails->pincode,
 			'country'		=> get_iso2_by_fields('iso3',$BillingDetails->country),
 			'night_phone_a'	=> substr($BillingDetails->mobileno , 0, 3 ),

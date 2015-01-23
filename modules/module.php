@@ -2,10 +2,10 @@
 	/**
 	 * Elgg module - actions
 	 * 
-	 * @package Elgg SocialCommerce
+	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -350,6 +350,9 @@ function load_checkout_actions(){
 }
 
 function check_checkout_form(){
+
+
+
 	if(is_dir(CHECKOUT_PATH.$_SESSION['CHECKOUT']['checkout_method'])){
 		if (file_exists(CHECKOUT_PATH.$_SESSION['CHECKOUT']['checkout_method'].'/action.php')) {
 			require_once(CHECKOUT_PATH.$_SESSION['CHECKOUT']['checkout_method']."/action.php");
@@ -456,13 +459,28 @@ function html_escape($text){
  
 function redirect_to_form( $url, $fields ){
 
-	global $CONFIG;
+ //echo __FILE__ .' at '.__LINE__; 
+// require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php'); 
+// $arr2 = get_defined_vars();
+// krumo($arr2); // die();
+
+
+//	global $CONFIG;
 	$formFields = '';
+	
+	
+	
 	if(is_array($fields)){
 		foreach($fields as $name => $value) {
 			$formFields .= "<input type=\"hidden\" name=\"".html_escape($name)."\" value=\"".html_escape($value)."\" />\n";
 		}
 	}
+
+//	return json_encode($formFields);
+ //$arr2 = get_defined_vars();
+// krumo($arr2); die();
+	
+	
 		$detailed_view = elgg_echo('processing').'...';
 		$auto_redirect_script = <<<EOF
 			<div id="load_action"></div>
@@ -1478,7 +1496,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 			$quantity_text = elgg_echo("quantity:available");
 		}else{
 			if(elgg_is_logged_in()){
-				$quantity_box = elgg_view('input/text',array('internalname' => "cartquantity[{$entity->guid}]",'class'=>"input_quantity", 'value'=>$entity->quantity));
+				$quantity_box = elgg_view('input/text',array('name' => "cartquantity[{$entity->guid}]",'class'=>"input_quantity", 'value'=>$entity->quantity));
 				$quantity_text = elgg_echo("quantity");
 			}
 		}
