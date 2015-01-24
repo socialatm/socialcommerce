@@ -14,7 +14,7 @@
 		'id' => 'product_guid',
 		'value' => $vars['product_guid'],
 		'class' => '',
-		'internalname'=>'product_guid',
+		'name'=>'product_guid',
 		'style' => '',
 		));
 		
@@ -23,7 +23,7 @@
 		'id' => 'submit_add_wishlist',
 		'value' => elgg_echo('add:wishlist'),
 		'class' => 'elgg-button-action',
-		'internalname'=>'last_name',
+		'name'=>'last_name',
 		));
 ?>
 		

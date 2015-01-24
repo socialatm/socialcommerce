@@ -9,6 +9,5 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	echo $vars['url'] . "mod/socialcommerce/graphics/defaulttiny.gif";
+	echo elgg_get_config('url'). "mod/socialcommerce/graphics/defaulttiny.gif";
 ?>
