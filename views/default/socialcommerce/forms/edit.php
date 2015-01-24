@@ -59,7 +59,7 @@
 		
 	$chk_tax_type = '';
 	$country_details = '';
-    $product_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
+    $product_type = elgg_view('input/product_type', array('name' => 'product_type_id', 'value' => $product_type_id));
 		
     $category_lists = elgg_get_entities_from_metadata(array(
 		'product_type_id' => $product_type_id,
@@ -75,7 +75,7 @@
         }
 		
 	    if(!empty($category_lists)){
-			$category_view = elgg_view('input/dropdown', array('internalname' => 'storescategory', 
+			$category_view = elgg_view('input/dropdown', array('name' => 'storescategory', 
 													  'value' => $category, 
 													  'js' => "id='storescategory'", 
 													  'options_values' => $options_values
@@ -84,8 +84,8 @@
         	$category_view = elgg_echo('no:category');	
         }
 		
-	$text_textarea = elgg_view('input/longtext', array('internalname' => 'storesbody', 'value' => $body));
-	$image_input = elgg_view("input/file",array('internalname' => 'product_image'));
+	$text_textarea = elgg_view('input/longtext', array('name' => 'storesbody', 'value' => $body));
+	$image_input = elgg_view("input/file",array('name' => 'product_image'));
 	
 	if ($vars['entity']->guid > 0){
 		$uploaded_image = elgg_view("socialcommerce/image", array(
@@ -96,7 +96,7 @@
 	}
 	
 	if (($action == "socialcommerce/add" && $product_type_id == 2 && $vars['entity']->mimetype == "")||($vars['entity']->guid > 0 && $product_type_id == 2 && $vars['entity']->mimetype == "")){
-	    $upload_input = elgg_view("input/file",array('internalname' => 'upload'));
+	    $upload_input = elgg_view("input/file",array('name' => 'upload'));
 		$form_upload = 
 			'<div>
 				<label for="upload">'.elgg_echo('stores:file').':</label><br />'
@@ -141,12 +141,12 @@
 					$fields .= "<div style='float:left;'>".elgg_view("socialcommerce/icon", array("mimetype" => $vars['entity']->mimetype, 'thumbnail' => $vars['entity']->thumbnail, 'stores_guid' => $vars['entity']->guid))."</div>";
 					$fields .= "<div class='change_product_file'><a href='javascript:void(0);' onclick='load_edit_product_detaile();'><b>".elgg_echo('product:edit:file')."</a></div><div class='clear'></div>";
 					$fields .= "<div id='product_file_change'>".elgg_view("input/{$valtype['field']}",array(
-															'internalname' => $shortname,
+															'name' => $shortname,
 															'value' => $value,
 															)).'</div>';
 				}else {
 					$fields .= elgg_view("input/{$valtype['field']}",array(
-															'internalname' => $shortname,
+															'name' => $shortname,
 															'value' => $value,
 															));
 				}
@@ -154,9 +154,9 @@
 			}
 		}
         
-	$tag_input = elgg_view('input/tags', array('internalname' => 'storestags','value' => $tags));
-    $access_input = elgg_view('input/access', array('internalname' => 'access_id', 'value' => $access_id));
-    $submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('save')));
+	$tag_input = elgg_view('input/tags', array('name' => 'storestags','value' => $tags));
+    $access_input = elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id));
+    $submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('save')));
 
 	if (isset($vars['container_guid'])) { $entity_hidden = '<input type="hidden" name="container_guid" value="'.$vars['container_guid'].'" />'; }
 	if (isset($vars['entity'])) { $entity_hidden .= '<input type="hidden" name="stores_guid" id="stores_guid" value="'.$vars['entity']->getGUID().'" />'; }
@@ -172,7 +172,7 @@
 				$("#product_file_change").show();
 			}
         </script>
-		<form action="'.$vars['url'].'action/'.$action.'" enctype="multipart/form-data" method="post">
+		<form action="'.elgg_get_config('url').'action/'.$action.'" enctype="multipart/form-data" method="post">
 			<div>
 				<label for="storestitle">'.elgg_echo('title').':</label>'
 					.elgg_view('input/text', array(

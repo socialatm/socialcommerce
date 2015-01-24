@@ -11,7 +11,7 @@
 	 
 	global $CONFIG;
 	
-	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('check:out')));
+	$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('check:out')));
 	
 	$buy_more_link = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/all";
 	$buy_more = elgg_echo('buy:more');
