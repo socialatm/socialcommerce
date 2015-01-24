@@ -52,7 +52,7 @@ $('a.show_product_mostly_desc').click(function () {
 	if($display == 1){
 		$ratings = get_purchased_orders('final_value', '', 'object', 'rating', '', '', true, '', 'DESC', $number, 0, '', elgg_get_page_owner_guid());
 	}else if($display == 2){
-		if ($friends = get_user_friends( elgg_get_page_owner_guid(), 'rating', 999999, 0)) {
+		if ($friends = $owner->getFriends(array('limit' => 0, 'subtype' => 'rating'))) {
 			$friendguids = array();
 			foreach($friends as $friend) {
 				$friendguids[] = $friend->getGUID();
