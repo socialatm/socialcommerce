@@ -36,7 +36,7 @@
 					'id' => 'currency_name',
 					'value' => $currency_name,
 					'class' => 'elgg-input-text',
-					'internalname'=>'currency_name',
+					'name'=>'currency_name',
 					));
 			?>
 	</div><br />
@@ -64,7 +64,7 @@
 				'id' => 'currency_code',
 				'value' => $currency_code,
 				'class' => 'elgg-input-text',
-				'internalname'=>'currency_code',
+				'name'=>'currency_code',
 				));
 		?>
 	</div><br />
@@ -75,7 +75,7 @@
 				'id' => 'exchange_rate',
 				'value' => $exchange_rate,
 				'class' => 'elgg-input-text',
-				'internalname'=>'exchange_rate',
+				'name'=>'exchange_rate',
 				));
 		?>
 	</div><br />
@@ -90,7 +90,7 @@
 				'id' => 'currency_token',
 				'value' => $currency_token,
 				'class' => 'elgg-input-text',
-				'internalname'=>'currency_token',
+				'name'=>'currency_token',
 				));
 		?>
 	</div><br />
@@ -112,12 +112,12 @@
 				'id' => 'decimal_token',
 				'value' => $decimal_token,
 				'class' => 'elgg-input-text',
-				'internalname'=>'decimal_token',
+				'name'=>'decimal_token',
 				));
 		?>
 	</div><br />
 	<div>
-		<?php echo elgg_view('input/hidden', array('internalname' => 'set_default', 'value' => $default )); ?>
+		<?php echo elgg_view('input/hidden', array('name' => 'set_default', 'value' => $default )); ?>
 	</div>
 	<div>
 		<?php if($default == 0 || $status != 'default'){ ?>
