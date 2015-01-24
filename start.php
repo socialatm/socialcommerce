@@ -82,10 +82,11 @@
 				elgg_register_widget_type('purchased',elgg_echo("stores:purchased:widget"),elgg_echo("stores:purchased:widget:description"));
 			}
 			
-		// Register a URL handler for files
-			elgg_register_entity_url_handler('object', 'stores', 'stores_url');
-			elgg_register_entity_url_handler('object', 'category', 'category_url');
-			elgg_register_entity_url_handler('object', 'cart', 'cart_url');
+		// Register URL handlers
+			elgg_register_plugin_hook_handler('entity:url', 'object', 'stores_set_url');
+			elgg_register_plugin_hook_handler('entity:url', 'object', 'category_set_url');
+			elgg_register_plugin_hook_handler('entity:url', 'object', 'cart_set_url');
+
 			
 		// Now override icons
 			elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'socialcommerce_image_hook');
@@ -413,10 +414,13 @@
 	 * @param ElggEntity $entity File entity
 	 * @return string File URL
 	 */
-	function stores_url( $entity ) {
-		$title = $entity->title;
-		$title = elgg_get_friendly_title($title);
+		
+	function stores_set_url($hook, $type, $url, $params) {
+		$entity = $params['entity'];
+		if (elgg_instanceof($entity, 'object', 'stores')) {
+			$title = elgg_get_friendly_title($entity->title);
 		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
+	}
 	}
 	
 	/**
@@ -425,16 +429,21 @@
 	 * @param ElggEntity $entity File entity
 	 * @return string File URL
 	 */
-	function category_url($entity) {
-		$title = $entity->title;
-		$title = elgg_get_friendly_title($title);
+		
+	function category_set_url($hook, $type, $url, $params) {
+		$entity = $params['entity'];
+		if (elgg_instanceof($entity, 'object', 'sc_category')) {
+			$title = elgg_get_friendly_title($entity->title);
 		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
 	}
+	}
 	
-	function cart_url($entity) {
-		$title = $entity->title;
-		$title = elgg_get_friendly_title($title);
-		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cart/'.$entity->getGUID().'/'.$title;
+	function cart_set_url($hook, $type, $url, $params) {
+		$entity = $params['entity'];
+		if (elgg_instanceof($entity, 'object', 'cart')) {
+			$title = elgg_get_friendly_title($entity->title);
+			return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
+		}
 	}
 	
 	/**
