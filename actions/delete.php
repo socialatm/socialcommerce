@@ -13,13 +13,13 @@
 	$product_guid = (int)$page[2];
 	
 	// be sure user has permission to delete before continuing
-	if(!can_edit_entity( $product_guid, $pageowner_guid )){
+	if(!$product->canEdit()){
 		register_error(elgg_echo("stores:deletefailed"));
 		forward('socialcommerce/'.$_SESSION['user']->username.'/all/');
 	}
 	
 	if ($stores = get_entity($product_guid)) {
-			$delete = delete_entity($product_guid);
+			$delete = $stores->delete();
 						
 			if (!$delete) {
 				register_error(elgg_echo("stores:deletefailed"));
