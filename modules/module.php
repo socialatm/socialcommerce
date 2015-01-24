@@ -153,7 +153,13 @@ function genarateCartFromSession(){
 						if($cart_item_guid){
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
 							if(in_array('cart_add', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')) ))
-								add_to_river('river/object/cart/create','cartadd',$_SESSION['user']->guid,$product->guid);	
+								elgg_create_river_item( array(
+									'view' => 'river/object/cart/create',
+									'action_type' => 'cartadd',
+									'subject_guid' => $_SESSION['user']->guid,
+									'object_guid' => $stores->guid
+									)
+								);	
 						}
 					}
 				}
@@ -190,7 +196,13 @@ function genarateCartFromSession(){
 						if($cart_item_guid){
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
 							if(in_array('product_checkout', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce'))))	//	@todo - maybe move this and add a 'cart_add' setting??
-								add_to_river('river/object/cart/create','cartadd',$_SESSION['user']->guid,$product->guid);
+								elgg_create_river_item( array(
+									'view' => 'river/object/cart/create',
+									'action_type' => 'cartadd',
+									'subject_guid' => $_SESSION['user']->guid,
+									'object_guid' => $product->guid
+									)
+								);	
 						}
 					}
 				}
@@ -306,7 +318,8 @@ function sc_get_checkout_methods(){
 		$checkout_methods = array();
 		foreach ($checkout_lists as $checkout_list){
 			if (file_exists(CHECKOUT_PATH.$checkout_list.'/method.xml')) {
-				$xml = xml_to_object(file_get_contents(CHECKOUT_PATH.$checkout_list.'/method.xml'));
+				$xml = new ElggXMLElement(file_get_contents(CHECKOUT_PATH.$checkout_list.'/method.xml'));
+				
 				if ($xml){
 					$elements = array();
 					if($xml->children){
@@ -380,7 +393,8 @@ function sc_get_shipping_methods(){
 		$shipping_methods = array();
 		foreach ($shipping_lists as $shipping_list){
 			if (file_exists(SHIPPING_PATH.$shipping_list.'/method.xml')) {
-				$xml = xml_to_object(file_get_contents(SHIPPING_PATH.$shipping_list.'/method.xml'));
+				$xml = new ElggXMLElement(file_get_contents(SHIPPING_PATH.$shipping_list.'/method.xml'));
+								
 				if ($xml){
 					$elements = array();
 					if($xml->children){
@@ -639,7 +653,13 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 										
 					if($order_item_id){
 						if(in_array('product_checkout', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')))) {
-							add_to_river('river/object/stores/purchase', 'purchase', $buyer_guid, $product_id );
+							elgg_create_river_item( array(
+								'view' => 'river/object/stores/purchase',
+								'action_type' => 'purchase',
+								'subject_guid' => $buyer_guid,
+								'object_guid' => $product_id
+								)
+							);	
 						}
 												
 						//-------- Buyer Price ----------------//
@@ -678,7 +698,7 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 							$product->quantity = $product->quantity - $cart_item->quantity;
 							$product_update_guid = $product->save();
 							if(!$product_update_guid > 0){
-								$existing = get_data_row("SELECT * from {$CONFIG->dbprefix}metadata WHERE entity_guid = $product->guid and name_id=" . add_metastring('quantity') . " limit 1");
+								$existing = get_data_row("SELECT * from {$CONFIG->dbprefix}metadata WHERE entity_guid = $product->guid and name_id=" .elgg_get_metastring_id('quantity') . " limit 1");
 								if($existing){
 									$id = $existing->id;
 									$value = $product->quantity - $cart_item->quantity;
@@ -1076,7 +1096,8 @@ function convert_currency($convert_from="", $convert_to="", $amount=0){
 function register_country_state(){
 	global $CONFIG;
 	if ( file_exists($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml')) {
-		$xml = xml_to_object(file_get_contents($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml'));
+		$xml = new ElggXMLElement(file_get_contents($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml'));
+				
 		if ($xml && is_object($xml)){
 			$country = array();
 			foreach ($xml->children as $countries_array){
@@ -1282,7 +1303,7 @@ function get_product_from_metadata($meta_array,$type=null,$subtype=null,$where_s
 		foreach($meta_array as $meta_name => $meta_value) {
 			$metadata_join .= " JOIN {$CONFIG->dbprefix}metadata m{$mindex} on e.guid = m{$mindex}.entity_guid "; 
 			if($meta_name){
-				$nameid = get_metastring_id($meta_name);
+				$nameid = elgg_get_metastring_id($meta_name);
 				if($nameid){
 					$where .= " and m{$mindex}.name_id=".$nameid;
 				}else{
@@ -1290,7 +1311,7 @@ function get_product_from_metadata($meta_array,$type=null,$subtype=null,$where_s
 				}
 			}
 			if($meta_value){
-				$valueid = get_metastring_id($meta_value);
+				$valueid = elgg_get_metastring_id($meta_value);
 				if($valueid){
 					$where .= " and m{$mindex}.value_id=".$valueid;
 				}
