@@ -41,13 +41,13 @@
 		}
 
             $title_label = elgg_echo('title');
-			$title_textbox = elgg_view('input/text', array('internalname' => 'categorytitle', 'value' => $title));
-            $product_type = elgg_view('input/product_type', array('internalname' => 'product_type_id', 'value' => $product_type_id));
+			$title_textbox = elgg_view('input/text', array('name' => 'categorytitle', 'value' => $title));
+            $product_type = elgg_view('input/product_type', array('name' => 'product_type_id', 'value' => $product_type_id));
                
 $text_label = elgg_echo('category:text');
-                $text_textarea = elgg_view('input/longtext', array('internalname' => 'categorybody', 'value' => $body));
+                $text_textarea = elgg_view('input/longtext', array('name' => 'categorybody', 'value' => $body));
                 
-                $submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('save:category')));
+                $submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('save:category')));
 
                 if (isset($category->container_guid)) {
 					$entity_hidden = '<input type="hidden" name="container_guid" value="'.$category->container_guid.'" />';
@@ -58,7 +58,7 @@ $text_label = elgg_echo('category:text');
 				
 				$entity_hidden .= elgg_view('input/securitytoken');	
 				$form_body = <<<EOT
-                	<form action="{$vars['url']}action/{$action}" enctype="multipart/form-data" method="post">
+                	<form action="{elgg_get_config('url')}action/{$action}" enctype="multipart/form-data" method="post">
 						<p>
 							<label><span style="color:red">*</span> $title_label</label><br />
 				                        $title_textbox

@@ -56,39 +56,39 @@
 		}
 
         $fnaem_label = elgg_echo('first:name');
-        $fnaem_textbox = elgg_view('input/text', array('internalname' => 'first_name', 'value' => $firstname));
+        $fnaem_textbox = elgg_view('input/text', array('name' => 'first_name', 'value' => $firstname));
         
         $lname_label = elgg_echo('last:name');
-        $lname_textbox = elgg_view('input/text', array('internalname' => 'last_name', 'value' => $lastname));
+        $lname_textbox = elgg_view('input/text', array('name' => 'last_name', 'value' => $lastname));
         
         $address_line_1_label = elgg_echo('address:line:1');
-        $address_line_1_textbox = elgg_view('input/text', array('internalname' => 'address_line_1', 'value' => $address_line_1));
+        $address_line_1_textbox = elgg_view('input/text', array('name' => 'address_line_1', 'value' => $address_line_1));
         
         $address_line_2_label = elgg_echo('address:line:2');
-        $address_line_2_textbox = elgg_view('input/text', array('internalname' => 'address_line_2', 'value' => $address_line_2));
+        $address_line_2_textbox = elgg_view('input/text', array('name' => 'address_line_2', 'value' => $address_line_2));
         
         $city_label = elgg_echo('city');
-        $city_textbox = elgg_view('input/text', array('internalname' => 'city', 'value' => $city));
+        $city_textbox = elgg_view('input/text', array('name' => 'city', 'value' => $city));
         
         $state_label = elgg_echo('state');
-        $state_textbox = elgg_view('input/text', array('internalname' => 'state', 'value' => $state));
+        $state_textbox = elgg_view('input/text', array('name' => 'state', 'value' => $state));
                         
         $country_label = elgg_echo('country');
-        $country_textbox = elgg_view('input/text', array('internalname' => 'country', 'value' => $country));
+        $country_textbox = elgg_view('input/text', array('name' => 'country', 'value' => $country));
         
         $pincode_label = elgg_echo('pincode');
-        $pincode_textbox = elgg_view('input/text', array('internalname' => 'pincode', 'value' => $pincode));
+        $pincode_textbox = elgg_view('input/text', array('name' => 'pincode', 'value' => $pincode));
         
         $mobno_label = elgg_echo('mob:no');
-        $mobno_textbox = elgg_view('input/text', array('internalname' => 'mobileno', 'value' => $mobileno));
+        $mobno_textbox = elgg_view('input/text', array('name' => 'mobileno', 'value' => $mobileno));
         
         $phoneno_label = elgg_echo('phone:no');
-        $phoneno_textbox = elgg_view('input/text', array('internalname' => 'phoneno', 'value' => $phoneno));
+        $phoneno_textbox = elgg_view('input/text', array('name' => 'phoneno', 'value' => $phoneno));
         
         $access_label = elgg_echo('access');
-        $access_input = elgg_view('input/access', array('internalname' => 'access_id', 'value' => $access_id));
+        $access_input = elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id));
         
-        $submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('save')));
+        $submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('save')));
 
         if (isset($vars['container_guid']))
 			$entity_hidden = "<input type=\"hidden\" name=\"container_guid\" value=\"{$vars['container_guid']}\" />";
@@ -107,8 +107,8 @@
 			$country_label_none = elgg_echo('country:none');
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
-			$address_post_url = "{$vars['url']}action/{$action}";
-			$address_reload_url = "{$vars['url']}socialcommerce/{$_SESSION['user']->username}/view_address";
+			$address_post_url = "{elgg_get_config('url')}action/{$action}";
+			$address_reload_url = "{elgg_get_config('url')}socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
 					function save_address(){
@@ -205,7 +205,7 @@ EOF;
 		$form_body = <<<EOT
 			{$script}
 			<div class="address_form">
-	        	<form action="{$vars['url']}action/{$action}" method="post" {$javascript}>
+	        	<form action="{elgg_get_config('url')}action/{$action}" method="post" {$javascript}>
 					<p>
 						<label><span style="color:red">*</span>$fnaem_label</label><br />
 			                        $fnaem_textbox
