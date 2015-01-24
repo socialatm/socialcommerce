@@ -110,7 +110,7 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		
 	function socialcommerce_pagesetup() {
 		/*****	add menu items	*****/
-
+		$user = elgg_get_logged_in_user_entity();
 		$menu_item = array(
 			'name' => 'category',			
 			'text' => elgg_echo('stores:category'), 			
@@ -121,7 +121,6 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 			elgg_register_menu_item('site', $menu_item);
 		
 		if (elgg_get_context() == "stores" or elgg_get_context() == "socialcommerce") {
-			if (isset($_SESSION['guid']) && elgg_is_logged_in()) {	
 
 				if( elgg_is_admin_logged_in() ){
 				
@@ -157,8 +156,6 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 						
 				}		//	end if( elgg_is_admin_logged_in() ){
 					
-			} 
-			
 		$menu_item = array(
 			'name' => 'stores_user',			
 			'text' => sprintf(elgg_echo('stores:user'), $user->username), 			
