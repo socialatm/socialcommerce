@@ -22,7 +22,7 @@
 				
 ?>
 		<div>
-			<a  class="object_category_string" href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $category->guid; ?>/product_cate">
+			<a  class="object_category_string" href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $category->guid; ?>/product_cate">
 				<?php echo $category->title; ?>
 			</a>
 			<?php if($category->owner_guid == $_SESSION['user']->guid){ ?>
@@ -51,23 +51,23 @@
 					echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'tiny'));
 				
 				?>
-				<p class="storesrepo_owner_details"><b><a href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
+				<p class="storesrepo_owner_details"><b><a href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
 				<small><?php echo $friendlytime; ?></small></p>
 			</div>
 		</div>
 		<div class="storesrepo_maincontent">
 		
-				<div class="storesrepo_description"><?php echo autop($desc); ?></div>
+				<div class="storesrepo_description"><?php echo elgg_autop($desc); ?></div>
 		
 <?php
 	if ($category->canEdit()) {
 ?>
 	<div class="storesrepo_controls">
 		<p>
-			<a href="<?php echo $vars['url']; ?>mod/socialcommerce/edit_category.php?category_guid=<?php echo $category->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>&nbsp; 
+			<a href="<?php echo elgg_get_config('url'); ?>mod/socialcommerce/edit_category.php?category_guid=<?php echo $category->getGUID(); ?>"><?php echo elgg_echo('edit'); ?></a>&nbsp; 
 			<?php 
 				echo elgg_view('output/confirmlink',array(
-					'href' => $vars['url'] . "action/socialcommerce/delete_category?category=" . $category->getGUID(),
+					'href' => elgg_get_config('url'). "action/socialcommerce/delete_category?category=" . $category->getGUID(),
 					'text' => elgg_echo("delete"),
 					'confirm' => elgg_echo("category:delete:confirm"),
 				));  

@@ -50,7 +50,7 @@
 		
 <?php
 		
-		if(can_edit_entity($address_guid, $page_owner->guid )) { 			
+		if( $address->canEdit() ) { 			
 ?>
 			<div class="storesrepo_controls">
 				<a href="<?php echo $CONFIG->url; ?>socialcommerce/<?php echo $page_owner->username;?>/edit_address/<?php echo $address->guid; ?>"><?php echo elgg_echo('edit:address'); ?></a> 	

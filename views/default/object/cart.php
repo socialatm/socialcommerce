@@ -32,7 +32,7 @@
 		$info .= "</p>";
 		$info .= elgg_cart_quantity($cart);
 		$info .= "<div class=\"stores_remove\">".elgg_view('output/confirmlink',array(
-							'href' => $vars['url'] . "action/socialcommerce/remove_cart?cart_guid=" . $cart->getGUID(),
+							'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?cart_guid=" . $cart->getGUID(),
 							'text' => elgg_echo("remove"),
 							'confirm' => elgg_echo("cart:delete:confirm")
 						))."</div>"; 
