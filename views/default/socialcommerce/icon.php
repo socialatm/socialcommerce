@@ -30,7 +30,7 @@
 		case 'image/bmp' 	: 
 			if ($thumbnail) {
 				if ($size == 'small') {
-					echo "<img src=\"{$vars['url']}action/socialcommerce/icon?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" border=\"0\" />";
+					echo "<img src=\"{elgg_get_config('url')}action/socialcommerce/icon?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" border=\"0\" />";
 				} else {
 					echo "<img src=\"{$vars['url']}mod/socialcommerce/thumbnail.php?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" border=\"0\" />";
 				}

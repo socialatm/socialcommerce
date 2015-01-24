@@ -88,7 +88,7 @@
 <?php
 				/*****	start edit & delete buttons	*****/
 		
-					if(can_edit_entity( $product_guid, $customer_guid )){
+					if($product->canEdit()){
 ?>
 						<div class="storesrepo_controls">
 							<div class="edit_btn" style="float:left;">
@@ -130,8 +130,8 @@
 				<!-- Add to Cart Form -->
 				
 				<form method="post" action="<?php echo addcartURL($stores); ?>">
-				<?php echo elgg_view('input/hidden', array('internalname' => 'product_guid', 'value' => $product_guid)); ?>
-				<?php echo elgg_view('input/hidden', array('internalname' => 'customer_guid', 'value' => $customer_guid )); ?>
+				<?php echo elgg_view('input/hidden', array('name' => 'product_guid', 'value' => $product_guid)); ?>
+				<?php echo elgg_view('input/hidden', array('name' => 'customer_guid', 'value' => $customer_guid )); ?>
 				<?php echo elgg_view("socialcommerce/socialcommerce_cart", array('entity'=>$stores, 'product_type_details'=>$product_type_details, 'phase'=>1) ); ?>
 				<?php echo elgg_view('input/securitytoken'); ?>
 				</form>
@@ -167,7 +167,7 @@
 					?>
 					<?php echo  elgg_view("custom_field/display",array('entity'=>$vars['entity'])); ?>
 					<div class="features"><?php echo elgg_echo('features:des'); ?></div>
-					<div class="storesrepo_description"><?php echo autop($desc); ?></div>
+					<div class="storesrepo_description"><?php echo elgg_autop($desc); ?></div>
 				</td>
 		</tr>
 		</table>

@@ -17,12 +17,12 @@
 		if ($product->guid > 0 && (elgg_is_logged_in())) {
 			$cart_btn = elgg_view('input/submit', array('value' => elgg_echo("add:to:cart")));
 			
-			$form_body = elgg_view('input/hidden', array('internalname' => 'stores_guid', 'value' => $product->getGUID()));
+			$form_body = elgg_view('input/hidden', array('name' => 'stores_guid', 'value' => $product->getGUID()));
 			$form_body .= $cart_btn;
 			
 			if($product->product_type_id == 1){
 				$label = "<div style=\"float:left;margin-bottom:5px;\"><label>".elgg_echo("enter:quantity").": </label></div>
-				<div style=\"float:left;\"><p>" . elgg_view('input/text',array('internalname' => 'cartquantity')) . "</p></div>
+				<div style=\"float:left;\"><p>" . elgg_view('input/text',array('name' => 'cartquantity')) . "</p></div>
 				<div style=\"clear:both;float:left;width:300px;\"><div style=\"float:left;padding-left:20px;\">{$form_body}</div></div>";
 			}elseif ($product->product_type_id == 2){
 				$label = $form_body;
