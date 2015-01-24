@@ -120,8 +120,6 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 			);
 			elgg_register_menu_item('site', $menu_item);
 		
-		if (elgg_get_context() == "stores" or elgg_get_context() == "socialcommerce") {
-
 				if( elgg_is_admin_logged_in() ){
 				
 					// load socialcommerce menu
@@ -159,7 +157,7 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		$menu_item = array(
 			'name' => 'stores_user',			
 			'text' => sprintf(elgg_echo('stores:user'), $user->username), 			
-			'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/products/',			
+			'href' => elgg_get_config('url').'socialcommerce/'.$user->username .'/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -168,12 +166,11 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		$menu_item = array(
 			'name' => 'stores_user_friends',			
 			'text' => sprintf(elgg_echo('stores:user:friends'), $user->username), 			
-			'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/friends/products/',			
+			'href' => elgg_get_config('url').'socialcommerce/'.$user->username .'/friends/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
 			elgg_register_menu_item('site', $menu_item);
-		}
 	}
 	
 	function socialcommerce_page_handler( $page ) {
