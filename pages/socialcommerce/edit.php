@@ -16,7 +16,7 @@
 	$page_owner = elgg_get_logged_in_user_entity();
 	$page_owner_guid = $page_owner->guid;
 	
-	if(!can_edit_entity( $stores_guid, $page_owner_guid )){
+	if(!$stores->canEdit())){
 		register_error(elgg_echo("product:edit:fail"));
 		forward(REFERER);
 	}

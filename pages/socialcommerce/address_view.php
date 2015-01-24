@@ -36,7 +36,7 @@
 				$new = elgg_echo($type.':address:new');
 				$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>$type));
 				
-				$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo($type.':address')));
+				$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo($type.':address')));
 				$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 				$address_details = <<<EOF
 					<div>
