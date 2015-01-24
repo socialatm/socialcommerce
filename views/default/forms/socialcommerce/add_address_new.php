@@ -17,7 +17,7 @@
 					'id' => 'first_name',
 					'value' => $first_name,
 					'class' => '',
-					'internalname'=>'first_name',
+					'name'=>'first_name',
 					'style' => '',
 					));
 			?>
@@ -27,7 +27,7 @@
 					'id' => 'last_name',
 					'value' => $last_name,
 					'class' => '',
-					'internalname'=>'last_name',
+					'name'=>'last_name',
 					));
 			?>
 <label for="address_line_1"><?php echo elgg_echo('address:line:1'); ?>:</label>
@@ -36,7 +36,7 @@
 					'id' => 'address_line_1',
 					'value' => $address_line_1,
 					'class' => '',
-					'internalname'=>'address_line_1',
+					'name'=>'address_line_1',
 					));
 			?>
 <label for="address_line_2"><?php echo elgg_echo('address:line:2'); ?>:</label>
@@ -45,7 +45,7 @@
 					'id' => 'address_line_2',
 					'value' => $address_line_2,
 					'class' => '',
-					'internalname'=>'address_line_2',
+					'name'=>'address_line_2',
 					));
 			?>
 <label for="city"><?php echo elgg_echo('city'); ?>:</label>
@@ -54,7 +54,7 @@
 					'id' => 'city',
 					'value' => $city,
 					'class' => 'elgg-input-text',
-					'internalname'=>'last_name',
+					'name'=>'last_name',
 					));
 			?>
 <label for="state"><?php echo elgg_echo('state'); ?>:</label>
@@ -63,7 +63,7 @@
 					'id' => 'state',
 					'value' => $state,
 					'class' => '',
-					'internalname'=>'state',
+					'name'=>'state',
 					));
 			?>
 <label for="pincode"><?php echo elgg_echo('pincode'); ?>:</label>
@@ -72,7 +72,7 @@
 					'id' => 'pincode',
 					'value' => $pincode,
 					'class' => '',
-					'internalname'=>'pincode',
+					'name'=>'pincode',
 					));
 			?>
 <label for="country"><?php echo elgg_echo('country'); ?>:</label>
@@ -81,7 +81,7 @@
 					'id' => 'country',
 					'value' => $country,
 					'class' => '',
-					'internalname'=>'country',
+					'name'=>'country',
 					));
 			?>
 
@@ -91,7 +91,7 @@
 					'id' => 'mobileno',
 					'value' => $mobileno,
 					'class' => '',
-					'internalname'=>'mobileno',
+					'name'=>'mobileno',
 					));
 			?>
 <label for="phoneno"><?php echo elgg_echo('phone:no'); ?>:</label>
@@ -100,7 +100,7 @@
 					'id' => 'phoneno',
 					'value' => $phoneno,
 					'class' => '',
-					'internalname'=>'phoneno',
+					'name'=>'phoneno',
 					));
 			?>
 			
