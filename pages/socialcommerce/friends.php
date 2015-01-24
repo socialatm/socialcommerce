@@ -4,8 +4,8 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
@@ -14,7 +14,7 @@
 	$search_viewtype = get_input('search_viewtype');
 	$limit = ($search_viewtype == 'gallery') ? 20 : 10 ;
 	$view = get_input('view');
-	$user_guid = $_SESSION['user']->guid;
+	$user = elgg_get_logged_in_user_entity();
 	
 	if ($friends = $user->getFriends(array('limit' => 0))) {
 		$friendguids = array();
