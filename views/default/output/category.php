@@ -18,7 +18,7 @@
 			echo $category->title;
 		}else{
 ?>
-			<a  class="object_category_string" href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $vars['value']; ?>/product_cate">
+			<a  class="object_category_string" href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $vars['value']; ?>/product_cate">
 				<?php echo $category->title; ?>
 			</a>
 <?php

@@ -23,7 +23,7 @@
 	}else{
 		if (is_array($default_product_types) && sizeof($default_product_types) > 0 && $vars['value']) {	 
 ?>
-			<a  class="object_product_type_string" href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $vars['value'];?>/type">
+			<a  class="object_product_type_string" href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $vars['value'];?>/type">
 				<?php 
 					foreach ($default_product_types as $default_product_type){
 						if($default_product_type->value == $vars['value']){
