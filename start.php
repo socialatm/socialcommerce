@@ -4,15 +4,15 @@
 	 * 
 	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
+	 * @author ray peaslee
 	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
 	function socialcommerce_init() {
 	    
-	    // Load system configuration
-		global $CONFIG;
+require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	    
 		// load socialcommerce model
 		require(elgg_get_config('pluginspath').'socialcommerce/modules/module.php');
 		
@@ -109,13 +109,12 @@
  	require(elgg_get_config('pluginspath').'socialcommerce/modules/product_types.php');
 		
 	function socialcommerce_pagesetup() {
-		global $CONFIG;
 		/*****	add menu items	*****/
 
 		$menu_item = array(
 			'name' => 'category',			
 			'text' => elgg_echo('stores:category'), 			
-			'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/category/',			
+			'href' => elgg_get_config('url').'socialcommerce/'.$user->username .'/category/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -132,7 +131,7 @@
 					$menu_item = array(
 						'name' => 'new_product',			
 						'text' => elgg_echo('stores:addpost'), 			
-						'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/add/',			
+						'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/add/',			
 						'contexts' => array('stores', 'socialcommerce'),	
 						'parent_name' => 'stores',	
 						);
@@ -141,7 +140,7 @@
 					$menu_item = array(
 						'name' => 'new_category',			
 						'text' => elgg_echo('stores:addcategory'), 			
-						'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/addcategory/',			
+						'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/addcategory/',			
 						'contexts' => array('stores', 'socialcommerce'),	
 						'parent_name' => 'stores',	
 						);
@@ -150,7 +149,7 @@
 					$menu_item = array(
 						'name' => 'sold_items',			
 						'text' => elgg_echo('stores:sold:products'), 			
-						'href' => elgg_get_config('url').'socialcommerce/'. $_SESSION['user']->username .'/sold/',			
+						'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/sold/',			
 						'contexts' => array('stores', 'socialcommerce'),	
 						'parent_name' => 'stores',	
 						);
@@ -160,12 +159,10 @@
 					
 			} 
 			
-		$page_owner = elgg_get_logged_in_user_entity();
-			
 		$menu_item = array(
 			'name' => 'stores_user',			
-			'text' => sprintf(elgg_echo('stores:user'), $page_owner->username), 			
-			'href' => elgg_get_config('url').'socialcommerce/'. $page_owner->username .'/products/',			
+			'text' => sprintf(elgg_echo('stores:user'), $user->username), 			
+			'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -173,8 +170,8 @@
 			
 		$menu_item = array(
 			'name' => 'stores_user_friends',			
-			'text' => sprintf(elgg_echo('stores:user:friends'), $page_owner->username), 			
-			'href' => elgg_get_config('url').'socialcommerce/'. $page_owner->username .'/friends/products/',			
+			'text' => sprintf(elgg_echo('stores:user:friends'), $user->username), 			
+			'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/friends/products/',			
 			'contexts' => array('stores', 'socialcommerce'),	
 			'parent_name' => 'stores',	
 			);
@@ -183,7 +180,9 @@
 	}
 	
 	function socialcommerce_page_handler( $page ) {
-		global $CONFIG;
+	
+//	krumo($page);
+	
 		$base_path = elgg_get_config('pluginspath').'socialcommerce/pages/socialcommerce/';
 		
 		/*****	The first component of a socialcommerce URL is the username	*****/
