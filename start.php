@@ -5,7 +5,7 @@
 	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
 	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
@@ -63,7 +63,7 @@
 			elgg_extend_view("profile/menu/links","socialcommerce/menu");
 					
 		// Load the language file
-			register_translations($CONFIG->pluginspath . "socialcommerce/languages/");
+			register_translations(elgg_get_config('pluginspath').'socialcommerce/languages/');
 			
 		// Register a page handler, so we can have nice URLs
 			elgg_register_page_handler("socialcommerce", "socialcommerce_page_handler");
@@ -384,7 +384,7 @@
 	function get_storestype_cloud($owner_guid = "", $friends = false) {
 		
 		if($friends) {
-			if ($friendslist = get_user_friends($user_guid, $subtype, 999999, 0)) {
+			if ($friendslist = $user->getFriends(array('limit' => 0))) {
 				$friendguids = array();
 				foreach($friendslist as $friend) {
 					$friendguids[] = $friend->getGUID();
@@ -501,10 +501,10 @@
 		}
 		
 		// Add the metastring
-		$value = add_metastring($value);
+		$value = elgg_get_metastring_id($value);
 		if (!$value) return false;
 		
-		$name = add_metastring($name);
+		$name = elgg_get_metastring_id($name);
 		if(!$name) { return false;	}
 		
 		// If ok then add it
@@ -553,7 +553,7 @@
 			$where .= " AND e.owner_guid=$owner_guid ";
 		}
 		if($metaname){
-			$nameid = get_metastring_id($metaname);
+			$nameid = elgg_get_metastring_id($metaname);
 			if($nameid){
 				$where .= " and m.name_id=".$nameid;
 			}else{
@@ -561,7 +561,7 @@
 			}
 		}	
 		if($metavalue || $metavalue == '0'){
-			$valueid = get_metastring_id($metavalue);
+			$valueid = elgg_get_metastring_id($metavalue);
 			if($valueid){
 				$where .= " and m.value_id=".$valueid;
 			}else{
@@ -576,21 +576,21 @@
 	
 	function get_sold_products($metavalue=null, $limit, $offset=0 ){
 		global $CONFIG;
-		$nameid = get_metastring_id('product_owner_guid');
+		$nameid = elgg_get_metastring_id('product_owner_guid');
 		if($nameid){
 			$where = " and m.name_id=".$nameid;
 		}else{
 			$where = " and m.name_id=0";
 		}
 		if($metavalue != null){
-			$valueid = get_metastring_id($metavalue);
+			$valueid = elgg_get_metastring_id($metavalue);
 			if($valueid){
 				$where .= " and m.value_id =".$valueid;
 			}else{
 				$where .= " and m.value_id=0";
 			}
 		}
-		$m1_nameid = get_metastring_id('product_id');
+		$m1_nameid = elgg_get_metastring_id('product_id');
 		if($m1_nameid){
 			$where .= " and m1.name_id=".$m1_nameid;
 		}
@@ -618,7 +618,7 @@
 	function get_purchased_orders($metaname=null,$metavalue=null,$type=null,$subtype=null,$where_spval=false,$where_spval_con=null,$metaorder=fale,$entityorder=null,$order='ASC',$limit=null,$offset=0,$count=false,$owner=0,$container=0,$id_not_in=null,$title=null,$where_con=""){
 		global $CONFIG;
 		if($metaname){
-			$nameid = get_metastring_id($metaname);
+			$nameid = elgg_get_metastring_id($metaname);
 			if($nameid){
 				$where = " and m.name_id=".$nameid;
 			}else{
@@ -628,7 +628,7 @@
 		if($metavalue != null){
 			$metavalues = explode(',',$metavalue);
 			foreach($metavalues as $metavalue){
-				$valueid = get_metastring_id($metavalue);
+				$valueid = elgg_get_metastring_id($metavalue);
 				if($valueid <= 0)
 					$valueid = 0;
 				$metavalue_in .= !empty($metavalue_in) ? ",".$valueid : $valueid;
