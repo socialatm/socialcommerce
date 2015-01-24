@@ -16,7 +16,7 @@
 	$view = get_input('view');
 	$user_guid = $_SESSION['user']->guid;
 	
-	if ($friends = $user->getFriends(array('limit' => 0));) {
+	if ($friends = $user->getFriends(array('limit' => 0))) {
 		$friendguids = array();
 		foreach($friends as $friend) {
 			$friendguids[] = $friend->getGUID();
