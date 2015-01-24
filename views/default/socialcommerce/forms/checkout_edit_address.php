@@ -58,7 +58,7 @@
 		}
 
         /*$title_label = elgg_echo('title');
-        $title_textbox = elgg_view('input/text', array('internalname' => 'title', 'value' => $title));*/
+        $title_textbox = elgg_view('input/text', array('name' => 'title', 'value' => $title));*/
         
         $fnaem_label = elgg_echo('first:name');
         $lname_label = elgg_echo('last:name');

@@ -55,7 +55,7 @@ if($CONFIG->country){
 					'id' => 'first_name',
 					'value' => $first_name,
 					'class' => '',
-					'internalname'=>'first_name',
+					'name'=>'first_name',
 					'style' => '',
 					));
 			?>
@@ -65,7 +65,7 @@ if($CONFIG->country){
 					'id' => 'last_name',
 					'value' => $last_name,
 					'class' => '',
-					'internalname'=>'last_name',
+					'name'=>'last_name',
 					));
 			?>
 <label for="address_line_1"><?php echo elgg_echo('address:line:1'); ?>:</label>
@@ -74,7 +74,7 @@ if($CONFIG->country){
 					'id' => 'address_line_1',
 					'value' => $address_line_1,
 					'class' => '',
-					'internalname'=>'address_line_1',
+					'name'=>'address_line_1',
 					));
 			?>
 <label for="address_line_2"><?php echo elgg_echo('address:line:2'); ?>:</label>
@@ -83,7 +83,7 @@ if($CONFIG->country){
 					'id' => 'address_line_2',
 					'value' => $address_line_2,
 					'class' => '',
-					'internalname'=>'address_line_2',
+					'name'=>'address_line_2',
 					));
 			?>
 <label for="city"><?php echo elgg_echo('city'); ?>:</label>
@@ -92,7 +92,7 @@ if($CONFIG->country){
 					'id' => 'city',
 					'value' => $city,
 					'class' => 'elgg-input-text',
-					'internalname'=>'last_name',
+					'name'=>'last_name',
 					));
 			?>
 <label for="state"><?php echo elgg_echo('state'); ?>:</label>
@@ -105,7 +105,7 @@ if($CONFIG->country){
 					'id' => 'pincode',
 					'value' => $pincode,
 					'class' => '',
-					'internalname'=>'pincode',
+					'name'=>'pincode',
 					));
 			?>
 <label for="country"><?php echo elgg_echo('country'); ?>:</label>
@@ -117,7 +117,7 @@ if($CONFIG->country){
 					'id' => 'phoneno',
 					'value' => $phoneno,
 					'class' => '',
-					'internalname'=>'phoneno',
+					'name'=>'phoneno',
 					));
 			?>
 </div>
@@ -128,7 +128,7 @@ if($CONFIG->country){
 					'id' => 'billing',
 					'value' => $vars['type'] == 'billing'? 1: 0,
 					'class' => '',
-					'internalname'=>'billing',
+					'name'=>'billing',
 					'checked' => $vars['type'] == 'billing'? 1: 0,
 					));
 			?>
