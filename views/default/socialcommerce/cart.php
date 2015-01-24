@@ -18,7 +18,7 @@
 	$cart = $cart[0];
 	
 	// be sure user has permission to view the shopping cart before continuing. If they don't we'll tell them it's empty.
-	if(!can_edit_entity( $cart->guid, elgg_get_page_owner_guid())){
+	if(!$cart->canEdit()){
 		register_error(elgg_echo("cart:null"));
 		forward('socialcommerce/'.$_SESSION['user']->username.'/all/');
 	}
@@ -82,7 +82,7 @@ EOF;
 			$info .= '<div class= "stores_remove">';
 			
 			$info .= elgg_view('output/confirmlink',array(
-								'href' => $vars['url'] . "action/socialcommerce/remove_cart?" . $parameters,
+								'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?" . $parameters,
 								'text' => elgg_echo("remove"),
 								'confirm' => elgg_echo("cart:delete:confirm"),
 							)); 

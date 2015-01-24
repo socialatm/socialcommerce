@@ -56,7 +56,7 @@
 					<?php
 						echo elgg_view("profile/icon",array('entity' => $owner, 'size' => 'tiny'));
 					?>
-					<p class="storesrepo_owner_details"><b><a href="<?php echo $vars['url']; ?>socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
+					<p class="storesrepo_owner_details"><b><a href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $owner->username; ?>"><?php echo $owner->name; ?></a></b><br />
 					<small><?php echo $friendlytime; ?></small></p>
 				</div>
 			</div>
@@ -123,7 +123,7 @@ EOF;
 					?>
 					<?php echo  elgg_view("custom_field/display",array('entity'=>$vars['entity'])); ?>
 					<div class="features"><?php echo elgg_echo('features:des'); ?></div>
-					<div class="storesrepo_description"><?php echo autop($desc); ?></div>
+					<div class="storesrepo_description"><?php echo elgg_autop($desc); ?></div>
 				</td>
 			</tr>
 		</table>

@@ -63,7 +63,7 @@ if($cart){
 EOF;
 				$info .= elgg_cart_quantity($cart_item);
 				$info .= elgg_view('output/confirmlink',array(
-									'href' => $vars['url'] . "action/socialcommerce/remove_cart?cart_guid=" . $cart_item->getGUID(),
+									'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?cart_guid=" . $cart_item->getGUID(),
 									'text' => elgg_echo("remove"),
 									'confirm' => elgg_echo("cart:delete:confirm"),
 								)); 

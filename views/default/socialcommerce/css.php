@@ -215,7 +215,7 @@ p.storesrepo_owner {
 }
 .storesrepo_user_gallery_link a {
 	padding:2px 25px 5px 0;
-	background: transparent url(<?php echo $vars['url']; ?>_graphics/icon_gallery.gif) no-repeat right top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>_graphics/icon_gallery.gif) no-repeat right top;
 	display:block;
 }
 .storesrepo_user_gallery_link a:hover {
@@ -252,14 +252,14 @@ p.storesrepo_owner {
 	text-align:right;
 }
 .stores_remove{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/cart_del.png) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/cart_del.png) no-repeat left top;
 }
 .stores_remove a{
 	padding-left:20px;
 	font-weight:bold;
 }
 .stores_update_cart{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/cart_update.png) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/cart_update.png) no-repeat left top;
 }
 .stores_update_cart a{
 	padding-left:20px;
@@ -327,7 +327,7 @@ p.storesrepo_owner {
 	float:left;
 }
 .wishlist_remove a {
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/remove_wishlist.gif) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/remove_wishlist.gif) no-repeat left top;
 	font-weight:bold;
 	padding-left:20px;
 }
@@ -335,14 +335,14 @@ p.storesrepo_owner {
 	text-decoration:none;
 }
 .cart_wishlist .cart{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/Cart_add.png) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/Cart_add.png) no-repeat left top;
 }
 .cart_wishlist .cart{
 	padding-left:20px;
 	font-weight:bold;
 }
 .cart_wishlist .wishlist{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/add_wishlist.gif) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/add_wishlist.gif) no-repeat left top;
 }
 .cart_wishlist .wishlist{
 	padding-left:20px;
@@ -361,7 +361,7 @@ p.storesrepo_owner {
 
 .ratingblock .loading {
 	height: 16px;
-	background: url(<?php echo $vars['url']; ?>mod/socialcommerce/images/working.gif) 50% 50% no-repeat;
+	background: url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/working.gif) 50% 50% no-repeat;
 	}
 
 .unit-rating { /* the UL */
@@ -371,7 +371,7 @@ p.storesrepo_owner {
 	height: 16px;
 	position: relative;
 	float:left;
-	background: url(<?php echo $vars['url']; ?>mod/socialcommerce/images/starrating.gif) top left repeat-x;		
+	background: url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/starrating.gif) top left repeat-x;		
 	}
 
 .unit-rating li{
@@ -394,7 +394,7 @@ p.storesrepo_owner {
 	}
 	
 .unit-rating li a:hover{
-	background: url(<?php echo $vars['url']; ?>mod/socialcommerce/images/starrating.gif) left center;
+	background: url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/starrating.gif) left center;
 	z-index: 2;
 	left: 0px;
 	}
@@ -411,7 +411,7 @@ unit-rating a.r1-unit{left: 0px;}
 .unit-rating a.r5-unit:hover{width: 80px;}
 
 .unit-rating li.current-rating {
-	background: url(<?php echo $vars['url']; ?>mod/socialcommerce/images/starrating.gif) left 16px;
+	background: url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/starrating.gif) left 16px;
 	position: absolute;
 	height: 16px;
 	display: block;
@@ -575,22 +575,22 @@ unit-rating a.r1-unit{left: 0px;}
 }
 
 .edit_btn a{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/edit.jpg) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/edit.jpg) no-repeat left top;
 	padding-left:20px;
 	font-weight:bold;
 }
 .more_btn a{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/more.gif) no-repeat right 4px;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/more.gif) no-repeat right 4px;
 	padding-right:15px;
 	font-weight:bold;
 }
 .delete_btn a{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.png) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat left top;
 	padding-left:20px;
 	font-weight:bold;
 }
 .buy_more a{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/buy_more.jpg) no-repeat left top;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/buy_more.jpg) no-repeat left top;
 	padding-left:20px;
 	font-weight:bold;
 }
@@ -770,12 +770,12 @@ unit-rating a.r1-unit{left: 0px;}
 	width:60px;
 }
 .object_product_type_string {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/graphics/software.png) no-repeat scroll left 2px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/graphics/software.png) no-repeat scroll left 2px;
 	margin:0 0 0 15px;
 	padding:0 0 0 16px;
 }
 .object_category_string {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/category.gif) no-repeat scroll left 2px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/category.gif) no-repeat scroll left 2px;
 	margin:0 0 0 15px;
 	padding:0 0 0 16px;
 }
@@ -836,27 +836,27 @@ unit-rating a.r1-unit{left: 0px;}
 }
 
 #owner_block_stores .scommerce_settings a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/settings.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/settings.png) no-repeat scroll left 0;
 	display:inline;
 }
 
 #owner_block_stores .cart a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/shopingcart.png) no-repeat scroll left 2px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/shopingcart.png) no-repeat scroll left 2px;
 	display:inline;
 }
 
 #owner_block_stores .wishlist a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/wishlist.gif) no-repeat scroll left 2px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/wishlist.gif) no-repeat scroll left 2px;
 	display:inline;
 }
 
 #owner_block_stores .orders a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/order_icon.png) no-repeat scroll left 2px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/order_icon.png) no-repeat scroll left 2px;
 	display:inline;
 }
 
 #owner_block_stores .my_account a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/myaccount.png) no-repeat scroll left 2px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/myaccount.png) no-repeat scroll left 2px;
 	display:inline;
 }
 
@@ -864,7 +864,7 @@ unit-rating a.r1-unit{left: 0px;}
 	margin:10px 0 0;
 }
 #owner_block_stores .coupon_code a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/coupon_code.gif) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/coupon_code.gif) no-repeat scroll left 0;
 	display:inline;
 }
 
@@ -884,7 +884,7 @@ unit-rating a.r1-unit{left: 0px;}
 	padding:3px 6px 3px 20px;
 	margin:10px 0 10px 0;
 	cursor: pointer;
-	background:#4690d6 url(<?php echo $vars['url']; ?>mod/socialcommerce/images/download.png) no-repeat scroll left;
+	background:#4690d6 url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/download.png) no-repeat scroll left;
 }
 .dproducts_download a:hover {
 	background-color: black;
@@ -948,7 +948,7 @@ unit-rating a.r1-unit{left: 0px;}
 .checkout_title {
 	font-size: 13px;
 	padding:3px 5px;
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/bg_common.gif);
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/bg_common.gif);
 	color: #0054A7;
 	cursor:default;
 	margin:10px 0;
@@ -1008,7 +1008,7 @@ unit-rating a.r1-unit{left: 0px;}
 	-webkit-border-radius: 4px; 
 	-moz-border-radius: 4px;
 	margin-top:2px;
-	background-image: url("<?php echo $vars['url']; ?>mod/socialcommerce/images/AccordionTab0.gif");
+	background-image: url("<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/AccordionTab0.gif");
 }
 .basic a {
 	display:block;
@@ -1017,7 +1017,7 @@ unit-rating a.r1-unit{left: 0px;}
 	color: #000000;
 }
 .basic a:hover {
-	background-image: url("<?php echo $vars['url']; ?>mod/socialcommerce/images/AccordionTab2.gif");
+	background-image: url("<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/AccordionTab2.gif");
 }
 .basic .shipping_disable a:hover {
 	background-image: none;
@@ -1046,7 +1046,7 @@ unit-rating a.r1-unit{left: 0px;}
 	top:15px;
 	height:16px;
 	width:16px;
-	background-image: url("<?php echo $vars['url']; ?>mod/socialcommerce/images/ui_icon.png");
+	background-image: url("<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/ui_icon.png");
 	background-position:-32px -16px;
 }
 .checkout_process input{
@@ -1098,7 +1098,7 @@ unit-rating a.r1-unit{left: 0px;}
 .checkout_table th {
 	padding: 5px 8px;
 	background-color: #4690D6;
-	background-image: url("<?php echo $vars['url']; ?>mod/socialcommerce/images/order_bg.gif");
+	background-image: url("<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/order_bg.gif");
 	color:#EEEEEE;
 }
 .checkout_table td {
@@ -1197,21 +1197,21 @@ unit-rating a.r1-unit{left: 0px;}
 .left_top{
 	width:10px;
 	height:13px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/left_top.png) no-repeat;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/left_top.png) no-repeat;
 	margin:0px;
 	padding:0px;
 }
 .inner_top{
 	width:280px;
 	height:13px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/top_center_bg.jpg) repeat-x;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/top_center_bg.jpg) repeat-x;
 	margin:0px;
 	padding:0px;
 }
 .right_top{
 	width:10px;
 	height:13px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/right_top.png) no-repeat;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/right_top.png) no-repeat;
 	padding:0px;
 	margin:0px;
 }
@@ -1235,21 +1235,21 @@ unit-rating a.r1-unit{left: 0px;}
 .left_bottom{
 	width:10px;
 	height:13px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/left_bottom.png) no-repeat;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/left_bottom.png) no-repeat;
 	margin:0px;
 	padding:0px;
 }
 .inner_bottom{
 	width:280px;
 	height:13px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/bottom_center_bg.jpg) repeat-x;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/bottom_center_bg.jpg) repeat-x;
 	margin:0px;
 	padding:0px;
 }
 .right_bottom{
 	width:10px;
 	height:13px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/right_bottom.png) no-repeat;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/right_bottom.png) no-repeat;
 	margin:0px;
 	padding:0px;
 }
@@ -1259,7 +1259,7 @@ unit-rating a.r1-unit{left: 0px;}
 	width:31px;
 	height:21px;
 	bottom:-20px;
-	background:url(<?php echo $vars['url']; ?>mod/socialcommerce/images/bottom_arrow.png) no-repeat;
+	background:url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/bottom_arrow.png) no-repeat;
 }
 
 .gallery_product {
@@ -1296,7 +1296,7 @@ unit-rating a.r1-unit{left: 0px;}
 	width:100px;
 }
 .gallery_product_inner .object_product_type_string {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/graphics/software.png) no-repeat scroll left 0px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/graphics/software.png) no-repeat scroll left 0px;
 	margin: 0;
 }
 .stbutton:link { 
@@ -1318,7 +1318,7 @@ unit-rating a.r1-unit{left: 0px;}
 .currency_settings h3{
 	font-size: 13px;
 	padding:3px 5px;
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/bg_common.gif);
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/bg_common.gif);
 	color: #0054A7;
 	cursor:default;
 }
@@ -1330,7 +1330,7 @@ unit-rating a.r1-unit{left: 0px;}
 /*-------- Button --------------*/
 
 a.squarebutton{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/square-blue-left.gif) no-repeat top left;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/square-blue-left.gif) no-repeat top left;
 	display: block;
 	float: left;
 	font: normal 12px Arial;
@@ -1340,14 +1340,14 @@ a.squarebutton{
 	text-decoration: none;
 }
 a:hover.squarebutton{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/square-blue-left.gif) no-repeat top left;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/square-blue-left.gif) no-repeat top left;
 }
 a:link.squarebutton, a:visited.squarebutton, a:active.squarebutton{
 	color: #494949;
 }
 
 a.squarebutton span{
-	background: transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/square-blue-right.gif) no-repeat top right;
+	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/square-blue-right.gif) no-repeat top right;
 	display: block;
 	padding: 4px 9px 4px 0;
 	font-weight:bold;
@@ -1400,7 +1400,7 @@ a.squarebutton:hover span{
 	position:relative;
 }
 .myaddress_edit {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
 	display:inline;
 	height:16px;
 	width:16px;
@@ -1410,10 +1410,10 @@ a.squarebutton:hover span{
 	cursor: pointer;
 }
 a.myaddress_edit:hover {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
 }
 .myaddress_delete{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
 	display:inline;
 	height:16px;
 	width:16px;
@@ -1423,7 +1423,7 @@ a.myaddress_edit:hover {
 	cursor: pointer;
 }
 a.myaddress_delete:hover {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
 }
 .order_icon_class{
 	float:left;
@@ -1706,7 +1706,7 @@ a.myaddress_delete:hover {
 .list_coupons th {
 	padding: 5px 8px;
 	background-color: #4690D6;
-	background-image: url("<?php echo $vars['url']; ?>mod/socialcommerce/images/order_bg.gif");
+	background-image: url("<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/order_bg.gif");
 	color:#EEEEEE;
 	font-weight:bold;
 }
@@ -1714,7 +1714,7 @@ a.myaddress_delete:hover {
 	padding: 5px 8px;
 }
 .coupon_edit {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
 	display:inline;
 	height:16px;
 	width:16px;
@@ -1724,10 +1724,10 @@ a.myaddress_delete:hover {
 	cursor: pointer;
 }
 a.coupon_edit:hover {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/tag-pencil.png) no-repeat scroll left 0;
 }
 .coupon_delete{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
 	display:inline;
 	height:16px;
 	width:16px;
@@ -1737,7 +1737,7 @@ a.coupon_edit:hover {
 	cursor: pointer;
 }
 a.coupon_delete:hover {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
 }
 .coupon_back {
 	background:#EAFDFF;
@@ -1782,19 +1782,19 @@ a.coupon_delete:hover {
 	width:95px;
 }
 .river_object_stores_create {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/social_commerce.gif)  no-repeat scroll left -1px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/social_commerce.gif)  no-repeat scroll left -1px;
 }
 .river_object_stores_update {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/social_commerce.gif)  no-repeat scroll left -1px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/social_commerce.gif)  no-repeat scroll left -1px;
 }
 .river_object_stores_cartadd {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/shopingcart.png) no-repeat scroll left -1px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/shopingcart.png) no-repeat scroll left -1px;
 }
 .river_object_stores_wishlistadd {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/wishlist.gif) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/wishlist.gif) no-repeat scroll left 0;
 }
 .river_object_stores_purchase {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/order_icon.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/order_icon.png) no-repeat scroll left 0;
 }
 
 .related_products .search_listing {
@@ -1838,12 +1838,12 @@ a.coupon_delete:hover {
 	margin-top:5px;
 }
 .edit_delete_details a.edit {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/edit.jpg) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/edit.jpg) no-repeat scroll left 0;
 	padding:0 8px;
 	margin-right:5px;
 }
 .edit_delete_details a.delete {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.gif) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.gif) no-repeat scroll left 0;
 	padding:0 8px;
 	margin-right:5px;
 }
@@ -1924,7 +1924,7 @@ a.coupon_delete:hover {
 	float:right;
 }
 .delete_details_from_cart a.delete {
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat scroll left 0;
 	padding:0 8px;
 	margin-right:5px;
 	opacity:0.25;
@@ -1937,14 +1937,14 @@ a.coupon_delete:hover {
 .checkout_table .related_details {
 	margin-left:10px;
 	padding-left:15px;
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/dot.gif) no-repeat scroll  left 3px;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/dot.gif) no-repeat scroll  left 3px;
 }
 .change_product_file {
 	float:left;
 	margin:25px 0 0 10px;
 }
 .change_product_file a{
-	background:transparent url(<?php echo $vars['url']; ?>mod/socialcommerce/images/change_file.gif) no-repeat scroll left 0;
+	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/change_file.gif) no-repeat scroll left 0;
 	padding-left:20px;
 }
 #product_file_change, #add_billing_address {
