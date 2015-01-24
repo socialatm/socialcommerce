@@ -35,7 +35,7 @@
 		}
 		$category_label = elgg_echo('category');
 		if(!empty($category_lists)){
-			$category = elgg_view('input/dropdown', array('internalname' => 'storescategory', 
+			$category = elgg_view('input/dropdown', array('name' => 'storescategory', 
 													  'value' => "$category", 
 													  'options_values' => $options_values));
 		}else{
@@ -66,7 +66,7 @@ EOF;
 					$fields .= elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'file_guid' => $product->guid));
 				}else{
 					$fields .= elgg_view("input/{$valtype['field']}",array(
-															'internalname' => $shortname,
+															'name' => $shortname,
 															'value' => $value,
 															));
 				}
