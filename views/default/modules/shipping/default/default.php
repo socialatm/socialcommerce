@@ -25,7 +25,7 @@
 				'id' => 'shipping_method',
 				'value' => $sc_shipping_method,
 				'class' => 'elgg-input-checkbox elgg-body',
-				'internalname'=>'shipping_method',
+				'name'=>'shipping_method',
 				'options' => array(elgg_echo('use:flat:rate:per:item') => 'default', ),
 				));
 		?>
@@ -37,7 +37,7 @@
 					'id' => 'shipping_name',
 					'value' => $sc_shipping_name,
 					'class' => 'elgg-input-text',
-					'internalname'=>'shipping_name',
+					'name'=>'shipping_name',
 					));
 			?>
 	</div><br />
@@ -48,7 +48,7 @@
 					'id' => 'shipping_per_item',
 					'value' => $sc_shipping_per_item,
 					'class' => 'elgg-input-text',
-					'internalname'=> 'shipping_per_item'
+					'name'=> 'shipping_per_item'
 					));
 			?>
 	</div><br />

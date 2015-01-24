@@ -26,7 +26,7 @@
 					'id' => 'payment_name',
 					'value' => $sc_payment_name,
 					'class' => 'elgg-input-text',
-					'internalname'=>'payment_name',
+					'name'=>'payment_name',
 					));
 			?>
 	</div><br />
@@ -37,7 +37,7 @@
 					'id' => 'socialcommerce_paypal_email',
 					'value' => $sc_paypal_email,
 					'class' => 'elgg-input-email',
-					'internalname'=>'socialcommerce_paypal_email'
+					'name'=>'socialcommerce_paypal_email'
 					));
 			?>
 	</div><br />
