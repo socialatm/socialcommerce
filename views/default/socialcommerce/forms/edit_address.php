@@ -106,8 +106,8 @@
 			$country_label_none = elgg_echo('country:none');
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
-			$address_post_url = "{$vars['url']}action/{$action}";
-			$address_reload_url = "{$vars['url']}socialcommerce/{$_SESSION['user']->username}/view_address";
+			$address_post_url = "{elgg_get_config('url')}action/{$action}";
+			$address_reload_url = "{elgg_get_config('url')}socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
 					function save_address(){
@@ -204,7 +204,7 @@ EOF;
 		$form_body = <<<EOT
 			{$script}
 			<div class="address_form">
-	        	<form action="{$vars['url']}action/{$action}" method="post" {$javascript}>
+	        	<form action="{elgg_get_config('url')}action/{$action}" method="post" {$javascript}>
 					<p>
 						<label><span style="color:red">*</span>$fnaem_label</label><br />
 			                        $fnaem_textbox
