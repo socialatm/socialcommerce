@@ -4,8 +4,8 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
@@ -16,7 +16,7 @@
 		}
 ?>
 	<div>
-		<label for="product_type_id"><?php echo elgg_echo('product:type');?>:</label><br />
+		<label for="product_type_id"><?php echo elgg_echo('product:type');?>:</label>
 		<?php echo elgg_view('input/dropdown', array(
 			'name' => 'product_type_id',
 			'id' => 'product_type_id',
@@ -25,4 +25,4 @@
 			'options_values' => $options_values,
 			));
 		?>
-	</div><br />
+	</div>
