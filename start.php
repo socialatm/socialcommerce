@@ -830,7 +830,7 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		elgg_register_plugin_hook_handler('permissions_check','object','order_can_create');
 		
 	/*****	register actions	*****/
-		$action_path = $CONFIG->pluginspath.'socialcommerce/actions/';
+		$action_path = elgg_get_config('pluginspath').'socialcommerce/actions/';
 	
 		elgg_register_action("socialcommerce/add", $action_path.'add.php');
 		elgg_register_action("socialcommerce/edit", $action_path.'edit.php');
