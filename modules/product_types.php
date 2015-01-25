@@ -18,14 +18,13 @@
 	 */
 	 
    	function sc_product_fields_setup(){
-   		global $CONFIG;
-   		//--- Default product types ----//
+		//--- Default product types ----//
    		$default_product_types = array(
 								(object)array('value'=> 1, 'display_val'=> elgg_echo('stores:simple:products'), 'addto_cart'=> 1 ),
 								(object)array('value'=> 2, 'display_val'=> elgg_echo('stores:digital:products'), 'addto_cart'=> 1 ),
 								(object)array('value'=> 3, 'display_val'=> elgg_echo('stores:virtual:products'), 'addto_cart'=> 1 ),
 								);
-		$CONFIG->product_type_default = elgg_trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_product_types);
+		elgg_set_config('product_type_default', elgg_trigger_plugin_hook('socialcommerce:product:type', 'stores', NULL, $default_product_types));	
 								 
    		//--- Default fields for simple products ----//
 		$product_fields[1] = array (
@@ -42,7 +41,7 @@
 			'quantity' => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 			'price'  => array('field'=>'text','mandatory'=>1,'display'=>1 ),
 		);
-		$CONFIG->product_fields = elgg_trigger_plugin_hook('socialcommerce:fields', 'stores', NULL, $product_fields );
+		elgg_set_config('product_fields', elgg_trigger_plugin_hook('socialcommerce:fields', 'stores', NULL, $product_fields ));	
 		
 		//--- Default related product types ----//
    		$default_related_product_types = array(
@@ -50,6 +49,5 @@
 								    (object)array('value'=>2,'display_val'=>elgg_echo('stores:services'),'addto_cart'=>0),
 									);
 								 
-		$CONFIG->default_related_product_types = elgg_trigger_plugin_hook('socialcommerce:relatedproduct:type', 'stores', NULL, $default_related_product_types);
+		elgg_set_config('default_related_product_types', elgg_trigger_plugin_hook('socialcommerce:relatedproduct:type', 'stores', NULL, $default_related_product_types));	
    	}
-?>
