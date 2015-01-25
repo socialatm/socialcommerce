@@ -107,8 +107,8 @@
 			$country_label_none = elgg_echo('country:none');
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
-			$address_post_url = "{elgg_get_config('url')}action/{$action}";
-			$address_reload_url = "{elgg_get_config('url')}socialcommerce/{$_SESSION['user']->username}/view_address";
+			$address_post_url = elgg_get_config('url')."action/{$action}";
+			$address_reload_url = elgg_get_config('url')."socialcommerce/{$_SESSION['user']->username}/view_address";
 			$script = <<<EOF
 				<script>
 					function save_address(){
