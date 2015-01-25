@@ -4,15 +4,15 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
 	gatekeeper();
 	$container_guid = elgg_get_plugin_from_id('socialcommerce')->guid;
 	$title = elgg_view_title(elgg_echo('stores:category'));
-		
+	$user = elgg_get_logged_in_user_entity();	
 	$offset = 0;
 	$limit = 9999;
 	$fullview = false;
@@ -27,9 +27,10 @@
 	if($digital_cats){									//	@todo - forward to create a category if none exist...
 		foreach($digital_cats as $digital_cat){
 			$digital_area .= elgg_view_entity($digital_cat, $fullview);
+			$digital_area .= '<a href = "'.elgg_get_config('url').'socialcommerce/'.$user->username.'/edit_category/'.$digital_cat->guid.'">Edit</a>';
 		}
 			
-		$digital_area = '<div style="width:330px;display:block;">'.$digital_area.'</div>';
+		$digital_area = '<div>'.$digital_area.'</div>';
 	}
 		
 	$content = '<div class="contentWrapper stores" >'.$digital_area.'</div>';
