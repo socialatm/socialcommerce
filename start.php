@@ -122,9 +122,20 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		
 				if( elgg_is_admin_logged_in() ){
 				
-					// load socialcommerce menu
-					require(elgg_get_config('pluginspath').'socialcommerce/modules/menu.php');
-				
+					$product_type_default = elgg_get_config('product_type_default');
+					
+					foreach($product_type_default as $key) {
+		
+						$menu_item = array(
+							'name' => 'new_product_'.$key->display_val,			
+							'text' => sprintf(elgg_echo("product:type:menu"),$key->display_val), 			
+							'href' => elgg_get_config('url').'socialcommerce/'. $user->username.'/add/'.$key->value.'/',			
+							'contexts' => array('stores', 'socialcommerce'),	
+							'parent_name' => 'stores',	
+							);
+						elgg_register_menu_item('site', $menu_item);
+					}
+									
 					$menu_item = array(
 						'name' => 'new_product',			
 						'text' => elgg_echo('stores:addpost'), 			
@@ -830,9 +841,10 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		elgg_register_action("socialcommerce/edit", $action_path.'edit.php');
 		elgg_register_action("socialcommerce/delete", $action_path.'delete.php');
 		elgg_register_action("socialcommerce/icon", $action_path.'icon.php');
-		elgg_register_action("socialcommerce/add_category", $action_path.'add_category.php');
-		elgg_register_action("socialcommerce/edit_category", $action_path.'edit_category.php');
+		elgg_register_action("socialcommerce/category/save", $action_path.'socialcommerce/category/save.php');			//	01/24/2015
+				
 		elgg_register_action("socialcommerce/delete_category", $action_path.'delete_category.php');
+				
 		elgg_register_action("socialcommerce/remove_cart", $action_path.'remove_cart.php');
 		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
