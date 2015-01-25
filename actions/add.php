@@ -4,95 +4,93 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	$title = trim(get_input("storestitle"));
-	$file_name = trim($_FILES['upload']['name']);
-	$desc = trim(get_input("storesbody"));
-	$category = get_input("storescategory");
-	$product_type_id = get_input("product_type_id");
-	$tags = trim(get_input("storestags"));
+			 
+	$title = htmlspecialchars(get_input('storestitle', '', false), ENT_QUOTES, 'UTF-8');
+	$desc = get_input("storesbody");
 	$access_id = (int) get_input("access_id");
 	$container_guid = (int) get_input('container_guid', 0);
+	$guid = (int) get_input('file_guid');
+	$tags = get_input("storestags");
+	$file_name = trim($_FILES['upload']['name']);
+	$category = get_input("storescategory");
+	$product_type_id = get_input("product_type_id");
 	$tax_country = trim(get_input("tax_country"));
-	$error_field = "";
+	$user = elgg_get_logged_in_user_entity();
 	
-		if (!$container_guid){
-			$container_guid = $_SESSION['user']->getGUID();
-		}
+if ($container_guid == 0) {
+	$container_guid = elgg_get_logged_in_user_guid();
+}
 		
-		$product_fields = $CONFIG->product_fields[$product_type_id];
+/*****	start Validation	*****/
 		
-		//Validation
 		if(empty($title)){
-			$error_field .= ", ".elgg_echo("title");
+			register_error(elgg_echo('title'));
+			forward(REFERER);
 		}
 		if(empty($desc)){
-			$error_field .= ", ".elgg_echo("stores:text");
+			register_error(elgg_echo('stores:text'));
+			forward(REFERER);
 		}
 		if(empty($category)){
-			$error_field .= ", ".elgg_echo("category");
+			register_error(elgg_echo('category'));
+			forward(REFERER);
 		}
 	
-		if(empty($product_type_id) || $product_type_id <= 0){
-			$error_field .= ", ".elgg_echo("product:type");
+		if(empty($product_type_id) or $product_type_id <= 0){
+			register_error(elgg_echo('product:type'));
+			forward(REFERER);
 		}
 		
-		if (is_array($product_fields) && sizeof($product_fields) > 0){
-			foreach ($product_fields as $shortname => $valtype){
-				if($valtype['mandatory'] == 1){
-					$value = trim(get_input($shortname));
-					if($valtype['field'] == 'file')
-						$value = trim($_FILES[$shortname]['name']);
-					if(empty($value)){
-						if($valtype['field'] == 'file' && $shortname == 'upload'){
-							if($stores->mimetype == "")
-								$error_field .= ", ".elgg_echo("product:".$shortname);
-						}else{
-							$error_field .= ", ".elgg_echo("product:".$shortname);
-						}
-					}else{
-						if($shortname == 'quantity'){
-							if(ereg("[^0-9]",$value))
-								$error_field .= ", ".elgg_echo("product:".$shortname);
-						}
-						if($shortname == 'base_stock'){
-							if(ereg("[^0-9]",$value))
-								$error_field .= ", ".elgg_echo("product:".$shortname);
-						}
-						if($shortname == 'price'){
-							if((!is_numeric($value)) || $value == 0 )
-								$error_field .= ", ".elgg_echo("product:".$shortname);
-						}
+		if(empty($access_id)){
+			register_error(elgg_echo('access:id'));
+			forward(REFERER);
+		}
+		
+		if(!$product_fields = elgg_get_config('product_fields')[$product_type_id]){
+			register_error(elgg_echo('product:fields'));
+			forward(REFERER);
+		}
+
+		//	if this is a file upload let's make sure we have it
+		if($product_fields['upload']['mandatory'] === 1){
+			// check if upload attempted and failed
+			if (!empty($_FILES['upload']['name']) && $_FILES['upload']['error'] != 0) {
+				$error = elgg_get_friendly_upload_error($_FILES['upload']['error']);
+				register_error($error);
+				forward(REFERER);
+			}
+		}
+		
+		foreach ($product_fields as $shortname => $valtype){
+			if($valtype['mandatory'] == 1 and $shortname != 'upload'){
+				$value = get_input($shortname);
+				if($shortname == 'quantity'){
+					if(!is_numeric($value)) {
+						register_error(elgg_echo('quantity'));
+						forward(REFERER);
+					}
+				}
+				if($shortname == 'price'){
+					if((!is_numeric($value)) or $value == 0 ) {
+						register_error(elgg_echo('price'));
+						forward(REFERER);
 					}
 				}
 			}
 		}
+/*****	end Validation	*****/
+			
+		require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+$arr2 = get_defined_vars();
+krumo($arr2);
+die();
 		
-		if(!empty($error_field)){
-			unset($_SESSION['product']);
-			$_SESSION['product']['storestitle'] = $title;
-			$_SESSION['product']['product_type_id'] = $product_type_id;
-			$_SESSION['product']['storescategory'] = $category;
-			$_SESSION['product']['storesbody'] = $desc;
-			$_SESSION['product']['storestags'] = $tags;
-			$_SESSION['product']['access_id'] = $access_id;
-			
-			if (is_array($product_fields) && sizeof($product_fields) > 0){
-				foreach ($product_fields as $shortname => $valtype){
-					if($valtype['field'] != 'file')
-						$_SESSION['product'][$shortname] = get_input($shortname);
-				}
-			}
-			
-			$error_field = substr($error_field,2);
-			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->url . 'mod/socialcommerce/add.php';
-		}else{
-			// Extract stores from, save to default stores (for now)
+
+			// @todo - change $stores to $products
 			$stores = new ElggObject();
 			$stores->subtype="stores";
 			$stores->access_id = $access_id;
@@ -140,7 +138,7 @@
 					elgg_create_river_item( array(
 						'view' => 'river/object/stores/create',
 						'action_type' => 'create',
-						'subject_guid' => $_SESSION['user']->guid,
+						'subject_guid' => $user->guid,
 						'object_guid' => $stores->guid
 						)
 					);	
@@ -193,7 +191,11 @@
 					}
 				}
 				
-				// Generate thumbnail (if image)
+	$arr2 = get_defined_vars();
+	krumo($upload_file);
+	die();
+				
+				// Generate thumbnail if the file is an image
 				if(isset($_FILES['upload']) && $file_name != ""){
 					if (substr_count($upload_file->getMimeType(),'image/')){
 						$thumbnail = get_resized_image_from_existing_file($upload_file->getFilenameOnFilestore(),60,60, true);
@@ -228,12 +230,7 @@
 				
 			if ($result){
 				system_message(elgg_echo("stores:saved"));
-				unset($_SESSION['product']);
 			}else{
 				register_error(elgg_echo("stores:uploadfailed"));
 			}
-			$container_user = get_entity($container_guid);
-			$redirect = $CONFIG->url . 'socialcommerce/' . $container_user->username;
-		}
-	forward($redirect);
-?>
+			forward(REFERER);
