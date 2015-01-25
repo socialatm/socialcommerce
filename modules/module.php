@@ -4,8 +4,8 @@
 	 * 
 	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
@@ -20,7 +20,7 @@ function register_socialcommerce_settings(){
 	genarateCartFromSession();
 }
 
-function SetGeneralValuesInConfig(){
+function SetGeneralValuesInConfig() {
 
 	global $CONFIG;
 	
