@@ -18,16 +18,7 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 		
 		// make products show up in seach results
 		elgg_register_entity_type( 'object', 'stores' );
-			
-		// Set up menu for logged in users
-			if (elgg_is_logged_in()) {
-				elgg_register_menu_item('site', array(
-					'name' => 'stores',
-					'text' => elgg_echo('item:object:stores'),
-					'href' => 'socialcommerce/' . $_SESSION['user']->username.'/all/products/',
-				));
-			}
-			
+					
 		// register js files ->   elgg_register_js( $name, $url, $location = 'head', $priority = null )
 		elgg_register_js( 'jquery.validate', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.validate.js', $location = 'footer', $priority = null );
 		elgg_register_js( 'jquery.steps.min', $CONFIG->url.'mod/socialcommerce/js/socialcommerce/checkout/jquery.steps.min.js', $location = 'footer', $priority = null );
@@ -111,6 +102,15 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 	function socialcommerce_pagesetup() {
 		/*****	add menu items	*****/
 		$user = elgg_get_logged_in_user_entity();
+		
+		// Set up menu for logged in users
+			if (elgg_is_logged_in()) {
+				elgg_register_menu_item('site', array(
+					'name' => 'stores',
+					'text' => elgg_echo('item:object:stores'),
+					'href' => 'socialcommerce/'. $user->username.'/all/products/',
+				));
+			}
 		$menu_item = array(
 			'name' => 'category',			
 			'text' => elgg_echo('stores:category'), 			
