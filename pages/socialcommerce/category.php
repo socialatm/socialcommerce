@@ -15,7 +15,6 @@
 	$user = elgg_get_logged_in_user_entity();	
 	$offset = 0;
 	$limit = 9999;
-	$fullview = false;
 	elgg_set_context('search');
 	$digital_cats = elgg_get_entities_from_metadata(array(
 	//		'product_type_id' => 2,
@@ -26,7 +25,7 @@
 			
 	if($digital_cats){									//	@todo - forward to create a category if none exist...
 		foreach($digital_cats as $digital_cat){
-			$digital_area .= elgg_view_entity($digital_cat, $fullview);
+			$digital_area .= elgg_view_entity($digital_cat, array('full_view' => false));
 			$digital_area .= '<a href = "'.elgg_get_config('url').'socialcommerce/'.$user->username.'/edit_category/'.$digital_cat->guid.'">Edit</a>';
 		}
 			
