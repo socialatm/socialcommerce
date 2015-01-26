@@ -7,6 +7,7 @@
 	 * @author ray peaslee
 	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 function register_socialcommerce_settings(){
@@ -22,8 +23,6 @@ function register_socialcommerce_settings(){
 
 function SetGeneralValuesInConfig() {
 
-	global $CONFIG;
-	
 	if(elgg_is_logged_in()){
 		$carts = elgg_get_entities(array(
 		'type' => 'object',
@@ -44,7 +43,7 @@ function SetGeneralValuesInConfig() {
 				}
 			}
 			if($items)
-				$CONFIG->cart_item_count = $items;
+				elgg_set_config('cart_item_count', $items);
 		}
 	}
 		
@@ -56,7 +55,7 @@ function SetGeneralValuesInConfig() {
 			));  
 	
 	if($wishlist_count){
-		$CONFIG->wishlist_item_count = $wishlist_count;
+		elgg_set_config('wishlist_item_count' , $wishlist_count);
 	}
 	
 	$default_currency = elgg_get_entities_from_metadata(array(
@@ -71,18 +70,17 @@ function SetGeneralValuesInConfig() {
 	if($default_currency){
 		$default_currency = $default_currency[0];
 		$currency_code = $default_currency->currency_code;
-		$CONFIG->currency_code = $currency_code;
+		elgg_set_config('currency_code', $currency_code);
 	}else{
-		$CONFIG->currency_code = "USD";
+		elgg_set_config('currency_code', 'USD');
 	}
 	
-	$CONFIG->default_weight_unit = 'LBS';
+	elgg_set_config('default_weight_unit', 'LBS');
 	load_module_configs();
 }
 
 function sc_get_product_type_from_value($value) {
-	global $CONFIG;
-	$default_product_types = $CONFIG->product_type_default;
+	$default_product_types = elgg_get_config('product_type_default');
 	if (is_array($default_product_types) && sizeof($default_product_types) > 0 && $value) { 
 		foreach ($default_product_types as $default_product_type){
 			if($default_product_type->value == $value){
@@ -239,7 +237,6 @@ function genarateCartFromSession(){
 	@todo - add taxes at some point....
  *********************************************************************/
 function load_module_configs(){
-	global $CONFIG;
 	//---- load config from checkout methods -----//
 	$checkout_lists = get_checkout_list();
 	if($checkout_lists){
@@ -273,7 +270,6 @@ function load_module_configs(){
 			}
 		}
 	}
-	
 }
 
 /*********************************************************************
@@ -301,7 +297,7 @@ function load_module_languages(){
 	$currency_lists = get_currency_list();
 	if($currency_lists){
 		foreach ($currency_lists as $currency_list){
-			register_translations(CURRENCY_PATH.$currency_list . '/languages/');
+			register_translations(CURRENCY_PATH.$currency_list.'/languages/');
 		}
 	}
 }
@@ -1575,7 +1571,7 @@ EOF;
 	}
 }
 
-function calculate_cart_total($cart_user=0,$product_user=0){
+function calculate_cart_total($cart_user=0, $product_user=0 ){
 	global $CONFIG;
 		
 	if(elgg_is_logged_in()){
@@ -1629,4 +1625,3 @@ function calculate_cart_total($cart_user=0,$product_user=0){
 	}
 	return $total;
 }
-?>
