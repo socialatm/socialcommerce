@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 ?>
 <script type="text/javascript">
@@ -201,9 +202,8 @@ EOF;
 EOF;
         }
         //get a link to the users files
-        $users_file_url = $vars['url'] . "socialcommerce/" . get_user($f->owner_guid)->username;
+        $users_file_url = elgg_get_config('url')."socialcommerce/".get_user($f->owner_guid)->username;
         echo '</div>';
  	} else {
 		echo elgg_echo("stores:none");
 	}
-?>

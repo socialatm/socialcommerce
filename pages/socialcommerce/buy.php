@@ -4,16 +4,14 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 
-	echo __FILE__ .' at '.__LINE__; die();
-	 
 	require_once(elgg_get_config('path').'engine/start.php');
-	global $CONFIG;
-	
+		
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 	
@@ -34,7 +32,7 @@
 	// Render the category upload page
 		if ($entity) {
 			if($entity->owner_guid == $_SESSION['user']->guid)
-				forward($CONFIG->url.'socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
+				forward(elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username."/read/{$product_guid}/{$entity->title}");
 			elgg_set_context('cartadd');
 			$content .= elgg_view_entity($entity, true);
 			$sidebar .= elgg_view("socialcommerce/sidebar");
@@ -50,4 +48,3 @@
 		} else {
 			forward();
 		}
-?>
