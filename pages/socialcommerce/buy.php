@@ -10,8 +10,6 @@
 	 * @version elgg 1.9.4
 	 **/ 
 
-	require_once(elgg_get_config('path').'engine/start.php');
-		
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 	

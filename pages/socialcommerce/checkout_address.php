@@ -4,13 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 
-	require_once(elgg_get_config('path').'engine/start.php');
-	global $CONFIG;
 	$address = (int) get_input('guid');
 	$title = elgg_view_title(elgg_echo('address:edit'));
 	
@@ -20,4 +19,3 @@
 		$content = elgg_view("socialcommerce/forms/edit_address", array('ajax'=>1));
 	}
 	echo $content;
-?>

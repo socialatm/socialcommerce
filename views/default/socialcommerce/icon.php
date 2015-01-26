@@ -4,10 +4,13 @@
 	 * 
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
  	**/
+	
+	echo '<b>'.__FILE__ .' at '.__LINE__; die();
 	
 	$mime = $vars['mimetype'];
 	if (isset($vars['thumbnail'])) {
@@ -30,15 +33,15 @@
 		case 'image/bmp' 	: 
 			if ($thumbnail) {
 				if ($size == 'small') {
-					echo "<img src=\"{elgg_get_config('url')}action/socialcommerce/icon?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" border=\"0\" />";
+					echo "<img src=\"{elgg_get_config('url')}action/socialcommerce/icon?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" />";
 				} else {
-					echo "<img src=\"{$vars['url']}mod/socialcommerce/thumbnail.php?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" border=\"0\" />";
+					echo "<img src=\"{$vars['url']}mod/socialcommerce/thumbnail.php?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" />";
 				}
 			} else {
 				if ($size == 'large') {
-					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general_lrg.gif\" border=\"0\" />";
+					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general_lrg.gif\" />";
 				} else {
-					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" border=\"0\" />";
+					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" />";
 				}
 			}
 		break;
@@ -48,8 +51,7 @@
 			} else if (!empty($mime) && elgg_view_exists("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default")) {
 				echo elgg_view("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default");
 			} else {
-				echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" border=\"0\" />";
+				echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" />";
 			}	 
 		break;
 	}
-?>

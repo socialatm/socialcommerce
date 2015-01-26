@@ -4,16 +4,15 @@
 	 * 
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	// Load Elgg engine
 	header("Cache-Control: no-cache");
 	header("Pragma: nocache");
-	
-	require_once(elgg_get_config('path').'engine/start.php');
 	
 	//getting the values
 	elgg_set_context('add_order');
@@ -117,4 +116,3 @@
 	//name of the div id to be updated | the html that needs to be changed
 	$output = "unit_long$id_sent|$allnewback";
 	echo $output;
-?>

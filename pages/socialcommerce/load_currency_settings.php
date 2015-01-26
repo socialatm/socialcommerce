@@ -4,14 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
-	// Load Elgg engine
-		require_once(elgg_get_config('path').'engine/start.php');
-		
 		$user_guid = get_input('u_id');
 		elgg_set_page_owner_guid($user_guid);
 		$todo = get_input('todo');
@@ -31,4 +29,3 @@
 				break;
 		}
 		echo $body;
-?>

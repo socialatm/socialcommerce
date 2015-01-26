@@ -4,19 +4,17 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
-	echo __FILE__ .' at '.__LINE__; die();
 	gatekeeper();
 	$page_owner = elgg_get_logged_in_user_entity();
 	
 	// Load Elgg engine
-	require_once(elgg_get_config('path').'engine/start.php');
-	global $CONFIG;
-
+	
 	// Set stores title
 		if($page_owner == $_SESSION['user']){
 			$title = elgg_view_title(elgg_echo('cart:confirm'));
@@ -37,4 +35,3 @@
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page($title, $body);
-?>

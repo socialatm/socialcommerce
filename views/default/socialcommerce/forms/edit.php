@@ -7,6 +7,7 @@
 	 * @author ray peaslee
 	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
  	**/
 	
 	echo(__FILE__);
@@ -162,7 +163,6 @@
 	if (isset($vars['entity'])) { $entity_hidden .= '<input type="hidden" name="stores_guid" id="stores_guid" value="'.$vars['entity']->getGUID().'" />'; }
 			
 	$entity_hidden .= elgg_view('input/securitytoken');
-	$post_url = elgg_get_config('url')."mod/socialcommerce/onchange_product_type.php";
 	$id = $vars['entity']->guid ? $vars['entity']->guid : 0;
 	$custom_fields = elgg_view("custom_field/view", array('entity'=>$vars['entity'], 'entity_type'=>$product_type_id) );
 			
@@ -217,4 +217,3 @@
 		</form>';
 
 echo $form_body;
-?>
