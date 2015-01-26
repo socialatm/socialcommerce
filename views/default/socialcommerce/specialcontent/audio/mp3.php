@@ -4,15 +4,14 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
-	 
-	global $CONFIG;
 ?>
 
-<object type="audio/mpeg" data="<?php echo $vars['url']; ?>action/socialcommerce/download?stores_guid=<?php echo $vars['entity']->getGUID(); ?>" width="200" height="20">
+<object type="audio/mpeg" data="<?php echo elgg_get_config('url'); ?>action/socialcommerce/download?stores_guid=<?php echo $vars['entity']->getGUID(); ?>" width="200" height="20">
   <param name="autoplay" value="false">
   <param name="autoStart" value="0">
 </object>

@@ -4,14 +4,14 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 $product = $vars['entity'];
-$base_url = $vars['url'];
-global $CONFIG;
+$base_url = elgg_get_config('url');
 $limit = 10;
 $offset = get_input('offset');
 if(!$offset)
@@ -62,7 +62,7 @@ EOF;
 	}
 }
 
-$action = $CONFIG->url."action/socialcommerce/update_cart";
+$action = elgg_get_config('url')."action/socialcommerce/update_cart";
 $title = elgg_echo('stores:purchased:orders');
 echo $cart_body = <<<EOF
 	<script>
@@ -126,4 +126,3 @@ echo $cart_body = <<<EOF
 		<div id="order_action_bg"></div>
 	</div>
 EOF;
-?>

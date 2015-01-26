@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	$stores = $vars['entity'];
@@ -92,7 +93,7 @@
 ?>
 						<div class="storesrepo_controls">
 							<div class="edit_btn" style="float:left;">
-								<a href="<?php echo $vars['url']; ?>socialcommerce/product/edit/<?php echo $stores->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
+								<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $stores->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
 							</div>
 									
 								<div class="delete_btn" style="float:left;padding-left:10px;">
@@ -181,4 +182,3 @@
 	if ($vars['full']) {
 		echo elgg_view_comments($stores);
 	}
-?>
