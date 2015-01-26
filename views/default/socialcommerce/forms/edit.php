@@ -4,8 +4,8 @@
 	 * 
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
@@ -45,7 +45,7 @@
 		$body = $vars['product']['storesbody'];
 		$tags = $vars['product']['storestags'];
 		$access_id = $vars['product']['access_id'];
-		$product_fields = $CONFIG->product_fields[$product_type_id];
+		$product_fields = elgg_get_config('product_fields')[$product_type_id];
 		if (is_array($product_fields) && sizeof($product_fields) > 0){
 			foreach ($product_fields as $shortname => $valtype){
 				if($valtype['field'] != 'file')
@@ -128,7 +128,7 @@
         $country_list .= "</select>";	  
 	  
 	$fields = '';
-	$product_fields = $CONFIG->product_fields[$product_type_id];
+	$product_fields = elgg_get_config('product_fields')[$product_type_id];
 		if (is_array($product_fields) && sizeof($product_fields) > 0){
 			foreach ($product_fields as $shortname => $valtype){
 				$value = $vars['entity']->$shortname;
@@ -162,7 +162,7 @@
 	if (isset($vars['entity'])) { $entity_hidden .= '<input type="hidden" name="stores_guid" id="stores_guid" value="'.$vars['entity']->getGUID().'" />'; }
 			
 	$entity_hidden .= elgg_view('input/securitytoken');
-	$post_url = $CONFIG->url."mod/socialcommerce/onchange_product_type.php";
+	$post_url = elgg_get_config('url')."mod/socialcommerce/onchange_product_type.php";
 	$id = $vars['entity']->guid ? $vars['entity']->guid : 0;
 	$custom_fields = elgg_view("custom_field/view", array('entity'=>$vars['entity'], 'entity_type'=>$product_type_id) );
 			

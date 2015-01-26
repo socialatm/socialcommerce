@@ -4,12 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
+	$sc_url = elgg_get_config('url');
 
 	if(elgg_is_logged_in()){
 ?>
@@ -17,7 +17,7 @@
 			<?php if (elgg_is_admin_logged_in()) { ?>
 				<!--My Account-->
 				<div class="scommerce_settings">
-					<a href="<?php echo $CONFIG->url.'admin/plugin_settings/socialcommerce/'; ?>">
+					<a href="<?php echo $sc_url.'admin/plugin_settings/socialcommerce/'; ?>">
 						<?php echo elgg_echo('socialcommerce:settings'); ?>
 					</a>
 				</div>
@@ -33,29 +33,29 @@
 			?>
 			<!--Cart-->
 			<?php 
-				if($CONFIG->cart_item_count){
-					$c_count = " (".$CONFIG->cart_item_count.")";
+				if(elgg_get_config('cart_item_count')){
+					$c_count = " (".elgg_get_config('cart_item_count').")";
 				}
 			?>
 			<div class="cart">
-				<a href="<?php echo $CONFIG->url ?>socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart">
+				<a href="<?php echo $sc_url ?>socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart">
 					<?php echo elgg_echo('stores:my:cart').$c_count; ?>
 				</a>
 			</div>
 			<!--Wishlist-->
 			<?php 
-				if($CONFIG->wishlist_item_count){
-					$w_count = " (".$CONFIG->wishlist_item_count.")";
+				if(elgg_get_config('wishlist_item_count')){
+					$w_count = " (".elgg_get_config('wishlist_item_count').")";
 				}
 			?>
 			<div class="wishlist">
-				<a href='<?php echo $CONFIG->url."socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>'>
+				<a href='<?php echo $sc_url."socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>'>
 					<?php echo elgg_echo('stores:my:wishlist').$w_count ?>
 				</a>
 			</div>
 			<!--orders-->
 			<div class="orders">
-				<a href='<?php echo $CONFIG->url."socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>'>
+				<a href='<?php echo $sc_url."socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>'>
 					<?php echo elgg_echo('stores:my:order') ?>
 				</a>
 			</div>
@@ -65,13 +65,13 @@
 		</div>
 <?php
 	}else{
-		if($CONFIG->cart_item_count){
-			$c_count = " (".$CONFIG->cart_item_count.")";
+		if(elgg_get_config('cart_item_count')){
+			$c_count = " (".elgg_get_config('cart_item_count').")";
 ?>
 		<div id="owner_block_stores">
 			<!--Cart-->
 			<div class="cart">
-				<a href="<?php echo $CONFIG->url ?>socialcommerce/gust/cart">
+				<a href="<?php echo $sc_url ?>socialcommerce/gust/cart">
 					<?php echo elgg_echo('stores:gust:cart').$c_count; ?>
 				</a>
 			</div>
