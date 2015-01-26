@@ -12,6 +12,8 @@
 	function socialcommerce_init() {
 	    
 require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 	    
 		// load socialcommerce model
 		require(elgg_get_config('pluginspath').'socialcommerce/modules/module.php');
@@ -776,19 +778,6 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
        	return mail( $to_email, $subject, $message, $headers );
 	 }
 	 
-	 function get_site_admin() {
-	 	global $CONFIG;
-		$access = get_access_sql_suffix('e');
-	 	
-		$row = get_data_row("SELECT e.* from {$CONFIG->dbprefix}users_entity u join {$CONFIG->dbprefix}entities e on e.guid=u.guid where u.admin='yes' and $access limit 1");
-		if ($row) {
-			return new ElggUser($row);
-		}
-		else {
-			return false;
-		}
-	}
-
 	/*****	Override the order_can_create function to return true for create order	****/
 	
 	function order_can_create($hook_name, $entity_type, $return_value, $parameters) {

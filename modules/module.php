@@ -598,7 +598,7 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 			$tot = $tax_total_price = 0;		//	@todo - is this even used
 			$item_details_for_store_owner = array();
 			//-------- Site admin ----------------//
-			$admin_user = get_site_admin();
+			$admin_user = elgg_get_admins(array('limit' => 1));
 			//-------- Site entity ----------------//
 			$site = get_entity(elgg_get_config('site_guid'));
 				
