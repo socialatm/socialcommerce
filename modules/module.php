@@ -28,7 +28,7 @@ function SetGeneralValuesInConfig() {
 		$carts = elgg_get_entities(array(
 		'type' => 'object',
 		'subtype' => 'cart',
-		'owner_guid' => $_SESSION['user']->guid,
+		'owner_guid' => elgg_get_logged_in_user_guid(),
 		));
 		
 		if($carts){
@@ -50,7 +50,7 @@ function SetGeneralValuesInConfig() {
 		
 	$wishlist_count = elgg_get_entities_from_relationship(array(
 			'relationship' => 'wishlist',
-			'relationship_guid' => $_SESSION['user']->guid, 
+			'relationship_guid' => elgg_get_logged_in_user_guid(), 
 			'inverse_relationship' => false,
 			'count' => true, 	
 			));  
