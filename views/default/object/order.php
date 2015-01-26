@@ -4,12 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 
-	global $CONFIG;
 	gatekeeper();
 	$order = $vars['entity'];
 	if($order){
@@ -26,7 +26,7 @@
 				}
 			}
 			$order_datre = date("dS M Y", $order->time_created);
-			$action = $CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/order_products';
+			$action = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/order_products';
 ?>
 			<div class="search_listing">
 				<div style="float:right;">
@@ -59,4 +59,3 @@
 <?php
 		}
 	}
-?>

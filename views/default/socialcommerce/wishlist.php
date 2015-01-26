@@ -4,13 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * version elgg 1.9.4
 	 **/ 
 	 
-global $CONFIG;
-
 $products = $vars['entities'];
 $ts = time();							
 if($products){
@@ -31,7 +30,7 @@ if($products){
 		$total = $product->price;
 		//$status = elgg_view('stores/product_status',array('entity'=>$order_item,'action'=>'view'));
 		$remove_wishlist_text = elgg_echo('remove:wishlish');
-		$remove_wishlist_action = $CONFIG->url."action/socialcommerce/remove_wishlist?__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
+		$remove_wishlist_action = elgg_get_config('url')."action/socialcommerce/remove_wishlist?__elgg_token=".generate_action_token($ts)."&__elgg_ts={$ts}";
 		$rating = elgg_view("socialcommerce/view_rating",array('id'=>$product->guid,'units'=>5,'static'=>''));
 		if($product->status == 1){
 			$not_available = "";
@@ -82,4 +81,3 @@ EOF;
 	$display_cart_items = elgg_echo('wishlist:null');
 }
 echo $display_cart_items
-?>

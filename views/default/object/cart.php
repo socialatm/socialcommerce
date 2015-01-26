@@ -4,13 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 
-	global $CONFIG;
-	
 	$cart = $vars['entity'];
 	
 	$cart_guid = $cart->getGUID();
@@ -67,4 +66,3 @@
 		
 		echo elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
 	}
-?>
