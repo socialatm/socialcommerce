@@ -10,8 +10,6 @@
 	 * @version elgg 1.9.4
  	**/
 	
-	echo '<b>'.__FILE__ .' at '.__LINE__; die();
-	
 	$mime = $vars['mimetype'];
 	if (isset($vars['thumbnail'])) {
 		$thumbnail = $vars['thumbnail'];
@@ -33,25 +31,25 @@
 		case 'image/bmp' 	: 
 			if ($thumbnail) {
 				if ($size == 'small') {
-					echo "<img src=\"{elgg_get_config('url')}action/socialcommerce/icon?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" />";
+					echo '<img src="'.elgg_get_config('url').'action/socialcommerce/icon?stores_guid='.$vars['stores_guid'].'&mimetype='.$mime.'" />';
 				} else {
-					echo "<img src=\"{$vars['url']}mod/socialcommerce/thumbnail.php?stores_guid={$vars['stores_guid']}&mimetype={$mime}\" />";
+					echo '<img src="'.elgg_get_config('url').'mod/socialcommerce/graphics/icons/general.gif" />';
 				}
 			} else {
 				if ($size == 'large') {
-					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general_lrg.gif\" />";
+					echo '<img src="'.elgg_get_config('url').'socialcommerce/graphics/icons/general_lrg.gif" />';
 				} else {
-					echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" />";
+					echo '<img src="'.elgg_get_config('url').'mod/socialcommerce/graphics/icons/general_lrg.gif" />';
 				}
 			}
 		break;
 		default : 
-			if (!empty($mime) && elgg_view_exists("socialcommerce/icon/{$mime}")) {
+			if (!empty($mime) && elgg_view_exists('socialcommerce/icon/'.$mime)) {
 				echo elgg_view("socialcommerce/icon/{$mime}", $vars);
 			} else if (!empty($mime) && elgg_view_exists("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default")) {
 				echo elgg_view("socialcommerce/icon/" . substr($mime,0,strpos($mime,'/')) . "/default");
 			} else {
-				echo "<img src=\"{$CONFIG->url}mod/socialcommerce/graphics/icons/general.gif\" />";
+				echo '<img src="'.elgg_get_config('url').'mod/socialcommerce/graphics/icons/general.gif" />';
 			}	 
 		break;
 	}
