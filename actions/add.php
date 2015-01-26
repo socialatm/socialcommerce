@@ -8,7 +8,12 @@
 	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-			 
+	
+require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+//krumo($_FILES);
+// die();
+
+	
 	$title = htmlspecialchars(get_input('storestitle', '', false), ENT_QUOTES, 'UTF-8');
 	$desc = get_input("storesbody");
 	$access_id = (int) get_input("access_id");
@@ -19,7 +24,8 @@
 	$category = get_input("storescategory");
 	$product_type_id = get_input("product_type_id");
 	$tax_country = trim(get_input("tax_country"));
-	$user = elgg_get_logged_in_user_entity();
+	$price = trim(get_input("price"));
+	$thumbnail_name = trim($_FILES['product_image']['name']);
 	
 if ($container_guid == 0) {
 	$container_guid = elgg_get_logged_in_user_guid();
@@ -47,6 +53,12 @@ if ($container_guid == 0) {
 		
 		if(empty($access_id)){
 			register_error(elgg_echo('access:id'));
+			forward(REFERER);
+		}
+		
+		//	make sure we have a product image
+		if(empty($thumbnail_name)){
+			register_error(elgg_echo('no:product:image'));
 			forward(REFERER);
 		}
 		
@@ -83,22 +95,119 @@ if ($container_guid == 0) {
 			}
 		}
 /*****	end Validation	*****/
-			
-		require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-$arr2 = get_defined_vars();
-krumo($arr2);
-die();
-		
 
-			// @todo - change $stores to $products
-			$stores = new ElggObject();
-			$stores->subtype="stores";
-			$stores->access_id = $access_id;
+	// check whether this is a new file or an edit
+	$new_file = true;
+	if ($guid > 0) {
+		$new_file = false;
+	}
+	
+if ($new_file) {
+		// must have a file if a new file upload
+		if (empty($file_name)) {
+			$error = elgg_echo('file:nofile');
+			register_error($error);
+			forward(REFERER);
+		}
+	
+	$file = new ElggFile();
+	$file->subtype = "stores";
+
+	// if no title on new upload, grab filename
+	if (empty($title)) {
+		$title = htmlspecialchars($_FILES['upload']['name'], ENT_QUOTES, 'UTF-8');
+	}
+
+} else {
+	// load original file object
+	$file = new ElggFile($guid);
+	if (!$file) {
+		register_error(elgg_echo('file:cannotload'));
+		forward(REFERER);
+	}
+
+	// user must be able to edit file
+	if (!$file->canEdit()) {
+		register_error(elgg_echo('file:noaccess'));
+		forward(REFERER);
+	}
+
+	if (!$title) {
+		// user blanked title, but we need one
+		$title = $file->title;
+	}
+}
+
+	$file->title = $title;
+	$file->description = $desc;
+	$file->access_id = $access_id;
+	$file->container_guid = $container_guid;
+	$file->tags = string_to_tag_array($tags);
+	$file->status = 1;
+	$file->product_type_id = $product_type_id;
+	$file->category = $category;
+	$file->countrycode = $tax_country;
+	$file->price = $price;
+	// we have a file upload, so process it
+if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
+
+	$prefix = "socialcommerce/";
+
+	// if previous file, delete it
+	if ($new_file == false) {
+		$filename = $file->getFilenameOnFilestore();
+		if (file_exists($filename)) {
+			unlink($filename);
+		}
+
+		// use same filename on the disk - ensures thumbnails are overwritten
+		$filestorename = $file->getFilename();
+		$filestorename = elgg_substr($filestorename, elgg_strlen($prefix));
+	} else {
+		$filestorename = elgg_strtolower(time().$_FILES['upload']['name']);
+	}
+	
+	$file->setFilename($prefix . $filestorename);
+	$file->originalfilename = $_FILES['upload']['name'];
+	$mime_type = $file->detectMimeType($_FILES['upload']['tmp_name'], $_FILES['upload']['type']);
+
+	$file->setMimeType($mime_type);
+	$file->simpletype = file_get_simple_type($mime_type);
+
+	// Open the file to guarantee the directory exists
+	$file->open("write");
+	$file->close();
+	move_uploaded_file($_FILES['upload']['tmp_name'], $file->getFilenameOnFilestore());
+
+	$guid = $file->save();
+	$add_to_river = unserialize( elgg_get_plugin_setting('river_settings', 'socialcommerce'));
+	$add_to_river = in_array('product_add', $add_to_river );
+	
+// let's create thumbnails before adding to the river...	
+
+	
+	/*****	add to river	*****/				
 			
-			if (is_array($product_fields) && sizeof($product_fields) > 0){
-				foreach ($product_fields as $shortname => $valtype){
-					if($valtype['field'] == 'file' && $shortname == 'upload' && isset($_FILES[$shortname]) && $_FILES[$shortname]['name'] != ""){
-						$prefix = 'socialcommerce/';
+			if ($guid and $add_to_river){
+			
+					elgg_create_river_item( array(
+						'view' => 'river/object/stores/create',
+						'action_type' => 'create',
+						'subject_guid' => elgg_get_logged_in_user_guid(),
+						'object_guid' => $file->guid
+						)
+					);
+	
+			}
+	/***** end add to river	*****/
+	
+
+
+	}		// after we're done make this line go away
+	
+
+		/*****	we'll use this for adding mandatory fiels but not now	******************************************************************
+								
 						$upload_file = new ElggFile();
 						$filestorename = strtolower(time().$_FILES[$shortname]['name']);
 						$upload_file->setFilename($prefix.$filestorename);
@@ -112,44 +221,21 @@ die();
 						$stores->mimetype = $upload_file->mimetype;
 						$stores->originalfilename = $upload_file->originalfilename;
 						$stores->simpletype = get_general_product_type($_FILES[$shortname]['type']);
-					}
+					
 					$value = trim(get_input($shortname));
 					if(!empty($value))
 						$stores->$shortname = trim(get_input($shortname));
-				}
-			}
-			$stores->title = $title;
-			$stores->status = 1;
-			$stores->description = $desc;
-			$stores->product_type_id = $product_type_id;
-			$stores->category = $category;
-			$stores->countrycode = $tax_country;
-			
-			// Save tags
-			$tags = explode(",", $tags);
-			$stores->tags = $tags;
-			
-			if ($container_guid){ $stores->container_guid = $container_guid; }
+					$result = $stores->save();
+		***************************************************************************************************************************************/			
+					
+					
 	
-			$result = $stores->save();
-			
-			if ($result){
-				if(in_array('product_add', unserialize(elgg_get_plugin_setting('river_settings', 'socialcommerce')) ))
-					elgg_create_river_item( array(
-						'view' => 'river/object/stores/create',
-						'action_type' => 'create',
-						'subject_guid' => $user->guid,
-						'object_guid' => $stores->guid
-						)
-					);	
-				
 				// Now see if we have a file product_image
-				if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/')))
-				{
-					$image_prefix = 'socialcommerce/'.$result;
+				if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/'))) {
+					$image_prefix = 'socialcommerce/'.$guid;
 					
 					$product_imagehandler = new ElggFile();
-					$product_imagehandler->owner_guid = $stores->owner_guid;
+					$product_imagehandler->owner_guid = $file->owner_guid;
 					$product_imagehandler->setFilename($image_prefix . ".jpg");
 					$product_imagehandler->open("write");
 					$product_imagehandler->write(get_uploaded_file('product_image'));
@@ -162,7 +248,7 @@ die();
 					if ($product_thumbtiny) {
 						
 						$product_thumb = new ElggFile();
-						$product_thumb->owner_guid = $stores->owner_guid;
+						$product_thumb->owner_guid = $file->owner_guid;
 						$product_thumb->setMimeType('image/jpeg');
 						
 						$product_thumb->setFilename($image_prefix."tiny.jpg");
@@ -186,17 +272,19 @@ die();
 						$product_thumb->close();
 						
 						$stores->icontime = time();
-						$stores->save();
+	//					$stores->save();
 							
 					}
 				}
 				
-	$arr2 = get_defined_vars();
-	krumo($upload_file);
-	die();
+	
 				
 				// Generate thumbnail if the file is an image
-				if(isset($_FILES['upload']) && $file_name != ""){
+				
+
+	/*****			
+				
+				if(! isset($_FILES['upload']) && $file_name != ""){
 					if (substr_count($upload_file->getMimeType(),'image/')){
 						$thumbnail = get_resized_image_from_existing_file($upload_file->getFilenameOnFilestore(),60,60, true);
 						$thumbsmall = get_resized_image_from_existing_file($upload_file->getFilenameOnFilestore(),153,153, true);
@@ -226,9 +314,9 @@ die();
 						}
 					}
 				}
-			}
+		*****/	
 				
-			if ($result){
+			if ($guid){
 				system_message(elgg_echo("stores:saved"));
 			}else{
 				register_error(elgg_echo("stores:uploadfailed"));
