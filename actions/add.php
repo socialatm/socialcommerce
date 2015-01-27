@@ -7,12 +7,8 @@
 	 * @author ray peaslee
 	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * version elgg 1.9.4
 	 **/ 
-	
-// require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-// krumo($_FILES);
-// die();
-
 	
 	$title = htmlspecialchars(get_input('storestitle', '', false), ENT_QUOTES, 'UTF-8');
 	$desc = get_input("storesbody");
@@ -181,34 +177,9 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 
 	$guid = $file->save();
 	
+	}
 	
-// let's create thumbnails before adding to the river...	
-
-	
-	/*****	add to river	*****/	
-
-$add_to_river = unserialize( elgg_get_plugin_setting('river_settings', 'socialcommerce'));
-	$add_to_river = in_array('product_add', $add_to_river );	
-			
-			if ($guid and $add_to_river){
-			
-					elgg_create_river_item( array(
-						'view' => 'river/object/stores/create',
-						'action_type' => 'create',
-						'subject_guid' => elgg_get_logged_in_user_guid(),
-						'object_guid' => $file->guid
-						)
-					);
-	
-			}
-	/***** end add to river	*****/
-	
-
-
-	}		// after we're done make this line go away
-	
-
-		/*****	we'll use this for adding mandatory fiels but not now	******************************************************************
+	/*****	we'll use this for adding mandatory fields but not now	******************************************************************
 								
 						$upload_file = new ElggFile();
 						$filestorename = strtolower(time().$_FILES[$shortname]['name']);
@@ -228,50 +199,35 @@ $add_to_river = unserialize( elgg_get_plugin_setting('river_settings', 'socialco
 					if(!empty($value))
 						$stores->$shortname = trim(get_input($shortname));
 					$result = $stores->save();
-		***************************************************************************************************************************************/			
+	***************************************************************************************************************************************/			
 					
-//	krumo($file->getFilename());
-// krumo($file->getFilenameOnFilestore());	
-
-	
-	
-	
-
-// krumo($product_imagehandler_name);
-
-// die();	
-	
-//	process the image
-if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/'))) {
+	//	process the image
+	if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/'))) {
 										
-					$product_imagehandler = new ElggFile();
+		$product_imagehandler = new ElggFile();
 					
-					$product_imagehandler_name = $file->getFilename();
-					$product_imagehandler_name = elgg_substr($product_imagehandler_name, elgg_strlen($prefix));
-					$extension = pathinfo($product_imagehandler_name, PATHINFO_EXTENSION);
-					$regexp = '@\.'.$extension.'$@';
-					$product_imagehandler_name = preg_replace($regexp, "", $product_imagehandler_name);
-					
-					$ext = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
-					
-					$product_imagehandler_name = $product_imagehandler_name.'.'.$ext;
-					
-					$product_imagehandler->setFilename($prefix.$product_imagehandler_name);
-					$product_imagehandler->originalfilename = $_FILES['product_image']['name'];
-					$mime_type = $product_imagehandler->detectMimeType($_FILES['product_image']['tmp_name'], $_FILES['product_image']['type']);
-					$product_imagehandler->setMimeType($mime_type);
-					$product_imagehandler->simpletype = file_get_simple_type($mime_type);
+		$product_imagehandler_name = $file->getFilename();
+		$product_imagehandler_name = elgg_substr($product_imagehandler_name, elgg_strlen($prefix));
+		$extension = pathinfo($product_imagehandler_name, PATHINFO_EXTENSION);
+		$regexp = '@\.'.$extension.'$@';
+		$product_imagehandler_name = preg_replace($regexp, "", $product_imagehandler_name);
+		$ext = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
+		$product_imagehandler_name = $product_imagehandler_name.'.'.$ext;
+		$product_imagehandler->setFilename($prefix.$product_imagehandler_name);
+		$product_imagehandler->originalfilename = $_FILES['product_image']['name'];
+		$mime_type = $product_imagehandler->detectMimeType($_FILES['product_image']['tmp_name'], $_FILES['product_image']['type']);
+		$product_imagehandler->setMimeType($mime_type);
+		$product_imagehandler->simpletype = file_get_simple_type($mime_type);
 
-					// Open the file to guarantee the directory exists
-					$product_imagehandler->open("write");
-					$product_imagehandler->close();
-					move_uploaded_file($_FILES['product_image']['tmp_name'], $product_imagehandler->getFilenameOnFilestore());
-					$product_imagehandler_guid = $product_imagehandler->save();	
+		// Open the file to guarantee the directory exists
+		$product_imagehandler->open("write");
+		$product_imagehandler->close();
+		move_uploaded_file($_FILES['product_image']['tmp_name'], $product_imagehandler->getFilenameOnFilestore());
+		$product_imagehandler_guid = $product_imagehandler->save();	
 					
+		//	process the thumbnails	
 					
-					//	process the thumbnails	
-					
-					$thumbnail = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(), 60, 60, true);
+		$thumbnail = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(), 60, 60, true);
 		if ($thumbnail) {
 			$thumb = new ElggFile();
 			$thumb->setMimeType($_FILES['product_image']['type']);
@@ -304,52 +260,28 @@ if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image'][
 			$product_imagehandler->largethumb = $prefix."largethumb".$product_imagehandler_name;
 			unset($thumblarge);
 		}
-		
-	
-}
-				
-	
-				
-				// Generate thumbnail if the file is an image
-				
+	}
 
-	/*****			
+	/*****	add to river	*****/	
+
+	$add_to_river = unserialize( elgg_get_plugin_setting('river_settings', 'socialcommerce'));
+	$add_to_river = in_array('product_add', $add_to_river );	
+			
+	if ($guid and $add_to_river){
+		elgg_create_river_item( array(
+			'view' => 'river/object/stores/create',
+			'action_type' => 'create',
+			'subject_guid' => elgg_get_logged_in_user_guid(),
+			'object_guid' => $file->guid
+			)
+		);
+	}
+	
+	/***** end add to river	*****/
 				
-				if(! isset($_FILES['upload']) && $file_name != ""){
-					if (substr_count($upload_file->getMimeType(),'image/')){
-						$thumbnail = get_resized_image_from_existing_file($upload_file->getFilenameOnFilestore(),60,60, true);
-						$thumbsmall = get_resized_image_from_existing_file($upload_file->getFilenameOnFilestore(),153,153, true);
-						$thumblarge = get_resized_image_from_existing_file($upload_file->getFilenameOnFilestore(),600,600, false);
-						if ($thumbnail) {
-							$thumb = new ElggFile();
-							$thumb->setMimeType($_FILES['upload']['type']);
-							
-							$thumb->setFilename($prefix."thumb".$filestorename);
-							$thumb->open("write");
-							$thumb->write($thumbnail);
-							$thumb->close();
-							$stores->thumbnail = $prefix."thumb".$filestorename;
-							
-							$thumb->setFilename($prefix."smallthumb".$filestorename);
-							$thumb->open("write");
-							$thumb->write($thumbsmall);
-							$thumb->close();
-							$stores->smallthumb = $prefix."smallthumb".$filestorename;
-							
-							$thumb->setFilename($prefix."largethumb".$filestorename);
-							$thumb->open("write");
-							$thumb->write($thumblarge);
-							$thumb->close();
-							$stores->largethumb = $prefix."largethumb".$filestorename;
-								
-						}
-					}
-				}
-		*****/	
-				
-			if ($guid){
-				system_message(elgg_echo("stores:saved"));
-			}else{
-				register_error(elgg_echo("stores:uploadfailed"));
-			}
-			forward(REFERER);
+	if ($guid){
+		system_message(elgg_echo("stores:saved"));
+	}else{
+		register_error(elgg_echo("stores:uploadfailed"));
+	}
+	forward(REFERER);
