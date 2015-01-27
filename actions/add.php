@@ -9,8 +9,8 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-//krumo($_FILES);
+// require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+// krumo($_FILES);
 // die();
 
 	
@@ -180,13 +180,15 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 	move_uploaded_file($_FILES['upload']['tmp_name'], $file->getFilenameOnFilestore());
 
 	$guid = $file->save();
-	$add_to_river = unserialize( elgg_get_plugin_setting('river_settings', 'socialcommerce'));
-	$add_to_river = in_array('product_add', $add_to_river );
+	
 	
 // let's create thumbnails before adding to the river...	
 
 	
-	/*****	add to river	*****/				
+	/*****	add to river	*****/	
+
+$add_to_river = unserialize( elgg_get_plugin_setting('river_settings', 'socialcommerce'));
+	$add_to_river = in_array('product_add', $add_to_river );	
 			
 			if ($guid and $add_to_river){
 			
@@ -228,54 +230,83 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 					$result = $stores->save();
 		***************************************************************************************************************************************/			
 					
-					
+//	krumo($file->getFilename());
+// krumo($file->getFilenameOnFilestore());	
+
 	
-				// Now see if we have a file product_image
-				if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/'))) {
-					$image_prefix = 'socialcommerce/'.$guid;
-					
+	
+	
+
+// krumo($product_imagehandler_name);
+
+// die();	
+	
+//	process the image
+if ((isset($_FILES['product_image'])) && (substr_count($_FILES['product_image']['type'],'image/'))) {
+										
 					$product_imagehandler = new ElggFile();
-					$product_imagehandler->owner_guid = $file->owner_guid;
-					$product_imagehandler->setFilename($image_prefix . ".jpg");
-					$product_imagehandler->open("write");
-					$product_imagehandler->write(get_uploaded_file('product_image'));
-					$product_imagehandler->close();
 					
-					$product_thumbtiny = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(),25,25, true);
-					$product_thumbsmall = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(),40,40, true);
-					$product_thumbmedium = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(),100,100, true);
-					$product_thumblarge = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(),350,800, false);
-					if ($product_thumbtiny) {
-						
-						$product_thumb = new ElggFile();
-						$product_thumb->owner_guid = $file->owner_guid;
-						$product_thumb->setMimeType('image/jpeg');
-						
-						$product_thumb->setFilename($image_prefix."tiny.jpg");
-						$product_thumb->open("write");
-						$product_thumb->write($product_thumbtiny);
-						$product_thumb->close();
-						
-						$product_thumb->setFilename($image_prefix."small.jpg");
-						$product_thumb->open("write");
-						$product_thumb->write($product_thumbsmall);
-						$product_thumb->close();
-						
-						$product_thumb->setFilename($image_prefix."medium.jpg");
-						$product_thumb->open("write");
-						$product_thumb->write($product_thumbmedium);
-						$product_thumb->close();
-						
-						$product_thumb->setFilename($image_prefix."large.jpg");
-						$product_thumb->open("write");
-						$product_thumb->write($product_thumblarge);
-						$product_thumb->close();
-						
-						$stores->icontime = time();
-	//					$stores->save();
-							
-					}
-				}
+					$product_imagehandler_name = $file->getFilename();
+					$product_imagehandler_name = elgg_substr($product_imagehandler_name, elgg_strlen($prefix));
+					$extension = pathinfo($product_imagehandler_name, PATHINFO_EXTENSION);
+					$regexp = '@\.'.$extension.'$@';
+					$product_imagehandler_name = preg_replace($regexp, "", $product_imagehandler_name);
+					
+					$ext = pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
+					
+					$product_imagehandler_name = $product_imagehandler_name.'.'.$ext;
+					
+					$product_imagehandler->setFilename($prefix.$product_imagehandler_name);
+					$product_imagehandler->originalfilename = $_FILES['product_image']['name'];
+					$mime_type = $product_imagehandler->detectMimeType($_FILES['product_image']['tmp_name'], $_FILES['product_image']['type']);
+					$product_imagehandler->setMimeType($mime_type);
+					$product_imagehandler->simpletype = file_get_simple_type($mime_type);
+
+					// Open the file to guarantee the directory exists
+					$product_imagehandler->open("write");
+					$product_imagehandler->close();
+					move_uploaded_file($_FILES['product_image']['tmp_name'], $product_imagehandler->getFilenameOnFilestore());
+					$product_imagehandler_guid = $product_imagehandler->save();	
+					
+					
+					//	process the thumbnails	
+					
+					$thumbnail = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(), 60, 60, true);
+		if ($thumbnail) {
+			$thumb = new ElggFile();
+			$thumb->setMimeType($_FILES['product_image']['type']);
+
+			$thumb->setFilename($prefix."thumb".$product_imagehandler_name);
+			$thumb->open("write");
+			$thumb->write($thumbnail);
+			$thumb->close();
+
+			$product_imagehandler->thumbnail = $prefix."thumb".$product_imagehandler_name;
+			unset($thumbnail);
+		}
+
+		$thumbsmall = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(), 153, 153, true);
+		if ($thumbsmall) {
+			$thumb->setFilename($prefix."smallthumb".$product_imagehandler_name);
+			$thumb->open("write");
+			$thumb->write($thumbsmall);
+			$thumb->close();
+			$product_imagehandler->smallthumb = $prefix."smallthumb".$product_imagehandler_name;
+			unset($thumbsmall);
+		}
+
+		$thumblarge = get_resized_image_from_existing_file($product_imagehandler->getFilenameOnFilestore(), 600, 600, false);
+		if ($thumblarge) {
+			$thumb->setFilename($prefix."largethumb".$product_imagehandler_name);
+			$thumb->open("write");
+			$thumb->write($thumblarge);
+			$thumb->close();
+			$product_imagehandler->largethumb = $prefix."largethumb".$product_imagehandler_name;
+			unset($thumblarge);
+		}
+		
+	
+}
 				
 	
 				
