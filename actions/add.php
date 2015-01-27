@@ -241,7 +241,7 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 			$thumb->open("write");
 			$thumb->write($thumbsmall);
 			$thumb->close();
-			$product_imagehandler->smallthumb = $prefix."smallthumb".$filestorename;
+			$product_image->smallthumb = $prefix."smallthumb".$filestorename;
 			unset($thumbsmall);
 		}
 
@@ -251,10 +251,13 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 			$thumb->open("write");
 			$thumb->write($thumblarge);
 			$thumb->close();
-			$product_imagehandler->largethumb = $prefix."largethumb".$filestorename;
+			$product_image->largethumb = $prefix."largethumb".$filestorename;
 			unset($thumblarge);
 		}
 	}
+	
+	/*****	add the relationship	*****/
+	add_entity_relationship($file->guid, "product_image", $product_image->guid);
 
 	/*****	add to river	*****/	
 
