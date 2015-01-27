@@ -4,13 +4,21 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	$stores = $vars['entity'];
 	
+//	echo '<b>'.__FILE__ .' at '.__LINE__.'</b>';
+	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	$arr2 = get_defined_vars();
+//	krumo($arr2);
+//	krumo::session();
+//	krumo($stores->display);
+
 	if ($stores instanceof ElggEntity) {
 	
 		// Get size
@@ -37,20 +45,25 @@
 
 		if($vars['display'] == "full"){
 ?>
-			<script>
-				function display_zoome_image(guid,e){
-					$("#zome_product_image_"+guid).css('display','block');
-				}
-				function hide_zoome_image(guid){
-					$("#zome_product_image_"+guid).css('display','none');
-				}
-			</script>
 			<div class="product_image">
-			<a href="<?php echo $vars['entity']->getURL(); ?>" class="icon" ><img onmouseover="display_zoome_image(<?php echo $vars['entity']->guid; ?>,this)" onmouseout="hide_zoome_image(<?php echo $vars['entity']->guid; ?>)"  title="<?php echo $vars['entity']->title; ?>" src="<?php echo $vars['entity']->getIconURL($vars['size']); ?>" border="0" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> /></a>
+			<a href="<?php echo $vars['entity']->getURL(); ?>" class="icon" >
+					
+			<img onmouseover="display_zoome_image(<?php echo $vars['entity']->guid; ?>,this)" onmouseout="hide_zoome_image(<?php echo $vars['entity']->guid; ?>)"
+			
+			title="<?php echo $vars['entity']->title; ?>"
+
+			src="<?php echo $vars['entity']->getIconURL($vars['size']); ?>"
+
+			border="0"
+
+			<?php echo $align; ?> 
+			
+			title="<?php echo $name; ?>"
+
+			<?php echo $vars['js']; ?> /></a>
+			
 			</div>
-			<div id="zome_product_image_<?php echo $vars['entity']->guid; ?>" class="zome_product_image">
-				<img src="<?php echo $vars['entity']->getIconURL('large'); ?>">
-			</div>
+	
 <?php
 		}else if ($vars['display'] == "image"){
 ?>
