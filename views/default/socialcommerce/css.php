@@ -779,19 +779,7 @@ unit-rating a.r1-unit{left: 0px;}
 	margin:0 0 0 15px;
 	padding:0 0 0 16px;
 }
-.zome_product_image{
-	width:auto;
-	height:auto;
-	border:1px solid #4690D6;
-	padding:5px;
-	position:absolute;
-	display:none;
-	background:#FFFFFF;
-	z-index:200;
-}
-.zome_product_image img{
-	width: 200px;
-}
+
 .trans_details{
 	margin: 10px 0 0 0;
 }
