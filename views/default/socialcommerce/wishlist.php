@@ -27,8 +27,8 @@ if($products){
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";
 		
-		$quantity_text = elgg_echo('quantity');
 		$price_text = elgg_echo('price');
+		
 		$total = $product->price;
 		//$status = elgg_view('stores/product_status',array('entity'=>$order_item,'action'=>'view'));
 		$remove_wishlist_text = elgg_echo('remove:wishlish');
@@ -45,14 +45,14 @@ if($products){
 			}else{
 				$quantity = 0;
 			}
-			$quantity = "<span><B>{$quantity_text}:</B> {$quantity}</span>";
+			$quantity = '<span>'.elgg_echo('quantity').': '.$quantity.'</span>';
 		}
 		$display_total = get_price_with_currency($total);
 		$entity_hidden .= elgg_view('input/securitytoken');
 		$info .= <<<EOF
 			<div class="storesqua_stores">
-				<div style="margin:5px 0;">
-					<span style="width:115px;float:left;display:block;"><B>{$price_text}:</B> {$display_total}</span>
+				<div>
+					<span>{$price_text}: {$display_total}</span>
 					{$quantity}
 					<div class="clear"></div>
 				</div>

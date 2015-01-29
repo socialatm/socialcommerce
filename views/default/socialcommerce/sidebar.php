@@ -50,7 +50,7 @@
 			?>
 			<div class="wishlist">
 				<a href='<?php echo $sc_url.'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/wishlist'; ?>'>
-					<?php echo elgg_echo('stores:my:wishlist').$w_count ?>
+					<?php echo sprintf(elgg_echo('stores:my:wishlist'), $w_count) ?>
 				</a>
 			</div>
 			<!--orders-->

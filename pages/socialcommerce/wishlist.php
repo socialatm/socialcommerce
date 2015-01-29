@@ -16,9 +16,6 @@
 	$page_owner = $_SESSION['user'];
 	elgg_set_page_owner_guid($_SESSION['guid']);
 		
-	// Set stores title
-	$title = elgg_view_title(elgg_echo('stores:your:wishlist'));
-	
 	// Get objects
 	$limit = 10;
 	$offset = get_input('offset') ? get_input('offset') : 0 ;
@@ -56,13 +53,12 @@ EOF;
 	$sidebar .= elgg_view("socialcommerce/sidebar");	
 	$sidebar .= gettags();
 		
-	/*****	don't know if I'll use this part or not ?
-		if($CONFIG->wishlist_item_count){
-			$count = " (".$CONFIG->wishlist_item_count.")";
-		}
+	if(elgg_get_config('wishlist_item_count')){
+		$count = elgg_get_config('wishlist_item_count');
+	}
 	
-		$title = sprintf(elgg_echo('stores:my:wishlist').$count, elgg_get_page_owner_entity()->name);
-	*****/
+	$title = sprintf(elgg_echo('stores:my:wishlist'), $count);
+
 	$params = array(
 		'title' => $title,
 		'content' => $content,
@@ -71,4 +67,3 @@ EOF;
 
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page($title, $body);
-?>

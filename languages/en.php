@@ -186,7 +186,7 @@
 			'toatal:paypal:fee' => "Total Payment Fee",
 			'stores:sold:products' => "Sold Products",
 			'checkout:process' => "Checkout Process",
-			'stores:my:wishlist' => "My Wishlist",
+			'stores:my:wishlist' => "My Wishlist (%d)",
 			'add:wishlist:not:login' => "Sorry; You are not logged in, Please login.",
 			'stores:my:order' => "My Order",
 			'withdraw:request:head' => "Send your request",
