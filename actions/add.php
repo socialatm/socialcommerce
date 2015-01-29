@@ -207,6 +207,7 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 		$prefix = "socialcommerce/product_image/";
 										
 		$product_image = new ElggFile();
+		$product_image->access_id = $access_id;
 		$product_image->subtype = "product_image";
 		$filestorename = elgg_strtolower(time().$_FILES['product_image']['name']);
 		$product_image->setFilename($prefix . $filestorename);
