@@ -9,8 +9,6 @@
 	* @link http://twentyfiveautumn.com/
 	**/ 
 	 
-global $CONFIG;
-		
 $cart = elgg_get_entities(array( 	
 	'type' => 'object',
 	'subtype' => 'cart',
@@ -106,9 +104,9 @@ if($environment == "sandbox"){
 	$business = elgg_get_plugin_setting('socialcommerce_paypal_email', 'socialcommerce');
 	$paypalurl = "https://www.paypal.com/cgi-bin/webscr";	
 }
-$cencelurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cancel/";
-$returnurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart_success/";
-$ipnurl = $CONFIG->url."action/socialcommerce/makepayment?page_owner=". elgg_get_page_owner_guid();
+$cencelurl = elgg_get_config('url')."socialcommerce/".$_SESSION['user']->username."/cancel/";
+$returnurl = elgg_get_config('url')."socialcommerce/".$_SESSION['user']->username."/cart_success/";
+$ipnurl = elgg_get_config('url')."action/socialcommerce/makepayment?page_owner=". elgg_get_page_owner_guid();
 
 echo $cart_body = <<<EOF
 	<form name="frm_cart" method="post" action="{$paypalurl}">
@@ -130,4 +128,3 @@ echo $cart_body = <<<EOF
 		{$confirm_cart}
 	</form>
 EOF;
-?>

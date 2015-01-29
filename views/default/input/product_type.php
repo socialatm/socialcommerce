@@ -11,7 +11,7 @@
 	
 	$class = isset($vars['class'])? $vars['class'] : "input-product-type" ;
 	$options_values = array();
-		foreach($CONFIG->product_type_default as $key) {
+		foreach(elgg_get_config('product_type_default') as $key) {
 			$options_values[$key->value] = $key->display_val;
 		}
 ?>

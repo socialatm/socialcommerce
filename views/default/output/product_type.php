@@ -9,14 +9,13 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
  		 
-	global $CONFIG;
 	if ($vars['value'] <= 0)
 		$vars['value'] = 1;
 		
 	if ($vars['display'] <= 0)
 		$vars['display'] = "";
 		
-	$default_product_types = $CONFIG->product_type_default;
+	$default_product_types = elgg_get_config('product_type_default');
 		
 	if($vars['display'] == 1){
 		echo $vars['options'][$vars['value']];
@@ -35,5 +34,4 @@
 			</a>
 <?php
 		}	
-	}	
-?>
+	}

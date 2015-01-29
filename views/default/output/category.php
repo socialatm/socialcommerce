@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	if ($vars['value']) {
 		$category = get_entity($vars['value']);
 		if ($vars['display'] <= 0)
@@ -23,5 +22,4 @@
 			</a>
 <?php
 		}
-	}		
-?>
+	}

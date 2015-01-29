@@ -9,7 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	$CONFIG->pluginlistcache = null;
+	elgg_set_config('pluginlistcache', null);
 	//----------- Get variables ---------------//
 	$title = trim(get_input("storestitle"));
 	$desc = trim(get_input("storesbody"));
@@ -23,11 +23,11 @@
 	//---------------- Check the entity --------------//
 	if (!$stores = get_entity($guid)) {
 		register_error(elgg_echo("stores:uploadfailed"));
-		forward($CONFIG->url . "socialcommerce/" . $_SESSION['user']->username);
+		forward(elgg_get_config('url')."socialcommerce/" . $_SESSION['user']->username);
 		exit;
 	}
 	
-	$product_fields = $CONFIG->product_fields[$product_type_id];
+	$product_fields = elgg_get_config('product_fields')[$product_type_id];
 	
 	//------------ Validation --------------------//
 	if(empty($title)){
@@ -103,11 +103,11 @@
 		
 		register_error(sprintf(elgg_echo("product:validation:null"),$error_field));
 		$container_user = get_entity($container_guid);
-		$redirect = $CONFIG->url . "mod/socialcommerce/edit.php?stores_guid=".$guid;
+		$redirect = elgg_get_config('url')."mod/socialcommerce/edit.php?stores_guid=".$guid;
 	}else{
 		if ($stores->canEdit()) {
 			$old_product_type_id = $stores->product_type_id;
-			$old_product_fields = $CONFIG->product_fields[$old_product_type_id];
+			$old_product_fields = elgg_get_config('product_fields')[$old_product_type_id];
 			if($old_product_type_id != $product_type_id && is_array($old_product_fields) && sizeof($old_product_fields) > 0){
 				foreach ($old_product_fields as $old_shortname => $old_valtype){
 					if($old_valtype['field'] == 'file' && $old_shortname == 'upload'){
@@ -276,7 +276,6 @@
 			register_error(elgg_echo("stores:uploadfailed"));
 		}
 		$container_user = get_entity($container_guid);	
-		$redirect = $CONFIG->url . "socialcommerce/" . $container_user->username;
+		$redirect = elgg_get_config('url')."socialcommerce/" . $container_user->username;
 	}
 	forward($redirect);
-?>
