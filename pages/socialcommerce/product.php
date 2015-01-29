@@ -4,12 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
-	$page_owner = elgg_get_logged_in_user_entity();
 	$product = get_entity((int)$page[2]);
 	$title = elgg_view_title($product->title);
 	elgg_set_context('stores');
@@ -31,4 +31,3 @@
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page($product->title, $body);
-?>
