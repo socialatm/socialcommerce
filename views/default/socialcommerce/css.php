@@ -315,15 +315,7 @@ storesrepo_icon img {
 	padding-right:10px;
 	font-size:12px;
 }
-.wishlist_remove{
-	padding-bottom:5px;
-	float:left;
-}
-.wishlist_remove a {
-	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/remove_wishlist.gif) no-repeat left top;
-	font-weight:bold;
-	padding-left:20px;
-}
+
 .stores a:hover {
 	text-decoration:none;
 }

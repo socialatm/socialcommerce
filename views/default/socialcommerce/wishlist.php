@@ -61,7 +61,7 @@ if($products){
 					<td width="275px">
 					</td>
 						<td style="vertical-align:bottom;">
-							<div class="wishlist_remove">
+							<div>
 								<form name="frm_remove_wishlist{$product->guid}" method="post" action="{$remove_wishlist_action}">
 									<a onclick="document.frm_remove_wishlist{$product->guid}.submit();" href="javascript:void(0)">{$remove_wishlist_text}</a>
 									<input type="hidden" name="product_guid" value="{$product->guid}">
