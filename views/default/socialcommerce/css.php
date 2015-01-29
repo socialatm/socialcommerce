@@ -1419,20 +1419,6 @@ a.myaddress_delete:hover {
 	font-size:12px;
 }
 
-#one_column #login-box {
-	margin:0 auto;
-	padding:15px;
-}
-#one_column #login-box {
-	background: none;
-	-webkit-border-radius: 0; 
-	-moz-border-radius: 0;
-	
-}
-#one_column #login_inst{
-	padding:10px;
-	margin-top:20px;
-}
 #my_request_table{
 	width:100%;
 	margin:0 auto 5px;

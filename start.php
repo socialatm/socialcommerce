@@ -198,16 +198,7 @@ ini_set('display_errors', 1);
 		if(is_numeric($page[0])){
 			set_input('stores_guid', $page[0]);
 		}
-		$page_0 = array('all','login');
-		if(in_array($page[0],$page_0)){
-			switch($page[0]) {
-				case "all":				require($base_path.'all.php');
-										break;
-				case "login":           require($base_path.'login.php');
-									  	break;
-			}
-			return true;
-		}
+		
 		// The second part dictates what we're doing
 		if (isset($page[1])) {
 			switch($page[1]) {
