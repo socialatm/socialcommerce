@@ -44,7 +44,7 @@
 			'stores:edit' => 'Edit Product',
 			'stores:upload' => 'Upload a Product',
 			'stores:yours:friends' => 'Your friends Products',
-			'stores:river:created' => "%s Created",
+			'stores:river:created' => "%s added a new product",
 			'stores:river:updated' => "%s Updated",
 			'stores:river:purchased' => "%s Purchased",
 			'stores:type:all' => "All Products",
