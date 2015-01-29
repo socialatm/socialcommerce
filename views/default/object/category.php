@@ -4,19 +4,18 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
-	
+
 	$category = $vars['entity'];
 	$product_guid = $category->guid;
 	$title = $category->title;
 	$desc = $category->description;
 	$owner = $category->getOwnerEntity();
 	$friendlytime = elgg_view_friendly_time($category->time_created);
-	
-//	$mime = $category->mimetype;
 	
 	if (elgg_get_context() == "search") {	// Start search listing version 
 				
@@ -32,7 +31,7 @@
 <?php
 	} else {							// Start main version
 ?>
-	<div class="storesrepo_stores">
+	<div>
 		<div class="storesrepo_icon">
 <?php 
 			echo elgg_view("socialcommerce/icon", array( "mimetype" => $mime, 'thumbnail' => $category->thumbnail, 'category_guid' => $product_guid) ); 
@@ -82,4 +81,3 @@
 
 <?php
 }
-?>
