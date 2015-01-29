@@ -4,17 +4,22 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
+	
+	
+	
+	gatekeeper();	// make sure user is logged in
+	$user = elgg_get_logged_in_user_entity();
+	$checkout_confirm = $vars['checkout_confirm'];
 
-$checkout_confirm = $vars['checkout_confirm'];
-
-$cart = elgg_get_entities(array( 	
-	'type' => 'object',
-	'subtype' => 'cart',
-	'owner_guid' => $_SESSION['user']->getGUID(),
+	$cart = elgg_get_entities(array( 	
+		'type' => 'object',
+		'subtype' => 'cart',
+		'owner_guid' => $user->guid,
 	)); 			
 
 if($cart){
@@ -139,4 +144,3 @@ echo $cart_body = <<<EOF
 		<input type="hidden" id="checkout_status" name="checkout_status" value="confirmation"/>
 	</form>
 EOF;
-?>
