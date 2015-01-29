@@ -97,21 +97,14 @@ p.storesrepo_owner {
     margin:2px;
 }
 
-/* SINGLE ITEM VIEW */
-.storesrepo_stores {
-	background:white;
-	margin:10px;
-	-webkit-border-radius: 8px; 
-	-moz-border-radius: 8px;
-}
-.storesrepo_stores .storesrepo_title_owner_wrapper {
+.storesrepo_title_owner_wrapper {
 	padding-top:10px;
 	padding-bottom:5px;
 }
-.storesrepo_stores .storesrepo_icon img {
+storesrepo_icon img {
 	width:350px;
 }
-.storesrepo_stores .storesrepo_icon {
+.storesrepo_icon {
 	margin:10px 0 0 10px;
 	padding: 0 5px 5px 0;	
 	float: left;
@@ -124,15 +117,15 @@ p.storesrepo_owner {
 	width:310px;
 	float:left;
 }
-.storesrepo_stores .storesrepo_title {
+.storesrepo_title {
 	margin:0;
 	padding:10px;
 	line-height: 1.2em;
 }
-.storesrepo_stores .storesrepo_owner {
+.storesrepo_owner {
 	padding:0 0 0 10px;
 }
-.storesrepo_stores .storesrepo_description {
+.storesrepo_description {
 	margin:5px 0 0 0;
 	padding:0 0 5px 10px;
 }
@@ -144,11 +137,11 @@ p.storesrepo_owner {
 	padding:0 0 10px 10px;
 	margin:0;
 }
-.storesrepo_stores .storesrepo_description p {
+.storesrepo_description p {
 	padding:0 0 5px 0;
 	margin:0;
 }
-.storesrepo_stores .storesrepo_specialcontent img {
+.storesrepo_specialcontent img {
 	padding:5px;
 	margin:0 0 0 10px;
 	border:1px dotted silver; 
@@ -574,21 +567,12 @@ unit-rating a.r1-unit{left: 0px;}
 	padding:5px;
 }
 
-.edit_btn a{
-	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/edit.jpg) no-repeat left top;
-	padding-left:20px;
-	font-weight:bold;
-}
 .more_btn a{
 	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/more.gif) no-repeat right 4px;
 	padding-right:15px;
 	font-weight:bold;
 }
-.delete_btn a{
-	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/delete.png) no-repeat left top;
-	padding-left:20px;
-	font-weight:bold;
-}
+
 .buy_more a{
 	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/buy_more.jpg) no-repeat left top;
 	padding-left:20px;
@@ -807,12 +791,7 @@ unit-rating a.r1-unit{left: 0px;}
 	margin:2px 0 0;
 	text-decoration:none;
 }
-#owner_block_stores .scommerce_settings{
-	margin:10px 0 0;
-}
-#owner_block_stores .my_account{
-	margin:10px 0 0;
-}
+
 #owner_block_stores .cart{
 	margin:10px 0 0;
 }
@@ -821,11 +800,6 @@ unit-rating a.r1-unit{left: 0px;}
 }
 #owner_block_stores .orders{
 	margin:10px 0 0;
-}
-
-#owner_block_stores .scommerce_settings a{
-	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/settings.png) no-repeat scroll left 0;
-	display:inline;
 }
 
 #owner_block_stores .cart a{
@@ -840,11 +814,6 @@ unit-rating a.r1-unit{left: 0px;}
 
 #owner_block_stores .orders a{
 	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/order_icon.png) no-repeat scroll left 2px;
-	display:inline;
-}
-
-#owner_block_stores .my_account a{
-	background:transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/myaccount.png) no-repeat scroll left 2px;
 	display:inline;
 }
 
