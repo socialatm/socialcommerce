@@ -71,13 +71,12 @@ if($products){
 			</div>
 			{$not_available}
 EOF;
-		$icon = elgg_view("socialcommerce/image", array(
-					'entity' => $product,
-					'size' => 'small',
-					 ));
-		$display_cart_items .= elgg_view('page/components/image_block', array('image' => $icon, 'body' => $info));
+		$product_image_guid = sc_product_image_guid($product->guid);
+		$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
+
+		$display_cart_items .= elgg_view('page/components/image_block', array('image' => $image, 'body' => $info));
 	}
 }else {
 	$display_cart_items = elgg_echo('wishlist:null');
 }
-echo $display_cart_items
+echo $display_cart_items;
