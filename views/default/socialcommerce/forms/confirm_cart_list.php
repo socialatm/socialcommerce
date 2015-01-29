@@ -8,15 +8,17 @@
 	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	
+	$user = elgg_get_logged_in_user_entity();
 	 
 	if(elgg_is_logged_in()){
 		if($vars['not_allow'] == 1){
 			$hidden = '<input type="hidden" name="not_allow" value="1">';
 			$action = "#";
 		}else{
-			$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout/";
+			$action = elgg_get_config('url').'socialcommerce/'.$user->username.'/checkout/';
 		}
-		$username = "/".$_SESSION['user']->username;
+		$username = "/".$user->username;
 	}
 	$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('check:out')));
 	$buy_more = elgg_echo('buy:more');
