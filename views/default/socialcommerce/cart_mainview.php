@@ -34,8 +34,8 @@
 		forward($reditrect);
 	}
 ?>
-	<div class="storesrepo_stores">
-		<div class="storesrepo_icon full_view">
+	<div>
+		<div>
 <?php 
 				echo elgg_view("socialcommerce/image", array(
 												'entity' => $vars['entity'],
