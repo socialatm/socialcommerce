@@ -16,15 +16,15 @@
 		<div id="owner_block_stores">
 			<?php if (elgg_is_admin_logged_in()) { ?>
 				<!--My Account-->
-				<div class="scommerce_settings">
+				<div class="scommerce_settings elgg-menu-content">
 					<a href="<?php echo $sc_url.'admin/plugin_settings/socialcommerce/'; ?>">
 						<?php echo elgg_echo('socialcommerce:settings'); ?>
 					</a>
 				</div>
 			<?php } ?>
 			<!--My Account-->
-			<div class="my_account">
-				<a href="<?php echo elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/my_account/address/">'; ?>
+			<div>
+				<a href="<?php echo elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/my_account/address/">'; ?>
 					<?php echo elgg_echo('stores:my:account'); ?>
 				</a>
 			</div>
@@ -38,7 +38,7 @@
 				}
 			?>
 			<div class="cart">
-				<a href="<?php echo $sc_url ?>socialcommerce/<?php echo $_SESSION['user']->username; ?>/cart">
+				<a href="<?php echo $sc_url ?>socialcommerce/<?php echo elgg_get_logged_in_user_entity()->username; ?>/cart">
 					<?php echo elgg_echo('stores:my:cart').$c_count; ?>
 				</a>
 			</div>
@@ -49,13 +49,13 @@
 				}
 			?>
 			<div class="wishlist">
-				<a href='<?php echo $sc_url."socialcommerce/" . $_SESSION['user']->username . "/wishlist"; ?>'>
+				<a href='<?php echo $sc_url.'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/wishlist'; ?>'>
 					<?php echo elgg_echo('stores:my:wishlist').$w_count ?>
 				</a>
 			</div>
 			<!--orders-->
 			<div class="orders">
-				<a href='<?php echo $sc_url."socialcommerce/" . $_SESSION['user']->username . "/order/"; ?>'>
+				<a href='<?php echo $sc_url.'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/order/'; ?>'>
 					<?php echo elgg_echo('stores:my:order') ?>
 				</a>
 			</div>
