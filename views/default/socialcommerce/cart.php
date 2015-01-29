@@ -4,9 +4,10 @@
 	* 
 	* @package Elgg products
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
-	* @author twentyfiveautumn.com
-	* @copyright twentyfiveautumn.com 2014
+	* @author ray peaslee
+	* @copyright twentyfiveautumn.com 2015
 	* @link http://twentyfiveautumn.com/
+	* @version 1.9.4
 	**/ 
 	
 	gatekeeper();
@@ -20,7 +21,7 @@
 	// be sure user has permission to view the shopping cart before continuing. If they don't we'll tell them it's empty.
 	if(!$cart->canEdit()){
 		register_error(elgg_echo("cart:null"));
-		forward('socialcommerce/'.$_SESSION['user']->username.'/all/');
+		forward('socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/all/');
 	}
 		
 	if($cart){
@@ -31,7 +32,6 @@
 	}else{
 		$display_cart_items = elgg_echo('cart:null');
 	}
-
 
 if($cart_items){
 	foreach ($cart_items as $cart_item){
@@ -92,12 +92,9 @@ EOF;
 				$not_allow = 1;
 			}
 			
-			$image = elgg_view("socialcommerce/image", array(
-										'entity' => $product,
-										'size' => 'medium',
-										'display'=>'full'
-									  )
-								);
+			$product_image_guid = sc_product_image_guid($product->guid);
+			$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
+			
 			if($product->mimetype && $product->product_type_id == 2){							
 				$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 			}else{
@@ -116,7 +113,7 @@ if($not_allow == 1){
 	$hidden = '<input type= "hidden" name="not_allow" value= "1">';
 	$action = "#";
 }else{
-	$action = $CONFIG->url."action/socialcommerce/update_cart";
+	$action = elgg_get_config('url')."action/socialcommerce/update_cart";
 }
 $hidden .= elgg_view('input/securitytoken');
 
