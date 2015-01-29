@@ -4,12 +4,13 @@
 	 * 
 	 * @package Elgg products
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 
-// echo __FILE__ .' at '.__LINE__; 
+	$user = elgg_get_logged_in_user_entity();
 
 $payment = new stdClass();
 $_SESSION['PAYMENT'] = $payment;
@@ -18,10 +19,8 @@ $_SESSION['PAYMENT'] = $payment;
 require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
 $arr2 = get_defined_vars();
 krumo($_SESSION['CHECKOUT']); // die();
-krumo($_SESSION);
-//krumo(get_input('checkout_status'));
+krumo::session();
 	 
-$page_owner = elgg_get_logged_in_user_entity();
 $checkout_status = get_input('checkout_status')? get_input('checkout_status') : 'begin';
 krumo($checkout_status);
 
@@ -31,7 +30,7 @@ switch ($checkout_status):
 		$cart = elgg_get_entities(array( 	
 				'type' => 'object',
 				'subtype' => 'cart',
-				'owner_guid' => $page_owner->guid,
+				'owner_guid' => $user->guid
 				)); 
 	
 		if($cart){				//	@todo - should probably register an error and forward if cart is empty...
@@ -89,7 +88,7 @@ switch ($checkout_status):
         continue;
 endswitch;
 
-$url = 'socialcommerce/' . $_SESSION['user']->username.'/checkout/';
+$url = 'socialcommerce/'.$user->username.'/checkout/';
 
 $content = '
         <div class="content">
