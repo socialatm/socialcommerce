@@ -15,7 +15,7 @@
 	if($address)
 		$address = $address[0];
 	$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('confirm:address')));
-	$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+	$action = elgg_get_config('url')."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 	$hidden_values = elgg_view('input/securitytoken');
 	$form_body = <<< BOTTOM
 		<form method="post" action="{$action}">
@@ -27,4 +27,3 @@
 		</form>
 BOTTOM;
 echo $form_body;
-?>

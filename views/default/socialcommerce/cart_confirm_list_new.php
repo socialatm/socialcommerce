@@ -80,10 +80,10 @@ EOF;
 	}
 }
 
-$cencelurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cancel/";
-$returnurl = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/cart_success/";
-$ipnurl = $CONFIG->url."action/socialcommerce/makepayment?page_owner=".elgg_get_page_owner_guid();
-$action = $CONFIG->url."ajax/view/socialcommerce/checkout";
+$cencelurl = elgg_get_config('url')."socialcommerce/".$_SESSION['user']->username."/cancel/";
+$returnurl = elgg_get_config('url')."socialcommerce/".$_SESSION['user']->username."/cart_success/";
+$ipnurl = elgg_get_config('url')."action/socialcommerce/makepayment?page_owner=".elgg_get_page_owner_guid();
+$action = elgg_get_config('url')."ajax/view/socialcommerce/checkout";
 
 if($checkout_confirm)
 	$disabled = 'disabled';

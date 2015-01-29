@@ -53,7 +53,7 @@ function contact_form_validation(){
 	<div class="index_box">
 		<h2><?php echo elgg_echo("contact:us");?></h2>
 		<div class="contentWrapper">
-			<form onsubmit="return contact_form_validation();" method="POST" action="<?php echo $CONFIG->url; ?>action/socialcommerce/contact_us">
+			<form onsubmit="return contact_form_validation();" method="POST" action="<?php echo elgg_get_config('url'); ?>action/socialcommerce/contact_us">
 				<table width="100%">
 					<tr>
 						<td style="text-align:right"><span style="color:red;">*</span><B><?php echo elgg_echo("contact:email");?></B></td>

@@ -16,7 +16,7 @@
 		if($order_guid){
 			$order = get_entity($order_guid);
 		}else{
-			$redirect = $CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/order';
+			$redirect = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/order';
 			forward($redirect);
 		}
 	

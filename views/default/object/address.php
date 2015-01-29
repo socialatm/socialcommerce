@@ -53,7 +53,7 @@
 		if( $address->canEdit() ) { 			
 ?>
 			<div class="storesrepo_controls">
-				<a href="<?php echo $CONFIG->url; ?>socialcommerce/<?php echo $page_owner->username;?>/edit_address/<?php echo $address->guid; ?>"><?php echo elgg_echo('edit:address'); ?></a> 	
+				<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $page_owner->username;?>/edit_address/<?php echo $address->guid; ?>"><?php echo elgg_echo('edit:address'); ?></a> 	
 			</div>
 <?php
 		}

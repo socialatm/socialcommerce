@@ -72,7 +72,7 @@
 		
 		/*	select shipping method form */
 		
-		$action = $CONFIG->url."ajax/view/socialcommerce/checkout";
+		$action = elgg_get_config('url')."ajax/view/socialcommerce/checkout";
 		$form_vars = array('action' => $action, 'id'=> 'select_shipping_method_form' ); 
 		$shipping_method_form = elgg_view_form("address/shipping", $form_vars, $body_vars);
 		

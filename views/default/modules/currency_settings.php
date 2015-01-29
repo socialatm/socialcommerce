@@ -81,7 +81,7 @@
 	</div><br />
 	<div class="buttonwrapper" >
 		<a onclick="get_exchange_rate();" class="squarebutton"><?php echo '     '.elgg_echo('get:exchange:rate'); ?></a>
-		<span><img id="run_exchange_rate" style="display:none;" src="<?php echo $CONFIG->url."mod/socialcommerce"; ?>/images/working.gif"> </span>
+		<span><img id="run_exchange_rate" style="display:none;" src="<?php echo elgg_get_config('url')."mod/socialcommerce"; ?>/images/working.gif"> </span>
 	</div><br />
 	<div>
 		<label for="currency_token"><h3><?php echo elgg_echo('currency:token'); ?>:</h3></label>

@@ -9,12 +9,9 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	if ($vars['size'] == 'large') {
 		$ext = '_lrg';
 	} else {
 		$ext = '';
 	}
-	echo '<img src="'.$CONFIG->url.'mod/socialcommerce/graphics/icons/vcard'.$ext.'.gif" border="0" />';
-
-?>
+	echo '<img src="'.elgg_get_config('url').'mod/socialcommerce/graphics/icons/vcard'.$ext.'.gif" border="0" />';

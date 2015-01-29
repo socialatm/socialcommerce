@@ -44,7 +44,7 @@
 											  ));
 ?>	
 		</div>
-		<form method="post" action="<?php echo $CONFIG->url."action/socialcommerce/addcart"; ?>">
+		<form method="post" action="<?php echo elgg_get_config('url')."action/socialcommerce/addcart"; ?>">
 		<div class="right_section_contents">
 			<div class="storesrepo_title_owner_wrapper">
 <?php
