@@ -30,7 +30,7 @@
 	}
 	
 	if (!$success) {
-		$contents = file_get_contents($CONFIG->pluginspath . "socialcommerce/graphics/default{$size}.jpg");
+		$contents = file_get_contents(elgg_get_config('pluginspath') . "socialcommerce/graphics/default{$size}.jpg");
 	}
 	
 	header("Content-type: image/jpeg");

@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-
 	if(
 	
 	$address = elgg_get_entities(array( 	
@@ -29,7 +27,7 @@
 		$address_add = elgg_view("socialcommerce/forms/checkout_edit_address",array('ajax'=>1,'type'=>'shipping'));
 		
 		$submit_input = elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('shipping:address')));
-		$action = $CONFIG->url."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
+		$action = elgg_get_config('url')."socialcommerce/".$_SESSION['user']->username."/checkout_process/";
 		$address_details = <<<EOF
 			<div>
 				<form method="post" action="{$action}" onsubmit="return validate_shipping_details();">

@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-global $CONFIG;
 $most_rateds = get_purchased_orders('final_value','','object','rating','','',true,'','DESC',500,0);
 if($most_rateds){
 	$products_list = "";

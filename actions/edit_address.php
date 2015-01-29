@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
-	global $CONFIG;
-	
 	// Get variables
 	//$title = trim(get_input('title'));
 	$firstname = trim(get_input('first_name'));
@@ -79,7 +77,7 @@
 		if (!$address = get_entity($guid)) {
 			if(!$ajax){
 				register_error(elgg_echo("address:edit:failed"));
-				forward($CONFIG->url . "socialcommerce/" . $container_user->username . "/address/");
+				forward(elgg_get_config('url')."socialcommerce/" . $container_user->username . "/address/");
 				exit;
 			}else{
 				echo elgg_echo("address:edit:failed");
@@ -127,6 +125,5 @@
 		}
 	}
 	if(!$ajax){
-		forward($CONFIG->url . "socialcommerce/" . $container->username . "/address/");
+		forward(elgg_get_config('url')."socialcommerce/" . $container->username . "/address/");
 	}
-?>

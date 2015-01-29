@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-global $CONFIG;
 $order_item = $vars['entity'];
 $action = $vars['action'];
 $order_status = $vars['status'];
@@ -28,7 +27,7 @@ if(elgg_is_logged_in() && $action == "edit"){
 		}
 		$order_options .= "<option value=\"{$key}\" {$select}>{$status}</option>";
 	}
-	$action = $CONFIG->url.'action/socialcommerce/change_order_status';
+	$action = elgg_get_config('url').'action/socialcommerce/change_order_status';
 	$submit_btn_text = elgg_echo('change:status:btn');
 	$status_body = <<<EOF
 		<span class="order_item_status">

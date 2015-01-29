@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	
 	$order = $vars['entity'];
 	$type = $vars['type'];
 	if($order){

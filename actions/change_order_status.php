@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	
 	$order_item_guid = get_input('id');
 	$order_item_status = get_input('status');
 	elgg_set_context('add_order');
