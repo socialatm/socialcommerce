@@ -9,8 +9,7 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
- 	global $CONFIG;
-	$guid = (int) get_input('a_id');
+ 	$guid = (int) get_input('a_id');
 	$user_guid = (int) get_input('u_guid');
 	$ajax = get_input('ajax');
 	if ($address = get_entity($guid)) {

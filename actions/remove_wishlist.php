@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 
-	global $CONFIG;
-	
 	// Get variables
 	$product_guid = get_input("product_guid");
 	$product = get_entity($product_guid);
@@ -27,6 +25,6 @@
 			register_error(elgg_echo("wishlist:delete:failed"));
 		}
 	}
-	$return = $CONFIG->url . "socialcommerce/" . $product->getOwnerEntity()->username . "/wishlist";
+	$return = elgg_get_config('url')."socialcommerce/" . $product->getOwnerEntity()->username . "/wishlist";
 	forward($return);
 ?>

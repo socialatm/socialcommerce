@@ -167,7 +167,7 @@ $content .= '<div>'.
 			</div>
 			<div id="load_action"></div>
 			<div id="load_action_div">
-				<img src="'.$CONFIG->url.'mod/socialcommerce/images/loadingAnimation.gif">
+				<img src="'.elgg_get_config('url').'mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Processing...</div>
 			</div>';
 

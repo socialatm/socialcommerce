@@ -8,7 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-		global $CONFIG;
+		
 		$guid = (int) get_input('category');
 		if ($category = get_entity($guid)) {
 			if ($category->canEdit()) {

@@ -8,7 +8,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-		global $CONFIG;
+		
 		if(elgg_is_logged_in()){
 			$guid = (int) get_input('cart_guid');
 			if ($cart_item = get_entity($guid)) {

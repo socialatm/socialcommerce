@@ -7,7 +7,7 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	global $CONFIG;
+	
 	$country_code = trim(get_input('code'));
 	
 	$tax_entity = elgg_get_entities_from_metadata(array(
