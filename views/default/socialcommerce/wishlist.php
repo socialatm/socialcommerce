@@ -9,22 +9,24 @@
 	 * @link http://twentyfiveautumn.com/
 	 * version elgg 1.9.4
 	 **/ 
-	 
-$products = $vars['entities'];
-$ts = time();							
+	
+	$products = $vars['entities'];
+	$ts = time();
+	
 if($products){
 	foreach ($products as $product){
 		$rating = "";
 		$owner = $product->getOwnerEntity();
-		$friendlytime = elgg_view_friendly_time($product->time_created);
 		$title = $product->title;
 		$product_url = $product->getURL();
 		$title = $product->title;
 		$mime = $product->mimetype;
-		$friendlytime = "<a href=\"{$vars['url']}socialcommerce/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
+		$friendlytime = '<a href="'.elgg_get_config('url').'socialcommerce/'.$owner->username.'">'.$owner->username.'</a> '.elgg_view_friendly_time($product->time_created);
+		
 		$info = "<p> <a href=\"{$product_url}\"><B>{$title}</B></a></p>";
 		$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
 		$info .= "</p>";
+		
 		$quantity_text = elgg_echo('quantity');
 		$price_text = elgg_echo('price');
 		$total = $product->price;
