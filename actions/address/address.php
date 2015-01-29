@@ -86,5 +86,4 @@
 	}
 	
 //	forward(REFERER);
-	forward($CONFIG->url . "socialcommerce/" . $page_owner->username . "/checkout/");
-?>
+	forward(elgg_get_config('url')."socialcommerce/" . $page_owner->username . "/checkout/");

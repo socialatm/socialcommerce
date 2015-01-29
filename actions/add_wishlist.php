@@ -44,6 +44,6 @@
 		}
 	}
 	
-	$return = $CONFIG->url . 'socialcommerce/' . $product->getOwnerEntity()->username . "/read/" . $product->getGUID() . "/" . $product->title;
+	$return = elgg_get_config('url').'socialcommerce/' . $product->getOwnerEntity()->username . "/read/" . $product->getGUID() . "/" . $product->title;
 	forward($return);
 ?>

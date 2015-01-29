@@ -117,6 +117,5 @@
 		}
 	}
 	if(!$ajax){
-		forward($CONFIG->url . "socialcommerce/" . $container_user->username . "/address/");
+		forward(elgg_get_config('url')."socialcommerce/" . $container_user->username . "/address/");
 	}
-?>

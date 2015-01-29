@@ -98,7 +98,7 @@ function sc_register_subtypes(){
 }
 
 function genarateCartFromSession(){
-	global $CONFIG;
+	
 	if (elgg_is_logged_in() && isset($_SESSION['GUST_CART']) && !empty($_SESSION['GUST_CART'])) {
 		$session_cart_items = $_SESSION['GUST_CART'];
 		$ownered_products = array();
@@ -1097,8 +1097,8 @@ function convert_currency($convert_from="", $convert_to="", $amount=0){
 
 function register_country_state(){
 	global $CONFIG;
-	if ( file_exists($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml')) {
-		$xml = new ElggXMLElement(file_get_contents($CONFIG->pluginspath.'/socialcommerce/xml/country_state.xml'));
+	if ( file_exists(elgg_get_config('pluginspath').'/socialcommerce/xml/country_state.xml')) {
+		$xml = new ElggXMLElement(file_get_contents(elgg_get_config('pluginspath').'/socialcommerce/xml/country_state.xml'));
 				
 		if ($xml && is_object($xml)){
 			$country = array();
@@ -1266,7 +1266,7 @@ function notification_for_scommerce($hook, $entity_type, $returnvalue, $params){
 				if($product->quantity <= $product->base_stock && $product->base_stock > 0){
 					$url = $product->getURL();
 					$user = get_entity($product->owner_guid);
-					$site = get_entity($CONFIG->site_guid);
+					$site = get_entity(elgg_get_config('site_guid'));
 					if($product->quantity)
 						$quantity = $product->quantity;
 					else
@@ -1392,10 +1392,9 @@ function get_product_from_metadata($meta_array,$type=null,$subtype=null,$where_s
 /*****	Function to convert a weight between the specified units.	*****/
 
 function convert_weight($weight, $to_unit, $from_unit = null){
-	global $CONFIG;
-	
+		
 	if(is_null($from_unit)) {
-		$from_unit = $CONFIG->default_weight_unit;
+		$from_unit = elgg_get_config('default_weight_unit');
 	}
 	$from_unit = strtolower($from_unit);
 	$to_unit = strtolower($to_unit);
@@ -1491,7 +1490,7 @@ function get_coupon_uses($coupon_guid){
 
 
 function generate_vat($vat_rate = '',$sub_total = '',$country_rate = ''){
-	global $CONFIG;
+	
 	if($country_rate == '')
 	{
 		$vat_amt = ($vat_rate * $sub_total) / 100;

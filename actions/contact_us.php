@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	
 	$site = get_entity(elgg_get_config('site_guid'));
 	$from = get_input('contact_email');
 	$name = get_input('contact_name');
@@ -19,7 +17,7 @@
 	$to = $site->email;
 	
 	$messate_header = sprintf(elgg_echo('msg:header'),"Admin");
-	$messate_footer = sprintf(elgg_echo('msg:footer'),$CONFIG->sitename.' Team');
+	$messate_footer = sprintf(elgg_echo('msg:footer'), elgg_get_config('sitename').' Team');
 	
 	$message = <<<EOF
 		<div style="width:500px;padding:10px;background-color:#FFFFFF;">
