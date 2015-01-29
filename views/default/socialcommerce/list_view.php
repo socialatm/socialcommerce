@@ -8,10 +8,10 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-
+	 
 	$stores = $vars['entity'];
 	$action = get_input('action');
-	$product_guid = $stores->getGUID();
+	$product_guid = $stores->guid;
 	$tags = $stores->tags;
 	$title = $stores->title;
 	$desc = $stores->description;
@@ -31,13 +31,10 @@
 		}else{
 			$quantity = 0;
 		}
-	//	$quantity = "<span><B>{$quantity_text}:</B>{$quantity}</span>";
-		
+			
 		$quantity = '<span><B>'.$quantity_text.':</B>'.$quantity.'</span>';
 	}
-	
-//	$quantity = '<span><B>'.$quantity_text.':</B>'.$quantity.'</span>';
-	
+		
 	$info = '<p><a href="'.$stores->getURL().'"><b>'.$title.'</b></a></p>';
 	$info .= '<p class="owner_timestamp">
 		<a href="'.$owner->getURL().'">'.$owner->name.'</a> '.$friendlytime;
@@ -51,8 +48,6 @@
 	$product_type_out =  elgg_view('output/product_type',array('value' => $stores->product_type_id));
 	$category_out =  elgg_view('output/category',array('value' => $stores->category));
 	$display_price = get_price_with_currency($stores->price);
-	
-	
 
 /*****	new	*****/
 
@@ -78,9 +73,7 @@
 			</tr>
 		</table>';
 
-
 /*****	end new	*****/
-
 
 	$cart_url = elgg_add_action_tokens_to_url(addcartURL($stores)).'&product_guid='.$product_guid;
 	$cart_text = elgg_echo('add:to:cart');
@@ -88,7 +81,7 @@
 	
 	if($stores->status == 1){
 		if($stores->owner_guid != $_SESSION['user']->guid && $product_type_details->addto_cart == 1){
-			$wishlist_action = elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/add_wishlist?pgid=".$stores->guid);
+			$wishlist_action = elgg_add_action_tokens_to_url(elgg_get_config('url')."action/socialcommerce/add_wishlist?pgid=".$stores->guid);
 
 			$cart_wishlist = '
 				<div class="cart_wishlist">
@@ -118,14 +111,15 @@
 		</div>	
 		
 EOF;
+
+	$product_image_guid = sc_product_image_guid($product_guid);
+	$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
+						
+	if($stores->mimetype && $stores->product_type_id == 2){	
+		$icon = '<div>';
+		$icon .= '<a href="'.$stores->getURL().'">'. elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a>
+		</div>";
 	
-	$image =  elgg_view("socialcommerce/image", array(
-						'entity' => $vars['entity'],
-						'size' => 'small',
-						));
-								  
-	if($stores->mimetype && $stores->product_type_id == 2){							
-		$icon = "<div style=\"padding-top:10px;\"><a href=\"{$stores->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
 	}
+	
 	echo elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
-?>
