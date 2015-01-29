@@ -714,7 +714,13 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 							$display_price = get_price_with_currency($original_price);
 
 							$product_url = $product->getURL();
+							
+							echo 'Calling the old image loader <b>'.__FILE__ .' at '.__LINE__; die();
+							
 							$image = "<a href=\"{$product_url}\">" . elgg_view("socialcommerce/image", array('entity' => $product, 'size' => 'medium','display'=>'image')) . "</a>";
+							
+							
+							
 							$display_sub_total = get_price_with_currency($sub_total);
 							
 							if($product->mimetype && $product->product_type_id == 2){
@@ -1572,13 +1578,12 @@ EOF;
 }
 
 function calculate_cart_total($cart_user=0, $product_user=0 ){
-	global $CONFIG;
-		
+			
 	if(elgg_is_logged_in()){
 		if($cart_user > 0)
 			$user_guid = $cart_user;
 		else
-			$cart_user = $_SESSION['user']->getGUID();
+			$cart_user = elgg_get_logged_in_user_guid();
 		$cart = elgg_get_entities(array( 	
 			'type' => 'object',
 			'subtype' => 'cart',
