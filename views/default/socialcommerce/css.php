@@ -8,8 +8,6 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
-	 
-	 global $CONFIG;
 ?>
 
 p.storesrepo_owner {

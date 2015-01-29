@@ -9,8 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
-	
 	$stores = $vars['entity'];
 	$action = get_input('action');
 	$product_guid = $stores->getGUID();

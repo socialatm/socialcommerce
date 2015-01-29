@@ -28,7 +28,7 @@
 				
 				if($success){
 					if($cart_success_load != 2 ){
-						$redirect =  elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&cart_success_load=2&success={$success}");
+						$redirect =  elgg_add_action_tokens_to_url(elgg_get_config('url')."action/socialcommerce/manage_socialcommerce?manage_action=cart_success&cart_success_load=2&success={$success}");
 						forward($redirect);
 						exit();
 					}else{
@@ -46,7 +46,7 @@
 AREA2;
 					}
 				}else{
-					$redirect =  elgg_add_action_tokens_to_url($CONFIG->url."action/socialcommerce/manage_socialcommerce?manage_action=checkout_error");	// @todo - re-write this at some point...
+					$redirect =  elgg_add_action_tokens_to_url(elgg_get_config('url')."action/socialcommerce/manage_socialcommerce?manage_action=checkout_error");	// @todo - re-write this at some point...
 					forward($redirect);
 				}
 				echo $area2;

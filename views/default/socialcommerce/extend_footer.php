@@ -9,5 +9,5 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-global $CONFIG;	//	@todo - can add some diagnostic stuff here if needed...
+	//	@todo - can add some diagnostic stuff here if needed...
 ?>

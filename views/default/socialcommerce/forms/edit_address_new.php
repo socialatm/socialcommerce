@@ -9,7 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	global $CONFIG;
 	$ajax = $vars['ajax'];
 	// Set title, form destination
 		if (isset($vars['entity'])) {

@@ -9,7 +9,6 @@
 	* @link http://twentyfiveautumn.com/
 	**/ 
 	 
-global $CONFIG;
 if($_SESSION['user']->guid > 0){
 	$user_email = $_SESSION['user']->email;
 	$user_name = $_SESSION['user']->name;

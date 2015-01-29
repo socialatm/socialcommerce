@@ -11,8 +11,6 @@
 	 
 	echo (__FILE__);
 	 
-	global $CONFIG;
-	
 	$stores = $vars['entity'];
 	$action = get_input('action');
 	$product_guid = $stores->getGUID();
@@ -105,7 +103,7 @@
 				<td>
 					<?php
 						$display_fields = '';
-						$product_fields = $CONFIG->product_fields[$stores->product_type_id];
+						$product_fields = elgg_get_config('product_fields')[$stores->product_type_id];
 						if (is_array($product_fields) && sizeof($product_fields) > 0){
 							foreach ($product_fields as $shortname => $valtype){
 								if($valtype['display'] == 1 && 	$shortname != 'price' && $shortname != 'quantity' && $shortname != 'upload'){
