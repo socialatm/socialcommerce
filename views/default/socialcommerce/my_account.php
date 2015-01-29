@@ -35,7 +35,7 @@
 					$product = get_entity($oreder_item->product_id);
 					$product_owner = get_user($product->owner_guid);
 					if($product){
-						$product_url = $CONFIG->url."socialcommerce/".$product_owner->username."/read/".$product->guid."/".$product->title;
+						$product_url = elgg_get_config('url')."socialcommerce/".$product_owner->username."/read/".$product->guid."/".$product->title;
 						$p_title = trim($product->title);
 						if(strlen($p_title) > 20){
 							$p_title = substr($p_title,0,20)."...";

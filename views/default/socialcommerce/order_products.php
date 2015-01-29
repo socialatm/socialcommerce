@@ -40,7 +40,7 @@
 				$display_price = get_price_with_currency($price);
 				$display_total = get_price_with_currency($total);
 				if($product->mimetype && $product->product_type_id == 2){
-					$download_action_url = $CONFIG->url."action/socialcommerce/download?product_guid=".$order_item->guid;						
+					$download_action_url = elgg_get_config('url')."action/socialcommerce/download?product_guid=".$order_item->guid;						
 					$download_action_url = elgg_add_action_tokens_to_url($download_action_url);							
 					$icon = "<div title='Download' class='order_icon_class'><a href=\"{$download_action_url}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}else{
@@ -121,7 +121,7 @@ EOF;
 			}
 		    $order_total = '<b>'.elgg_echo('order:total').":</b> ".get_price_with_currency($grand_total);
 			$order_item_follows = sprintf(elgg_echo('order:item:follows'),$order->guid);
-			$action = $CONFIG->url.'socialcommerce/'.$_SESSION['user']->username.'/order/';
+			$action = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/order/';
 			$display_grand_total = get_price_with_currency($grand_total);
 		
 			$cart_item_text = elgg_echo('checkout:cart:item');
