@@ -10,25 +10,32 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
-	$stores = $vars['entity'];
-	
-//	echo '<b>'.__FILE__ .' at '.__LINE__.'</b>';
 	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-	$arr2 = get_defined_vars();
-//	krumo($arr2);
-//	krumo::session();
-//	krumo($stores->display);
-
-	if ($stores instanceof ElggEntity) {
+	echo 'Trying to use old image format<b>'.__FILE__ .' at '.__LINE__;
+	krumo::includes();
+	die();
 	
-		// Get size
-		if (!in_array($vars['size'],array('small','medium','large','tiny','master','topbar')))
-			$vars['size'] = "medium";
+/*********************************************************************************************************************************************
+
+This will tell us what files are trying to use the old product image handler
+
+search for:  elgg_view("socialcommerce/image" in the included files
+
+here is the new format:
+
+$url = elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_guid.'/'.$size; 	
+
+***********************************************************************************************************************************************/	
 			
+/***************************	OLD STUFF BELOW	*************************************************/
+
+
 		// Get display
-		if (!in_array($vars['display'],array('full','image','url'))){
-			$vars['display'] = "full";
-		}
+		$display = $vars['display'] ? $vars['display'] : 'full';
+		
+		// icontime? @todo: is it used anywhere?
+		$icontime = $product->icontime ? $product->icontime : 'default';
+		
 			
 		// Get any align and js
 		if (!empty($vars['align'])) {
@@ -36,41 +43,34 @@
 		} else {
 			$align = "";
 		}
+			
+			
 		
-		if ($icontime = $vars['entity']->icontime) {
-			$icontime = "{$icontime}";
-		} else {
-			$icontime = "default";
-		}
-
+		
 		if($vars['display'] == "full"){
+		
 ?>
 			<div class="product_image">
-			<a href="<?php echo $vars['entity']->getURL(); ?>" class="icon" >
+				<a href="<?php echo $product->getURL(); ?>" class="icon" >
 					
-			<img onmouseover="display_zoome_image(<?php echo $vars['entity']->guid; ?>,this)" onmouseout="hide_zoome_image(<?php echo $vars['entity']->guid; ?>)"
+					<img src="<?php echo 'file://'.$file; ?>"
 			
-			title="<?php echo $vars['entity']->title; ?>"
+					title="<?php echo $product->title; ?>" width = "600px" height = "600px"
 
-			src="<?php echo $vars['entity']->getIconURL($vars['size']); ?>"
-
-			border="0"
-
-			<?php echo $align; ?> 
+					<?php echo $align; ?> 
 			
-			title="<?php echo $name; ?>"
-
-			<?php echo $vars['js']; ?> /></a>
-			
+					<?php echo $vars['js']; ?> />
+				</a>
 			</div>
 	
 <?php
 		}else if ($vars['display'] == "image"){
 ?>
-			<img title="<?php echo $vars['entity']->title; ?>" src="<?php echo $vars['entity']->getIconURL($vars['size']); ?>" border="0" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> />
+			<img title="<?php echo $vars['entity']->title; ?>" src="<?php echo 'file://'.$file; ?>" <?php echo $align; ?> title="<?php echo $name; ?>" <?php echo $vars['js']; ?> />
 <?php
+
 		}else if ($vars['display'] == "url"){
 			echo $vars['entity']->getIconURL($vars['size']); 
 		}
 	}
-?>
+
