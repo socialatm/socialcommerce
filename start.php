@@ -9,9 +9,13 @@
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
+//	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+//	krumo($CONFIG);
+//	die();
+	
 	function socialcommerce_init() {
 	    
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+// require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 	    
@@ -251,6 +255,8 @@ ini_set('display_errors', 1);
 										break;
 				case "friends":			require($base_path.'friends.php'); 	
 										break;
+				case "image":			require($base_path.'image.php'); 	
+										break;
 				case "ipn":				makepayment_paypal();
 										break;						
 				case "more_order_item":	require($base_path.'more_order_item.php');
@@ -286,6 +292,25 @@ ini_set('display_errors', 1);
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Takes the product guid and returns the product image guid.
+	 * @author ray peaslee
+	 * @version elgg 1.9.4
+	 * @return int $product_image_guid
+	 */
+	 
+	function sc_product_image_guid($product_guid) {
+	
+		$options = array(
+			'relationship' => 'product_image',
+			'relationship_guid' => $product_guid,
+		);
+		$product_image = elgg_get_entities_from_relationship($options);
+		$product_image_guid = $product_image[0]->guid;
+		
+		return $product_image_guid;
 	}
 	
 	/**
