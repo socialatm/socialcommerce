@@ -4,14 +4,16 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	$quantity = (get_input("cartquantity")) ? get_input("cartquantity") : 1;
 	$product_guid = get_input("product_guid");
 	$container_guid = (int) get_input('customer_guid') ? (int) get_input('customer_guid') : elgg_get_logged_in_user_entity()->guid ;
+	$cart_owner_guid = (int) get_input('customer_guid') ? (int) get_input('customer_guid') : elgg_get_logged_in_user_entity()->guid ;
 	$product = get_entity($product_guid);
 	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
 	if($product_type_details->addto_cart != 1){			//	@todo - throw an error message here...	
@@ -26,7 +28,7 @@
 				$carts = elgg_get_entities(array(
 					'type' => 'object',
 					'subtype' => 'cart',
-					'owner_guid' => $_SESSION['user']->getGUID(), 
+					'owner_guid' => $cart_owner_guid, 
 					));
 					
 				if($carts){
@@ -58,7 +60,7 @@
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
 						$cart_item->amount = $product->price;
-						$cart_item->container_guid = $container_guid;
+						$cart_item->container_guid = $cart_owner_guid;
 						
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
@@ -70,7 +72,7 @@
 					$cart = new ElggObject();
 					$cart->access_id = 2;
 					$cart->subtype = "cart";
-					$cart->container_guid = $container_guid;
+					$cart->container_guid = $cart_owner_guid;
 					
 					$cart_guid = $cart->save();
 					if($cart_guid){
@@ -81,7 +83,7 @@
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
 						$cart_item->amount = $product->price;
-						$cart_item->container_guid = $container_guid;
+						$cart_item->container_guid = $cart_owner_guid;
 						
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
@@ -100,7 +102,7 @@
 					$return = $CONFIG->url . 'socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
 				}	
 			}
-			$container_user = get_entity($container_guid);
+			$container_user = get_entity($cart_owner_guid);
 		}else{
 			register_error(elgg_echo("cart:addfailed:quantity"));
 			$return = $CONFIG->url . 'socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
