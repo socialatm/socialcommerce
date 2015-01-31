@@ -19,23 +19,42 @@
 	$quantity = get_input('cartquantity') ? (int)get_input('cartquantity') : 1;
 		
 	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
-	
 	//	@todo - throw an error message here...	if product is on backorder or something like that
 	if($product_type_details->addto_cart != 1){			//	@todo - throw an error message here...	
 		forward($product->getURL());
 	}
 	
-				// Get the users shopping cart
-				$carts = elgg_get_entities(array(
-					'type' => 'object',
-					'subtype' => 'cart',
-					'owner_guid' => $user->guid, 
-					));
+	// Get the users shopping cart
+	$carts = elgg_get_entities(array(
+		'type' => 'object',
+		'subtype' => 'cart',
+		'owner_guid' => $user->guid, 
+	));
+	
+	// if the user does not have a shopping cart let's create one
+	if(!is_array($carts)){
+		$cart = new ElggObject();
+		$cart->access_id = ACCESS_PRIVATE;
+		$cart->subtype = "cart";
+		$cart->owner_guid = $user->guid;
+		$cart_guid = $cart->save();
+		$carts = array( 0 => $cart);
+	}
+	
+	$cart = $carts[0];
+	unset($carts);
+	$cart_guid = $cart->guid;
+	
+	// if unable to create cart throw an error message
+	if(!$cart->guid){
+		register_error(elgg_echo('cart:not:created'));
+		forward(REFERER);
+	}
 					
-				if($carts){
-					$cart = $carts[0];
-					unset($carts);
-					$cart_guid = $cart->guid;
+					
+					
+					
+					
 										
 					//	get all the items that are in the cart
 					$cart_items = elgg_get_entities_from_relationship(array(
@@ -70,6 +89,8 @@ krumo(is_array($carts));
 
 //  krumo::defines();
 krumo($quantity);
+
+krumo((array)$cart);
 
 die();
 					
@@ -107,13 +128,9 @@ die();
 							
 						}
 					}
-				}else{
-					$cart = new ElggObject();
-					$cart->access_id = ACCESS_PRIVATE;
-					$cart->subtype = "cart";
-					$cart->owner_guid = $user->guid;
+				
 					
-					$cart_guid = $cart->save();
+					
 					if($cart_guid){
 						$cart_item = new ElggObject();
 						$cart_item->access_id = ACCESS_PRIVATE;
@@ -129,7 +146,12 @@ die();
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
 						}
 					}
-				}
+				
+				
+				
+				
+				
+				
 			if(!$cart_added){
 				if ($result){
 					system_message(elgg_echo("cart:added"));
