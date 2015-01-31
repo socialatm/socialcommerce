@@ -65,6 +65,7 @@ EOF;
 									'text' => elgg_echo("remove"),
 									'confirm' => elgg_echo("cart:delete:confirm"),
 								)); 
+echo 'Calling the old image loader <b>'.__FILE__ .' at '.__LINE__; die();
 				$image = elgg_view("socialcommerce/image", array(
 											'entity' => $product,
 											'size' => 'medium',
