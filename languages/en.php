@@ -140,7 +140,6 @@
 			'withdraw:text' => "Now your account has <B>%s</B>, if you wnat to Withdraw This Amount, select one of the following withdraw method and click on \"Withdraw\" button",
 			'withdraw:methods' => "Withdraw Methods",
 			'product:download' => "Download This",
-			'cart:already:added' => "You have already added this prdouct in your cart",
 			'add:cart:not:login' => "Sorry; You are not logged in, Please login.",
 			'active:products' => "Active Products",
 			'deleted:products' => "Deleted Products",
@@ -391,7 +390,7 @@
 		 	'cart:quantity' => "Quantity",
 		 	'enter:quantity' => "Enter Quantity",
 		 	'notlogin:message' => "Sorry; You could not be added this product at this time.",
-		 	'cart:delete:confirm' => "Are you sure, you want to delete this product from your cart?",
+		 	'cart:delete:confirm' => 'Are you sure you want to remove this product from your cart?',
 		 	'cart:update:text' => "Changed quantity?",
 		 	'cart:update' => "Update Cart",
 			'cart:subtotal' => 'Subtotal',
@@ -418,14 +417,18 @@
 		 	'cart:less:quantity:product' => "<div>%s set as %s quantity</div>",
 		 	'cart:less:quantity:products' => "<div>Following product(s) have no enough stock, so the quantity was reseted.%s</div>",
 		 
-		//	Status messages for cart
+		//	Cart status messages
 		
-			'cart:not:created' => 'Unable to create Shopping Cart',
 			'cart:added' => "cart was successfully added.",
          	'cart:updated' => "%s cart quantity updated",
          	'cart:deleted' => "The product %s was successfully deleted from your cart.",
-         	
-         	
+			
+		//	Cart error messages
+		
+			'cart:not:created' => 'Unable to create Shopping Cart',				//	updated @version elgg 1.9.4
+			'cart:item:not:updated' => 'Unable to update Item Quantity',
+			'cart:item:not:added' => 'Unable to Add Item to Shopping Cart',
+		         	
          /**
 		 * Error messages for category
 		 */
