@@ -9,8 +9,9 @@
 	 * @link http://twentyfiveautumn.com/
  	**/
 	
-//	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
 //	krumo($CONFIG);
+//	krumo::defines();
 //	die();
 	
 	function socialcommerce_init() {
@@ -160,7 +161,8 @@ ini_set('display_errors', 1);
 						'text' => elgg_echo('stores:sold:products'), 			
 						'href' => elgg_get_config('url').'socialcommerce/'. $user->username .'/sold/',			
 						'contexts' => array('stores', 'socialcommerce'),	
-						'parent_name' => 'stores',	
+						'parent_name' => 'stores',
+						'link_class' => 'elgg-menu-content',
 						);
 						elgg_register_menu_item('site', $menu_item);
 						
@@ -537,60 +539,6 @@ ini_set('display_errors', 1);
 		return $result;
 	}
 	
-	function get_stores_from_relationship($relationship,$relationship_guid, $metaname = "",$metavalue = "",$type = "", $subtype = "",$owner_guid = "", $metaorder_by = "", $order_by = "", $order = "ASC",$count=false){
-		global $CONFIG;
-		
-		$relationship = sanitise_string($relationship);
-		$relationship_guid = (int)$relationship_guid;
-		$type = sanitise_string($type);
-		$subtype = get_subtype_id($type, $subtype);
-		$owner_guid = (int)$owner_guid;
-		
-		if($metaorder_by){
-			$order_by = " CAST( v.string AS unsigned ) ".$order;
-		}elseif ($order_by){
-			$order_by = " e.".sanitise_string($order_by) . $order;
-		}else {
-			$order_by = " e.time_created desc";
-		}
-		
-		$where = "";
-		if ($relationship!="")
-			$where = " AND r.relationship='$relationship' ";
-		if ($relationship_guid)
-			$where .= " AND r.guid_one='$relationship_guid' ";
-		if ($type != "")
-			$where .= " AND e.type='$type' ";
-		if ($subtype)
-			$where .= " AND e.subtype=$subtype ";
-			
-		if(is_array($owner_guid)){
-			$where .= " AND e.owner_guid IN (" . implode(",",$owner_guid) . ")";
-		}else{
-			$where .= " AND e.owner_guid=$owner_guid ";
-		}
-		if($metaname){
-			$nameid = elgg_get_metastring_id($metaname);
-			if($nameid){
-				$where .= " and m.name_id=".$nameid;
-			}else{
-				$where .= " and m.name_id=0";
-			}
-		}	
-		if($metavalue || $metavalue == '0'){
-			$valueid = elgg_get_metastring_id($metavalue);
-			if($valueid){
-				$where .= " and m.value_id=".$valueid;
-			}else{
-				$where .= " and m.value_id=0";
-			}
-		}
-		
-		$query = "SELECT SQL_CALC_FOUND_ROWS e.*, v.string as value FROM {$CONFIG->dbprefix}entity_relationships r JOIN {$CONFIG->dbprefix}entities e ON e.guid = r.guid_two JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metastrings v ON m.value_id = v.id WHERE (1 = 1) ".$where." AND e.enabled='yes' AND m.enabled='yes'  ORDER BY ".$order_by." ".$limit;			
-		$sections = get_data($query);
-		return $sections;
-	}
-	
 	function get_sold_products($metavalue=null, $limit, $offset=0 ){
 		global $CONFIG;
 		$nameid = elgg_get_metastring_id('product_owner_guid');
@@ -840,13 +788,17 @@ ini_set('display_errors', 1);
 		elgg_register_action("socialcommerce/add", $action_path.'add.php');
 		elgg_register_action("socialcommerce/edit", $action_path.'edit.php');
 		elgg_register_action("socialcommerce/delete", $action_path.'delete.php');
+		
 		elgg_register_action("socialcommerce/icon", $action_path.'icon.php');
+		
 		elgg_register_action("socialcommerce/category/save", $action_path.'socialcommerce/category/save.php');			//	01/24/2015
 				
 		elgg_register_action("socialcommerce/delete_category", $action_path.'delete_category.php');
-				
+		
+		elgg_register_action('socialcommerce/add_to_cart', $action_path.'socialcommerce/add_to_cart.php' );
 		elgg_register_action("socialcommerce/remove_cart", $action_path.'remove_cart.php');
 		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
+		
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
 		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
 		elgg_register_action("address/address", $action_path.'address/address.php');
@@ -864,5 +816,5 @@ ini_set('display_errors', 1);
 		elgg_register_action("socialcommerce/addcountry_tax", $action_path.'addcountry_tax.php');
 		elgg_register_action('socialcommerce/manage_socialcommerce', $action_path.'manage_socialcommerce.php');
 		elgg_register_action('socialcommerce/settings/save', $action_path.'socialcommerce/settings/save.php' );
-		elgg_register_action('socialcommerce/add_to_cart', $action_path.'socialcommerce/add_to_cart.php' );
+		
 ?>
