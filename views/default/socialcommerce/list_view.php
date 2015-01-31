@@ -4,19 +4,20 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
+	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	 
 	$stores = $vars['entity'];
-	$action = get_input('action');
-	$product_guid = $stores->guid;
+	
 	$tags = $stores->tags;
 	$title = $stores->title;
 	$desc = $stores->description;
-	$ts = time();
-	
+		
 	$owner = $vars['entity']->getOwnerEntity();
 	$friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
 	$quantity_text = elgg_echo('quantity');
@@ -25,16 +26,9 @@
 	$mime = $stores->mimetype;
 	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
 	
-	if($stores->product_type_id == 1){
-		if($stores->quantity > 0){
-			$quantity = $stores->quantity;
-		}else{
-			$quantity = 0;
-		}
-			
-		$quantity = '<span><B>'.$quantity_text.':</B>'.$quantity.'</span>';
-	}
-		
+	
+
+	
 	$info = '<p><a href="'.$stores->getURL().'"><b>'.$title.'</b></a></p>';
 	$info .= '<p class="owner_timestamp">
 		<a href="'.$owner->getURL().'">'.$owner->name.'</a> '.$friendlytime;
@@ -75,23 +69,21 @@
 
 /*****	end new	*****/
 
-	$cart_url = elgg_add_action_tokens_to_url(addcartURL($stores)).'&product_guid='.$product_guid;
-	$cart_text = elgg_echo('add:to:cart');
-	$wishlist_text = elgg_echo('add:wishlist');
-	
+	//	if user is not the owner show the add to cart and add to wishlist buttons
 	if($stores->status == 1){
-		if($stores->owner_guid != $_SESSION['user']->guid && $product_type_details->addto_cart == 1){
-			$wishlist_action = elgg_add_action_tokens_to_url(elgg_get_config('url')."action/socialcommerce/add_wishlist?pgid=".$stores->guid);
-
-			$cart_wishlist = '
-				<div class="cart_wishlist">
-					<a title="'.$cart_text.'" class="cart" href="'.$cart_url.'">Add To Cart</a>
-				</div>
-				<div class="cart_wishlist">
-					<a class="wishlist" href="'.$wishlist_action.'">'.$wishlist_text.'</a>
-				</div>';
+		if($stores->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
+			$body_vars = array('product_guid' => $stores->guid);	
+			$cart_wishlist = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
+					
+			$body_vars = array('product_guid' => $stores->guid);	
+			$cart_wishlist .= elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
 		}
 	}
+	
+	$arr2 = get_defined_vars();
+//  krumo($arr2);
+// die();		
+
 	
 	$info .= <<<EOF
 		<div class="storesqua_stores">
@@ -101,8 +93,9 @@
 						<div class="cart_wishlist" style="padding:5px 0 0 10px;">
 							<div style="clear:both;"></div>
 							<div class="cart_wishlist">
-							</div>
 							{$cart_wishlist}
+							</div>
+							
 							<div style="clear:both;"></div>	
 						<div>
 					</td>
@@ -112,12 +105,12 @@
 		
 EOF;
 
-	$product_image_guid = sc_product_image_guid($product_guid);
+	$product_image_guid = sc_product_image_guid($stores->guid);
 	$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
 						
 	if($stores->mimetype && $stores->product_type_id == 2){	
 		$icon = '<div>';
-		$icon .= '<a href="'.$stores->getURL().'">'. elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a>
+		$icon .= '<a href="'.$stores->getURL().'">'. elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $stores->guid, 'size' => 'small')) . "</a>
 		</div>";
 	
 	}

@@ -29,7 +29,7 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 			<?php echo elgg_view('input/text', array(
 					'name' => 'quantity',
 					'id' => 'quantity',
-					'value' => $first_name,
+					'value' => 1,
 					'class' => '',
 					'style' => '',
 					));
