@@ -4,29 +4,29 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
-		
-		if(elgg_is_logged_in()){
-			$guid = (int) get_input('cart_guid');
-			if ($cart_item = get_entity($guid)) {
-				if ($cart_item->canEdit()) {
-					$container = get_entity($cart_item->container_guid);
-					if (!$cart_item->delete()) {
-						register_error(elgg_echo("cart:deletefailed"));
-					} else {
-						system_message(sprintf(elgg_echo("cart:deleted"),$cart_item->title));
-					}
-				} else {
-					$container = $_SESSION['user'];
-					register_error(elgg_echo("cart:deletefailed"));
-				}
-			} else {
+
+	gatekeeper();
+	$user = elgg_get_logged_in_user_entity();
+	$cart_item_guid = (int) get_input('cart_guid');
+			
+	// @todo - below still needs work			
+	if ($cart_item = get_entity($cart_item_guid)) {
+		if ($cart_item->canEdit()) {
+			if (!$cart_item->delete()) {
 				register_error(elgg_echo("cart:deletefailed"));
+			} else {
+				system_message(sprintf(elgg_echo("cart:deleted"), $cart_item->title));
+				forward(REFERER);
 			}
-			$username = $_SESSION['user']->username;
+		} else {
+			register_error(elgg_echo("cart:deletefailed"));
 		}
-		forward("socialcommerce/" . $username . "/cart/");
-?>
+	} else {
+		register_error(elgg_echo("cart:deletefailed"));
+	}
+forward(REFERER);
