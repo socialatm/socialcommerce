@@ -90,6 +90,7 @@ $('a.show_product_recent_desc').click(function () {
 					$products_list .= "</tr><tr>";
 				}
                 $mime = $f->mimetype;
+echo 'Calling the old image loader <b>'.__FILE__ .' at '.__LINE__; die();
                 $product_img = elgg_view("socialcommerce/image", array(
 						'entity' => $f,
 						'size' => 'medium',
