@@ -16,7 +16,7 @@
 	$product_guid = get_input("product_guid");
 	$product = get_entity($product_guid);
 	
-	$quantity = (get_input("cartquantity")) ? get_input("cartquantity") : 1;
+	$quantity = get_input('cartquantity') ? (int)get_input('cartquantity') : 1;
 		
 	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
 	
@@ -66,9 +66,10 @@ $arr2 = get_defined_vars();
 // krumo($arr2);
 
 
-krumo($in_cart);
+krumo(is_array($carts));
 
-krumo::defines();
+//  krumo::defines();
+krumo($quantity);
 
 die();
 					
@@ -98,7 +99,7 @@ die();
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
 						$cart_item->amount = $product->price;
-						$cart_item->container_guid = $user->guid;
+						$cart_item->owner_guid = $user->guid;
 						
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
@@ -110,7 +111,7 @@ die();
 					$cart = new ElggObject();
 					$cart->access_id = ACCESS_PRIVATE;
 					$cart->subtype = "cart";
-					$cart->container_guid = $user->guid;
+					$cart->owner_guid = $user->guid;
 					
 					$cart_guid = $cart->save();
 					if($cart_guid){
@@ -121,7 +122,7 @@ die();
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
 						$cart_item->amount = $product->price;
-						$cart_item->container_guid = $user->guid;
+						$cart_item->owner_guid = $user->guid;
 						
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
