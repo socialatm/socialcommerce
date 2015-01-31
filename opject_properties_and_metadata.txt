@@ -1,0 +1,38 @@
+/*************************
+ *
+ *	View an Elgg Objects properties and Metadata.
+ *
+ **/
+ 
+require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+$arr2 = get_defined_vars();
+krumo($arr2);
+krumo($product->getURL());
+
+krumo($_REQUEST);
+
+echo 'Object: <b>'.$product->title.'</b>';
+foreach($product as $key=>$value) {
+	$result[$key] = $value;
+} 
+krumo($result);
+
+$options = array('guid'=> $product_guid);
+$metadata = elgg_get_metadata($options);
+
+function object_to_array($obj) {
+if(is_object($obj)) $obj = (array) $obj;
+if(is_array($obj)) {
+$new = array();
+foreach($obj as $key => $val) {
+$new[$key] = object_to_array($val);
+	}
+}
+else $new = $obj;
+
+return $new; 
+}
+
+$test = object_to_array($metadata);
+echo 'metadata for: <b>'.$product->title.'</b>';
+krumo($test);
