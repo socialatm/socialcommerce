@@ -68,6 +68,8 @@ $arr2 = get_defined_vars();
 
 krumo($in_cart);
 
+krumo::defines();
+
 die();
 					
 					
@@ -91,7 +93,7 @@ die();
 						}
 					}else{
 						$cart_item = new ElggObject();
-						$cart_item->access_id = 2;
+						$cart_item->access_id = ACCESS_PRIVATE;
 						$cart_item->subtype = "cart_item";
 						$cart_item->quantity = $quantity;
 						$cart_item->product_id = $product_guid;
@@ -106,14 +108,14 @@ die();
 					}
 				}else{
 					$cart = new ElggObject();
-					$cart->access_id = 2;
+					$cart->access_id = ACCESS_PRIVATE;
 					$cart->subtype = "cart";
 					$cart->container_guid = $user->guid;
 					
 					$cart_guid = $cart->save();
 					if($cart_guid){
 						$cart_item = new ElggObject();
-						$cart_item->access_id = 2;
+						$cart_item->access_id = ACCESS_PRIVATE;
 						$cart_item->title = $product->title;
 						$cart_item->subtype = "cart_item";
 						$cart_item->quantity = $quantity;
