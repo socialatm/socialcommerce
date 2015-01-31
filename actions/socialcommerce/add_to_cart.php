@@ -19,15 +19,12 @@
 	$quantity = (get_input("cartquantity")) ? get_input("cartquantity") : 1;
 		
 	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
-
+	
+	//	@todo - throw an error message here...	if product is on backorder or something like that
 	if($product_type_details->addto_cart != 1){			//	@todo - throw an error message here...	
 		forward($product->getURL());
 	}
 	
-	// Check the quantity of a product
-	if($product->quantity > 0 || $product->product_type_id == 2){
-		if(($product->quantity >= $quantity && $quantity > 0) || $product->product_type_id == 2){
-
 				// Get the users shopping cart
 				$carts = elgg_get_entities(array(
 					'type' => 'object',
@@ -139,12 +136,5 @@ die();
 					$return = elgg_get_config('url').'socialcommerce/'.$user->username.'/buy/'.$product->guid.'/'.$product->title;
 				}	
 			}
-		}else{
-			register_error(elgg_echo("cart:addfailed:quantity"));
-			$return = elgg_get_config('url').'socialcommerce/'.$product->getOwnerEntity()->username.'/buy/'.$product->guid.'/'.$product->title;
-		}
-	}else{
-		register_error(elgg_echo("cart:addfailed:pquantity"));
-		$return = elgg_get_config('url').'socialcommerce/'.$product->getOwnerEntity()->username.'/buy/'.$product->guid.'/'.$product->title;
-	}
+	
 	forward($return);
