@@ -54,9 +54,11 @@
 					}
 					
 					switch($in_cart) {
+						// do this if the product is already in the cart
 						case TRUE:
 							echo 'product is already in the cart';
 							break;
+						// do this if the product is already in the cart
 						default:
 							echo 'product is NOT already in the cart';
 					} 
@@ -83,12 +85,12 @@ die();
 								}
 							}else{
 								register_error(sprintf(elgg_echo("cart:quantity:less"), $product->title));
-								$return = elgg_get_config('url').'socialcommerce/'.$user->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+								$return = elgg_get_config('url').'socialcommerce/'.$user->username.'/buy/'.$product->guid.'/'.$product->title;
 							}
 						} else {
 							register_error(elgg_echo("cart:already:added"));
 							$cart_added = true;
-							$return = elgg_get_config('url').'socialcommerce/'.$user->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+							$return = elgg_get_config('url').'socialcommerce/'.$user->username.'/buy/'.$product->guid.'/'.$product->title;
 						}
 					}else{
 						$cart_item = new ElggObject();
@@ -125,7 +127,6 @@ die();
 						$cart_item_guid = $cart_item->save();
 						if($cart_item_guid){
 							$result = add_entity_relationship($cart_guid,'cart_item',$cart_item_guid);
-							
 						}
 					}
 				}
@@ -135,15 +136,15 @@ die();
 					$return = elgg_get_config('url').'socialcommerce/'.$user->username.'/cart/';
 				}else {
 					register_error(elgg_echo("cart:addfailed"));
-					$return = elgg_get_config('url').'socialcommerce/'.$user->username.'/buy/'.$product->getGUID().'/'.$product->title;
+					$return = elgg_get_config('url').'socialcommerce/'.$user->username.'/buy/'.$product->guid.'/'.$product->title;
 				}	
 			}
 		}else{
 			register_error(elgg_echo("cart:addfailed:quantity"));
-			$return = elgg_get_config('url').'socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+			$return = elgg_get_config('url').'socialcommerce/'.$product->getOwnerEntity()->username.'/buy/'.$product->guid.'/'.$product->title;
 		}
 	}else{
 		register_error(elgg_echo("cart:addfailed:pquantity"));
-		$return = elgg_get_config('url').'socialcommerce/' . $product->getOwnerEntity()->username . "/buy/" . $product->getGUID() . "/" . $product->title;
+		$return = elgg_get_config('url').'socialcommerce/'.$product->getOwnerEntity()->username.'/buy/'.$product->guid.'/'.$product->title;
 	}
 	forward($return);
