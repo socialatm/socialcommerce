@@ -50,34 +50,29 @@
 		register_error(elgg_echo('cart:not:created'));
 		forward(REFERER);
 	}
+	
+	//	get all the items that are in the cart
+	$cart_items = elgg_get_entities_from_relationship(array(
+		'relationship' => 'cart_item',
+		'relationship_guid' => $cart->guid,
+	));
 					
+	// is this product already in the cart?
+	foreach($cart_items as $key => $value){
+		if($value->guid == $product_guid){
+			$in_cart = TRUE;
+		}
+	}
 					
-					
-					
-					
-										
-					//	get all the items that are in the cart
-					$cart_items = elgg_get_entities_from_relationship(array(
-						'relationship' => 'cart_item',
-						'relationship_guid' => $cart->guid,
-					));
-					
-					// is this product already in the cart?
-					foreach($cart_items as $key => $value){
-						if($value->guid == $product_guid){
-							$in_cart = TRUE;
-						}
-					}
-					
-					switch($in_cart) {
-						// do this if the product is already in the cart
-						case TRUE:
-							echo 'product is already in the cart';
-							break;
-						// do this if the product is already in the cart
-						default:
-							echo 'product is NOT already in the cart';
-					} 
+	switch($in_cart) {
+		// do this if the product is already in the cart
+		case TRUE:
+			echo 'product is already in the cart';
+			break;
+		// do this if the product is already in the cart
+		default:
+			echo 'product is NOT already in the cart';
+	} 
 					
 					
 require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
