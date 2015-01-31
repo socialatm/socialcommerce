@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	echo (__FILE__);
@@ -35,11 +36,8 @@
 	<div>
 		<div>
 <?php 
-				echo elgg_view("socialcommerce/image", array(
-												'entity' => $vars['entity'],
-												'size' => 'large',
-												'display' => 'image'
-											  ));
+		$product_image_guid = sc_product_image_guid($product_guid);
+		echo '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 
 ?>	
 		</div>
 		<form method="post" action="<?php echo elgg_get_config('url')."action/socialcommerce/addcart"; ?>">
