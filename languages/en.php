@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version wlgg 1.9.4
 	 **/ 
 	 
 	$english = array(
@@ -379,9 +380,8 @@
 		 	'category:deletefailed' => "Sorry; this category could not be deleted at this time.",
 		 	'no:category' => "No Categories found, so you can't add product at this time.",
 		 	
-		/**
-		 * Cart
-		 */ 	
+		//	shopping Cart
+		 	
 		 	'stores:add:to:cart' => "My Cart",
 		 	'stores:my:cart' => "My Cart",
 		 	'stores:gust:cart' => "Guest Cart",
@@ -417,10 +417,11 @@
 		 	'cart:ownered:products' => "<div>Following products are your owned product(s), so its removed from your cart.%s</div>",
 		 	'cart:less:quantity:product' => "<div>%s set as %s quantity</div>",
 		 	'cart:less:quantity:products' => "<div>Following product(s) have no enough stock, so the quantity was reseted.%s</div>",
-		 /**
-		 * Status messages for cart
-		 */
-         	'cart:added' => "cart was successfully added.",
+		 
+		//	Status messages for cart
+		
+			'cart:not:created' => 'Unable to create Shopping Cart',
+			'cart:added' => "cart was successfully added.",
          	'cart:updated' => "%s cart quantity updated",
          	'cart:deleted' => "The product %s was successfully deleted from your cart.",
          	
@@ -807,49 +808,11 @@
 	</div>
 <div>',
 	
-		/*
-		  *Approved	Withdraw Payment mail for
-		  */
-		 	'approval:mail:subject' => 'Your withdrawal request has approved from %s',
-		 	'approval:mail' => '
-<div style="font-size:13px;font-family:verdana,arial,times New Roman;line-height:20px;width:600px;">		 	
-	<div style="margin-bottom:10px;">Hello %s</div>
-	<div>Your  withdrawal request has approved by %s team.As of now you can withdraw your payment. </div>
-	<div style="font-size:11px;color:#666666;line-height:15px;margin-top:10px;">
-		Best Regards,<br>
-		%s team
-	</div>
-<div>',
+		
 	
-		/*
-		  *	Denied Withdraw Payment mail for
-		  */
-		 	'denied:mail:subject' => 'Your withdrawal request has denied from %s',
-		 	'denied:mail' => '
-<div style="font-size:13px;font-family:verdana,arial,times New Roman;line-height:20px;width:600px;">		 	
-	<div style="margin-bottom:10px;">Hello %s</div>
-	<div>Your withdrawal request has denied by %s team.</div>
-	<div style="font-size:11px;color:#666666;line-height:15px;margin-top:10px;">
-		Best Regards,<br>
-		%s team
-	</div>
-<div>',
+		
 	
-		/*
-		  *	Withdraw Payment request mail for
-		  */
-		 	'request:mail:subject' => 'Withdrawal Payment request from %s user',
-		 	'request:mail' => '
-<div style="font-size:13px;font-family:verdana,arial,times New Roman;line-height:20px;width:600px;">		 	
-	<div style="margin-bottom:10px;">Hello %s</div>
-	<div>Hi,</div>
-	<div>I would like to withdraw, the payment from my account.I have already credited %s in my account.</div>
-	<div style="font-size:11px;color:#666666;line-height:15px;margin-top:10px;">
-		Best Regards,<br>
-		%s
-	</div>
-<div>',
+		
 	);
 					
 	add_translation("en",$english);
-?>
