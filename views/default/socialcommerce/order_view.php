@@ -42,7 +42,7 @@ if($order_items){
 		$status = elgg_view("socialcommerce/product_status",array('entity'=>$order_item,'status'=>$order_item->status,'action'=>'view'));
 		$more = "<a onclick='view_order_details($order_item->guid);' href='javascript:void(0);'>".elgg_echo('order:more')."</a>";
 		$info .= <<<EOF
-			<div class="storesqua_stores">
+			<div>
 				<table>
 					<tr>
 						<td><B>{$quantity_text}:</B> {$order_item->quantity}</td>

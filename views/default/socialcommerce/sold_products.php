@@ -95,7 +95,7 @@ EOF;
 		$not_available = "<div style='color:red;padding-top:10px;'>".elgg_echo('not:available')."</div>";	
 	}
 	$info .= <<<EOF
-		<div class="storesqua_stores">
+		<div>
 			<table>
 				<tr>
 					<td width="230">{$rating}</td>

@@ -50,7 +50,7 @@ if($products){
 		$display_total = get_price_with_currency($total);
 		$entity_hidden .= elgg_view('input/securitytoken');
 		$info .= <<<EOF
-			<div class="storesqua_stores">
+			<div>
 				<div>
 					<span>{$price_text}: {$display_total}</span>
 					{$quantity}

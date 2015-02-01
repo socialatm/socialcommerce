@@ -212,9 +212,7 @@ storesrepo_icon img {
 .storesrepo_user_gallery_link a:hover {
 	background-position: right -40px;
 }
-.storesqua_stores{
-	margin:5px 0 0 0;
-}
+
 .input_quantity{
 	width: 50px;
 	padding:2px;
