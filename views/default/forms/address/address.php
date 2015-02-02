@@ -12,9 +12,11 @@
 $selected_state = $vars['entity']->state? $vars['entity']->state : "" ;
 $selected_country = $vars['entity']->country ? $vars['entity']->country : 'USA' ;
 
-if($CONFIG->country){
+$countries = elgg_get_config('country');
+
+if($countries){
 			$options_values = array();
-			foreach ($CONFIG->country as $country){
+			foreach ($countries->country as $country){
 				$options_values[$country['iso3']] = $country['name'];
 			}
 	
