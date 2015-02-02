@@ -10,28 +10,21 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
-	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-	 
 	$stores = $vars['entity'];
 	
 	$tags = $stores->tags;
 	$title = $stores->title;
 	$desc = $stores->description;
+	$mime = $stores->mimetype;
 		
 	$owner = $vars['entity']->getOwnerEntity();
-	$friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
-	$quantity_text = elgg_echo('quantity');
-	$price_text = elgg_echo('price');
+	$friendlytime = elgg_view_friendly_time($stores->time_created);
+	
 	$search_viewtype = get_input('search_viewtype');
-	$mime = $stores->mimetype;
 	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
-	
-	
-
-	
-	$info = '<p><a href="'.$stores->getURL().'"><b>'.$title.'</b></a></p>';
-	$info .= '<p class="owner_timestamp">
-		<a href="'.$owner->getURL().'">'.$owner->name.'</a> '.$friendlytime;
+		
+	$info = '<p><a href="'.$stores->getURL().'"><h2>'.$title.'</h2></a>';
+	$info .= '<a href="'.$owner->getURL().'">'.$owner->name.'</a> '.$friendlytime.'</p>';
 	
 	$numcomments = $stores->countComments();
 		if ($numcomments) {
@@ -41,19 +34,17 @@
 	$tags_out =  elgg_view('output/tags',array('value' => $tags));
 	$product_type_out =  elgg_view('output/product_type',array('value' => $stores->product_type_id));
 	$category_out =  elgg_view('output/category',array('value' => $stores->category));
-	$display_price = get_price_with_currency($stores->price);
 
 /*****	new	*****/
 
 	$info .= 
 		'<div style="margin:5px 0;">
-			<span style="width:115px;"><B>'.$price_text.':</B>'.$display_price.'</span>
-			<span>&nbsp;</span>'.
-			$quantity.'
+			<span style="width:115px;"><B>'.elgg_echo('price').':</B>'.get_price_with_currency($stores->price).'</span>
+			<span>&nbsp;</span>
 		</div>
 		<table style="margin-top:3px;width:100%;">
 			<tr>
-				<td style="width:300px;" class="tag_td">
+				<td  class="tag_td">
 					<div class="object_tag_string">'.$tags_out.'</div>
 				</td>
 				<td>
@@ -86,15 +77,15 @@
 
 	
 	$info .= <<<EOF
-		<div class="storesqua_stores">
+		<div>
 			<table style="width:100%;">
 				<tr>
 					<td>
-						<div class="cart_wishlist" style="padding:5px 0 0 10px;">
+						<div class="cart_wishlist">
 							<div style="clear:both;"></div>
-							<div class="cart_wishlist">
+							
 							{$cart_wishlist}
-							</div>
+							
 							
 							<div style="clear:both;"></div>	
 						<div>
