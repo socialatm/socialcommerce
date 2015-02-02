@@ -10,8 +10,6 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
-	 echo '<b>'.__FILE__ .' at '.__LINE__; die();
-	 
 	$cart = $vars['entity'];
 	$title = $cart->title;
 	$desc = $cart->description;
@@ -29,11 +27,10 @@
 		$info .= '<p class="owner_timestamp">'.$friendlytime.'</p>';
 		$info .= '<p>Quantity: '.$quantity.'</p>';
 		
-		$info .= '<div class="stores_remove">'.elgg_view('output/confirmlink',array(
-							'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?cart_guid=" . $cart->guid,
-							'text' => elgg_echo("remove"),
-							'confirm' => elgg_echo("cart:delete:confirm")
-						))."</div>"; 
+		$body_vars = array('product_guid' => $product->guid);
+		$delete_form = elgg_view_form('socialcommerce/cart/delete', $form_vars, $body_vars);
+		
+		$info .= $delete_form;
 						
 		$product_image_guid = sc_product_image_guid($cart->product_id);
 		$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 				
