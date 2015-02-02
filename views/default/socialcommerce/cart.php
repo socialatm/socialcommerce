@@ -55,9 +55,9 @@ if($cart_items){
 			}
 			$friendlytime = elgg_view_friendly_time($cart_item->time_created);
 			
-			$info = "<p> <a href=\"{$product_url}\">{$title}</a></p>";
-			$info .= "<p class=\"owner_timestamp\">{$friendlytime}";
-			$info .= "</p>";
+			$info = '<p><a href="'.$product_url.'">'.$title.'</a></p>';
+			$info .= '<p class="owner_timestamp">'.$friendlytime.'</p>';
+			$info .= '<p>Quantity: '.$cart_item->quantity.'</p>';
 			$tags_out =  elgg_view('output/tags',array('value' => $tags));
 			$product_type_out =  elgg_view('output/product_type',array('value' => $product->product_type_id));
 			$category_out =  elgg_view('output/category',array('value' => $product->category));
