@@ -87,15 +87,13 @@
 				</div>
 						
 <?php
-/*****	start edit & delete buttons	*****/
-		
+	//	add the edit & delete buttons
 	if($stores->canEdit()){
 ?>
 		<div class="storesrepo_controls">
 			<div class="elgg-button-action" >
 				<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $stores->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
 			</div>
-									
 			<div class="elgg-button-action" >
 				<?php 
 					echo elgg_view('output/confirmlink',array(
@@ -107,48 +105,33 @@
 			</div>
 		</div>
 <?php
-/*****	end edit & delete buttons	*****/
 				
-	}		//	end if($stores->canEdit()
+	}		//	end if($stores->canEdit())
 				
-				
-	/*****	if you don't own it we'll show you the wishlist and add to cart links	*****/
-				
-		if($user_guid != $product_owner_guid){
-			if($stores->status == 1){
-				if($product_type_details->addto_cart == 1) { 
-?>
-							
-	<!-- start new wishlist	-->						
-							<div class="storesrepo_controls">
-								<div class="cart_wishlist">
-									<?php $body_vars = array('product_guid' => $stores->guid); ?>
-									<?php echo elgg_view_form('products/add_wishlist', $form_vars, $body_vars); ?>
-								</div>
-								<div style="clear:both;"></div>
-							</div>
-	<!-- end new wishlist	-->	
-				<!-- Add to Cart Form -->
-				
-				<form method="post" action="<?php echo addcartURL($stores); ?>">
-				<?php echo elgg_view('input/hidden', array('name' => 'product_guid', 'value' => $product_guid)); ?>
-				<?php echo elgg_view('input/hidden', array('name' => 'customer_guid', 'value' => $user_guid )); ?>
-				<?php echo elgg_view("socialcommerce/socialcommerce_cart", array('entity'=>$stores, 'product_type_details'=>$product_type_details, 'phase'=>1) ); ?>
-				<?php echo elgg_view('input/securitytoken'); ?>
-				</form>
+	// if user is not the product owner show the add to cart and add to wishlist forms
+	if($user_guid != $product_owner_guid){
+		if($stores->status == 1){
+			if($product_type_details->addto_cart == 1) { 
+				if($stores->status == 1){
+					if($stores->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
+						$body_vars = array('product_guid' => $stores->guid);	
+						$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
+						echo $add_to_cart_form;
+								
+						$body_vars = array('product_guid' => $stores->guid);	
+						$add_to_wishlist_form = elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
+						echo $add_to_wishlist_form;
+					}
+				}
+?>				
 			</div>
 		</div>
 		<div class="clear"></div>
-		
-			
 <?php 
-				}	//	end if($product_type_details->addto_cart == 1)
-			}	//	end if($stores->status == 1)
-		}					/*****	end if($user_guid != $product_owner_guid)	*****/
-
-	/*****	End if you don't own it we'll show you the wishlist and add to cart links	*****/
+			}	//	end if($product_type_details->addto_cart == 1)
+		}	//	end if($stores->status == 1)
+	}					//	end if($user_guid != $product_owner_guid)
 ?>		
-		
 		<table width="100%">
 			<tr>
 				<td>
