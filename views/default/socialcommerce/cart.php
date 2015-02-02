@@ -36,12 +36,13 @@
 if($cart_items){
 	foreach ($cart_items as $cart_item){
 		if(is_array($cart_item)){
-			$cart_item = (object) array('product_id'=>$cart_item['product_id'],
-										'quantity' => $cart_item['quantity'],
-										'amount' => $cart_item['amount'],
-										'time_created' => $cart_item['time_created'],
-										'guid' => $cart_item['product_id']
-										);
+			$cart_item = (object) array(
+				'product_id'=>$cart_item['product_id'],
+				'quantity' => $cart_item['quantity'],
+				'amount' => $cart_item['amount'],
+				'time_created' => $cart_item['time_created'],
+				'guid' => $cart_item['product_id']
+			);
 		}
 		if($product = get_entity($cart_item->product_id)){
 			$product_url = $product->getURL();
@@ -61,6 +62,7 @@ if($cart_items){
 			$tags_out =  elgg_view('output/tags',array('value' => $tags));
 			$product_type_out =  elgg_view('output/product_type',array('value' => $product->product_type_id));
 			$category_out =  elgg_view('output/category',array('value' => $product->category));
+			
 			$info .= <<<EOF
 				<table style="margin-top:3px;width:100%;">
 					<tr>
@@ -78,15 +80,12 @@ if($cart_items){
 					</tr>
 				</table>
 EOF;
-			$info .= elgg_cart_quantity($cart_item);
-			$info .= '<div class= "stores_remove">';
+			$info .= '<div>'.elgg_echo('quantity').$cart->quantity.'</div>';
 			
-			$info .= elgg_view('output/confirmlink',array(
-								'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?" . $parameters,
-								'text' => elgg_echo("remove"),
-								'confirm' => elgg_echo("cart:delete:confirm"),
-							)); 
-			$info .= "</div>";
+			//	add the delete item from cart form
+			$body_vars = array('product_guid' => $product->guid);
+			$delete_form = elgg_view_form('socialcommerce/cart/delete', $form_vars, $body_vars);
+						
 			if(($product->product_type_id == 1 && $product->quantity < $cart_item->quantity) || $product->status == 0){
 				$info .= "<div style='color:red;padding-top:10px;'>".elgg_echo('not:available')."</div>";
 				$not_allow = 1;
@@ -103,6 +102,7 @@ EOF;
 			$display_cart_items .= elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
 		}
 	}
+	
 	$update_cart = elgg_view("socialcommerce/forms/updatecart");
 	$confirm_cart_list = elgg_view("socialcommerce/forms/confirm_cart_list", array('not_allow'=>$not_allow) );
 }else{
@@ -123,4 +123,5 @@ $hidden .= elgg_view('input/securitytoken');
 		.$update_cart
 		.$hidden
 		.'</form>'
+		.$delete_form
 		.$confirm_cart_list;
