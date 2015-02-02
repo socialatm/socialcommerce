@@ -59,6 +59,7 @@
 			}
 		}
 	}
+	$body .= elgg_view_form('socialcommerce/cart');
 ?>
 <div>
 	<?php echo $body; ?>
