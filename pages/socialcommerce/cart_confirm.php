@@ -11,16 +11,9 @@
 	 **/ 
 	 
 	gatekeeper();
-	$page_owner = elgg_get_logged_in_user_entity();
 	
-	// Load Elgg engine
+	$title = elgg_view_title(elgg_echo('cart:confirm'));
 	
-	// Set stores title
-		if($page_owner == $_SESSION['user']){
-			$title = elgg_view_title(elgg_echo('cart:confirm'));
-		}
-	
-	// Get objects
 	elgg_set_context('confirm');
 	$content = elgg_view("socialcommerce/cart_confirm");
 	elgg_set_context('stores');
