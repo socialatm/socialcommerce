@@ -71,11 +71,6 @@
 		}
 	}
 	
-	$arr2 = get_defined_vars();
-//  krumo($arr2);
-// die();		
-
-	
 	$info .= <<<EOF
 		<div>
 			<table style="width:100%;">
