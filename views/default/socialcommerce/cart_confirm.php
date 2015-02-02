@@ -4,16 +4,18 @@
 	* 
     * @package Elgg SocialCommerce
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
-    * @author twentyfiveautumn.com
-	* @copyright twentyfiveautumn.com 2013
+    * @author ray peaslee
+	* @copyright twentyfiveautumn.com 2015
 	* @link http://twentyfiveautumn.com/
+	* @version elgg 1.9.4
 	**/ 
-	 
+
+$user = elgg_get_logged_in_user_entity();	
 $cart = elgg_get_entities(array( 	
 	'type' => 'object',
 	'subtype' => 'cart',
-	'owner_guid' => $_SESSION['user']->getGUID(),
-	)); 			
+	'owner_guid' => $user->guid
+)); 			
 
 if($cart){
 	$cart = $cart[0];
@@ -60,11 +62,11 @@ if($cart){
 					</table>
 EOF;
 				$info .= elgg_cart_quantity($cart_item);
-				$info .= elgg_view('output/confirmlink',array(
-									'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?cart_guid=" . $cart_item->getGUID(),
-									'text' => elgg_echo("remove"),
-									'confirm' => elgg_echo("cart:delete:confirm"),
-								)); 
+				
+	$body_vars = array('product_guid' => $product->guid);
+	$delete_form = elgg_view_form('socialcommerce/cart/delete', $form_vars, $body_vars);
+	$info .= $delete_form;
+								
 echo 'Calling the old image loader <b>'.__FILE__ .' at '.__LINE__; die();
 				$image = elgg_view("socialcommerce/image", array(
 											'entity' => $product,
