@@ -63,11 +63,11 @@ if($cart){
 					</table>
 EOF;
 				$info .= elgg_cart_quantity($cart_item);
-				$info .= elgg_view('output/confirmlink',array(
-									'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?cart_guid=" . $cart_item->getGUID(),
-									'text' => elgg_echo("remove"),
-									'confirm' => elgg_echo("cart:delete:confirm"),
-								)); 
+									
+	$body_vars = array('product_guid' => $product->guid);
+	$delete_form = elgg_view_form('socialcommerce/cart/delete', $form_vars, $body_vars);
+	$info .= $delete_form;							
+								
 				$image = elgg_view("socialcommerce/image", array(
 											'entity' => $product,
 											'size' => 'medium',
