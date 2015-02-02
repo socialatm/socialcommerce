@@ -134,19 +134,6 @@ EOF;
 		
 		$content = <<<EOF
 			<div class="checkout_process">
-				<script type="text/javascript" src="{$CONFIG->url}mod/socialcommerce/js/jquery.accordion.js"></script>
-				<script type="text/javascript">
-					$(document).ready(function(){
-						jQuery('#list1b').accordion({
-							autoheight: false,
-							header: 'h3',
-							event: '',
-							active: {$checkout_order}
-						});
-					});
-					function change_modified(order){
-						jQuery('#list1b').accordion("activate",order);
-					}
 					function toggle_address_type(address,type){
 						if(type == 'select') {
 							$('.select_'+address+'_address').show();
