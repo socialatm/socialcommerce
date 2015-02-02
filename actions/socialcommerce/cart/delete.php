@@ -1,84 +1,43 @@
 <?php
-/**
-* Elgg file delete
-* 
-* @package ElggFile
-*/
-
-echo '<b>'.__FILE__ .' at '.__LINE__; die();
-
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	/**
+	 * Elgg cart - remove item from cart action
+	 * 
+	 * @package Elgg SocialCommerce
+	 * @license http://www.gnu.org/licenses/gpl-2.0.html
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
+	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
+	 **/ 
 
 $user = elgg_get_logged_in_user_entity();
 
 //	$guid is the product we want to delete
-$guid = (int)$page[2];
-
-//	get the product image
-$product_image = elgg_get_entities_from_relationship(array(
-	'relationship' => 'product_image',
-	'relationship_guid' => $guid,
-));
-$product_image_guid = $product_image[0]->guid;
-
-//	remove the relationship
-// remove_entity_relationship($guid, 'product_image', $product_image_guid);
-
-// @todo - also need to remove the product from any carts or wishlists
-// remove_entity_relationship($user->guid, 'wishlist', $guid );
+$guid = get_input('product_guid');
 
 // Get the users shopping cart
-	$cart = elgg_get_entities(array(
-		'type' => 'object',
-		'subtype' => 'cart',
-		'owner_guid' => $user->guid,
-		'limit' => 1
-	));
-	$cart = $cart[0];
+$cart = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'cart',
+	'owner_guid' => $user->guid,
+	'limit' => 1
+));
+$cart = $cart[0];
 	
-//	get all the items that are in the cart
-	$cart_items = elgg_get_entities_from_relationship(array(
-		'relationship' => 'cart_item',
-		'relationship_guid' => $cart->guid,
-	));
-	
-foreach($cart_items as $cart_item){
-	if($cart_item->product_id == guid) {
-		//	remove the item form the cart and delete it
-		remove_entity_relationship($cart->guid, 'cart_item', $cart_item->guid );
-		$result = $cart_item->delete();
-//		krumo($cart_item->product_id);
-	}
-}
+//	get the product if it's in the cart
+$cart_item = elgg_get_entities_from_metadata(array(
+	'container_guid' => $cart->guid,
+	'metadata_name_value_pairs' => array( 'name' => 'product_id', 'value' => $guid, 'operand' => '=' )
+));
+$cart_item = $cart_item[0];
 
-$remove = array($guid); 
+// remove the product relationship to the cart
+remove_entity_relationship($cart->guid, 'cart_item', $cart_item->guid );
 
-// if there is a product image add it to the array to be removed
-if($product_image_guid){
-	$remove[] = $product_image_guid;
-}	
-
-$arr2 = get_defined_vars();
-krumo($arr2);
-krumo($user->username);
-die();
-
-
-$file = new FilePluginFile($guid);
-if (!$file->guid) {
-	register_error(elgg_echo("file:deletefailed"));
-	forward(REFERER);
-}
-
-if (!$file->canEdit()) {
-	register_error(elgg_echo("file:deletefailed"));
-	forward(REFERER);
-}
-
-if (!$file->delete()) {
-	register_error(elgg_echo("file:deletefailed"));
-	forward(REFERER);
+// delete the item from the cart
+if (!$cart_item->delete()) {
+	register_error(elgg_echo('cart:item:not:deleted'));
 } else {
-	system_message(elgg_echo("file:deleted"));
+	system_message(elgg_echo('cart:deleted'));
 }
-forward('socialcommerce/'.$user->username.'/all');
+forward('socialcommerce/'.$user->username.'/cart');
