@@ -4,15 +4,17 @@
      * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
+$user = elgg_get_logged_in_user_entity();
 $cart = $cart = elgg_get_entities(array( 	
 	'type' => 'object',
 	'subtype' => 'cart',
-	'owner_guid' => $_SESSION['user']->getGUID(),
+	'owner_guid' => $user->guid
 	)); 
 
 if($cart){
@@ -94,4 +96,3 @@ echo $cart_body = <<<EOF
 	{$update_cart}
 	{$confirm_address}
 EOF;
-?>
