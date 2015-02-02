@@ -10,6 +10,8 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
+	 echo '<b>'.__FILE__ .' at '.__LINE__; die();
+	 
 	$cart = $vars['entity'];
 	$title = $cart->title;
 	$desc = $cart->description;
@@ -25,7 +27,7 @@
 	
 		$info = '<p> <a href="'.$product_url.'">'.$title.'</a></p>';
 		$info .= '<p class="owner_timestamp">'.$friendlytime.'</p>';
-		$info .= elgg_cart_quantity($cart);
+		$info .= '<p>Quantity: '.$quantity.'</p>';
 		
 		$info .= '<div class="stores_remove">'.elgg_view('output/confirmlink',array(
 							'href' => elgg_get_config('url'). "action/socialcommerce/remove_cart?cart_guid=" . $cart->guid,
