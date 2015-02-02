@@ -101,7 +101,7 @@
 					echo elgg_view('output/confirmlink',array(
 						'href' => elgg_get_config('url').'socialcommerce/'.$user->username.'/delete/'.$stores->guid,
 						'text' => elgg_echo("delete"),
-						'confirm' => elgg_echo("stores:delete:confirm"),
+						'confirm' => elgg_echo('stores:delete:confirm'),
 					));  
 				?>
 			</div>
