@@ -421,17 +421,17 @@
 		
 			'cart:added' => "cart was successfully added.",
          	'cart:updated' => "%s cart quantity updated",
-         	'cart:deleted' => "The product %s was successfully deleted from your cart.",
+         	'cart:deleted' => "The product was successfully removed from your cart.",
 			
 		//	Cart error messages
 		
 			'cart:not:created' => 'Unable to create Shopping Cart',				//	updated @version elgg 1.9.4
 			'cart:item:not:updated' => 'Unable to update Item Quantity',
 			'cart:item:not:added' => 'Unable to Add Item to Shopping Cart',
+			'cart:item:not:deleted' => 'Unable to remove the Item from your Shopping Cart',
 		         	
-         /**
-		 * Error messages for category
-		 */
+         //	Error messages for category
+		 
 		 	'cart:addfailed' => "Sorry; we could not be added this product to your cart at this time.",
 		 	'cart:addfailed:quantity' => "Sorry; we could not be added this product to your cart at this time. \n Please verify the stock ",
 		 	'cart:addfailed:pquantity' => "Sorry; This product have no stock at this time so we could not be added this product to your cart.",
@@ -442,7 +442,7 @@
 		 	'product:validation:null' => "Please Enter the following mandatory filelds \n %s.",
 		 	'order:addfailed' => "Sorry, We could not copleate process in this time, ",
 		 	
-		 /*****	Address	*****/ 	
+		 //	Address 	
 		 
 		 	'stores:address' => "Your Address Book",
 		 	'confirm:address' => "Confirm Address",
