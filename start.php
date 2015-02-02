@@ -237,9 +237,11 @@ ini_set('display_errors', 1);
 				case "country_state":	require($base_path.'manage_country_state.php'); 	
 									  	break;						
 				case "currency_settings": require($base_path.'load_currency_settings.php'); 
-									  	break;						
-				case "delete":			require($CONFIG->pluginspath.'socialcommerce/actions/delete.php'); 
-										break;	
+								
+				//	@todo this needs to be fixed to use a form 
+				case "delete":			require(elgg_get_config('pluginspath').'socialcommerce/actions/socialcommerce/delete.php'); 
+										break;
+									
 				case "edit":			require($base_path.'edit.php'); 	
 										break;
 				case "edit_address":	require($base_path.'edit_address.php'); 	
@@ -796,7 +798,8 @@ ini_set('display_errors', 1);
 		elgg_register_action("socialcommerce/delete_category", $action_path.'delete_category.php');
 		
 		elgg_register_action('socialcommerce/add_to_cart', $action_path.'socialcommerce/add_to_cart.php' );
-		elgg_register_action("socialcommerce/remove_cart", $action_path.'remove_cart.php');
+		elgg_register_action("socialcommerce/cart/delete", $action_path.'socialcommerce/cart/delete.php');
+			
 		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
 		
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
