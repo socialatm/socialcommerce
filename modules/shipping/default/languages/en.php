@@ -4,12 +4,13 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
-	$english = array(
+	return array(
 		'default:shipping:instructions' => "Update the shipping settings in the form below.",
 		'flat:rate:per:item' => "Flat Rate Per Item",
 		'use:flat:rate:per:item' => "Use Flat Rate Per Item Shipping Method",
@@ -22,6 +23,3 @@
 		'shipping:default:help' => 'This is the default shipping method. In this method we set a flat rate per item',
 		
 	);
-					
-	add_translation("en",$english);
-?>

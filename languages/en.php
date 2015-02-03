@@ -10,7 +10,7 @@
 	 * @version wlgg 1.9.4
 	 **/ 
 	 
-	$english = array(
+	return array(
 	
 		/*****	Menu items and titles	*****/
 			
@@ -810,12 +810,4 @@
 		%s team
 	</div>
 <div>',
-	
-		
-	
-		
-	
-		
-	);
-					
-	add_translation("en",$english);
+);

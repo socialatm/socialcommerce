@@ -4,12 +4,13 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
-	$english = array(
+	return array(
 		'paypal:standard' => "PayPal Website Payments (Standard)",
 		'paypal:instruction1' => '<a target="_blank" href="%s">Register for a free PayPal account here</a>',
 		'settings' => 'Settings',
@@ -24,6 +25,3 @@
 		'checkout:paypal:help' => 'This is the one type of checkout method in paypal',
 		'paypal:settings:not:saved' => '%s settings not saved! Please try again.',
 	);
-					
-	add_translation("en",$english);
-?>
