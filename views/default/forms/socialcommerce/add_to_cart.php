@@ -9,32 +9,14 @@
 	 * @link http://twentyfiveautumn.com/
 	 * @version elgg 1.9.4
  	 **/
-	
-// echo '<b>'.__FILE__ .' at '.__LINE__; die();
-
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-// $arr2 = get_defined_vars();
-// krumo($arr2);
-
-// die();
-
-
-
-
-
-
 ?>
 
-	<label for="quantity"><?php echo elgg_echo('quantity'); ?>:</label>
-			<?php echo elgg_view('input/text', array(
-					'name' => 'quantity',
-					'id' => 'quantity',
-					'value' => 1,
-					'class' => '',
-					'style' => '',
-					));
-			?>
-<?php
+<label for="quantity"><?php echo elgg_echo('quantity'); ?>:</label>
+<?php echo elgg_view('input/text', array(
+	'name' => 'quantity',
+	'id' => 'quantity',
+	'value' => 1,
+	));
 	
 	echo elgg_view('input/hidden', array(
 		'name' => 'product_guid',
@@ -48,8 +30,7 @@ require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php')
 	echo elgg_view('input/submit', array(
 		'name' => 'submit_add_to_cart',
 		'id' => 'submit_add_to_cart',
-		'value' => elgg_echo('add:cart'),
+		'value' => $vars['button_text'],
 		'class' => 'elgg-button-action',
 		));
-?>
 		
