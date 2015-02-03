@@ -63,11 +63,12 @@
 	//	if user is not the owner show the add to cart and add to wishlist buttons
 	if($stores->status == 1){
 		if($stores->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
-			$body_vars = array('product_guid' => $stores->guid);	
-			$cart_wishlist = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
+			$button_text = elgg_echo('add:cart');
+			$body_vars = array('product_guid' => $stores->guid, 'button_text' => $button_text );	
+			$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
 					
 			$body_vars = array('product_guid' => $stores->guid);	
-			$cart_wishlist .= elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
+			$add_to_wishlist_form	= elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
 		}
 	}
 	
@@ -78,10 +79,8 @@
 					<td>
 						<div class="cart_wishlist">
 							<div style="clear:both;"></div>
-							
-							{$cart_wishlist}
-							
-							
+							{$add_to_cart_form}
+							{$add_to_wishlist_form}
 							<div style="clear:both;"></div>	
 						<div>
 					</td>
