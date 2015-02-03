@@ -4,11 +4,12 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
-
+	 
 	$change_quantity = elgg_echo('cart:update:text');
 	$update_cart = elgg_echo('cart:update');
 	$cart_payment = elgg_echo('cart:confirm:payment');
@@ -17,7 +18,7 @@
 	$subtotal_text = elgg_echo('cart:subtotal');
 	
 	if(elgg_get_context() == "confirm") {
-		$form_body .= <<< BOTTOM
+		$form_body = <<< BOTTOM
 			<div class="search_listing">
 				<span class="address_listing_info_head"><B><h3>$cart_payment</h3></B></span>
 			</div>
@@ -28,8 +29,10 @@
 			</div>
 			<input type="hidden" name="amount" value="{$display_price}">  
 BOTTOM;
+		$form_body .= elgg_view('input/securitytoken');
+		echo $form_body;
 	}elseif (elgg_get_context() == "order"){
-		$form_body .= <<< BOTTOM
+		$form_body = <<< BOTTOM
 			<div class="search_listing">
 				<span class="address_listing_info_head"><B><h3>$cart_payment</h3></B></span>
 			</div>
@@ -39,8 +42,10 @@ BOTTOM;
 				</span>
 			</div>
 BOTTOM;
+		$form_body .= elgg_view('input/securitytoken');
+		echo $form_body;
 	}else{
-		$form_body .= <<< BOTTOM
+		$form_body = <<< BOTTOM
 			<div class="search_listing">
 				<span class="update_cart_quantity">
 					<span class="qtext">{$change_quantity}</span>
@@ -52,6 +57,5 @@ BOTTOM;
 			</div>
 BOTTOM;
 	}
-$form_body .= elgg_view('input/securitytoken');
-echo $form_body;
-?>
+		$form_body .= elgg_view('input/securitytoken');
+		echo $form_body;
