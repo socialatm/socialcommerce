@@ -80,48 +80,30 @@ if($cart_items){
 					</tr>
 				</table>
 EOF;
-			$info .= '<div>'.elgg_echo('quantity').$cart->quantity.'</div>';
-			
 			//	add the delete item from cart form
 			$body_vars = array('product_guid' => $product->guid);
 			$delete_form = elgg_view_form('socialcommerce/cart/delete', $form_vars, $body_vars);
 						
-			if(($product->product_type_id == 1 && $product->quantity < $cart_item->quantity) || $product->status == 0){
-				$info .= "<div style='color:red;padding-top:10px;'>".elgg_echo('not:available')."</div>";
-				$not_allow = 1;
-			}
-			
 			$product_image_guid = sc_product_image_guid($product->guid);
 			$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
 			
 			if($product->mimetype && $product->product_type_id == 2){							
-				$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
+				$icon = '<div><a href="'.$product->getURL().'">'.elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')).'</a></div>';
 			}else{
-				$icon = "";	
+				$icon = '';	
 			}
 			$display_cart_items .= elgg_view('page/components/image_block', array('image' => $image.$icon, 'body' => $info));
 		}
 	}
 	
-	$update_cart = elgg_view("socialcommerce/forms/updatecart");
-	$confirm_cart_list = elgg_view("socialcommerce/forms/confirm_cart_list", array('not_allow'=>$not_allow) );
+	$confirm_cart_list = elgg_view("socialcommerce/forms/confirm_cart_list");
 }else{
 	$display_cart_items = elgg_echo('cart:null');
 }
 
-if($not_allow == 1){
-	$hidden = '<input type= "hidden" name="not_allow" value= "1">';
-	$action = "#";
-}else{
-	$action = elgg_get_config('url')."action/socialcommerce/update_cart";
-}
-$hidden .= elgg_view('input/securitytoken');
-
-	echo $cart_body = 
-		'<form name="frm_cart" method="post" action="'.$action.'">'
-		.$display_cart_items
-		.$update_cart
-		.$hidden
-		.'</form>'
-		.$delete_form
-		.$confirm_cart_list;
+$button_text = elgg_echo('cart:update');
+$form_vars = array('action' => 'socialcommerce/update_cart');
+$body_vars = array('product_guid' => $product->guid, 'button_text' => $button_text );	
+$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
+	
+echo $cart_body = $display_cart_items.$add_to_cart_form.$delete_form.$confirm_cart_list;
