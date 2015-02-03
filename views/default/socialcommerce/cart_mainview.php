@@ -80,9 +80,6 @@
 				?>
 					<div class="product_odd"><B><?php echo elgg_echo("category");?></B></div>
 					<div class="field_results"><?php echo elgg_view('output/category',array('value' => $stores->category)); ?></div>
-				<?php } 
-				if($quantity > 0 && $stores->product_type_id == 1){?>
-					<div class="product_even"><B><?php echo elgg_echo("quantity");?> :</B> <?php echo $quantity ?></div>
 				<?php } ?>
 				<div class="storesrepo_tags">
 					<span class="object_tag_string">
