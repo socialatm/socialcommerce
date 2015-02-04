@@ -10,46 +10,46 @@
 	 **/ 
 	 
 gatekeeper();
-$stores = $vars['entity'];
-$product_guid = $stores->getGUID();
-$tags = $stores->tags;
-$title = $stores->title;
-$desc = $stores->description;
-$price = $stores->price;
+$product = $vars['entity'];
+$product_guid = $product->getGUID();
+$tags = $product->tags;
+$title = $product->title;
+$desc = $product->description;
+$price = $product->price;
 $search_viewtype = get_input('search_viewtype');
 
-$quantity = $stores->quantity;
+$quantity = $product->quantity;
 $owner = $vars['entity']->getOwnerEntity();
 $friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
 $quantity_text = elgg_echo('quantity');
 $price_text = elgg_echo('price');
 
-$mime = $stores->mimetype;
-if($stores){
-	if($stores->product_type_id == 1){
-		if($stores->quantity > 0){
-			$quantity = $stores->quantity;
+$mime = $product->mimetype;
+if($product){
+	if($product->product_type_id == 1){
+		if($product->quantity > 0){
+			$quantity = $product->quantity;
 		}else{
 			$quantity = 0;
 		}
 		$quantity = "<span><B>{$quantity_text}:</B> {$quantity}</span>";
 	}
 	
-	$info = "<p> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></p>";
+	$info = "<p> <a href=\"{$product->getURL()}\"><B>{$title}</B></a></p>";
 	
 	$info .= '<p class="owner_timestamp">';
 	
 	$info .= '<a href="'.elgg_get_config('url').'socialcommerce/'.$owner->username.'">'.$owner->username.'</a> '.$friendlytime;
 		
 		
-		$numcomments = $stores->countComments();
+		$numcomments = $product->countComments();
 		if ($numcomments)
-			$info .= ", <a href=\"{$stores->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
+			$info .= ", <a href=\"{$product->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
 	$info .= "</p>";
 	$tags_out =  elgg_view('output/tags',array('value' => $tags));
-	$category_out =  elgg_view('output/category',array('value' => $stores->category));
-	$product_type_out =  elgg_view('output/product_type',array('value' => $stores->product_type_id));
-	$display_price = get_price_with_currency($stores->price);
+	$category_out =  elgg_view('output/category',array('value' => $product->category));
+	$product_type_out =  elgg_view('output/product_type',array('value' => $product->product_type_id));
+	$display_price = get_price_with_currency($product->price);
 	$info .= <<<EOF
 		<div style="margin:5px 0;">
 			<span style="width:115px;float:left;display:block;"><B>{$price_text}:</B> {$display_price}</span>
@@ -71,21 +71,21 @@ if($stores){
 			</tr>
 		</table>
 EOF;
-	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$stores->guid,'units'=>5,'static'=>''));
-	$cart_url = addcartURL($stores);
+	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$product->guid,'units'=>5,'static'=>''));
+	$cart_url = addcartURL($product);
 	$cart_text = elgg_echo('add:to:cart');
 	$wishlist_text = elgg_echo('add:wishlist');
-	if($stores->status == 1){
-		if($stores->owner_guid != $_SESSION['user']->guid){
+	if($product->status == 1){
+		if($product->owner_guid != $_SESSION['user']->guid){
 			$entity_hidden = elgg_view('input/securitytoken');
 			$cart_wishlist = <<<EOF
 				<div class="cart_wishlist">
 					<a title="{$cart_text}" class="cart" href="{$cart_url}">&nbsp;</a>
 				</div>
 				<div class="cart_wishlist">
-					<form name="frm_wishlist_{$stores->guid}" method="POST" action="{$CONFIG->url}action/socialcommerce/add_wishlist">
-						<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$stores->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
-						<INPUT type="hidden" name="product_guid" value="{$stores->guid}">
+					<form name="frm_wishlist_{$product->guid}" method="POST" action="{$CONFIG->url}action/socialcommerce/add_wishlist">
+						<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$product->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
+						<INPUT type="hidden" name="product_guid" value="{$product->guid}">
 					</form>
 				</div>
 EOF;
