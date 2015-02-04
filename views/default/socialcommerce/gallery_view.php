@@ -9,12 +9,12 @@
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
 	 
-	$stores = $vars['entity'];
+	$product = $vars['entity'];
 	$action = get_input('action');
-	$product_guid = $stores->getGUID();
-	$tags = $stores->tags;
-	$title = $stores->title;
-	$desc = $stores->description;
+	$product_guid = $product->getGUID();
+	$tags = $product->tags;
+	$title = $product->title;
+	$desc = $product->description;
 	
 	
 	$owner = $vars['entity']->getOwnerEntity();
@@ -22,7 +22,7 @@
 	$quantity_text = elgg_echo('quantity');
 	$price_text = elgg_echo('price');
 	$search_viewtype = get_input('search_viewtype');
-	$mime = $stores->mimetype;
+	$mime = $product->mimetype;
 	
 	$image =  elgg_view("socialcommerce/image", array(
 								'entity' => $vars['entity'],
@@ -30,27 +30,27 @@
 								'display' => 'image'
 							  ));
 							  
-	$info = "<div> <a href=\"{$stores->getURL()}\"><B>{$title}</B></a></div>";
+	$info = "<div> <a href=\"{$product->getURL()}\"><B>{$title}</B></a></div>";
 	$info .= "<div class=\"owner_timestamp\">
 		<a href=\"{$owner->getURL()}\">{$owner->name}</a> {$friendlytime}";
-		$numcomments = $stores->countComments();
+		$numcomments = $product->countComments();
 		if ($numcomments)
-			$info .= ", <a href=\"{$stores->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
+			$info .= ", <a href=\"{$product->getURL()}\">" . sprintf(elgg_echo("comments")) . " (" . $numcomments . ")</a>";
 	$info .= "</div>";
-	$product_type_out =  elgg_view('output/product_type',array('value' => $stores->product_type_id));
-	$category_out =  elgg_view('output/category',array('value' => $stores->category));
+	$product_type_out =  elgg_view('output/product_type',array('value' => $product->product_type_id));
+	$category_out =  elgg_view('output/category',array('value' => $product->category));
 	$tags_out =  elgg_view('output/tags',array('value' => $tags));
-	if($stores->product_type_id == 1){
-		if($stores->quantity > 0)
-			$quantity = $stores->quantity;
+	if($product->product_type_id == 1){
+		if($product->quantity > 0)
+			$quantity = $product->quantity;
 		else 
 			$quantity = 0;
 		$quantity = "<B>{$quantity_text}:</B> {$quantity} &nbsp;";
 	}else{
 		$quantity = "";
 	}
-	$display_price = get_price_with_currency($stores->price);
-	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$stores->guid,'units'=>5,'static'=>''));
+	$display_price = get_price_with_currency($product->price);
+	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$product->guid,'units'=>5,'static'=>''));
 	$output = <<<EOF
 		<script>
 			function findPosX(obj) {
@@ -118,7 +118,7 @@
 			        <div class="clear"></div>
 			    </div>		
 				<div class="gallery_product_icon">
-					<a href="{$stores->getURL()}">{$image}</a>
+					<a href="{$product->getURL()}">{$image}</a>
 				</div>
 				<div class="gallery_product_price">{$display_price}</div>
 				<div style="clear:both;"></div>

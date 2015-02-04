@@ -10,18 +10,18 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	
-	$stores = $vars['entity'];
-	$product_guid = $stores->getGUID();
-	$tags = $stores->tags;
-	$title = $stores->title;
-	$desc = $stores->description;
-	$price = $stores->price;
-	$quantity = $stores->quantity;
-	$mime = $stores->mimetype;
-	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
-	$friendlytime = elgg_view_friendly_time($stores->time_created);
+	$product = $vars['entity'];
+	$product_guid = $product->getGUID();
+	$tags = $product->tags;
+	$title = $product->title;
+	$desc = $product->description;
+	$price = $product->price;
+	$quantity = $product->quantity;
+	$mime = $product->mimetype;
+	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
+	$friendlytime = elgg_view_friendly_time($product->time_created);
 	
-	$product_owner = $stores->getOwnerEntity();
+	$product_owner = $product->getOwnerEntity();
 	$product_owner_guid = $product_owner->guid;
 	
 	$user = elgg_get_logged_in_user_entity();
@@ -57,27 +57,27 @@
 					<div class="product_odd"><B><?php echo elgg_echo("Price");?></B></div>
 					<div class="field_results s_price"><B><?php echo get_price_with_currency($price); ?></B></div>
 				<?php }
-					if($stores->product_type_id > 0){
+					if($product->product_type_id > 0){
 				?>
 					<div class="product_even"><B><?php echo elgg_echo("product:type");?></B></div>
 					<div class="field_results">
 						<?php 
-						if($stores->mimetype && $stores->product_type_id == 2){
-							echo "<div style=\"float:left;margin-top:20px;\">".elgg_view('output/product_type',array('value' => $stores->product_type_id))."</div>";
-							echo "<div style=\"float:left;\"><a href=\"{$stores->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
+						if($product->mimetype && $product->product_type_id == 2){
+							echo "<div style=\"float:left;margin-top:20px;\">".elgg_view('output/product_type',array('value' => $product->product_type_id))."</div>";
+							echo "<div style=\"float:left;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product_guid, 'size' => 'small')) . "</a></div>";
 							echo '<div class="clear"></div>';
 						}else{
-							echo elgg_view('output/product_type',array('value' => $stores->product_type_id));
+							echo elgg_view('output/product_type',array('value' => $product->product_type_id));
 						} 
 						?>
 					</div>
 <?php }
-				if($stores->category > 0){
+				if($product->category > 0){
 ?>
 					<div class="product_odd"><B><?php echo elgg_echo("category");?></B></div>
-					<div class="field_results"><?php echo elgg_view('output/category',array('value' => $stores->category)); ?></div>
+					<div class="field_results"><?php echo elgg_view('output/category',array('value' => $product->category)); ?></div>
 				<?php } 
-				if($quantity > 0 && $stores->product_type_id == 1){?>
+				if($quantity > 0 && $product->product_type_id == 1){?>
 					<div class="product_even"><B><?php echo elgg_echo("quantity");?> :</B> <?php echo $quantity ?></div>
 				<?php } ?>
 				<div class="storesrepo_tags">
@@ -88,16 +88,16 @@
 						
 <?php
 	//	add the edit & delete buttons
-	if($stores->canEdit()){
+	if($product->canEdit()){
 ?>
 		<div class="storesrepo_controls">
 			<div class="elgg-button-action" >
-				<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $stores->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
+				<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $product->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
 			</div>
 			<div class="elgg-button-action" >
 				<?php 
 					echo elgg_view('output/confirmlink',array(
-						'href' => elgg_get_config('url').'socialcommerce/'.$user->username.'/delete/'.$stores->guid,
+						'href' => elgg_get_config('url').'socialcommerce/'.$user->username.'/delete/'.$product->guid,
 						'text' => elgg_echo("delete"),
 						'confirm' => elgg_echo('stores:delete:confirm'),
 					));  
@@ -106,19 +106,19 @@
 		</div>
 <?php
 				
-	}		//	end if($stores->canEdit())
+	}		//	end if($product->canEdit())
 				
 	// if user is not the product owner show the add to cart and add to wishlist forms
 	if($user_guid != $product_owner_guid){
-		if($stores->status == 1){
+		if($product->status == 1){
 			if($product_type_details->addto_cart == 1) { 
-				if($stores->status == 1){
-					if($stores->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
-						$body_vars = array('product_guid' => $stores->guid);	
+				if($product->status == 1){
+					if($product->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
+						$body_vars = array('product_guid' => $product->guid);	
 						$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
 						echo $add_to_cart_form;
 								
-						$body_vars = array('product_guid' => $stores->guid);	
+						$body_vars = array('product_guid' => $product->guid);	
 						$add_to_wishlist_form = elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
 						echo $add_to_wishlist_form;
 					}
@@ -129,7 +129,7 @@
 		<div class="clear"></div>
 <?php 
 			}	//	end if($product_type_details->addto_cart == 1)
-		}	//	end if($stores->status == 1)
+		}	//	end if($product->status == 1)
 	}					//	end if($user_guid != $product_owner_guid)
 ?>		
 		<table width="100%">
@@ -137,19 +137,19 @@
 				<td>
 					<?php
 						$display_fields = '';
-						$product_fields = elgg_get_config('product_fields')[$stores->product_type_id];
+						$product_fields = elgg_get_config('product_fields')[$product->product_type_id];
 						if (is_array($product_fields) && sizeof($product_fields) > 0){
 							foreach ($product_fields as $shortname => $valtype){
 								if($valtype['display'] == 1 && 	$shortname != 'price' && $shortname != 'quantity' && $shortname != 'upload'){
 									$display_name = elgg_echo('product:'.$shortname);
-									$output = elgg_view("output/{$valtype['field']}",array('value'=>$stores->$shortname));
+									$output = elgg_view("output/{$valtype['field']}",array('value'=>$product->$shortname));
 									$display_fields .= '<div class="storesrepo_description"><B>'.$display_name.':</B>'.$output.'</div>';
 								}
 							}
 						}
 						echo $display_fields;
 					?>
-					<?php echo  elgg_view("custom_field/display",array('entity'=>$stores)); ?>
+					<?php echo  elgg_view("custom_field/display",array('entity'=>$product)); ?>
 					<div class="features"><?php echo elgg_echo('features:des'); ?></div>
 					<div class="storesrepo_description"><?php echo elgg_autop($desc); ?></div>
 				</td>
@@ -159,7 +159,7 @@
 	
 <?php
 	if($product_owner_guid == $user_guid){
-		echo elgg_view("socialcommerce/order_view", array('entity'=>$stores));
+		echo elgg_view("socialcommerce/order_view", array('entity'=>$product));
 	}
 
-	if ($vars['full']) { echo elgg_view_comments($stores); }
+	if ($vars['full']) { echo elgg_view_comments($product); }

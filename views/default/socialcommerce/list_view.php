@@ -10,36 +10,36 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
-	$stores = $vars['entity'];
+	$product = $vars['entity'];
 	
-	$tags = $stores->tags;
-	$title = $stores->title;
-	$desc = $stores->description;
-	$mime = $stores->mimetype;
+	$tags = $product->tags;
+	$title = $product->title;
+	$desc = $product->description;
+	$mime = $product->mimetype;
 		
 	$owner = $vars['entity']->getOwnerEntity();
-	$friendlytime = elgg_view_friendly_time($stores->time_created);
+	$friendlytime = elgg_view_friendly_time($product->time_created);
 	
 	$search_viewtype = get_input('search_viewtype');
-	$product_type_details = sc_get_product_type_from_value($stores->product_type_id);
+	$product_type_details = sc_get_product_type_from_value($product->product_type_id);
 		
-	$info = '<p><a href="'.$stores->getURL().'"><h2>'.$title.'</h2></a>';
+	$info = '<p><a href="'.$product->getURL().'"><h2>'.$title.'</h2></a>';
 	$info .= '<a href="'.$owner->getURL().'">'.$owner->name.'</a> '.$friendlytime.'</p>';
 	
-	$numcomments = $stores->countComments();
+	$numcomments = $product->countComments();
 		if ($numcomments) {
-			$info .= ', <a href="'.$stores->getURL().'">'.sprintf(elgg_echo("comments")).' ('.$numcomments.')</a></p>';
+			$info .= ', <a href="'.$product->getURL().'">'.sprintf(elgg_echo("comments")).' ('.$numcomments.')</a></p>';
 		}
 	
 	$tags_out =  elgg_view('output/tags',array('value' => $tags));
-	$product_type_out =  elgg_view('output/product_type',array('value' => $stores->product_type_id));
-	$category_out =  elgg_view('output/category',array('value' => $stores->category));
+	$product_type_out =  elgg_view('output/product_type',array('value' => $product->product_type_id));
+	$category_out =  elgg_view('output/category',array('value' => $product->category));
 
 /*****	new	*****/
 
 	$info .= 
 		'<div style="margin:5px 0;">
-			<span style="width:115px;"><B>'.elgg_echo('price').':</B>'.get_price_with_currency($stores->price).'</span>
+			<span style="width:115px;"><B>'.elgg_echo('price').':</B>'.get_price_with_currency($product->price).'</span>
 			<span>&nbsp;</span>
 		</div>
 		<table style="margin-top:3px;width:100%;">
@@ -61,13 +61,13 @@
 /*****	end new	*****/
 
 	//	if user is not the owner show the add to cart and add to wishlist buttons
-	if($stores->status == 1){
-		if($stores->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
+	if($product->status == 1){
+		if($product->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
 			$button_text = elgg_echo('add:cart');
-			$body_vars = array('product_guid' => $stores->guid, 'button_text' => $button_text );	
+			$body_vars = array('product_guid' => $product->guid, 'button_text' => $button_text );	
 			$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
 					
-			$body_vars = array('product_guid' => $stores->guid);	
+			$body_vars = array('product_guid' => $product->guid);	
 			$add_to_wishlist_form	= elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
 		}
 	}
@@ -90,12 +90,12 @@
 		
 EOF;
 
-	$product_image_guid = sc_product_image_guid($stores->guid);
+	$product_image_guid = sc_product_image_guid($product->guid);
 	$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
 						
-	if($stores->mimetype && $stores->product_type_id == 2){	
+	if($product->mimetype && $product->product_type_id == 2){	
 		$icon = '<div>';
-		$icon .= '<a href="'.$stores->getURL().'">'. elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $stores->thumbnail, 'stores_guid' => $stores->guid, 'size' => 'small')) . "</a>
+		$icon .= '<a href="'.$product->getURL().'">'. elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a>
 		</div>";
 	
 	}
