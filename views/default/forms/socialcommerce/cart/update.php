@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg products add to cart form
+	 * Elgg products update cart form
 	 * 
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -9,13 +9,6 @@
 	 * @link http://twentyfiveautumn.com/
 	 * @version elgg 1.9.4
  	 **/
-	 
-require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-$arr2 = get_defined_vars();
-// krumo($arr2);
-// die();	 
-	 
-	 
 ?>
 
 <label for="quantity"><?php echo elgg_echo('quantity'); ?>:</label>
