@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 $most_rateds = get_purchased_orders('final_value','','object','rating','','',true,'','DESC',500,0);
@@ -22,11 +23,9 @@ if($most_rateds){
 		if($product){
 				$product_path = $product->getURL();
 				$mime = $product->mimetype;
-				$product_img = elgg_view("socialcommerce/image", array(
-										'entity' => $product,
-										'size' => 'medium',
-										'display'=>'image'
-									  ));
+				
+				$product_image_guid = sc_product_image_guid($product->guid);
+				$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 
 									  
 				if($i%8 == 0){
 					$products_list .= "</tr><tr>";
@@ -35,7 +34,7 @@ if($most_rateds){
 					<td>
 						<div id="popular_products_list_{$product->guid}" class="popular_products_list">
 							<a onmouseover="popular_products_list_mouseover_action($product->guid)" onmouseout="popular_products_list_mouseout_action($product->guid)" href="{$product_path}">
-								$product_img
+								$image
 							</a>
 						</div>
 					</td>
@@ -72,4 +71,3 @@ EOF;
 		</div>
 EOF;
 }
-?>
