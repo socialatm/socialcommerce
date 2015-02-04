@@ -798,8 +798,7 @@ ini_set('display_errors', 1);
 		
 		elgg_register_action('socialcommerce/add_to_cart', $action_path.'socialcommerce/add_to_cart.php' );
 		elgg_register_action("socialcommerce/cart/delete", $action_path.'socialcommerce/cart/delete.php');
-			
-		elgg_register_action("socialcommerce/update_cart", $action_path.'update_cart.php');
+		elgg_register_action("socialcommerce/cart/update", $action_path.'socialcommerce/cart/update.php');
 		
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
 		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
