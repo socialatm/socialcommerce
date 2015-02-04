@@ -67,13 +67,9 @@ EOF;
 	$delete_form = elgg_view_form('socialcommerce/cart/delete', $form_vars, $body_vars);
 	$info .= $delete_form;
 								
-echo 'Calling the old image loader <b>'.__FILE__ .' at '.__LINE__; die();
-				$image = elgg_view("socialcommerce/image", array(
-											'entity' => $product,
-											'size' => 'medium',
-											'display'=>'full'
-										  )
-									);
+	$product_image_guid = sc_product_image_guid($product->guid);
+	$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 
+									
 				if($product->mimetype && $product->product_type_id == 2){							
 					$icon = "<div style=\"padding-top:10px;\"><a href=\"{$product->getURL()}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $mime, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div>";
 				}
