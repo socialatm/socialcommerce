@@ -9,6 +9,8 @@
 	 * @link http://twentyfiveautumn.com/
 	 * @version elgg 1.9.4
 	 **/ 
+	 
+//	echo '<b>'.__FILE__ .' at '.__LINE__; die();
 	
 	$product = $vars['entity'];
 	$product_guid = $product->getGUID();
@@ -104,6 +106,14 @@
 				?>
 			</div>
 		</div>
+		
+		<div>
+		<?php
+			$body_vars = array('product_guid' => $product->guid);
+			echo elgg_view_form('socialcommerce/product/delete', $form_vars, $body_vars);
+		?>
+		</div>
+		
 <?php
 				
 	}		//	end if($product->canEdit())

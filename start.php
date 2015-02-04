@@ -786,9 +786,13 @@ ini_set('display_errors', 1);
 	/*****	register actions	*****/
 		$action_path = elgg_get_config('pluginspath').'socialcommerce/actions/';
 	
+		//	products
 		elgg_register_action("socialcommerce/add", $action_path.'add.php');
 		elgg_register_action("socialcommerce/edit", $action_path.'edit.php');
-		elgg_register_action("socialcommerce/delete", $action_path.'delete.php');
+		
+		elgg_register_action("socialcommerce/product/delete", $action_path.'socialcommerce/product/delete.php');
+		
+		//	****************************************************************************************************************************************************
 		
 		elgg_register_action("socialcommerce/icon", $action_path.'icon.php');
 		
