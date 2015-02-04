@@ -49,41 +49,6 @@
 	$display_price = get_price_with_currency($product->price);
 	$rating = elgg_view("socialcommerce/view_rating",array('id'=>$product->guid,'units'=>5,'static'=>''));
 	$output = <<<EOF
-		<script>
-			function findPosX(obj) {
-			    var curleft = 0;
-			    if (obj.offsetParent) {
-			        while (1) {
-			            curleft+=obj.offsetLeft;
-			            if (!obj.offsetParent) {
-			                break;
-			            }
-			            obj=obj.offsetParent;
-			        }
-			    } else if (obj.x) {
-			        curleft+=obj.x;
-			    }
-			    return curleft;
-			}
-			function display_gallery_product_details(e,guid){
-				var window_width = $(document).width();
-				var div_width = $("#gallery_product_details_"+guid).width();
-				var div_height = $("#gallery_product_details_"+guid).height();
-				div_height = div_height + 28;
-				var mouseX = e.pageX;
-				var leftPos = '-120px';
-				var div_position = findPosX(document.getElementById('gallery_'+guid));
-				
-				if(div_width + div_position >= window_width )leftPos = '-150px';
-				$("#gallery_product_details_"+guid).css('left',leftPos);
-				$("#gallery_product_details_"+guid).css('top','-' + div_height + 'px');
-				$("#gallery_product_details_"+guid).show();
-				
-			}
-			function hide_gallery_product_details(guid){
-				$("#gallery_product_details_"+guid).hide();
-			}
-		</script>
 		<div id="gallery_{$product_guid}" onmouseover="display_gallery_product_details(event,{$product_guid})" onmouseout="hide_gallery_product_details({$product_guid})" class="gallery_product">
 			<div style="position:relative;">
 				<div id="gallery_product_details_{$product_guid}" class="pop_up_box gallery_product_details">
