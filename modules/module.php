@@ -469,16 +469,9 @@ function html_escape($text){
  
 function redirect_to_form( $url, $fields ){
 
- //echo __FILE__ .' at '.__LINE__; 
-// require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php'); 
-// $arr2 = get_defined_vars();
-// krumo($arr2); // die();
+	echo __FILE__ .' at '.__LINE__; 
 
-
-//	global $CONFIG;
 	$formFields = '';
-	
-	
 	
 	if(is_array($fields)){
 		foreach($fields as $name => $value) {
@@ -487,9 +480,6 @@ function redirect_to_form( $url, $fields ){
 	}
 
 //	return json_encode($formFields);
- //$arr2 = get_defined_vars();
-// krumo($arr2); die();
-	
 	
 		$detailed_view = elgg_echo('processing').'...';
 		$auto_redirect_script = <<<EOF
@@ -715,9 +705,8 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 
 							$product_url = $product->getURL();
 							
-							echo 'Calling the old image loader <b>'.__FILE__ .' at '.__LINE__; die();
-							
-							$image = "<a href=\"{$product_url}\">" . elgg_view("socialcommerce/image", array('entity' => $product, 'size' => 'medium','display'=>'image')) . "</a>";
+							$product_image_guid = sc_product_image_guid($product->guid);
+							$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 
 							
 							
 							
@@ -1024,6 +1013,10 @@ function load_currency_actions() {
 }
 
 function get_price_with_currency( $price ){		
+
+	$fmt = numfmt_create( 'en_US', NumberFormatter::CURRENCY );
+	return numfmt_format_currency($fmt, $price, "USD");
+	die();
 
 	if(!$default_currency = elgg_get_plugin_from_id('socialcommerce')) {
 		register_error(elgg_echo("default:currency:fail"));						
@@ -1527,7 +1520,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 		if($related_product_price)
 			$sub_total += $related_product_price;
 		$display_sub_total = get_price_with_currency($sub_total);
-		$info = "<div class=\"storesqua_stores\">";
+		$info = "<div>";
 		if($entity->product_type_id == 1){
 			$info .= "<b>".elgg_echo("quantity")." :</b> ". $quantity_box;
 		}
@@ -1549,7 +1542,7 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->url}action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
 		}
 		$info = <<<EOF
-			<div class="storesqua_stores">
+			<div>
 				{$related_product_display}
 				<table>
 					<tr>
