@@ -11,7 +11,7 @@
 	 
 	$product = $vars['entity'];
 	$action = get_input('action');
-	$product_guid = $product->getGUID();
+	$product_guid = $product->guid;
 	$tags = $product->tags;
 	$title = $product->title;
 	$desc = $product->description;
@@ -23,12 +23,9 @@
 	$price_text = elgg_echo('price');
 	$search_viewtype = get_input('search_viewtype');
 	$mime = $product->mimetype;
-	
-	$image =  elgg_view("socialcommerce/image", array(
-								'entity' => $vars['entity'],
-								'size' => 'medium',
-								'display' => 'image'
-							  ));
+
+	$product_image_guid = sc_product_image_guid($product->guid);
+	$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 
 							  
 	$info = "<div> <a href=\"{$product->getURL()}\"><B>{$title}</B></a></div>";
 	$info .= "<div class=\"owner_timestamp\">
@@ -126,4 +123,3 @@
 		</div>
 EOF;
 	echo $output;
-?>
