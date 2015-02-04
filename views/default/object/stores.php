@@ -14,8 +14,13 @@
 	
 	switch ($context) {
     case "search":
-        echo elgg_view("socialcommerce/short_view", $vars );
-        break;
+		$search_viewtype = get_input('search_viewtype');
+		if($search_viewtype == "gallery"){
+			echo elgg_view("socialcommerce/gallery_view", $vars );
+		}else{
+			echo elgg_view("socialcommerce/list_view", $vars );
+		}
+		break;
     case "cartadd":
         echo elgg_view("socialcommerce/cart_mainview", $vars );
         break;
