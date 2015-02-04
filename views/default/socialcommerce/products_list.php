@@ -25,11 +25,9 @@ if($products){
 	foreach ($products as $product){
 		$product_path = $product->getURL();
 		$mime = $product->mimetype;
-		$product_img = elgg_view("socialcommerce/image", array(
-										'entity' => $product,
-										'size' => 'medium',
-										'display'=>'image'
-									  ));
+		
+		$product_image_guid = sc_product_image_guid($product->guid);
+		$image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
 									  
 		if($i%8 == 0){
 			$products_list .= "</tr><tr>";
@@ -38,7 +36,7 @@ if($products){
 			<td>
 				<div id="products_list_{$product->guid}" class="products_list">
 					<a onmouseover="products_list_mouseover_action($product->guid)" onmouseout="products_list_mouseout_action($product->guid)" href="{$product_path}">
-						$product_img
+						$image
 					</a>
 				</div>
 			</td>

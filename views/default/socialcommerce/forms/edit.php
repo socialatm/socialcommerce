@@ -89,11 +89,9 @@
 	$image_input = elgg_view("input/file",array('name' => 'product_image'));
 	
 	if ($vars['entity']->guid > 0){
-		$uploaded_image = elgg_view("socialcommerce/image", array(
-			'entity' => $vars['entity'],
-			'size' => 'small',
-			'display'=>'image'
-			));
+		$product = $vars['entity'];
+		$product_image_guid = sc_product_image_guid($product->guid);
+		$uploaded_image = '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'small'.'"/>'; 
 	}
 	
 	if (($action == "socialcommerce/add" && $product_type_id == 2 && $vars['entity']->mimetype == "")||($vars['entity']->guid > 0 && $product_type_id == 2 && $vars['entity']->mimetype == "")){
