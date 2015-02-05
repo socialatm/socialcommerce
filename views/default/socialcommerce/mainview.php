@@ -37,22 +37,20 @@
 ?>
 <div>
 	<div>
-<?php 
+		<?php 
 		$product_image_guid = sc_product_image_guid($product_guid);
 		echo '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 	
-?>	
+		?>	
 	</div>
-
 	<div class="right_section_contents">
 			<div class="storesrepo_title_owner_wrapper">
-<?php
+				<?php
 				//get the user and a link to their gallery
 				$user_gallery = elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$product_owner_guid.'search_viewtype/gallery';
-?>
-					<?php echo elgg_view_entity($product_owner, array('full_view' => false)); ?>
-					<small><?php echo $friendlytime; ?></small>
+				?>
+				<?php echo elgg_view_entity($product_owner, array('full_view' => false)); ?>
+				<small><?php echo $friendlytime; ?></small>
 			</div>
-			
 			<div class="storesrepo_maincontent">
 				<?php if($price > 0){?>
 					<div class="product_odd"><B><?php echo elgg_echo("Price");?></B></div>
@@ -72,9 +70,9 @@
 						} 
 						?>
 					</div>
-<?php }
+				<?php }
 				if($product->category > 0){
-?>
+				?>
 					<div class="product_odd"><B><?php echo elgg_echo("category");?></B></div>
 					<div class="field_results"><?php echo elgg_view('output/category',array('value' => $product->category)); ?></div>
 				<?php } 
@@ -86,39 +84,38 @@
 						<?php echo elgg_view('output/tags',array('value' => $tags)); ?>
 					</span>
 				</div>
-						
-<?php
-	//	add the edit & delete buttons
-	if($product->canEdit()){
-?>
-		<div class="elgg-button-action" >
-			<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $product->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
-		</div>
-		<div>
-		<?php
-			$body_vars = array('product_guid' => $product->guid);
-			echo elgg_view_form('socialcommerce/product/delete', $form_vars, $body_vars);
-		?>
-		</div>
-<?php
-	}else{		
-		// if user is not the product owner show the add to cart and add to wishlist forms
-		if($product->status == 1){
-			if($product_type_details->addto_cart == 1) { 
-					$button_text = elgg_echo('add:cart');
-					$body_vars = array('product_guid' => $product->guid, 'button_text' => $button_text );	
-					$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
-					echo $add_to_cart_form;
-								
-					$body_vars = array('product_guid' => $product->guid);	
-					$add_to_wishlist_form = elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
-					echo $add_to_wishlist_form;
-			}	//	end if($product_type_details->addto_cart == 1)
-		}	//	end if($product->status == 1)
-	}					
-?>		
 			</div>
-		</div>
+			<div>
+				<?php
+				if($product->canEdit()){
+					//	add the edit & delete buttons
+				?>
+					<div class="elgg-button-action" >
+						<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $product->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
+					</div>
+					<div>
+						<?php
+						$body_vars = array('product_guid' => $product->guid);
+						echo elgg_view_form('socialcommerce/product/delete', $form_vars, $body_vars);
+						?>
+					</div>
+				<?php
+				}else{		
+					// if user is not the product owner show the add to cart and add to wishlist forms
+					if(($product->status == 1) and ($product_type_details->addto_cart == 1)){
+						$button_text = elgg_echo('add:cart');
+						$body_vars = array('product_guid' => $product->guid, 'button_text' => $button_text );	
+						$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
+						echo $add_to_cart_form;
+								
+						$body_vars = array('product_guid' => $product->guid);	
+						$add_to_wishlist_form = elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
+						echo $add_to_wishlist_form;
+					}
+				}					
+				?>		
+			</div>
+	</div>
 		<div class="clear"></div>
 		<table width="100%">
 			<tr>
@@ -149,5 +146,4 @@
 	if($product_owner_guid == $user_guid){
 		echo elgg_view("socialcommerce/order_view", array('entity'=>$product));
 	}
-
 	if ($vars['full']) { echo elgg_view_comments($product); }
