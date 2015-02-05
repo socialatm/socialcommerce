@@ -36,19 +36,18 @@
 	
 ?>
 <div>
-		<div>
+	<div>
 <?php 
-
 		$product_image_guid = sc_product_image_guid($product_guid);
 		echo '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 	
 ?>	
-		</div>
+	</div>
 
-		<div class="right_section_contents">
+	<div class="right_section_contents">
 			<div class="storesrepo_title_owner_wrapper">
 <?php
 				//get the user and a link to their gallery
-				$user_gallery = elgg_get_config('url').'socialcommerce/'.$_SESSION['user']->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$product_owner_guid.'search_viewtype/gallery';
+				$user_gallery = elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$product_owner_guid.'search_viewtype/gallery';
 ?>
 					<?php echo elgg_view_entity($product_owner, array('full_view' => false)); ?>
 					<small><?php echo $friendlytime; ?></small>
@@ -92,56 +91,35 @@
 	//	add the edit & delete buttons
 	if($product->canEdit()){
 ?>
-		<div class="storesrepo_controls">
-			<div class="elgg-button-action" >
-				<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $product->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
-			</div>
-			<div class="elgg-button-action" >
-				<?php 
-					echo elgg_view('output/confirmlink',array(
-						'href' => elgg_get_config('url').'socialcommerce/'.$user->username.'/delete/'.$product->guid,
-						'text' => elgg_echo("delete"),
-						'confirm' => elgg_echo('stores:delete:confirm'),
-					));  
-				?>
-			</div>
+		<div class="elgg-button-action" >
+			<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/product/edit/<?php echo $product->guid; ?>"><?php echo elgg_echo('edit'); ?></a>
 		</div>
-		
 		<div>
 		<?php
 			$body_vars = array('product_guid' => $product->guid);
 			echo elgg_view_form('socialcommerce/product/delete', $form_vars, $body_vars);
 		?>
 		</div>
-		
 <?php
-				
-	}		//	end if($product->canEdit())
-				
-	// if user is not the product owner show the add to cart and add to wishlist forms
-	if($user_guid != $product_owner_guid){
+	}else{		
+		// if user is not the product owner show the add to cart and add to wishlist forms
 		if($product->status == 1){
 			if($product_type_details->addto_cart == 1) { 
-				if($product->status == 1){
-					if($product->owner_guid != $user->guid && $product_type_details->addto_cart == 1){
-						$body_vars = array('product_guid' => $product->guid);	
-						$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
-						echo $add_to_cart_form;
+					$button_text = elgg_echo('add:cart');
+					$body_vars = array('product_guid' => $product->guid, 'button_text' => $button_text );	
+					$add_to_cart_form = elgg_view_form('socialcommerce/add_to_cart', $form_vars, $body_vars);
+					echo $add_to_cart_form;
 								
-						$body_vars = array('product_guid' => $product->guid);	
-						$add_to_wishlist_form = elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
-						echo $add_to_wishlist_form;
-					}
-				}
-?>				
+					$body_vars = array('product_guid' => $product->guid);	
+					$add_to_wishlist_form = elgg_view_form('socialcommerce/add_wishlist', $form_vars, $body_vars);
+					echo $add_to_wishlist_form;
+			}	//	end if($product_type_details->addto_cart == 1)
+		}	//	end if($product->status == 1)
+	}					
+?>		
 			</div>
 		</div>
 		<div class="clear"></div>
-<?php 
-			}	//	end if($product_type_details->addto_cart == 1)
-		}	//	end if($product->status == 1)
-	}					//	end if($user_guid != $product_owner_guid)
-?>		
 		<table width="100%">
 			<tr>
 				<td>
