@@ -20,7 +20,6 @@
 		'name' => 'submit',
 		'id' => 'submit',
 		'value' => elgg_echo('remove'),
-		'class' => 'elgg-button elgg-button-submit',
-		'confirm' => elgg_echo("cart:delete:confirm")
+		'class' => 'elgg-button elgg-button-action elgg-requires-confirmation'
 		));
 	?>
