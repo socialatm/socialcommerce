@@ -744,9 +744,11 @@ echo '<b>'.__FILE__ .' at '.__LINE__; die();
 		elgg_register_action("socialcommerce/cart/update", $action_path.'socialcommerce/cart/update.php');
 		
 		//	address
-		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
+		elgg_register_action("socialcommerce/address/save", $action_path.'socialcommerce/address/save.php');
 		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
 		elgg_register_action("address/address", $action_path.'address/address.php');
+		
+		
 		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
 		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
 		

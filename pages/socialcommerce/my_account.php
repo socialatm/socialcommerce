@@ -4,14 +4,13 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 8 @version elgg 1.9.4
 	 **/ 
 
 	gatekeeper();
-	$page_owner = elgg_get_page_owner_entity();
-		
 	$title = elgg_view_title(elgg_echo('stores:my:account'));
 	
 	$limit = 10;
@@ -61,4 +60,3 @@
 
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_echo('stores:my:account'), $body);
-?>

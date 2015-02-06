@@ -4,60 +4,46 @@
 	* 
 	* @package Elgg SocialCommerce
 	* @license http://www.gnu.org/licenses/gpl-2.0.html
-	* @author twentyfiveautumn.com
-	* @copyright twentyfiveautumn.com 2014
+	* @author ray peaslee
+	* @copyright twentyfiveautumn.com 2015
 	* @link http://twentyfiveautumn.com/
+	* @version elgg 1.9.4
 	**/ 
 	
+	$user = elgg_get_logged_in_user_entity();
 	$ajax = $vars['ajax'];
 	$type = $vars['type'];
 	$first = $vars['first'];
 	
-	// Set title, form destination
-		if (isset($vars['entity'])) {
-			$action = "socialcommerce/edit_address";
-			$firstname = $vars['entity']->first_name;
-			$lastname = $vars['entity']->last_name;
-			$address_line_1 = $vars['entity']->address_line_1;
-			$address_line_2 = $vars['entity']->address_line_2;
-			$city = $vars['entity']->city;
-			$selected_state = $vars['entity']->state;
-			$selected_country = $vars['entity']->country;
-			$pincode = $vars['entity']->pincode;
-			$mobileno = $vars['entity']->mobileno;
-			$phoneno = $vars['entity']->phoneno;
-			$access_id = $vars['entity']->access_id;
-		} else {
-			$action = "socialcommerce/add_address";
-			$firstname = "";
-			$lastname = "";
-			$address_line_1 = "";
-			$address_line_2 = "";
-			$city = "";
-			$selected_state = "";
-			$selected_country = "USA";
-			$pincode = "";
-			$mobileno = "";
-			$phoneno = "";
-			$access_id = 0;
-		}
+	if (isset($vars['entity'])) {
+		$action = "socialcommerce/edit_address";
+		$firstname = $vars['entity']->first_name;
+		$lastname = $vars['entity']->last_name;
+		$address_line_1 = $vars['entity']->address_line_1;
+		$address_line_2 = $vars['entity']->address_line_2;
+		$city = $vars['entity']->city;
+		$selected_state = $vars['entity']->state;
+		$selected_country = $vars['entity']->country;
+		$pincode = $vars['entity']->pincode;
+		$mobileno = $vars['entity']->mobileno;
+		$phoneno = $vars['entity']->phoneno;
+		$access_id = $vars['entity']->access_id;
+	} else {
+		$action = "socialcommerce/add_address";
+		$firstname = "";
+		$lastname = "";
+		$address_line_1 = "";
+		$address_line_2 = "";
+		$city = "";
+		$selected_state = "";
+		$selected_country = "USA";
+		$pincode = "";
+		$mobileno = "";
+		$phoneno = "";
+		$access_id = 0;
+	}
 
-	// Just in case we have some cached details
-		if (isset($vars['address'])) {
-			$firstname = $vars['address']['first_name'];
-			$lastname = $vars['address']['last_name'];
-			$address_line_1 = $vars['address']['address_line_1'];
-			$address_line_2 = $vars['address']['address_line_2'];
-			$city = $vars['address']['city'];
-			$selected_state = $vars['address']['state'];
-			$selected_country = $vars['address']['country'];
-			$pincode = $vars['address']['pincode'];
-			$mobileno = $vars['address']['mobileno'];
-			$phoneno = $vars['address']['phoneno'];
-			$access_id = $vars['address']['access_id'];
-		}
-
-        /*$title_label = elgg_echo('title');
+	    /*$title_label = elgg_echo('title');
         $title_textbox = elgg_view('input/text', array('name' => 'title', 'value' => $title));*/
         
         $fnaem_label = elgg_echo('first:name');
@@ -79,41 +65,51 @@
 			$entity_hidden .= "<input type=\"hidden\" id=\"{$type}_address_guid\" name=\"address_guid\" value=\"{$vars['entity']->getGUID()}\" />";
 		$entity_hidden .= elgg_view('input/securitytoken');
 
-		
-		if($CONFIG->country){
-			$options_values = array();
-			foreach ($CONFIG->country as $country){
-				$options_values[$country['iso3']] = $country['name'];
-			}
-	
+	$countries = elgg_get_config('country');
+	if($countries){
+		$options_values = array();
+		foreach ($countries as $country){
+			$options_values[$country['iso3']] = $country['name'];
+		}
+
 		$country_list = elgg_view('input/dropdown', array(
-													'name' => 'currency_country',
-													'id' => $type.'_country',
-													'value' => $selected_country,
-													'options_values' => $options_values,
-													));
+			'name' => 'currency_country',
+			'id' => $type.'_country',
+			'value' => $selected_country,
+			'options_values' => $options_values,
+			));
 
 			if($selected_country){
-				$states = get_state_by_fields('iso3',$selected_country);
+				$states = get_state_by_fields('iso3', $selected_country );
 				if(!empty($states)){
 					$options_values = array();
 					foreach ($states as $state){
 						$options_values[$state->abbrv] = $state->name;
 					}
 					$state_list = elgg_view('input/dropdown', array(
-													'name' => 'state',
-													'id' => $type.'_state',
-													'value' => $selected_state,
-													'options_values' => $options_values,
-													));
+						'name' => 'state',
+						'id' => $type.'_state',
+						'value' => $selected_state,
+						'options_values' => $options_values,
+						));
 				}else{
-					$state_list = '<input class="input-text" type="text" value="'.$selected_state.'" id="'.$type.'_state" name="state"/>';
+					$state_list = elgg_view('input/text', array(
+						'name' => 'state',
+						'id' => $type.'_state',
+						'value' => $selected_state,
+						'class' => ''
+						));
 				}
 			}
 			
-		}else {
-			$country_list = '<input class="input-text" type="text" value="'.$selected_country.'" id="'.$type.'_country" name="country"/>';
-		}
+	}else {
+		$country_list = elgg_view('input/text', array(
+			'name' => 'country',
+			'id' => $type.'_country',
+			'value' => $selected_country,
+			'class' => ''
+			));
+	}
 			
 		if($ajax == 1){
 			if($type == 'myaccount'){
@@ -138,8 +134,10 @@ EOF;
 			$country_label_none = elgg_echo('country:none');
 			$pincode_label_none = elgg_echo('pincode:none');
 			$mobno_label_none = elgg_echo('mob:no:none');
-			$address_post_url = "{$CONFIG->url}action/{$action}";
-			$address_reload_url = "{$CONFIG->url}socialcommerce/{$_SESSION['user']->username}/view_address";
+			$address_post_url =  elgg_get_config('url').'action/'.$action;
+			$address_reload_url = elgg_get_config('url').'socialcommerce/'.$user->username.'/view_address';
+			
+			
 			$script = <<<EOF
 				<script>
 /*****	country/state dropdown	*****/
@@ -157,8 +155,9 @@ $("#myaccount_country").change(function () {
 
 /*****	end country/state dropdown	*****/
 				
-					var time_out;
-					function {$type}_save_address(){
+	var time_out;
+	
+	function {$type}_save_address(){
 						var type = '{$type}';
 						var u_guid = '{$_SESSION['user']->guid}';
 						var first_name = $('#'+type+'_first_name').val();
@@ -174,6 +173,8 @@ $("#myaccount_country").change(function () {
 						var address_guid = $('#'+type+'_address_guid').val();
 						var elgg_token = $('[name=__elgg_token]');
 						var elgg_ts = $('[name=__elgg_ts]');
+						
+						
 						if($.trim(first_name) == ""){
 							alert("{$fnaem_label_none}");
 							$('#'+type+'_first_name').focus();
@@ -270,7 +271,7 @@ $("#myaccount_country").change(function () {
 						});
 						return false;
 						*/
-					}
+	}
 					
 				</script>
 EOF;
@@ -352,5 +353,8 @@ EOF;
 				</table>
 			</div>
 EOT;
-echo $form_body;
-?>
+
+$body_vars = array('state_list' => $state_list, 'country_list' => $country_list );
+$new_form = elgg_view_form('socialcommerce/address/save', $form_vars, $body_vars);
+
+echo $form_body.$new_form;
