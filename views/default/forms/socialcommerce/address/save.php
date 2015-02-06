@@ -58,14 +58,6 @@
 					));
 			?>
 <label for="state"><?php echo elgg_echo('state'); ?>:</label>
-			<?php echo elgg_view('input/text', array(
-					'name' => 'state',
-					'id' => 'state',
-					'value' => $state,
-					'class' => '',
-					'name'=>'state',
-					));
-			?>
 			<?php echo $vars['state_list']; ?>
 			
 <label for="pincode"><?php echo elgg_echo('pincode'); ?>:</label>
@@ -78,14 +70,6 @@
 					));
 			?>
 <label for="country"><?php echo elgg_echo('country'); ?>:</label>
-			<?php echo elgg_view('input/text', array(
-					'name' => 'country',
-					'id' => 'country',
-					'value' => $country,
-					'class' => '',
-					'name'=>'country',
-					));
-			?>
 			<?php echo $vars['country_list']; ?>
 
 <label for="mobileno"><?php echo elgg_echo('mob:no'); ?>:</label>
