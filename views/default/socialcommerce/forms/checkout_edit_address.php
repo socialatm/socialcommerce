@@ -135,232 +135,26 @@
 			$address_reload_url = elgg_get_config('url').'socialcommerce/'.$user->username.'/view_address';
 			
 			
-	$script = <<<EOF
-				<script>
-/*****	country/state dropdown	*****/
+$script = <<<EOF
 
-// alert($(".country").val());
-				
-$("#country").change(function () {
-    var country = $(this).val();
-//	alert(country);
-    var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
-    $.post(url, {
-        selected_country: country
-    })
+	<script>
+		//	country/state dropdown
+		$("#country").change(function () {
+		var country = $(this).val();
+		var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
+		$.post(url, {
+			selected_country: country
+		})
         .done(function (data) {
-		
-		alert(data);
-		
-		
-        $("#state").empty().html(data);
-    });
-});
-
-/*****	end country/state dropdown	*****/
-				
-	var time_out;
-	
-	function {$type}_save_address(){
-						var type = '{$type}';
-						var u_guid = '{$_SESSION['user']->guid}';
-						var first_name = $('#'+type+'_first_name').val();
-						var last_name = $('#'+type+'_last_name').val();
-						var address_line_1 = $('#'+type+'_address_line_1').val();
-						var address_line_2 = $('#'+type+'_address_line_2').val();
-						var city = $('#'+type+'_city').val();
-						var state = $('#'+type+'_state').val();
-						var country = $('#'+type+'_country').val();
-						var pincode = $('#'+type+'_pincode').val();
-						var mobileno = $('#'+type+'_mobileno').val();
-						var phoneno = $('#'+type+'_phoneno').val();
-						var address_guid = $('#'+type+'_address_guid').val();
-						var elgg_token = $('[name=__elgg_token]');
-						var elgg_ts = $('[name=__elgg_ts]');
-						
-						
-						if($.trim(first_name) == ""){
-							alert("{$fnaem_label_none}");
-							$('#'+type+'_first_name').focus();
-							return false;
-						}
-						if($.trim(last_name) == ""){
-							alert("{$lname_label_none}");
-							$('#'+type+'_last_name').focus();
-							return false;
-						}
-						if($.trim(address_line_1) == ""){
-							alert("{$address_line_1_label_none}");
-							$('#'+type+'_address_line_1').focus();
-							return false;
-						}
-					
-						if($.trim(city) == ""){
-							alert("{$city_label_none}");
-							$('#'+type+'_city').focus();
-							return false;
-						}
-						if($.trim(state) == ""){
-							alert("{$state_label_none}");
-							$('#'+type+'_state').focus();
-							return false;
-						}
-						if($.trim(country) == ""){
-							alert("{$country_label_none}");
-							$('#'+type+'_country').focus();
-							return false;
-						}
-						if($.trim(pincode) == ""){
-							alert("{$pincode_label_none}");
-							$('#'+type+'_pincode').focus();
-							return false;
-						}
-					
-							
-						var window_width = $(document).width();
-						var window_height = $(document).height();
-						var scroll_pos = (document.all)?document.body.scrollTop:window.pageYOffset;
-						scroll_pos = scroll_pos  + 300;
-						$("#load_action").show();
-						$("#load_action").css({'width':window_width+'px','height':window_height+'px'});
-						$("#load_action_div").css("top",scroll_pos+"px");
-						$("#load_action_div").css({'width':window_width+'px'});
-						$("#load_action_div").show();
-					
-						
-												
-						var urls="{$address_post_url}";
-						var paramdata="first_name="+first_name+"&last_name="+last_name+"&address_line_1="+address_line_1+"&address_line_2="+address_line_2+"&city="+city+"&country="+country+"&state="+state+"&pincode="+pincode+"&mobileno="+mobileno+"&phoneno="+phoneno+"&address_guid="+address_guid+"&u_guid="+u_guid+"&ajax=1"+"&__elgg_token="+elgg_token.val()+"&__elgg_ts="+elgg_ts.val();
-						$.ajax({
-						   type: "POST",
-						   url: urls,
-						   data:paramdata,
-						   success: function(data){
-								if(data > 0){
-												$("#{$type}_address").load("{$address_reload_url}", {guid: data,u_guid: u_guid,type:'{$type}',todo:'{$todo}'});
-											}else{
-												alert(data);
-											}
-									$("#load_action").hide();
-									$("#load_action_div").hide();
-								}
-						});
-						
-						/*
-						$.post("{$address_post_url}", {
-							first_name: first_name,
-							last_name: last_name,
-							address_line_1: address_line_1,
-							address_line_2: address_line_2,
-							city: city,
-							state: state,
-							country: country,
-							pincode: pincode,
-							mobileno: mobileno,
-							phoneno: phoneno,
-							address_guid: address_guid,
-							u_guid: u_guid,
-							ajax:1,
-							__elgg_token: elgg_token.val(),
-							__elgg_ts: elgg_ts.val()
-						},
-						function(data){
-							if(data > 0){
-								$("#{$type}_address").load("{$address_reload_url}", {guid: data,u_guid: u_guid,type:'{$type}',todo:'{$todo}'});
-							}else{
-								alert(data);
-							}
-							$("#load_action").hide();
-							$("#load_action_div").hide();
-						});
-						return false;
-						*/
-	}
-					
-				</script>
+			$("#state").empty().html(data);
+			});
+		});
+	</script>
 EOF;
 		}else{
 			$javascript = "";
 		}
-		$form_body = <<<EOT
-			{$script}
-			<div class="address_form">
-				<table>
-	        	 	<tr>
-						<td><label><span style="color:red">*</span> $fnaem_label</label></td>
-						<td>:</td>
-			            <td><input class="input-text" type="text" value="{$firstname}" id="{$type}_first_name" name="first_name"/></td>
-					</tr>
-					<tr>
-						<td><label><span style="color:red">*</span> $lname_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$lastname}" id="{$type}_last_name" name="last_name"/></td>
-					</tr>
-					<tr>
-						<td><label><span style="color:red">*</span> $address_line_1_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$address_line_1}" id="{$type}_address_line_1" name="address_line_1"/></td>
-					</tr>
-					<tr>
-						<td><label>&nbsp; $address_line_2_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$address_line_2}" id="{$type}_address_line_2" name="address_line_2"/></td>
-					</tr>
-					<tr>
-						<td><label><span style="color:red">*</span> $city_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$city}" id="{$type}_city" name="city"/></td>
-					</tr>
-					<tr>
-						<td><label><span style="color:red">*</span> $country_label</label></td>
-						<td>:</td>
-						<td>
-							{$country_list}
-						</td>
-					</tr>
-					<tr>
-						<td><label><span style="color:red">*</span> $state_label</label></td>
-						<td>:</td>
-						<td>
-							<div id="{$type}_state_list">
-								{$state_list}
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><label><span style="color:red">*</span> $pincode_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$pincode}" id="{$type}_pincode" name="pincode"/></td>
-					</tr>
-					<tr>
-						<td><label>&nbsp;  $mobno_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$mobileno}" id="{$type}_mobileno" name="mobileno"/></td>
-					</tr>
-					<tr>
-						<td><label> &nbsp; $phoneno_label</label></td>
-						<td>:</td>
-						<td><input class="input-text" type="text" value="{$phoneno}" id="{$type}_phoneno" name="phoneno"/></td>
-					</tr>
-					<tr>
-						<td colspan="2"></td>
-						<td style="text-align:center">
-							$entity_hidden
-							<div>
-								<div class="buttonwrapper" style="float:left;">
-									<a onclick="{$type}_save_address();" class="elgg-button elgg-button-submit">{$submit_input}</a>
-								</div>
-								{$cancel_btn}
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-EOT;
-
 $body_vars = array('state_list' => $state_list, 'country_list' => $country_list );
 $new_form = elgg_view_form('socialcommerce/address/save', $form_vars, $body_vars);
-
-// echo $form_body.$new_form;
 
 echo $new_form.$script;
