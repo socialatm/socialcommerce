@@ -15,16 +15,16 @@ $selected_country = get_input('selected_country');
 if($selected_country){
 	$states = get_state_by_fields('iso3', $selected_country );
 	if(!empty($states)){
-	$options_values = array();
-	foreach ($states as $state){
-		$options_values[$state->abbrv] = $state->name;
-	}
-	$state_list = elgg_view('input/dropdown', array(
-		'name' => 'state',
-		'id' => 'state',
-		'value' => $selected_state,
-		'options_values' => $options_values
-		));
+		$options_values = array();
+		foreach ($states as $state){
+			$options_values[$state->abbrv] = $state->name;
+		}
+		$state_list = elgg_view('input/dropdown', array(
+			'name' => 'state',
+			'id' => 'state',
+			'value' => $selected_state,
+			'options_values' => $options_values
+			));
 	}else{
 		$state_list = '<input class="input-text" type="text" value="'.$selected_state.'" id="'.'state" name="state"/>';
 	}
