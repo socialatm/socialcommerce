@@ -10,60 +10,60 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
-	$page_owner = elgg_get_logged_in_user_entity();
 	$title = elgg_view_title(elgg_echo('stores:all:products'));
-		
 	elgg_set_context('search');
-		
 	$search_viewtype = get_input('search_viewtype');
 	$limit = ($search_viewtype == 'gallery') ? 20 : 10;
 	$view = get_input('view');
 	
-		if (elgg_is_admin_logged_in()) {
+	if (elgg_is_admin_logged_in()) {
+		$tab = get_input('tab') ? get_input('tab') : 'active';
+		$vars = array(
+			'tabs' => array(
+				array('title' => elgg_echo('active:products'), 'url' => "$url" . '?tab=active', 'selected' => ($tab == 'active')),
+				array('title' => elgg_echo('deleted:products'), 'url' => "$url" . '?tab=deleted', 'selected' => ($tab == 'deleted')),
+			)
+		);
+		$content = elgg_view('navigation/tabs', $vars);
 		
-			$filter = get_input("filter") ? get_input("filter") : 'active';
-			switch($filter){
-				case "active":	$content = elgg_list_entities_from_metadata(array(
-													'status' => 1,
-													'type_subtype_pairs' => array('object' => 'stores'),
-													'limit' => $limit,
-													));
-								break;
-				case "deleted":	$content = elgg_list_entities_from_metadata(array(
-													'status' => 0,
-													'type_subtype_pairs' => array('object' => 'stores'),
-													'limit' => $limit,
-													));
-								break;
+		switch($tab){
+			case "active":	
+				$content .= elgg_list_entities_from_metadata(array(
+					'status' => 1,
+					'type_subtype_pairs' => array('object' => 'stores'),
+					'limit' => $limit
+					));
+				break;
+			case "deleted":	
+				$content .= elgg_list_entities_from_metadata(array(
+					'status' => 0,
+					'type_subtype_pairs' => array('object' => 'stores'),
+					'limit' => $limit
+					));
+				break;
 			}
-			
-			
-			if(empty($content)){ $content = '<div>'.elgg_echo('product:null').'</div>';	}
-			
-			if($view != 'rss'){
-				$content = elgg_view("socialcommerce/product_tab_view",array('base_view' => $content, "filter" => $filter));
-			}
-		}else{
-			$content = elgg_list_entities_from_metadata(array(
-								'status' => 1,
-								'type_subtype_pairs' => array('object' => 'stores'),
-								'limit' => $limit,
-								));	
+		
+		if(empty($content)){ $content .= '<div>'.elgg_echo('product:null').'</div>';	}
+	}else{
+		$content = elgg_list_entities_from_metadata(array(
+			'status' => 1,
+			'type_subtype_pairs' => array('object' => 'stores'),
+			'limit' => $limit,
+			));	
 
-			if(empty($content)){ $content = elgg_echo('product:null');}
-		}
-		if($view != 'rss'){
-			$content = '<div class="contentWrapper stores">'.$content.'</div>';
-		}
-	
+		if(empty($content)){ $content = elgg_echo('product:null');}
+	}
+		
+	$content = '<div class="contentWrapper stores">'.$content.'</div>';
 	elgg_set_context('stores');
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar .= gettags();
 		
 	$params = array(
 		'title' => $title,
-		'content' => $content,
+		'content' => $content.$content2,
 		'sidebar' => $sidebar,
 		);
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_echo('stores:all:products'), $body);
+	
