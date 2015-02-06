@@ -478,68 +478,6 @@ ini_set('display_errors', 1);
 		return	elgg_get_config('url').'action/socialcommerce/add_to_cart/';
 	}
 	
-	/**
-	 * Update an item of metadata for stores.
-	 *
-	 * @param int $id
-	 * @param string $name
-	 * @param string $value
-	 * @param string $value_type
-	 * @param int $owner_guid
-	 * @param int $access_id
-	 */
-	 
-	function update_metadata_for_stores($id, $name, $value, $value_type, $owner_guid, $access_id) {
-		global $CONFIG;
-
-		$id = (int)$id;
-
-		if(!$md = elgg_get_metadata_from_id($id)) { return false; }	
-		
-		// If memcached then we invalidate the cache for this entry
-		static $metabyname_memcache;
-		if((!$metabyname_memcache) && (is_memcache_available())) { $metabyname_memcache = new ElggMemcache('metabyname_memcache'); }
-		if($metabyname_memcache) { $metabyname_memcache->delete("{$md->entity_guid}:{$md->name_id}"); }
-		
-		//$name = sanitise_string(trim($name));
-		//$value = sanitise_string(trim($value));
-		$value_type = detect_extender_valuetype($value, sanitise_string(trim($value_type)));
-		
-		$owner_guid = (int)$owner_guid;
-		if ($owner_guid==0) $owner_guid = elgg_get_logged_in_user_guid();
-		
-		$access_id = (int)$access_id;
-		
-		$access = get_access_sql_suffix();
-		
-		// Support boolean types (as integers)
-		if (is_bool($value)) {
-			if ($value)
-				$value = 1;
-			else
-				$value = 0;
-		}
-		
-		// Add the metastring
-		$value = elgg_get_metastring_id($value);
-		if (!$value) return false;
-		
-		$name = elgg_get_metastring_id($name);
-		if(!$name) { return false;	}
-		
-		// If ok then add it
-		$result = update_data("UPDATE {$CONFIG->dbprefix}metadata set value_id='$value', value_type='$value_type', access_id=$access_id, owner_guid=$owner_guid where id=$id and name_id='$name'");
-		if ($result!==false) {
-			$obj = elgg_get_metadata_from_id($id);
-			if (elgg_trigger_event('update', 'metadata', $obj)) {
-				return true;
-			} else {
-				elgg_delete_metadata(array('metadata_id' => $id));
-			}
-		}
-		return $result;
-	}
-	
 	function get_sold_products($metavalue=null, $limit, $offset=0 ){
 		global $CONFIG;
 		$nameid = elgg_get_metastring_id('product_owner_guid');
@@ -796,25 +734,31 @@ ini_set('display_errors', 1);
 		
 		elgg_register_action("socialcommerce/icon", $action_path.'icon.php');
 		
+		//	category
 		elgg_register_action("socialcommerce/category/save", $action_path.'socialcommerce/category/save.php');			//	01/24/2015
-				
 		elgg_register_action("socialcommerce/delete_category", $action_path.'delete_category.php');
 		
+		//	cart
 		elgg_register_action('socialcommerce/add_to_cart', $action_path.'socialcommerce/add_to_cart.php' );
 		elgg_register_action("socialcommerce/cart/delete", $action_path.'socialcommerce/cart/delete.php');
 		elgg_register_action("socialcommerce/cart/update", $action_path.'socialcommerce/cart/update.php');
 		
+		//	address
 		elgg_register_action("socialcommerce/add_address", $action_path.'add_address.php');
 		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
 		elgg_register_action("address/address", $action_path.'address/address.php');
 		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
 		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
+		
 		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
 		elgg_register_action("socialcommerce/add_order", $action_path.'add_order.php');
 		elgg_register_action("socialcommerce/change_order_status", $action_path.'change_order_status.php');
+		
+		//	wishlist
 		elgg_register_action("socialcommerce/add_wishlist", $action_path.'add_wishlist.php');	// remove once the new add wishlist form is working
 		elgg_register_action("products/add_wishlist", $action_path.'products/add_wishlist.php');
 		elgg_register_action("socialcommerce/remove_wishlist", $action_path.'remove_wishlist.php');
+		
 		elgg_register_action("socialcommerce/download", $action_path.'download.php');
 		elgg_register_action("socialcommerce/contry_tax", $action_path.'contry_tax.php');
 		elgg_register_action("socialcommerce/addcommon_tax", $action_path.'addcommon_tax.php');
