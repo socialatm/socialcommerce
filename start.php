@@ -395,40 +395,6 @@ ini_set('display_errors', 1);
 	}
 	
 	/**
-	 * Returns a list of producttypes to search specifically on
-	 *
-	 * @param int|array $owner_guid The GUID(s) of the owner(s) of the files 
-	 * @param true|false $friends Whether we're looking at the owner or the owner's friends
-	 * @return string The typecloud
-	 */
-	function get_storestype_cloud($owner_guid = "", $friends = false) {
-		
-		if($friends) {
-			if ($friendslist = $user->getFriends(array('limit' => 0))) {
-				$friendguids = array();
-				foreach($friendslist as $friend) {
-					$friendguids[] = $friend->getGUID();
-				}
-			}
-			$friendofguid = $owner_guid;
-			$owner_guid = $friendguids;
-		} else {
-			$friendofguid = false;
-		}
-		
-		$tag_options = array(
-			'threshold' => 0,
-			'limit' => 10,
-			'metadata_name' => 'simpletype',
-			'entity_type' => 'object',
-			'entity_subtype' => 'stores',
-			'owner_guid' => $owner_guid,
-		);
-		
-		return elgg_view("socialcommerce/typecloud", array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => elgg_get_tags($tag_options)));
-	}
-	
-	/**
 	 * Populates the ->getUrl() method for file objects
 	 *
 	 * @param ElggEntity $entity File entity
@@ -605,7 +571,7 @@ echo '<b>'.__FILE__ .' at '.__LINE__; die();
 		elgg_register_plugin_hook_handler('permissions_check','user','order_can_create');
 		elgg_register_plugin_hook_handler('permissions_check','object','order_can_create');
 		
-	/*****	register actions	*****/
+	//	register actions
 		$action_path = elgg_get_config('pluginspath').'socialcommerce/actions/';
 	
 		//	products
