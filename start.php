@@ -405,8 +405,8 @@ ini_set('display_errors', 1);
 		$entity = $params['entity'];
 		if (elgg_instanceof($entity, 'object', 'stores')) {
 			$title = elgg_get_friendly_title($entity->title);
-		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
-	}
+			return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/read/'.$entity->getGUID().'/'.$title;
+		}
 	}
 	
 	/**
@@ -420,8 +420,8 @@ ini_set('display_errors', 1);
 		$entity = $params['entity'];
 		if (elgg_instanceof($entity, 'object', 'sc_category')) {
 			$title = elgg_get_friendly_title($entity->title);
-		return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
-	}
+			return elgg_get_config('url').'socialcommerce/'.$entity->getOwnerEntity()->username.'/cateread/'.$entity->getGUID().'/'.$title;
+		}
 	}
 	
 	function cart_set_url($hook, $type, $url, $params) {
@@ -444,45 +444,10 @@ ini_set('display_errors', 1);
 		return	elgg_get_config('url').'action/socialcommerce/add_to_cart/';
 	}
 	
-	function get_sold_products($metavalue=null, $limit, $offset=0 ){
-		global $CONFIG;
-		$nameid = elgg_get_metastring_id('product_owner_guid');
-		if($nameid){
-			$where = " and m.name_id=".$nameid;
-		}else{
-			$where = " and m.name_id=0";
-		}
-		if($metavalue != null){
-			$valueid = elgg_get_metastring_id($metavalue);
-			if($valueid){
-				$where .= " and m.value_id =".$valueid;
-			}else{
-				$where .= " and m.value_id=0";
-			}
-		}
-		$m1_nameid = elgg_get_metastring_id('product_id');
-		if($m1_nameid){
-			$where .= " and m1.name_id=".$m1_nameid;
-		}
-		$where .= " and e.type='object'";
-		$subtypeid = get_subtype_id('object','order_item');
-		if($subtypeid){
-			$where .= " and e.subtype=".$subtypeid;
-		}else{
-			$where .= " and e.subtype=-1";
-		}
-		
-		$order = " order by e.time_created desc";	
-		
-		if($limit){
-			$limit = " limit ".$offset.",".$limit;
-		}else{
-			$limit = "";
-		}
-echo '<b>'.__FILE__ .' at '.__LINE__; die();		
-		$query = "SELECT SQL_CALC_FOUND_ROWS DISTINCT v.string AS value, e.guid AS guid, e.owner_guid as owner_guid, e.container_guid as container_guid from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}entities e on e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata m1 ON e.guid = m1.entity_guid JOIN {$CONFIG->dbprefix}metastrings v on m1.value_id = v.id where (1 = 1) ".$where." and m.enabled='yes' GROUP BY v.string  ".$order." ".$limit;
-		$sold_products = get_data($query);
-		return $sold_products;
+	function get_sold_products(){
+			echo '<b>'.__FILE__ .' at '.__LINE__; die();		
+			function get_sold_products() needs a re-write
+			return $sold_products;
 	}
 	
 	function gettags(){
