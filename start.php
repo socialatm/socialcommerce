@@ -519,94 +519,6 @@ echo '<b>'.__FILE__ .' at '.__LINE__; die();
 		return $sold_products;
 	}
 	
-	function get_purchased_orders($metaname=null,$metavalue=null,$type=null,$subtype=null,$where_spval=false,$where_spval_con=null,$metaorder=fale,$entityorder=null,$order='ASC',$limit=null,$offset=0,$count=false,$owner=0,$container=0,$id_not_in=null,$title=null,$where_con=""){
-		global $CONFIG;
-		if($metaname){
-			$nameid = elgg_get_metastring_id($metaname);
-			if($nameid){
-				$where = " and m.name_id=".$nameid;
-			}else{
-				$where = " and m.name_id=0";
-			}
-		}
-		if($metavalue != null){
-			$metavalues = explode(',',$metavalue);
-			foreach($metavalues as $metavalue){
-				$valueid = elgg_get_metastring_id($metavalue);
-				if($valueid <= 0)
-					$valueid = 0;
-				$metavalue_in .= !empty($metavalue_in) ? ",".$valueid : $valueid;
-			}
-			
-			if($metavalue_in){
-				$where .= " and m.value_id IN(".$metavalue_in.")";
-			}else{
-				$where .= " and m.value_id=0";
-			}
-		}
-		if($type){
-			$where .= " and e.type='".$type."'";
-		}
-		if($subtype){
-			$subtypeid = get_subtype_id('object',$subtype);
-			if($subtypeid){
-				$where .= " and e.subtype=".$subtypeid;
-			}else{
-				$where .= " and e.subtype=-1";
-			}
-		}
-		
-		if(is_array($owner)){
-			$where .= " AND e.owner_guid IN (" . implode(",",$owner) . ")";
-		}else{
-			if($owner > 0)
-				$where .= " AND e.owner_guid=$owner ";
-		}
-		
-		if($container > 0)
-			$where .= " and e.container_guid=".$container;
-			
-		if(is_array($id_not_in)){
-			$entity_guids = get_not_in_ids($id_not_in);
-			if(!empty($entity_guids)){
-				$where .= " and e.guid NOT IN(".$entity_guids.") ";
-			}
-		}	
-		if($title){
-			$where .= " and o.title='".$title."'";
-		}
-		if($where_spval){
-			$current_date = strtotime(date("m/d/Y"));
-			$where .= " and v.string {$where_spval_con} {$current_date}";
-		}
-		if($where_con){
-			$where .= " {$where_con} ";
-		}
-		
-		if($metaorder){
-			$order = " order by  CAST( v.string AS unsigned ) ".$order;
-		}elseif($entityorder){
-			$order = " order by e.".$entityorder." ".$order;
-		}else{
-			$order = " order by e.time_created desc";
-		}
-		
-		if($limit){
-			$limit = " limit ".$offset.",".$limit;
-		}else{
-			$limit = "";
-		}
-echo '<b>'.__FILE__ .' at '.__LINE__; die();		
-		//$access = get_stores_access_sql_suffix();
-		$query = "SELECT SQL_CALC_FOUND_ROWS e.guid AS guid, e.owner_guid as owner_guid, e.container_guid as container_guid, v.string as value from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}entities e on e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metastrings v on m.value_id = v.id JOIN {$CONFIG->dbprefix}objects_entity o on e.guid = o.guid where (1 = 1) ".$where." and m.enabled='yes' ".$order." ".$limit;
-		$propositions = get_data($query);
-		if($count){
-			$count = get_data("SELECT FOUND_ROWS( ) AS count");
-			return $count[0]->count;
-		}
-		return $propositions;
-	}
-	
 	function get_stores_access_sql_suffix($table_prefix = ""){
 		global $ENTITY_SHOW_HIDDEN_OVERRIDE;  
 		
@@ -745,10 +657,7 @@ echo '<b>'.__FILE__ .' at '.__LINE__; die();
 		
 		//	address
 		elgg_register_action("socialcommerce/address/save", $action_path.'socialcommerce/address/save.php');
-		elgg_register_action("socialcommerce/add_address_new", $action_path.'add_address_new.php');
-		elgg_register_action("address/address", $action_path.'address/address.php');
-		
-		
+				
 		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
 		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
 		

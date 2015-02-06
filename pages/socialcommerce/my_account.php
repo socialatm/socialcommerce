@@ -32,31 +32,31 @@
 	$content .= elgg_view('navigation/tabs', $vars);
 
 	switch($tab) {
-		case 'address':			$content .= elgg_view("socialcommerce/myaccount_address");
-								break;
-		case 'transactions':	$transactions = get_purchased_orders('trans_category','sold_product,withdraw_fund','object','transaction','','','','','',$limit,$offset,'',$_SESSION['user']->guid);
-									$count = get_data("SELECT FOUND_ROWS( ) AS count");
-									$count = $count[0]->count;
-									$nav = elgg_view('navigation/pagination', array(
-											'baseurl' => $baseurl,
-											'offset' => $offset,
-											'count' => $count,
-											'limit' => $limit
-											));
-								$content .=	elgg_view("socialcommerce/my_account", array('entity'=>$transactions, 'filter'=>$page[2], 'nav'=>$nav ));
-								break;
-		default:				$content .= elgg_view("modules/general_settings");
-								break;
+		case 'address':
+			$content .= elgg_view("socialcommerce/myaccount_address");
+			break;
+		case 'transactions':
+			$options = array(
+				'type' => 'object',
+				'subtype' => 'order',
+				'owner_guid' => elgg_get_logged_in_user_guid()
+				);
+			$transactions = elgg_list_entities($options);
+			$content .=	elgg_view("socialcommerce/my_account", array('entity'=>$transactions, 'filter'=>$page[2], 'nav'=>$nav ));
+			break;
+		default:
+			$content .= elgg_view("modules/general_settings");
+			break;
 	}
 		
 	$sidebar .= elgg_view("socialcommerce/sidebar");
 	$sidebar = gettags();
 			
 	$params = array(
-	'title' => $title,
-	'content' => $content,
-	'sidebar' => $sidebar,
-	);
+		'title' => $title,
+		'content' => $content,
+		'sidebar' => $sidebar,
+		);
 
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_echo('stores:my:account'), $body);
