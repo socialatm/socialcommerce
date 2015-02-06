@@ -42,8 +42,8 @@
 		echo '<img src ="'.elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/image/'.$product_image_guid.'/'.'medium'.'"/>'; 	
 		?>	
 	</div>
-	<div class="right_section_contents">
-			<div class="storesrepo_title_owner_wrapper">
+	<div>
+			<div>
 				<?php
 				//get the user and a link to their gallery
 				$user_gallery = elgg_get_config('url').'socialcommerce/'.elgg_get_logged_in_user_entity()->username.'/search/subtype/stores/md_type/simpletype/tag/image/owner_guid/'.$product_owner_guid.'search_viewtype/gallery';
@@ -85,7 +85,30 @@
 					</span>
 				</div>
 			</div>
-			<div>
+			<table>
+			<tr>
+				<td>
+					<?php
+						$display_fields = '';
+						$product_fields = elgg_get_config('product_fields')[$product->product_type_id];
+						if (is_array($product_fields) && sizeof($product_fields) > 0){
+							foreach ($product_fields as $shortname => $valtype){
+								if($valtype['display'] == 1 && 	$shortname != 'price' && $shortname != 'quantity' && $shortname != 'upload'){
+									$display_name = elgg_echo('product:'.$shortname);
+									$output = elgg_view("output/{$valtype['field']}",array('value'=>$product->$shortname));
+									$display_fields .= '<div class="storesrepo_description"><B>'.$display_name.':</B>'.$output.'</div>';
+								}
+							}
+						}
+						echo $display_fields;
+					?>
+					<?php echo  elgg_view("custom_field/display",array('entity'=>$product)); ?>
+					<div class="features"><?php echo elgg_echo('features:des'); ?></div>
+					<div class="storesrepo_description"><?php echo elgg_autop($desc); ?></div>
+				</td>
+			</tr>
+		</table>
+		<div>
 				<?php
 				if($product->canEdit()){
 					//	add the edit & delete buttons
@@ -116,30 +139,6 @@
 				?>		
 			</div>
 	</div>
-		<div class="clear"></div>
-		<table width="100%">
-			<tr>
-				<td>
-					<?php
-						$display_fields = '';
-						$product_fields = elgg_get_config('product_fields')[$product->product_type_id];
-						if (is_array($product_fields) && sizeof($product_fields) > 0){
-							foreach ($product_fields as $shortname => $valtype){
-								if($valtype['display'] == 1 && 	$shortname != 'price' && $shortname != 'quantity' && $shortname != 'upload'){
-									$display_name = elgg_echo('product:'.$shortname);
-									$output = elgg_view("output/{$valtype['field']}",array('value'=>$product->$shortname));
-									$display_fields .= '<div class="storesrepo_description"><B>'.$display_name.':</B>'.$output.'</div>';
-								}
-							}
-						}
-						echo $display_fields;
-					?>
-					<?php echo  elgg_view("custom_field/display",array('entity'=>$product)); ?>
-					<div class="features"><?php echo elgg_echo('features:des'); ?></div>
-					<div class="storesrepo_description"><?php echo elgg_autop($desc); ?></div>
-				</td>
-			</tr>
-		</table>
 </div>
 	
 <?php
