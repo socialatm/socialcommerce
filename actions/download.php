@@ -8,6 +8,9 @@
 	 * @copyright twentyfiveautumn.com 2013
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	 
+echo '<b>'.__FILE__ .' at '.__LINE__; die();
+//compare this to the downloap file in the file plugin.... & re-write
 	
 	global $CONFIG;
 	// Get the guid
