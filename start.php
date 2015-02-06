@@ -519,34 +519,6 @@ echo '<b>'.__FILE__ .' at '.__LINE__; die();
 		return $sold_products;
 	}
 	
-	function get_stores_access_sql_suffix($table_prefix = ""){
-		global $ENTITY_SHOW_HIDDEN_OVERRIDE;  
-		
-		$sql = "";
-		
-		if ($table_prefix)
-				$table_prefix = sanitise_string($table_prefix) . ".";
-		
-			$access = get_access_list();
-			
-			$owner = elgg_get_logged_in_user_guid();
-			if (!$owner) $owner = -1;
-			
-			global $is_admin;
-			
-			if (isset($is_admin) && $is_admin == true) {
-				$sql = " (1 = 1) ";
-			}
-
-			if (empty($sql))
-				$sql = " ({$table_prefix}e.access_id in {$access} or ({$table_prefix}e.access_id = 0 and {$table_prefix}e.owner_guid = $owner))";
-
-		if (!$ENTITY_SHOW_HIDDEN_OVERRIDE)
-			$sql .= " and {$table_prefix}e.enabled='yes'";
-		
-		return $sql;
-	}
-	
 	function gettags(){
 		$products = elgg_get_entities(array( 	
 			'type' => 'object',
