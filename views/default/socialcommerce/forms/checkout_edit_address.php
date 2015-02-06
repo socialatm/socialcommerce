@@ -73,10 +73,11 @@
 		}
 
 		$country_list = elgg_view('input/dropdown', array(
-			'name' => 'currency_country',
-			'id' => $type.'_country',
+			'name' => 'country',
+			'id' => 'country',
 			'value' => $selected_country,
 			'options_values' => $options_values,
+			'class' => 'country'
 			));
 
 			if($selected_country){
@@ -88,14 +89,14 @@
 					}
 					$state_list = elgg_view('input/dropdown', array(
 						'name' => 'state',
-						'id' => $type.'_state',
+						'id' => 'state',
 						'value' => $selected_state,
 						'options_values' => $options_values,
 						));
 				}else{
 					$state_list = elgg_view('input/text', array(
 						'name' => 'state',
-						'id' => $type.'_state',
+						'id' => 'state',
 						'value' => $selected_state,
 						'class' => ''
 						));
@@ -105,25 +106,21 @@
 	}else {
 		$country_list = elgg_view('input/text', array(
 			'name' => 'country',
-			'id' => $type.'_country',
+			'id' => 'country',
 			'value' => $selected_country,
 			'class' => ''
 			));
 	}
 			
 		if($ajax == 1){
-			if($type == 'myaccount'){
-				$todo = 'reload_myaccount_address';
-			}else{
-				$todo = 'reload_checkout_address';
-			}
+			$todo = ($type == 'myaccount') ? 'reload_myaccount_address' : 'reload_checkout_address';
+						
 			if(!$first && $type == 'myaccount'){
-				$cancel_btn = <<<EOF
-					<div class="buttonwrapper" style="float:left;">
-						<a onclick="{$type}_cancel_address();" class="squarebutton"><span> Cancel </span></a>
-					</div>
-EOF;
+				$cancel_btn = '<div class="buttonwrapper" style="float:left;">';
+				$cancel_btn .= '<a onclick="'.$type.'_cancel_address();" class="squarebutton"><span> Cancel </span></a>';
+				$cancel_btn .= '</div>';
 			}
+			
 			$javascript = "onsubmit='return save_address()'";
 			$fnaem_label_none = elgg_echo('first:name:none');
 			$lname_label_none = elgg_echo('last:name:none');
@@ -138,18 +135,25 @@ EOF;
 			$address_reload_url = elgg_get_config('url').'socialcommerce/'.$user->username.'/view_address';
 			
 			
-			$script = <<<EOF
+	$script = <<<EOF
 				<script>
 /*****	country/state dropdown	*****/
+
+// alert($(".country").val());
 				
-$("#myaccount_country").change(function () {
+$("#country").change(function () {
     var country = $(this).val();
+//	alert(country);
     var url = elgg.config.wwwroot + "ajax/view/socialcommerce/change_country_state";
     $.post(url, {
         selected_country: country
     })
         .done(function (data) {
-        $("#myaccount_state_list").empty().html(data);
+		
+		alert(data);
+		
+		
+        $("#state").empty().html(data);
     });
 });
 
@@ -357,4 +361,6 @@ EOT;
 $body_vars = array('state_list' => $state_list, 'country_list' => $country_list );
 $new_form = elgg_view_form('socialcommerce/address/save', $form_vars, $body_vars);
 
-echo $form_body.$new_form;
+// echo $form_body.$new_form;
+
+echo $new_form.$script;
