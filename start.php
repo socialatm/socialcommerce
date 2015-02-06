@@ -513,7 +513,7 @@ ini_set('display_errors', 1);
 		}else{
 			$limit = "";
 		}
-		
+echo '<b>'.__FILE__ .' at '.__LINE__; die();		
 		$query = "SELECT SQL_CALC_FOUND_ROWS DISTINCT v.string AS value, e.guid AS guid, e.owner_guid as owner_guid, e.container_guid as container_guid from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}entities e on e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata m1 ON e.guid = m1.entity_guid JOIN {$CONFIG->dbprefix}metastrings v on m1.value_id = v.id where (1 = 1) ".$where." and m.enabled='yes' GROUP BY v.string  ".$order." ".$limit;
 		$sold_products = get_data($query);
 		return $sold_products;
@@ -596,7 +596,7 @@ ini_set('display_errors', 1);
 		}else{
 			$limit = "";
 		}
-		
+echo '<b>'.__FILE__ .' at '.__LINE__; die();		
 		//$access = get_stores_access_sql_suffix();
 		$query = "SELECT SQL_CALC_FOUND_ROWS e.guid AS guid, e.owner_guid as owner_guid, e.container_guid as container_guid, v.string as value from {$CONFIG->dbprefix}metadata m JOIN {$CONFIG->dbprefix}entities e on e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metastrings v on m.value_id = v.id JOIN {$CONFIG->dbprefix}objects_entity o on e.guid = o.guid where (1 = 1) ".$where." and m.enabled='yes' ".$order." ".$limit;
 		$propositions = get_data($query);

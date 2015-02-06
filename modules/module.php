@@ -684,6 +684,9 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 							$product->quantity = $product->quantity - $cart_item->quantity;
 							$product_update_guid = $product->save();
 							if(!$product_update_guid > 0){
+							
+								//	get the inventory quantity for this product and subtract the amount that were sold in this order and then save new inventory amount.... re-write this
+			echo '<b>'.__FILE__ .' at '.__LINE__; die();
 								$existing = get_data_row("SELECT * from {$CONFIG->dbprefix}metadata WHERE entity_guid = $product->guid and name_id=" .elgg_get_metastring_id('quantity') . " limit 1");
 								if($existing){
 									$id = $existing->id;
