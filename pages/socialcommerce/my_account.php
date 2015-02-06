@@ -12,23 +12,18 @@
 
 	gatekeeper();
 	$title = elgg_view_title(elgg_echo('stores:my:account'));
-	
 	$limit = 10;
 	$offset = get_input('offset');
 	if(!$offset) { $offset = 0; }
 			
-	$position = strstr(elgg_get_config('url'),'https://') ? 'https://' : 'http://' ;
-	$baseurl = $position.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-	
 	$tab = get_input('tab') ? get_input('tab') : 'address';
 
 	$vars = array(
         'tabs' => array(
-                  array('title' => elgg_echo('address'), 'url' => "$url" . '?tab=address', 'selected' => ($tab == 'address')),
-                  array('title' => elgg_echo('transactions'), 'url' => "$url" . '?tab=transactions', 'selected' => ($tab == 'transactions')),
+			array('title' => elgg_echo('address'), 'url' => "$url" . '?tab=address', 'selected' => ($tab == 'address')),
+			array('title' => elgg_echo('transactions'), 'url' => "$url" . '?tab=transactions', 'selected' => ($tab == 'transactions')),
 		)
 	);
-
 	$content .= elgg_view('navigation/tabs', $vars);
 
 	switch($tab) {
