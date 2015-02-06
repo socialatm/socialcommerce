@@ -446,7 +446,7 @@ ini_set('display_errors', 1);
 	
 	function get_sold_products(){
 			echo '<b>'.__FILE__ .' at '.__LINE__; die();		
-			function get_sold_products() needs a re-write
+		//	function get_sold_products() needs a re-write
 			return $sold_products;
 	}
 	
