@@ -23,8 +23,7 @@ $('a.show_product_mostly_desc').click(function () {
 
 
 <?php
-	global $CONFIG;
-   //the page owner
+	//the page owner
 	$owner = $vars['entity']->owner_guid;
 	$widget_guid = $vars['entity']->guid;
 	//the number of files to display
@@ -157,13 +156,14 @@ EOF;
 					$cart_text = elgg_echo('add:to:cart');
 					$wishlist_text = elgg_echo('add:wishlist');
 					$hidden = elgg_view('input/securitytoken');
+					$url = elgg_get_config('url');
 					if($f->owner_guid != $_SESSION['user']->guid){
 						$cart_wishlist = <<<EOF
 							<div class="cart_wishlist">
 								<a title="{$cart_text}" class="cart" href="{$cart_url}">&nbsp;</a>
 							</div>
 							<div class="cart_wishlist">
-								<form name="frm_wishlist_{$f->guid}" method="POST" action="{$CONFIG->url}action/socialcommerce/add_wishlist">
+								<form name="frm_wishlist_{$f->guid}" method="POST" action="{$url}action/socialcommerce/add_wishlist">
 									<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$f->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
 									<INPUT type="hidden" name="product_guid" value="{$f->guid}">
 								</form>

@@ -110,12 +110,13 @@
 				.'</div>';
 	}
 		
- /***** @todo - this needs work	*****/       
+ /***** @todo - this needs work	*****/  
+		$countries = elgg_get_config('country');
         $country_name = elgg_echo('country');
         $country_label = "<label><span style='color:red'>*</span>{$country_name}</label><br />";
         $country_list = "<select name='tax_country' id='tax_country' >";
-            if($CONFIG->country){
-			foreach ($CONFIG->country as $country){
+            if($countries){
+			foreach ($countries as $country){
 				if($taxrate_name_cnty == $country['iso3']){
 					$selected = "selected";
 				}else {
