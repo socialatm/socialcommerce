@@ -447,6 +447,7 @@
 		 	'stores:address' => "Your Address Book",
 		 	'confirm:address' => "Confirm Address",
 		 	'edit:address' => "Edit This Address",
+			'delete:address' => "Delete This Address",
 		 	'address:edit' => "Edit Address",
 		 	'first:name' => "First Name",
 		 	'first:name:none' => "Please enter the First Name",
