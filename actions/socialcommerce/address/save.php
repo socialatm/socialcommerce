@@ -16,18 +16,17 @@
 	
 	$user = elgg_get_logged_in_user_entity();
 		
-	$firstname = trim(get_input('first_name'));
-	$lastname = trim(get_input('last_name'));
-	$address_line_1 = trim(get_input('address_line_1'));
-	$address_line_2 = trim(get_input('address_line_2'));
-	$city = trim(get_input('city'));
-	$state = trim(get_input('state'));
-	$country = trim(get_input('country'));
-	$pincode = trim(get_input('pincode'));
-	$phoneno = trim(get_input('phoneno'));
+	$firstname = get_input('first_name');
+	$lastname = get_input('last_name');
+	$address_line_1 = get_input('address_line_1');
+	$address_line_2 = get_input('address_line_2');
+	$city = get_input('city');
+	$state = get_input('state');
+	$country = get_input('country');
+	$pincode = get_input('pincode');
+	$phoneno = get_input('phoneno');
 	$access_id = get_input('access_id');
-	$ajax = get_input('ajax');
-	
+		
 	$container_guid = (int) get_input('container_guid', 0);
 	if (!$container_guid){
 		$container_guid = $_SESSION['user']->getGUID();
