@@ -1,21 +1,21 @@
 <?php
 	/**
-	 * Elgg socialcommerce activate page
+	 * Elgg socialcommerce address form
 	 * 
 	 * @package Elgg Commerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
  	 **/
-	 
 ?>
 
 <label for="first_name"><?php echo elgg_echo('first:name'); ?>:</label>
 			<?php echo elgg_view('input/text', array(
 					'name' => 'first_name',
 					'id' => 'first_name',
-					'value' => $first_name,
+					'value' => $vars['entity']->first_name,
 					'class' => '',
 					'style' => ''
 					));
@@ -24,7 +24,7 @@
 			<?php echo elgg_view('input/text', array(
 					'name' => 'last_name',
 					'id' => 'last_name',
-					'value' => $last_name,
+					'value' => $vars['entity']->last_name,
 					'class' => ''
 					));
 			?>
@@ -32,7 +32,7 @@
 			<?php echo elgg_view('input/text', array(
 					'name' => 'address_line_1',
 					'id' => 'address_line_1',
-					'value' => $address_line_1,
+					'value' => $vars['entity']->address_line_1,
 					'class' => ''
 					));
 			?>
@@ -40,7 +40,7 @@
 			<?php echo elgg_view('input/text', array(
 					'name' => 'address_line_2',
 					'id' => 'address_line_2',
-					'value' => $address_line_2,
+					'value' => $vars['entity']->address_line_2,
 					'class' => ''
 					));
 			?>
@@ -48,7 +48,7 @@
 			<?php echo elgg_view('input/text', array(
 					'name' => 'city',
 					'id' => 'city',
-					'value' => $city,
+					'value' => $vars['entity']->city,
 					'class' => 'elgg-input-text'
 					));
 			?>
@@ -61,7 +61,7 @@
 			<?php echo elgg_view('input/text', array(
 					'name' => 'pincode',
 					'id' => 'pincode',
-					'value' => $pincode,
+					'value' => $vars['entity']->pincode,
 					'class' => ''
 					));
 			?>
@@ -74,7 +74,7 @@
 			<?php echo elgg_view('input/text', array(
 					'name' => 'phoneno',
 					'id' => 'phoneno',
-					'value' => $phoneno,
+					'value' => $vars['entity']->phoneno,
 					'class' => ''
 					));
 			?>
@@ -85,4 +85,14 @@
 		'class' => 'elgg-button elgg-button-action'
 		));
 	?>
-			
+	
+<?php
+	if(isset($vars['entity'])){
+		echo elgg_view('input/hidden', array(
+			'name' => 'address_guid',
+			'id' => 'address_guid',
+			'value' => $vars['entity']->guid,
+			'class' => ''
+			));
+	}
+		
