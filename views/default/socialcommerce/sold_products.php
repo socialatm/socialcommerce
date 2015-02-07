@@ -79,12 +79,13 @@ EOF;
 	if($product->status == 1){
 		if($product->owner_guid != $_SESSION['user']->guid){
 			$entity_hidden = elgg_view('input/securitytoken');
+			$url = elgg_get_config('url');
 			$cart_wishlist = <<<EOF
 				<div class="cart_wishlist">
 					<a title="{$cart_text}" class="cart" href="{$cart_url}">&nbsp;</a>
 				</div>
 				<div class="cart_wishlist">
-					<form name="frm_wishlist_{$product->guid}" method="POST" action="{$CONFIG->url}action/socialcommerce/add_wishlist">
+					<form name="frm_wishlist_{$product->guid}" method="POST" action="{$url}action/socialcommerce/add_wishlist">
 						<a title="{$wishlist_text}" class="wishlist" onclick=" document.frm_wishlist_{$product->guid}.submit();" href="javascript:void(0);">&nbsp;</a>
 						<INPUT type="hidden" name="product_guid" value="{$product->guid}">
 					</form>
