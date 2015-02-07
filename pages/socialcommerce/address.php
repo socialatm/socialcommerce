@@ -12,7 +12,7 @@
 	 
 	gatekeeper();
 	$user = elgg_get_logged_in_user_entity();
-	$title = elgg_view_title(elgg_echo('stores:address'));
+	$title = elgg_echo('stores:address');
 		
 	// If the user has addresses show them. If not show the add new address form
 	if(	elgg_get_entities(array('type' => 'object', 'subtype' => 'address', 'owner_guid' => $user->guid ))) {
@@ -22,7 +22,7 @@
 			'type' => 'object',
 			'subtype' => 'address',
 			'owner_guid' => $user->guid,
-			'limit' => 10,
+			'limit' => 10
 			));
 						
 		elgg_set_context('address');
@@ -35,7 +35,7 @@
 	$sidebar .= gettags();
 		
 	$params = array(
-		'title' => $title,
+		'title' => elgg_view_title($title),
 		'content' => $content,
 		'sidebar' => $sidebar,
 	);
