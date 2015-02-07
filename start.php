@@ -545,8 +545,6 @@ ini_set('display_errors', 1);
 		
 		elgg_register_action("socialcommerce/product/delete", $action_path.'socialcommerce/product/delete.php');
 		
-		//	****************************************************************************************************************************************************
-		
 		elgg_register_action("socialcommerce/icon", $action_path.'icon.php');
 		
 		//	category
@@ -561,7 +559,6 @@ ini_set('display_errors', 1);
 		//	address
 		elgg_register_action("socialcommerce/address/save", $action_path.'socialcommerce/address/save.php');
 				
-		elgg_register_action("socialcommerce/edit_address", $action_path.'edit_address.php');
 		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
 		
 		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
