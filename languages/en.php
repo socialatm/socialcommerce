@@ -465,8 +465,6 @@
 			'country:none' => "Please enter the Country",
 			'pincode' => "Zip Code",
 			'pincode:none' => "Please enter the PIN/ZIP",
-			'mob:no' => "Mobile No",
-			'mob:no:none' => "Please enter the Mobile No",
 			'phone:no' => "Phone",
 			'change:address' => "Change Address",
 			'address:saved' => "Address was successfully added.",

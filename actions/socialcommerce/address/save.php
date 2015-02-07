@@ -9,8 +9,11 @@
 	 * @link http://twentyfiveautumn.com/
 	 * @version elgg 1.9.4
 	 **/ 
+	 
+	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+	krumo($_POST);
+	die();
 		
-	// Get variables
 	//$title = trim(get_input('title'));
 	$firstname = trim(get_input('first_name'));
 	$lastname = trim(get_input('last_name'));
@@ -20,7 +23,6 @@
 	$state = trim(get_input('state'));
 	$country = trim(get_input('country'));
 	$pincode = trim(get_input('pincode'));
-	$mobileno = trim(get_input('mobileno'));
 	$phoneno = trim(get_input('phoneno'));
 	$access_id = get_input('access_id');
 	$ajax = get_input('ajax');
@@ -72,7 +74,6 @@
 			$_SESSION['address']['state'] = $state;
 			$_SESSION['address']['country'] = $country;
 			$_SESSION['address']['pincode'] = $pincode;
-			$_SESSION['address']['mobileno'] = $mobileno;
 			$_SESSION['address']['phoneno'] = $phoneno;
 			$_SESSION['address']['access_id'] = $access_id;
 			$error_field = substr($error_field,2);
@@ -81,11 +82,11 @@
 			echo sprintf(elgg_echo("address:validation:null"),$error_field);
 		}
 	}else{
-		// Extract categories from, save to default social commerce (for now)
-		$address = new ElggObject();
 		
-		$address->subtype="address";
-		$address->title = $firstname . " " . $lastname;
+		$address = new ElggObject();
+		$address->subtype = 'address';
+		
+		$address->title = $firstname.' '.$lastname;
 		$address->first_name = $firstname;
 		$address->last_name = $lastname;
 		$address->address_line_1 = $address_line_1;
@@ -94,7 +95,6 @@
 		$address->state = $state;
 		$address->country = $country;
 		$address->pincode = $pincode;
-		$address->mobileno = $mobileno;
 		if(!empty($phoneno))
 			$address->phoneno = $phoneno;
 		$address->access_id = 2;
@@ -111,7 +111,7 @@
 			}else{
 				echo $result;
 			}
-			// Remove the blog post cache
+			
 			unset($_SESSION['address']);
 		}else{
 			register_error(elgg_echo("address:addfailed"));
