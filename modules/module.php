@@ -1157,8 +1157,7 @@ function get_state_by_countryname($name=""){
 }
 
 function get_state_by_fields($field="",$value=""){
-	global $CONFIG;
-	$countries = $CONFIG->country;
+	$countries = elgg_get_config('country');
 	if(!empty($field) && !empty($value) && count($countries) > 0){
 		if($field == 'iso2' || $field == 'iso3'){
 			$value = strtoupper($value);
@@ -1181,8 +1180,7 @@ function get_state_by_fields($field="",$value=""){
 }
 
 function get_iso2_by_fields($field="",$value=""){
-	global $CONFIG;
-	$countries = $CONFIG->country;
+	$countries = elgg_get_config('country');
 	if(!empty($field) && !empty($value) && count($countries) > 0){
 		if($field == 'iso3'){
 			$value = strtoupper($value);
@@ -1205,8 +1203,7 @@ function get_iso2_by_fields($field="",$value=""){
 }
 
 function get_iso3_by_fields($field="",$value=""){
-	global $CONFIG;
-	$countries = $CONFIG->country;
+	$countries = elgg_get_config('country');
 	if(!empty($field) && !empty($value) && count($countries) > 0){
 		if($field == 'iso2'){
 			$value = strtoupper($value);
@@ -1229,8 +1226,7 @@ function get_iso3_by_fields($field="",$value=""){
 }
 
 function get_name_by_fields($field="",$value=""){
-	global $CONFIG;
-	$countries = $CONFIG->country;
+	$countries = elgg_get_config('country');
 	if(!empty($field) && !empty($value) && count($countries) > 0){
 		if($field == 'iso2'){
 			$value = strtoupper($value);
