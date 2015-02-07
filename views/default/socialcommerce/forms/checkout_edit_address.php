@@ -10,10 +10,14 @@
 	* @version elgg 1.9.4
 	**/ 
 	
+	
+	
 	$user = elgg_get_logged_in_user_entity();
-	$ajax = $vars['ajax'];
-	$type = $vars['type'];
-	$first = $vars['first'];
+		
+	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
+$arr2 = get_defined_vars();
+krumo($arr2);
+die();
 	
 	if (isset($vars['entity'])) {
 		$action = "socialcommerce/edit_address";
@@ -25,7 +29,6 @@
 		$selected_state = $vars['entity']->state;
 		$selected_country = $vars['entity']->country;
 		$pincode = $vars['entity']->pincode;
-		$mobileno = $vars['entity']->mobileno;
 		$phoneno = $vars['entity']->phoneno;
 		$access_id = $vars['entity']->access_id;
 	} else {
@@ -38,15 +41,11 @@
 		$selected_state = "";
 		$selected_country = "USA";
 		$pincode = "";
-		$mobileno = "";
 		$phoneno = "";
 		$access_id = 0;
 	}
 
-	    /*$title_label = elgg_echo('title');
-        $title_textbox = elgg_view('input/text', array('name' => 'title', 'value' => $title));*/
-        
-        $fnaem_label = elgg_echo('first:name');
+	    $fnaem_label = elgg_echo('first:name');
         $lname_label = elgg_echo('last:name');
         $address_line_1_label = elgg_echo('address:line:1');
         $address_line_2_label = elgg_echo('address:line:2');
