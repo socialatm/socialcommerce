@@ -11,7 +11,6 @@
 	 **/ 
 	
 	$user = elgg_get_logged_in_user_entity();
-	$user_guid = $user->guid;
 	$address = elgg_get_entities(array( 	
 		'type' => 'object',
 		'subtype' => 'address',
@@ -19,20 +18,25 @@
 		));
 	
 	if($address){ 
- 		$list_address = elgg_view("socialcommerce/list_address", array('entity'=>$address, 'display'=>'list_with_action', 'selected'=>$selected_address, 'type'=>'myaccount' ));
-		$content = <<<EOF
-			<div>
-				<div style="float:right;margin-bottom:10px;">
-					<div class="buttonwrapper" style="float:left;">
-						<a onclick="add_myaddress();" class="squarebutton"><span> Add New Address </span></a>
-					</div>
-				</div>
-				<div class="clear" style="margin-bottom:10px;">
-					{$list_address}
-				</div>
-			</div>
-EOF;
+ 		$new_address_link = elgg_view('output/url', array(
+			'href' => 'socialcommerce/'.$user->username.'/address/new',
+			'text' => elgg_echo('add:new:address'),
+			'class' => 'right'
+			));
+		
+		// If the user has addresses show them. If not show the add new address form
+		if(	elgg_get_entities(array('type' => 'object', 'subtype' => 'address', 'owner_guid' => $user->guid ))) {
+			elgg_set_context('search');
+			
+			$content = elgg_list_entities(array(
+				'type' => 'object',
+				'subtype' => 'address',
+				'owner_guid' => $user->guid,
+				'limit' => 10
+				));
+			elgg_set_context('address');
+		}
 	}else{
-		$content = elgg_view("socialcommerce/forms/checkout_edit_address", array('ajax'=>1,'type'=>'myaccount','first'=>1 ));
+		$content = elgg_view('socialcommerce/forms/checkout_edit_address');
 	}
-echo $content;
+echo $new_address_link.$content;
