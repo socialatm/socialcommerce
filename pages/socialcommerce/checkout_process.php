@@ -4,12 +4,14 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	gatekeeper();
+	$url = elgg_get_config('url');
 	$page_owner = elgg_get_logged_in_user_entity();
 	$checkout_order = get_input('checkout_order');
 	
@@ -184,7 +186,7 @@ EOF;
 						}else{
 							var elgg_token = $('[name=__elgg_token]');
 							var elgg_ts = $('[name=__elgg_ts]');
-							$.post("{$CONFIG->url}action/socialcommerce/manage_socialcommerce", { 
+							$.post("{$url}action/socialcommerce/manage_socialcommerce", { 
 									code: couponcode,
 									manage_action: "coupon_process",
 									__elgg_token: elgg_token.val(),
@@ -210,7 +212,7 @@ EOF;
 												$("#coupon_apply_result").css({"color":"#9F1313"});
 											break;
 										case 'coupon_applied':
-												$.post("{$CONFIG->url}action/socialcommerce/manage_socialcommerce", {
+												$.post("{$url}action/socialcommerce/manage_socialcommerce", {
 														manage_action: "coupon_reload_process",
 														__elgg_token: elgg_token.val(),
 														__elgg_ts: elgg_ts.val()
@@ -305,7 +307,7 @@ EOF;
 			</div>
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->url}mod/socialcommerce/images/loadingAnimation.gif">
+				<img src="{$url}mod/socialcommerce/images/loadingAnimation.gif">
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Processing...</div>
 			</div>
 EOF;
