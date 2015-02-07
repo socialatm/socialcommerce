@@ -558,8 +558,7 @@ ini_set('display_errors', 1);
 		
 		//	address
 		elgg_register_action("socialcommerce/address/save", $action_path.'socialcommerce/address/save.php');
-				
-		elgg_register_action("socialcommerce/delete_address", $action_path.'delete_address.php');
+		elgg_register_action("socialcommerce/address/delete", $action_path.'socialcommerce/address/delete.php');
 		
 		elgg_register_action("socialcommerce/makepayment", $action_path.'makepayment.php');
 		elgg_register_action("socialcommerce/add_order", $action_path.'add_order.php');
