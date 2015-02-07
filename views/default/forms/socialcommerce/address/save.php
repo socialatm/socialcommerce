@@ -17,8 +17,7 @@
 					'id' => 'first_name',
 					'value' => $first_name,
 					'class' => '',
-					'name'=>'first_name',
-					'style' => '',
+					'style' => ''
 					));
 			?>
 <label for="last_name"><?php echo elgg_echo('last:name'); ?>:</label>
@@ -26,8 +25,7 @@
 					'name' => 'last_name',
 					'id' => 'last_name',
 					'value' => $last_name,
-					'class' => '',
-					'name'=>'last_name',
+					'class' => ''
 					));
 			?>
 <label for="address_line_1"><?php echo elgg_echo('address:line:1'); ?>:</label>
@@ -35,8 +33,7 @@
 					'name' => 'address_line_1',
 					'id' => 'address_line_1',
 					'value' => $address_line_1,
-					'class' => '',
-					'name'=>'address_line_1',
+					'class' => ''
 					));
 			?>
 <label for="address_line_2"><?php echo elgg_echo('address:line:2'); ?>:</label>
@@ -44,8 +41,7 @@
 					'name' => 'address_line_2',
 					'id' => 'address_line_2',
 					'value' => $address_line_2,
-					'class' => '',
-					'name'=>'address_line_2',
+					'class' => ''
 					));
 			?>
 <label for="city"><?php echo elgg_echo('city'); ?>:</label>
@@ -53,8 +49,7 @@
 					'name' => 'city',
 					'id' => 'city',
 					'value' => $city,
-					'class' => 'elgg-input-text',
-					'name'=>'last_name',
+					'class' => 'elgg-input-text'
 					));
 			?>
 <label for="state"><?php echo elgg_echo('state'); ?>:</label>
@@ -65,8 +60,7 @@
 					'name' => 'pincode',
 					'id' => 'pincode',
 					'value' => $pincode,
-					'class' => '',
-					'name'=>'pincode',
+					'class' => ''
 					));
 			?>
 <label for="country"><?php echo elgg_echo('country'); ?>:</label>
@@ -77,8 +71,7 @@
 					'name' => 'mobileno',
 					'id' => 'mobileno',
 					'value' => $mobileno,
-					'class' => '',
-					'name'=>'mobileno',
+					'class' => ''
 					));
 			?>
 <label for="phoneno"><?php echo elgg_echo('phone:no'); ?>:</label>
@@ -86,8 +79,7 @@
 					'name' => 'phoneno',
 					'id' => 'phoneno',
 					'value' => $phoneno,
-					'class' => '',
-					'name'=>'phoneno',
+					'class' => ''
 					));
 			?>
 <?php echo elgg_view('input/submit', array(
