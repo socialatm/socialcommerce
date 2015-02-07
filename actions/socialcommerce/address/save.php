@@ -50,23 +50,8 @@
 	}
 	
 	if(!empty($error_field)){
-		if(!$ajax){
-			$_SESSION['address']['first_name'] = $firstname;
-			$_SESSION['address']['last_name'] = $lastname;
-			$_SESSION['address']['address'] = $address_1;
-			$_SESSION['address']['address_line_1'] = $address_line_1;
-			$_SESSION['address']['address_line_2'] = $address_line_2;
-			$_SESSION['address']['city'] = $city;
-			$_SESSION['address']['state'] = $state;
-			$_SESSION['address']['country'] = $country;
-			$_SESSION['address']['pincode'] = $pincode;
-			$_SESSION['address']['phoneno'] = $phoneno;
-			$_SESSION['address']['access_id'] = $access_id;
-			$error_field = substr($error_field,2);
-			register_error(sprintf(elgg_echo("address:validation:null"),$error_field));
-		}else{
-			echo sprintf(elgg_echo("address:validation:null"),$error_field);
-		}
+		$error_field = substr($error_field,2);
+		register_error(sprintf(elgg_echo("address:validation:null"),$error_field));
 	}else{
 		
 		$address = new ElggObject();
@@ -92,13 +77,9 @@
 		$result = $address->save();
 		
 		if ($result){
-			if(!$ajax){
-				system_message(elgg_echo("address:saved"));
-			}else{
-				echo $result;
-			}
 			
-			unset($_SESSION['address']);
+				system_message(elgg_echo("address:saved"));
+			
 		}else{
 			register_error(elgg_echo("address:addfailed"));
 		}
