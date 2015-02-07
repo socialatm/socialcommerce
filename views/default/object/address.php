@@ -8,6 +8,8 @@
 	 * @copyright twentyfiveautumn.com 2014
 	 * @link http://twentyfiveautumn.com/
 	 **/ 
+	
+	echo '<b>'.__FILE__ .' at '.__LINE__; die();
 	 
 	$page_owner = elgg_get_page_owner_entity();
 	
@@ -23,7 +25,6 @@
 	$state = $address->state;
 	$country = $address->country;
 	$pincode = $address->pincode;
-	$mobileno = $address->mobileno;
 	$phoneno = $address->phoneno;
 	
 	$owner = $vars['entity']->getOwnerEntity();
@@ -41,8 +42,7 @@
 					<tr><?php echo "<td>".elgg_echo("state")."</td><td> : </td><td>".$state."</td>" ?></tr>
 					<tr><?php echo "<td>".elgg_echo("country")."</td><td> : </td><td>".$country."</td>" ?></tr>
 					<tr><?php echo "<td>".elgg_echo("pincode")."</td><td> : </td><td>".$pincode."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("mob:no")."</td><td> : </td><td>".$mobileno."</td>" ?></tr>
-					<?PHP if($phoneno > 0){?>
+					<?php if($phoneno > 0){?>
 					<tr><?php echo "<td class='address_left'>".elgg_echo("phone:no")."</td><td class='address_sep'> : </td><td class='address_right'>".$phoneno."</td>" ?></tr>
 					<?php } ?>
 				</table>
@@ -77,8 +77,7 @@
 							<tr><?php echo "<td>".elgg_echo("state")."</td><td> : </td><td>".$state."</td>" ?></tr>
 							<tr><?php echo "<td>".elgg_echo("country")."</td><td> : </td><td>".$country."</td>" ?></tr>
 							<tr><?php echo "<td>".elgg_echo("pincode")."</td><td> : </td><td>".$pincode."</td>" ?></tr>
-							<tr><?php echo "<td>".elgg_echo("mob:no")."</td><td> : </td><td>".$mobileno."</td>" ?></tr>
-							<?PHP if($phoneno > 0){?>
+							<?php if($phoneno > 0){?>
 							<tr><?php echo "<td class='address_left'>".elgg_echo("phone:no")."</td><td class='address_sep'> : </td><td class='address_right'>".$phoneno."</td>" ?></tr>
 							<?php } ?>
 						</table>
@@ -94,8 +93,7 @@
 							<tr><?php echo "<td>".elgg_echo("state")."</td><td> : </td><td>".$state."</td>" ?></tr>
 							<tr><?php echo "<td>".elgg_echo("country")."</td><td> : </td><td>".$country."</td>" ?></tr>
 							<tr><?php echo "<td>".elgg_echo("pincode")."</td><td> : </td><td>".$pincode."</td>" ?></tr>
-							<tr><?php echo "<td>".elgg_echo("mob:no")."</td><td> : </td><td>".$mobileno."</td>" ?></tr>
-							<?PHP if($phoneno > 0){?>
+							<?php if($phoneno > 0){?>
 							<tr><?php echo "<td class='address_left'>".elgg_echo("phone:no")."</td><td class='address_sep'> : </td><td class='address_right'>".$phoneno."</td>" ?></tr>
 							<?php } ?>
 						</table>
@@ -112,4 +110,4 @@
 			<input type="hidden" name="first_name" value="<?php echo $firstname ?>">	
 			<input type="hidden" name="last_name" value="<?php echo $lastname ?>">	
 			</div>
-<?php }	?>
+<?php }	
