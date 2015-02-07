@@ -27,12 +27,6 @@
 	$pincode = get_input('pincode');
 	$phoneno = get_input('phoneno');
 			
-	$container_guid = (int) get_input('container_guid', 0);
-	if (!$container_guid){
-		$container_guid = $_SESSION['user']->getGUID();
-	}
-	$container_user = get_entity($container_guid);
-	
 	if(empty($firstname)){
 		$error_field .= ", ".elgg_echo("first:name");
 	}
@@ -91,11 +85,11 @@
 		if(!empty($phoneno)) {$address->phoneno = $phoneno;}
 		//	access_id is always private
 		$address->access_id = ACCESS_PRIVATE;
+		//	for now the container_guid & owner_guid is always the logged in user
+		$address->container_guid = $user->guid;
+		$address->owner_guid = $user->guid;
 		
-		if ($container_guid){
-			$address->container_guid = $container_guid;
-		}
-		
+				
 		$result = $address->save();
 		
 		if ($result){
