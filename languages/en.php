@@ -448,6 +448,7 @@
 		 	'confirm:address' => "Confirm Address",
 		 	'edit:address' => "Edit This Address",
 			'delete:address' => "Delete This Address",
+			'add:new:address' => 'Add a New Address',
 		 	'address:edit' => "Edit Address",
 		 	'first:name' => "First Name",
 		 	'first:name:none' => "Please enter the First Name",
