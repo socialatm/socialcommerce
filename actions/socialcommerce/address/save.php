@@ -12,6 +12,7 @@
 	 
 	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
 	krumo($_POST);
+	krumo::defines();
 	die();
 	
 	$user = elgg_get_logged_in_user_entity();
@@ -25,8 +26,7 @@
 	$country = get_input('country');
 	$pincode = get_input('pincode');
 	$phoneno = get_input('phoneno');
-	$access_id = get_input('access_id');
-		
+			
 	$container_guid = (int) get_input('container_guid', 0);
 	if (!$container_guid){
 		$container_guid = $_SESSION['user']->getGUID();
@@ -88,9 +88,9 @@
 		$address->state = $state;
 		$address->country = $country;
 		$address->pincode = $pincode;
-		if(!empty($phoneno))
-			$address->phoneno = $phoneno;
-		$address->access_id = 2;
+		if(!empty($phoneno)) {$address->phoneno = $phoneno;}
+		//	access_id is always private
+		$address->access_id = ACCESS_PRIVATE;
 		
 		if ($container_guid){
 			$address->container_guid = $container_guid;
