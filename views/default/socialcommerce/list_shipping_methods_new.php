@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
@@ -81,7 +82,7 @@
 		
 	}
 	else{
-		if($CONFIG->no_shipping ==2){
+		if(elgg_get_config('no_shipping') ==2){
 			
 			$method_display = elgg_echo('checkout:shipping:method:no');	
 		}

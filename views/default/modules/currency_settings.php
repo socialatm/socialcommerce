@@ -4,9 +4,10 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
 	$socialcommerce = elgg_get_plugin_from_id('socialcommerce');
@@ -20,7 +21,7 @@
 	$decimal_token = $socialcommerce->decimal_token ? $socialcommerce->decimal_token	: 2;
 	$default = $socialcommerce->set_default ? $socialcommerce->set_default	: 1;		//	default exchange rate...
 		
-	foreach ($CONFIG->country as $country){
+	foreach (elgg_get_config('country') as $country){
 		$countries[$country['iso3']] = $country['name'] ;
 	}
 ?>
