@@ -4,17 +4,11 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2013
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	 
-	global $CONFIG;
-	if ($vars['size'] == 'large') {
-		$ext = '_lrg';
-	} else {
-		$ext = '';
-	}
-	echo '<img src="'.$CONFIG->url.'mod/socialcommerce/graphics/icons/archive'.$ext.'.gif" border="0" />';
-
-?>
+	$ext = ($vars['size'] == 'large') ? '_lrg' : '';
+	echo '<img src="'.elgg_get_config('url').'mod/socialcommerce/graphics/icons/archive'.$ext.'.gif" />';
