@@ -13,8 +13,9 @@
 	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
 	krumo($_POST);
 	die();
+	
+	$user = elgg_get_logged_in_user_entity();
 		
-	//$title = trim(get_input('title'));
 	$firstname = trim(get_input('first_name'));
 	$lastname = trim(get_input('last_name'));
 	$address_line_1 = trim(get_input('address_line_1'));
@@ -32,9 +33,7 @@
 		$container_guid = $_SESSION['user']->getGUID();
 	}
 	$container_user = get_entity($container_guid);
-	/*if(empty($title)){
-		$error_field = ", ".elgg_echo("title");
-	}*/
+	
 	if(empty($firstname)){
 		$error_field .= ", ".elgg_echo("first:name");
 	}
@@ -44,9 +43,7 @@
 	if(empty($address_line_1)){
 		$error_field .= ", ".elgg_echo("address:line:1");
 	}
-	/*if(empty($address_line_2)){
-		$error_field .= ", ".elgg_echo("address:line:2");
-	}*/
+	
 	if(empty($city)){
 		$error_field .= ", ".elgg_echo("city");
 	}
@@ -59,12 +56,9 @@
 	if(empty($pincode)){
 		$error_field .= ", ".elgg_echo("pincode");
 	}
-	/*if(empty($mobileno)){
-		$error_field .= ", ".elgg_echo("mob:no");
-	}*/
+	
 	if(!empty($error_field)){
 		if(!$ajax){
-			//$_SESSION['address']['title'] = $title;
 			$_SESSION['address']['first_name'] = $firstname;
 			$_SESSION['address']['last_name'] = $lastname;
 			$_SESSION['address']['address'] = $address_1;
@@ -117,6 +111,5 @@
 			register_error(elgg_echo("address:addfailed"));
 		}
 	}
-	if(!$ajax){
-		forward(elgg_get_config('url')."socialcommerce/".$container_user->username."/address/");
-	}
+	
+	forward(elgg_get_config('url')."socialcommerce/".$container_user->username."/address/");
