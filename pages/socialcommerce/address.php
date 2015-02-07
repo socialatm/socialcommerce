@@ -27,7 +27,7 @@
 						
 		elgg_set_context('address');
 	}else{
-		$content = elgg_view_form('socialcommerce/address/save');
+		$content = elgg_view('socialcommerce/forms/checkout_edit_address');
 	}
 		
 	$content = '<div class="contentWrapper stores">'.$content.'</div>';
