@@ -482,10 +482,11 @@ function redirect_to_form( $url, $fields ){
 //	return json_encode($formFields);
 	
 		$detailed_view = elgg_echo('processing').'...';
+		$url = elgg_get_config('url');
 		$auto_redirect_script = <<<EOF
 			<div id="load_action"></div>
 			<div id='load_action_div'>
-				<img src="{$CONFIG->url}mod/socialcommerce/views/default/modules/checkout/paypal/images/loading.gif" alt="" />
+				<img src="{$url}mod/socialcommerce/views/default/modules/checkout/paypal/images/loading.gif" alt="" />
 				<div style="color:#FFFFFF;font-weight:bold;font-size:14px;margin:10px;">Loading...</div>
 			</div>
 			<script type="text/javascript">
@@ -520,9 +521,8 @@ EOF;
 	the Create Order function
 ******************************************************/
 
-function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod){
+function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDetails, $ShippingDetails, $ShippingMethod ){
 	
-	global $CONFIG;					//	@todo	-	working on making this go away...
 	$used_coupons = array();
 	elgg_set_context('add_order');
 	$buyer = get_entity($buyer_guid);
@@ -687,7 +687,9 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 							
 								//	get the inventory quantity for this product and subtract the amount that were sold in this order and then save new inventory amount.... re-write this
 			echo '<b>'.__FILE__ .' at '.__LINE__; die();
-								$existing = get_data_row("SELECT * from {$CONFIG->dbprefix}metadata WHERE entity_guid = $product->guid and name_id=" .elgg_get_metastring_id('quantity') . " limit 1");
+			$dbprefix = elgg_get_config('dbprefix');
+			
+	$existing = get_data_row("SELECT * from {$dbprefix}metadata WHERE entity_guid = $product->guid and name_id=" .elgg_get_metastring_id('quantity') . " limit 1");
 								if($existing){
 									$id = $existing->id;
 									$value = $product->quantity - $cart_item->quantity;
@@ -715,11 +717,11 @@ function create_order( $buyer_guid, $CheckoutMethod, $posted_values, $BillingDet
 							
 							$display_sub_total = get_price_with_currency($sub_total);
 							
-							if($product->mimetype && $product->product_type_id == 2){
-								$icon = "<div title='Download' class='order_icon_class'><a href=\"{$CONFIG->url}action/socialcommerce/download?product_guid={$order_item->guid}\">" . elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div><div class='clear'></div>";
-							}else{
-								$icon = "";
-							}
+	if($product->mimetype && $product->product_type_id == 2){
+		$icon = '<div title="Download" class="order_icon_class"><a href="'.elgg_get_config('url')."action/socialcommerce/download?product_guid={$order_item->guid}\">".elgg_view("socialcommerce/icon", array("mimetype" => $product->mimetype, 'thumbnail' => $product->thumbnail, 'stores_guid' => $product->guid, 'size' => 'small')) . "</a></div><div class='clear'></div>";
+	}else{
+		$icon = "";
+	}
 							
 							$item_details .= <<<EOF
 								<tr>
@@ -1092,7 +1094,6 @@ function convert_currency($convert_from="", $convert_to="", $amount=0){
 /******************************************/
 
 function register_country_state(){
-	global $CONFIG;
 	if ( file_exists(elgg_get_config('pluginspath').'/socialcommerce/xml/country_state.xml')) {
 		$xml = new ElggXMLElement(file_get_contents(elgg_get_config('pluginspath').'/socialcommerce/xml/country_state.xml'));
 				
@@ -1140,14 +1141,13 @@ function register_country_state(){
 					$country[$country_name]['state'] = $state;
 				}
 			}
-			$CONFIG->country = $country;
+			elgg_set_config('country', $country);
 		}
 	}
 }
 
 function get_state_by_countryname($name=""){
-	global $CONFIG;
-	$country = $CONFIG->country;
+	$country = elgg_get_config('country');
 	if(!empty($name) && count($country[$name]['state']) > 0){
 		$country_state = $country[$name]['state'];
 		return $country_state;
@@ -1337,11 +1337,11 @@ function GenerateCouponCode(){
 
 
 function get_coupon_uses($coupon_guid){
-	global $CONFIG;
 	$guid_one = (int)$coupon_guid;
 	$relationship = 'coupon_uses';
+	$dbprefix = elgg_get_config('dbprefix');
 		
-	if ($row = get_data("SELECT * FROM {$CONFIG->dbprefix}entity_relationships WHERE guid_one=$guid_one AND relationship='$relationship' limit 0,999999", "entity_row_to_elggstar")) {
+	if ($row = get_data("SELECT * FROM {$dbprefix}entity_relationships WHERE guid_one=$guid_one AND relationship='$relationship' limit 0,999999", "entity_row_to_elggstar")) {
 		return $row;
 	}
 	return false;
@@ -1365,7 +1365,7 @@ function generate_vat($vat_rate = '',$sub_total = '',$country_rate = ''){
 }
 
 function elgg_cart_quantity($entity,$status=false,$status_val=0){
-	global $CONFIG;
+	
 	if ($entity->guid > 0) {
 		if($product = get_entity($entity->product_id))
 			$product_price = $product->price;
@@ -1405,7 +1405,8 @@ function elgg_cart_quantity($entity,$status=false,$status_val=0){
 		if($product->product_type_id == 1){
 			$quantity = "<div style='margin-bottom:5px;'><B>{$quantity_text}:</B> {$quantity_box}</div>";
 		}else if($product->product_type_id == 2 && elgg_get_context() == 'purchased_products'){
-			$download = "<div class=dproducts_download><p><a href=\"{$CONFIG->url}action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
+		
+			$download = '<div class="dproducts_download"><p><a href="'.elgg_get_config('url')."action/socialcommerce/download?product_guid={$entity->guid}\">".elgg_echo("product:download")."</a></p></div>";
 		}
 		$info = <<<EOF
 			<div>
