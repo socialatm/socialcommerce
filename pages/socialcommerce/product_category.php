@@ -87,4 +87,3 @@
 
 	$body = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page(elgg_view('output/category', array('value' => $product_category, 'display'=>1 )), $body);
-?>
