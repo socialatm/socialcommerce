@@ -1272,41 +1272,6 @@ unit-rating a.r1-unit{left: 0px;}
 	vertical-align:baseline;
 }
 
-/*-------- Button --------------*/
-
-a.squarebutton{
-	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/square-blue-left.gif) no-repeat top left;
-	display: block;
-	float: left;
-	font: normal 12px Arial;
-	line-height: 15px;
-	height: 23px;
-	padding: 0 0 0 9px;
-	text-decoration: none;
-}
-a:hover.squarebutton{
-	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/square-blue-left.gif) no-repeat top left;
-}
-a:link.squarebutton, a:visited.squarebutton, a:active.squarebutton{
-	color: #494949;
-}
-
-a.squarebutton span{
-	background: transparent url(<?php echo elgg_get_config('url'); ?>mod/socialcommerce/images/square-blue-right.gif) no-repeat top right;
-	display: block;
-	padding: 4px 9px 4px 0;
-	font-weight:bold;
-}
-
-a.squarebutton:hover{
-	background-position: bottom left;
-}
-
-a.squarebutton:hover span{
-	background-position: bottom right;
-	color: black;
-}
-
 .buttonwrapper{
 	overflow: hidden;
 	cursor:pointer;

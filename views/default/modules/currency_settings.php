@@ -81,7 +81,7 @@
 		?>
 	</div><br />
 	<div class="buttonwrapper" >
-		<a onclick="get_exchange_rate();" class="squarebutton"><?php echo '     '.elgg_echo('get:exchange:rate'); ?></a>
+		<a onclick="get_exchange_rate();" ><?php echo '     '.elgg_echo('get:exchange:rate'); ?></a>
 		<span><img id="run_exchange_rate" style="display:none;" src="<?php echo elgg_get_config('url')."mod/socialcommerce"; ?>/images/working.gif"> </span>
 	</div><br />
 	<div>
@@ -123,7 +123,7 @@
 	<div>
 		<?php if($default == 0 || $status != 'default'){ ?>
 			<div class="buttonwrapper">
-				<a onclick="cancel_currency_settings();" class="squarebutton"><span> <?php echo elgg_echo('stores:cancel'); ?> </span></a>
+				<a onclick="cancel_currency_settings();" ><span> <?php echo elgg_echo('stores:cancel'); ?> </span></a>
 			</div>
 		<?php } ?>
 	</div>

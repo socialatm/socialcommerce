@@ -105,7 +105,7 @@ EOF;
 					<div>
 						<div style="float:right;margin-bottom:10px;">
 							<div class="buttonwrapper" style="float:left;">
-								<a onclick="add_myaddress();" class="squarebutton"><span> Add New Address </span></a>
+								<a onclick="add_myaddress();" ><span> Add New Address </span></a>
 							</div>
 						</div>
 						<div class="clear" style="margin-bottom:10px;">
@@ -131,7 +131,7 @@ EOF;
 							<div>{$edit_address_not_posible}</div>
 							<div style="margin:10px;">
 								<div class="buttonwrapper" style="float:left;">
-									<a onclick="myaccount_cancel_address();" class="squarebutton"><span> Cancel </span></a>
+									<a onclick="myaccount_cancel_address();" ><span> Cancel </span></a>
 								</div>
 								<div class="clear"></div>
 							</div>

@@ -38,7 +38,7 @@ if(elgg_is_logged_in() && $action == "edit"){
 				</select>
 			</div>
 			<div class="buttonwrapper" style="float:left">
-				<a onclick="change_status_function();" class="squarebutton" style="color:#222222;"><span> {$submit_btn_text} </span></a>
+				<a onclick="change_status_function();" style="color:#222222;"><span> {$submit_btn_text} </span></a>
 			</div>
 			<input type="hidden" name="order_item_guid" id="order_item_guid" value="{$order_item->guid}">
 		</span>
