@@ -44,7 +44,14 @@
 		<?php
 		if( $address->canEdit() ) { 			
 			echo '<a href="'.elgg_get_config('url').'socialcommerce/'.$user->username.'/edit_address/'.$address->guid.'">'.elgg_echo('edit:address').'</a>'; 	
-			echo 'needs a delete address link here!';
+						
+			$url = 'action/socialcommerce/address/delete?address_guid='.$address->guid;
+			$delete_button = elgg_view('output/confirmlink', array(
+				'href' => $url,
+				'confirm' => elgg_echo('delete:confirm:address'),
+				'text' => elgg_echo('delete:address')
+			));
+			echo ' - '.$delete_button;
 		}
 	}else{
 ?>
