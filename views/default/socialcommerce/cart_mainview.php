@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="storesrepo_maincontent">
-				<?PHP if($price > 0){?>
+				<?php if($price > 0){?>
 					<div class="product_odd"><B><?php echo elgg_echo("price");?></B></div>
 					<div class="field_results s_price"><B><?php echo get_price_with_currency($price); ?></B></div>
 				<?php }
