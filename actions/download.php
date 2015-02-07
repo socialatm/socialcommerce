@@ -12,12 +12,12 @@
 echo '<b>'.__FILE__ .' at '.__LINE__; die();
 //compare this to the downloap file in the file plugin.... & re-write
 	
-	global $CONFIG;
+	$dbprefix = elgg_get_config('dbprefix');
 	// Get the guid
 	$order_guid = get_input("product_guid");
 	
 	$order = get_entity($order_guid);
-	$subtype = get_data_row("SELECT * from {$CONFIG->dbprefix}entity_subtypes where id='{$order->subtype}'");
+	$subtype = get_data_row("SELECT * from {$dbprefix}entity_subtypes where id='{$order->subtype}'");
 	
 	if(elgg_is_logged_in() && $order && $subtype->subtype == "order_item" && $order->owner_guid == $_SESSION['user']->guid){
 		// Get the file
