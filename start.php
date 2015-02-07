@@ -236,11 +236,7 @@ ini_set('display_errors', 1);
 				case "country_state":	require($base_path.'manage_country_state.php'); 	
 									  	break;						
 				case "currency_settings": require($base_path.'load_currency_settings.php'); 
-								
-				//	@todo this needs to be fixed to use a form 
-				case "delete":			require(elgg_get_config('pluginspath').'socialcommerce/actions/socialcommerce/delete.php'); 
 										break;
-									
 				case "edit":			require($base_path.'edit.php'); 	
 										break;
 				case "edit_address":	require($base_path.'edit_address.php'); 	
