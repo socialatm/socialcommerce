@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Elgg address - add
+	 * Elgg address - add/edit
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
@@ -10,10 +10,6 @@
 	 * @version elgg 1.9.4
 	 **/ 
 	 
-	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
-	krumo($_POST);
-	die();
-	
 	$user = elgg_get_logged_in_user_entity();
 		
 	$firstname = get_input('first_name');
@@ -25,6 +21,7 @@
 	$country = get_input('country');
 	$pincode = get_input('pincode');
 	$phoneno = get_input('phoneno');
+	$address_guid = get_input('address_guid');
 			
 	if(empty($firstname)){
 		$error_field .= ", ".elgg_echo("first:name");
@@ -53,6 +50,29 @@
 		$error_field = substr($error_field,2);
 		register_error(sprintf(elgg_echo("address:validation:null"),$error_field));
 	}else{
+
+		if(isset($address_guid)){
+			//	we know it's an edit
+			$address = get_entity($address_guid);
+			$address->title = $firstname.' '.$lastname;
+			$address->first_name = $firstname;
+			$address->last_name = $lastname;
+			$address->address_line_1 = $address_line_1;
+			$address->address_line_2 = $address_line_2;
+			$address->city = $city;
+			$address->state = $state;
+			$address->country = $country;
+			$address->pincode = $pincode;
+			if(!empty($phoneno)) {$address->phoneno = $phoneno;}
+		
+			if($result = $address->save()) {
+				system_message(elgg_echo("address:saved"));
+			}else{
+				register_error(elgg_echo("address:edit:failed"));
+			}
+			forward(elgg_get_config('url').'socialcommerce/'.$user->username.'/address/');
+		}
+		
 		//	save a new address
 		$address = new ElggObject();
 		$address->subtype = 'address';
@@ -78,5 +98,4 @@
 			register_error(elgg_echo("address:addfailed"));
 		}
 	}
-	
 	forward(elgg_get_config('url').'socialcommerce/'.$user->username.'/address/');
