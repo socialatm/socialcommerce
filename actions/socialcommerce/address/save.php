@@ -12,7 +12,6 @@
 	 
 	require_once('C:/Program Files (x86)/Zend/Apache2/htdocs/krumo/class.krumo.php');
 	krumo($_POST);
-	krumo::defines();
 	die();
 	
 	$user = elgg_get_logged_in_user_entity();
@@ -105,4 +104,4 @@
 		}
 	}
 	
-	forward(elgg_get_config('url')."socialcommerce/".$container_user->username."/address/");
+	forward(elgg_get_config('url').'socialcommerce/'.$user->username.'/address/');
