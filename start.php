@@ -267,8 +267,6 @@ ini_set('display_errors', 1);
 									  	break;
 				case "read":			require($base_path.'product.php');
 										break;
-				case "search":			require(elgg_get_config('pluginspath').'socialcommerce/search.php'); 
-										break;
 				case "sold":			require($base_path.'sold.php');
 									  	break;
 				case "type":			require($base_path.'product_type.php');
