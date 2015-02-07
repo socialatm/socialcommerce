@@ -4,17 +4,14 @@
 	 * 
 	 * @package Elgg SocialCommerce
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @author twentyfiveautumn.com
-	 * @copyright twentyfiveautumn.com 2014
+	 * @author ray peaslee
+	 * @copyright twentyfiveautumn.com 2015
 	 * @link http://twentyfiveautumn.com/
+	 * @version elgg 1.9.4
 	 **/ 
 	
-	echo '<b>'.__FILE__ .' at '.__LINE__; die();
-	 
-	$page_owner = elgg_get_page_owner_entity();
-	
+	$user = elgg_get_logged_in_user_entity();
 	$address = $vars['entity'];
-	
 	$address_guid = $address->guid;
 	$title = $address->title;
 	$firstname = $address->first_name;
@@ -26,40 +23,32 @@
 	$country = $address->country;
 	$pincode = $address->pincode;
 	$phoneno = $address->phoneno;
-	
 	$owner = $vars['entity']->getOwnerEntity();
 	$friendlytime = elgg_view_friendly_time($vars['entity']->time_created);
 	
-	if (elgg_get_context() == "search") {	// Start search listing version 
-?>
-		<div class="address_listing_info">
-				<table cellpadding="10">
-					<tr><?php echo "<td>".elgg_echo("first:name")."</td><td> : </td><td>".$firstname."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("last:name")."</td><td> : </td><td>".$lastname."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("address:line:1")."</td><td> : </td><td>".nl2br($address_line_1)."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("address:line:2")."</td><td> : </td><td>".nl2br($address_line_2)."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("city")."</td><td> : </td><td>".$city."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("state")."</td><td> : </td><td>".$state."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("country")."</td><td> : </td><td>".$country."</td>" ?></tr>
-					<tr><?php echo "<td>".elgg_echo("pincode")."</td><td> : </td><td>".$pincode."</td>" ?></tr>
-					<?php if($phoneno > 0){?>
-					<tr><?php echo "<td class='address_left'>".elgg_echo("phone:no")."</td><td class='address_sep'> : </td><td class='address_right'>".$phoneno."</td>" ?></tr>
-					<?php } ?>
-				</table>
-			</div>
+	if (elgg_get_context() == "search") { 
+		?>
+		<div>
+			<?php echo $address->title; ?>
+			<br />
+			<?php echo $address->address_line_1.'<br />'; ?>
+			<?php 
+				if(!empty($address_line_2)){
+					echo $address->address_line_2.'<br />';
+				}
+			?>
+			<?php echo $address->city.' '.$address->state.' '.$address->pincode; ?>
+		</div>
+		<br />
 		
-<?php
-		
+		<?php
 		if( $address->canEdit() ) { 			
-?>
-			<div class="storesrepo_controls">
-				<a href="<?php echo elgg_get_config('url'); ?>socialcommerce/<?php echo $page_owner->username;?>/edit_address/<?php echo $address->guid; ?>"><?php echo elgg_echo('edit:address'); ?></a> 	
-			</div>
-<?php
+			echo '<a href="'.elgg_get_config('url').'socialcommerce/'.$user->username.'/edit_address/'.$address->guid.'">'.elgg_echo('edit:address').'</a>'; 	
+			echo 'needs a delete address link here!';
 		}
-	}elseif (elgg_get_context() == "confirm" or elgg_get_context() == "order") {
+	}else{
 ?>
-		<div class="address_listing_info">
+		<div>
 			<table>
 				<tr>
 					<th>&nbsp; Billing Address</th>
