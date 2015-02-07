@@ -19,7 +19,6 @@
 	$state = trim(get_input('state'));
 	$country = trim(get_input('country'));
 	$pincode = trim(get_input('pincode'));
-	$mobileno = trim(get_input('mobileno'));
 	$phoneno = trim(get_input('phoneno'));
 	$access_id = get_input('access_id');
 	$ajax = get_input('ajax');
@@ -65,7 +64,6 @@
 			$_SESSION['address']['state'] = $state;
 			$_SESSION['address']['country'] = $country;
 			$_SESSION['address']['pincode'] = $pincode;
-			$_SESSION['address']['mobileno'] = $mobileno;
 			$_SESSION['address']['phoneno'] = $phoneno;
 			$_SESSION['address']['access_id'] = $access_id;
 			$error_field = substr($error_field,2);
@@ -101,7 +99,6 @@
 			$address->state = $state;
 			$address->country = $country;
 			$address->pincode = $pincode;
-			$address->mobileno = $mobileno;
 			$address->phoneno = $phoneno;
 			$address->access_id = 2;
 			
