@@ -53,10 +53,9 @@
 		$error_field = substr($error_field,2);
 		register_error(sprintf(elgg_echo("address:validation:null"),$error_field));
 	}else{
-		
+		//	save a new address
 		$address = new ElggObject();
 		$address->subtype = 'address';
-		
 		$address->title = $firstname.' '.$lastname;
 		$address->first_name = $firstname;
 		$address->last_name = $lastname;
@@ -72,14 +71,9 @@
 		//	for now the container_guid & owner_guid is always the logged in user
 		$address->container_guid = $user->guid;
 		$address->owner_guid = $user->guid;
-		
-				
-		$result = $address->save();
-		
-		if ($result){
-			
-				system_message(elgg_echo("address:saved"));
-			
+						
+		if($result = $address->save()) {
+			system_message(elgg_echo("address:saved"));
 		}else{
 			register_error(elgg_echo("address:addfailed"));
 		}
